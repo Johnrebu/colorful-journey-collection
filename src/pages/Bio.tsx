@@ -31,6 +31,11 @@ export default function Bio() {
     })
   };
 
+  // Define paragraph colors
+  const paragraphColors = {
+    callToAction: "text-portfolioPurple",
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -69,7 +74,9 @@ export default function Bio() {
                     </div>
                     <span className="text-sm font-medium text-gray-500">{item.title}</span>
                   </div>
-                  <span className="text-lg text-gray-900 ml-7">{item.value}</span>
+                  <span className={`text-lg ml-7 ${index % 2 === 0 ? "text-portfolioBlue" : "text-portfolioPink"}`}>
+                    {item.value}
+                  </span>
                 </motion.li>
               ))}
             </ul>
@@ -105,7 +112,9 @@ export default function Bio() {
                     </div>
                     <span className="text-sm font-medium text-gray-500">{item.title}</span>
                   </div>
-                  <span className="text-lg text-gray-900 ml-7">{item.value}</span>
+                  <span className={`text-lg ml-7 ${index % 2 === 0 ? "text-portfolioOrange" : "text-portfolioPurple"}`}>
+                    {item.value}
+                  </span>
                 </motion.li>
               ))}
             </ul>
@@ -125,7 +134,7 @@ export default function Bio() {
               <Sparkles className="w-8 h-8 text-white" />
             </div>
             <h3 className="text-2xl font-bold text-gray-800 mb-4">Ready to Work Together?</h3>
-            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+            <p className={`mb-6 max-w-2xl mx-auto ${paragraphColors.callToAction}`}>
               I'm passionate about creating elegant, functional web applications that solve real-world problems.
               Let's connect and discuss how I can contribute to your next project!
             </p>

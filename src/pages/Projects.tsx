@@ -57,6 +57,14 @@ export default function Projects() {
     },
   ];
 
+  // Define paragraph colors
+  const paragraphColors = {
+    projectDesc1: "text-portfolioBlue",
+    projectDesc2: "text-portfolioPurple",
+    projectDesc3: "text-portfolioPink",
+    callToAction: "text-portfolioOrange",
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -111,7 +119,11 @@ export default function Projects() {
                 <h3 className="text-xl font-semibold text-gray-800 mb-3">
                   {project.title}
                 </h3>
-                <p className="text-gray-600 mb-6 line-clamp-3">
+                <p className={`mb-6 line-clamp-3 ${
+                  index === 0 ? paragraphColors.projectDesc1 : 
+                  index === 1 ? paragraphColors.projectDesc2 : 
+                  paragraphColors.projectDesc3
+                }`}>
                   {project.description}
                 </p>
               </div>
@@ -160,7 +172,7 @@ export default function Projects() {
         <GlassCard>
           <div className="text-center">
             <h3 className="text-2xl font-bold text-gray-800 mb-4">Interested in working together?</h3>
-            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+            <p className={`mb-6 max-w-2xl mx-auto ${paragraphColors.callToAction}`}>
               I'm always looking for new and exciting projects to work on.
               If you like my work and have a project in mind, feel free to reach out!
             </p>

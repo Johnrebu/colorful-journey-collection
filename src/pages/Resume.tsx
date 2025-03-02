@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import {
   Briefcase,
@@ -104,6 +103,16 @@ export default function Resume() {
     }
   };
 
+  const paragraphColors = {
+    summary: "text-portfolioBlue",
+    experience1: "text-portfolioPurple",
+    experience2: "text-portfolioPink",
+    project1: "text-portfolioOrange",
+    project2: "text-portfolioBlue",
+    project3: "text-portfolioPurple",
+    downloadText: "text-indigo-600",
+  };
+
   return (
     <motion.div
       className="space-y-12"
@@ -122,7 +131,7 @@ export default function Resume() {
         <SectionTitle icon={<User size={24} />}>Professional Summary</SectionTitle>
         <motion.div variants={itemVariants}>
           <GlassCard>
-            <p className="text-gray-700 leading-relaxed">
+            <p className={`leading-relaxed ${paragraphColors.summary}`}>
               Results-driven Full-Stack Developer with expertise in React,
               JavaScript, Python, Django, SQL, and modern web technologies. Adept at
               building scalable, user-friendly web applications that enhance user
@@ -155,11 +164,13 @@ export default function Resume() {
                   {experience.title}
                 </h4>
                 <p className="text-gray-500 mb-4">{experience.period}</p>
-                <ul className="space-y-2 text-gray-700">
+                <ul className="space-y-2">
                   {experience.responsibilities.map((item, itemIndex) => (
                     <li key={itemIndex} className="flex items-start">
                       <CheckCircle className="w-5 h-5 text-primary/70 mr-2 flex-shrink-0 mt-0.5" />
-                      <span>{item}</span>
+                      <span className={index === 0 ? "text-portfolioPurple" : index === 1 ? "text-portfolioPink" : "text-portfolioOrange"}>
+                        {item}
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -183,7 +194,7 @@ export default function Resume() {
                 <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary to-portfolioPurple"></div>
                 <div className="pl-4">
                   <h4 className="text-xl font-semibold text-gray-800">{item.degree}</h4>
-                  <p className="text-gray-600">
+                  <p className={index % 2 === 0 ? "text-portfolioBlue" : "text-portfolioPurple"}>
                     {item.institution} • {item.period}
                   </p>
                 </div>
@@ -232,7 +243,7 @@ export default function Resume() {
               <h4 className="text-xl font-semibold text-gray-800 mb-2">
                 React_Colorful Weather Widget
               </h4>
-              <p className="text-gray-600">
+              <p className={paragraphColors.project1}>
                 "This project demonstrates modern web development practices while
                 creating a beautiful and functional weather application. The
                 combination of React, Tailwind CSS, and modern API integration
@@ -246,7 +257,7 @@ export default function Resume() {
               <h4 className="text-xl font-semibold text-gray-800 mb-2">
                 Employee Directory Application
               </h4>
-              <p className="text-gray-600">
+              <p className={paragraphColors.project2}>
                 "This is a modern React-based Employee Directory application that
                 allows organizations to manage and visualize their employee data
                 through an intuitive interface. The application provides a
@@ -260,7 +271,7 @@ export default function Resume() {
               <h4 className="text-xl font-semibold text-gray-800 mb-2">
                 E-commerce_Website
               </h4>
-              <p className="text-gray-600">
+              <p className={paragraphColors.project3}>
                 "Complete e-commerce website using React JS
                 and the MERN stack. The project covers front-end development using
                 React, including component creation, routing, state management,
@@ -290,7 +301,9 @@ export default function Resume() {
                   <div className="p-2 rounded-full bg-primary/10 mr-3">
                     <Award className="w-5 h-5 text-primary" />
                   </div>
-                  <span className="text-gray-700">{cert}</span>
+                  <span className={index % 2 === 0 ? "text-portfolioBlue" : "text-portfolioPurple"}>
+                    {cert}
+                  </span>
                 </div>
               ))}
             </div>
@@ -307,7 +320,7 @@ export default function Resume() {
         <GlassCard>
           <div className="text-center">
             <h3 className="text-2xl font-bold text-gray-800 mb-4">Ready to Download My Resume?</h3>
-            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+            <p className={`mb-6 max-w-2xl mx-auto ${paragraphColors.downloadText}`}>
               Get a complete copy of my resume in PDF format for your records.
             </p>
             <motion.a
