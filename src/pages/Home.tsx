@@ -1,8 +1,9 @@
 
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, ChevronDown, Sparkles } from "lucide-react";
+import { Github, Linkedin, Mail, ChevronDown, Sparkles, Code, Rocket, Heart } from "lucide-react";
 import image from "/src/images/johnelon.png";
 import GlassCard from "../components/GlassCard";
+import SkillTag from "../components/SkillTag";
 import { Link } from "react-router-dom";
 
 export default function Home() {
@@ -24,6 +25,16 @@ export default function Home() {
   const scrollToProjects = () => {
     document.getElementById('featured-projects')?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const skills = [
+    { name: "HTML", color: "orange", icon: <Code size={14} /> },
+    { name: "CSS", color: "blue", icon: <Code size={14} /> },
+    { name: "JavaScript", color: "yellow", icon: <Code size={14} /> },
+    { name: "React", color: "teal", icon: <Code size={14} /> },
+    { name: "Python", color: "green", icon: <Code size={14} /> },
+    { name: "Django", color: "red", icon: <Code size={14} /> },
+    { name: "SQL", color: "purple", icon: <Code size={14} /> },
+  ];
 
   return (
     <div className="min-h-[calc(100vh-12rem)] flex flex-col justify-center">
@@ -52,7 +63,7 @@ export default function Home() {
         </motion.div>
         
         <motion.h1 
-          className="text-5xl font-bold text-gray-900 mb-4 tracking-tight"
+          className="text-5xl font-bold mb-4 tracking-tight bg-gradient-to-r from-primary via-portfolioPurple to-portfolioPink text-transparent bg-clip-text"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.5 }}
@@ -68,7 +79,7 @@ export default function Home() {
         >
           <span className="absolute -inset-1 rounded-lg bg-gradient-to-r from-primary/20 to-portfolioPurple/20 blur"></span>
           <span className="relative bg-white px-6 py-2 rounded-full text-xl text-gray-800 font-medium">
-            Full Stack Developer
+            <span className="text-primary">Full Stack</span> Developer <Rocket className="inline-block ml-1 text-portfolioPink" size={18} />
           </span>
         </motion.div>
 
@@ -117,13 +128,29 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.7 }}
         >
-          <GlassCard>
+          <GlassCard colorScheme="gradient">
             <p className="text-gray-700 leading-relaxed text-lg">
-              Hi there! I'm a passionate full-stack developer with expertise in
+              Hi there! <span className="animate-wave inline-block">👋</span> I'm a passionate full-stack developer with expertise in
               HTML, CSS, JavaScript, React, Python, Django, and SQL. I love turning
               ideas into seamless, high-performance web applications that make a
-              real difference.
+              real difference. <Heart className="inline-block text-pink-500" size={18} />
             </p>
+            
+            <motion.div 
+              className="mt-6 flex flex-wrap gap-2 justify-center"
+              variants={container}
+              initial="hidden"
+              animate="show"
+            >
+              {skills.map((skill, index) => (
+                <motion.div key={index} variants={item}>
+                  <SkillTag colorScheme={skill.color as any} icon={skill.icon}>
+                    {skill.name}
+                  </SkillTag>
+                </motion.div>
+              ))}
+            </motion.div>
+            
             <div className="mt-8 flex flex-wrap gap-2 justify-center">
               <Link to="/about">
                 <motion.button 
@@ -164,6 +191,8 @@ export default function Home() {
           <ChevronDown size={18} />
         </motion.button>
       </motion.div>
+      
+      <div id="featured-projects" className="pt-20"></div>
     </div>
   );
 }
