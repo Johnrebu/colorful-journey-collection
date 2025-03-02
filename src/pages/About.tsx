@@ -38,6 +38,18 @@ export default function About() {
     }
   };
 
+  // Define paragraph colors
+  const paragraphColors = {
+    p1: "text-portfolioBlue",
+    p2: "text-portfolioPurple",
+    p3: "text-portfolioPink",
+    p4: "text-portfolioOrange",
+    listItem1: "text-emerald-600",
+    listItem2: "text-cyan-600",
+    listItem3: "text-indigo-600",
+    listItem4: "text-amber-600",
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -53,15 +65,15 @@ export default function About() {
         animate="visible"
       >
         <GlassCard className="mb-8">
-          <p className="text-gray-700 mb-6 leading-relaxed text-lg">
+          <p className={`mb-6 leading-relaxed text-lg ${paragraphColors.p1}`}>
             I'm a full-stack developer seeking a challenging full-time role where
             I can apply my strong interpersonal, time management, and
             problem-solving skills to drive organizational success. With 9+ years
             of experience as an educator, I have honed my ability to communicate
             complex concepts effectively, fostering growth and understanding among
-            diverse learners. 
+            diverse learners.
           </p>
-          <p className="text-gray-700 mb-6 leading-relaxed text-lg">
+          <p className={`mb-6 leading-relaxed text-lg ${paragraphColors.p2}`}>
             Holding an M.Sc. in Chemistry and a B.Ed., I bring a
             strong analytical mindset, complemented by technical expertise in web
             development. My passion for continuous learning and innovation allows
@@ -89,12 +101,12 @@ export default function About() {
             </motion.div>
             
             <GlassCard>
-              <p className="text-gray-700 mb-4 leading-relaxed">
+              <p className={`mb-4 leading-relaxed ${paragraphColors.p3}`}>
                 Coming from 9+ years in education, I've developed exceptional communication 
                 and analytical skills. My chemistry background gives me a methodical approach 
                 to problem-solving that translates perfectly to coding and development.
               </p>
-              <p className="text-gray-700 leading-relaxed">
+              <p className={`leading-relaxed ${paragraphColors.p4}`}>
                 My transition to tech stems from a passion for building tools that help 
                 people learn and work more effectively. I combine educational insights 
                 with technical know-how to create intuitive, impactful applications.
@@ -114,22 +126,22 @@ export default function About() {
             </motion.div>
             
             <GlassCard>
-              <ul className="space-y-3 text-gray-700">
+              <ul className="space-y-3">
                 <li className="flex items-start">
                   <span className="h-6 w-6 rounded-full bg-green-100 text-green-800 flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">✓</span>
-                  <span>Strong problem-solving abilities from both scientific and educational backgrounds</span>
+                  <span className={paragraphColors.listItem1}>Strong problem-solving abilities from both scientific and educational backgrounds</span>
                 </li>
                 <li className="flex items-start">
                   <span className="h-6 w-6 rounded-full bg-green-100 text-green-800 flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">✓</span>
-                  <span>Excellent communication skills and ability to explain complex concepts</span>
+                  <span className={paragraphColors.listItem2}>Excellent communication skills and ability to explain complex concepts</span>
                 </li>
                 <li className="flex items-start">
                   <span className="h-6 w-6 rounded-full bg-green-100 text-green-800 flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">✓</span>
-                  <span>Disciplined work ethic and commitment to continuous learning</span>
+                  <span className={paragraphColors.listItem3}>Disciplined work ethic and commitment to continuous learning</span>
                 </li>
                 <li className="flex items-start">
                   <span className="h-6 w-6 rounded-full bg-green-100 text-green-800 flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">✓</span>
-                  <span>Adaptability and ability to quickly master new technologies</span>
+                  <span className={paragraphColors.listItem4}>Adaptability and ability to quickly master new technologies</span>
                 </li>
               </ul>
             </GlassCard>
