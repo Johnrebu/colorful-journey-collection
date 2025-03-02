@@ -1,40 +1,39 @@
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 
-interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
+interface GlassCardProps {
   className?: string;
-  children: React.ReactNode;
-  hoverEffect?: boolean;
-  colorScheme?: 'blue' | 'purple' | 'pink' | 'orange' | 'gradient';
+  children: ReactNode;
+  colorScheme?: 'light' | 'dark' | 'primary' | 'gradient' | 'none';
 }
 
 const colorSchemes = {
-  blue: "bg-blue-50/80 border-blue-200/50 shadow-blue-100/20",
-  purple: "bg-purple-50/80 border-purple-200/50 shadow-purple-100/20",
-  pink: "bg-pink-50/80 border-pink-200/50 shadow-pink-100/20",
-  orange: "bg-orange-50/80 border-orange-200/50 shadow-orange-100/20",
-  gradient: "bg-gradient-to-br from-blue-50/90 to-purple-50/90 border-blue-200/50 shadow-blue-100/30",
+  light: "bg-white/80 backdrop-blur-sm border-white/20",
+  dark: "bg-gray-900/80 backdrop-blur-sm border-gray-800/20 text-white",
+  primary: "bg-primary/10 backdrop-blur-sm border-primary/20",
+  gradient: "bg-white/80 backdrop-blur-sm border-white/20 glass-card-gradient",
+  none: "",
 };
 
 const GlassCard = ({ 
   className, 
   children, 
-  hoverEffect = true, 
-  colorScheme = 'gradient',
-  ...props 
+  colorScheme = 'light' 
 }: GlassCardProps) => {
   return (
-    <motion.div 
+    <motion.div
       className={cn(
-        "glass-card rounded-2xl p-6 backdrop-blur-sm border border-white/20",
-        colorSchemes[colorScheme], 
-        hoverEffect ? "hover-lift transition-all duration-300" : "",
+        "rounded-2xl border shadow-sm p-6", 
+        colorSchemes[colorScheme],
         className
-      )} 
-      whileHover={hoverEffect ? { y: -5, boxShadow: "0 15px 30px rgba(0,0,0,0.1)" } : {}}
-      {...props}
+      )}
+      // Removed the onDrag handler which was causing the error
+      whileHover={{ 
+        boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)", 
+        translateY: -2
+      }}
     >
       {children}
     </motion.div>

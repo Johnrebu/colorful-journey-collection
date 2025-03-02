@@ -9,7 +9,9 @@ import Bio from "./pages/Bio";
 import Resume from "./pages/Resume";
 import Contact from "./pages/Contact";
 import Projects from "./pages/Projects";
-import image from "./images/john.jpg";
+
+// Using an image from the public folder instead of a local import
+const profileImageUrl = "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=200&h=200";
 
 // Scroll to top component
 const ScrollToTop = () => {
@@ -105,7 +107,7 @@ export default function App() {
             <div className="flex justify-between h-16">
               <div className="flex items-center">
                 <motion.img
-                  src={image}
+                  src={profileImageUrl}
                   alt="Profile"
                   className="h-10 w-10 rounded-full border-2 border-white shadow-md"
                   whileHover={{ scale: 1.1 }}

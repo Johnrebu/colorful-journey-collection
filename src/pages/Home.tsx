@@ -1,10 +1,10 @@
-
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, ChevronDown, Sparkles, Code, Rocket, Heart } from "lucide-react";
-import image from "/src/images/johnelon.png";
 import GlassCard from "../components/GlassCard";
 import SkillTag from "../components/SkillTag";
 import { Link } from "react-router-dom";
+
+const profileImageUrl = "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=200&h=200";
 
 export default function Home() {
   const container = {
@@ -47,7 +47,7 @@ export default function Home() {
         >
           <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-portfolioPurple rounded-full blur opacity-75 animate-pulse-subtle"></div>
           <motion.img 
-            src={image} 
+            src={profileImageUrl}
             alt="Johnson T" 
             className="relative rounded-full w-32 h-32 object-cover border-4 border-white"
             whileHover={{ scale: 1.05 }}
