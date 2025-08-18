@@ -31,10 +31,10 @@ export default function Projects() {
       image:
         "https://media.istockphoto.com/id/1430370901/es/foto/lista-de-verificaci%C3%B3n-r%C3%A1pida-y-gesti%C3%B3n-de-tareas-del-portapapeles-completando-formularios-de.jpg?s=612x612&w=0&k=20&c=UJW8NNYOUZsem8H6kiFLEpDJ1mcbB0fR26Z1pkAAK3k=",
       technologies: [
-        { name: "React", scheme: "blue" }, 
-        { name: "Tailwind CSS", scheme: "blue" }, 
-        { name: "TypeScript", scheme: "blue" }, 
-        { name: "useMemo", scheme: "purple" }
+        { name: "React", scheme: "blue" },
+        { name: "Tailwind CSS", scheme: "blue" },
+        { name: "TypeScript", scheme: "blue" },
+        { name: "useMemo", scheme: "purple" },
       ],
       githubUrl: "https://github.com/Johnrebu/Pro_ForCecilAnna_sortSerch",
       liveUrl: "https://stellular-cactus-7acb12.netlify.app/",
@@ -47,13 +47,13 @@ export default function Projects() {
       image:
         "https://media.istockphoto.com/id/839422436/photo/business-man-showing-online-shopping-concept-in-color-background.jpg?s=612x612&w=0&k=20&c=dRFLX-_NnPdj4nfol4A24-aR0Sw3rCeBiVvSejnSw74=",
       technologies: [
-        { name: "React", scheme: "blue" }, 
-        { name: "Routing", scheme: "orange" }, 
-        { name: "Context API", scheme: "purple" }, 
-        { name: "MongoDB", scheme: "green" }
+        { name: "React", scheme: "blue" },
+        { name: "Routing", scheme: "orange" },
+        { name: "Context API", scheme: "purple" },
+        { name: "MongoDB", scheme: "green" },
       ],
-      githubUrl: "https://vercel.com/johnsons-projects-4da3c79c/ecommerce/HwQLrmjsBJK4XPQYMGJXco9M5ppF",
-      liveUrl: "https://ecommerce-nzky6c14k-johnsons-projects-4da3c79c.vercel.app/",
+      githubUrl: "https://github.com/Johnrebu/E-Commerce_Website",
+      liveUrl: "https://ecommercejohn.netlify.app/",
       icon: <Code className="w-5 h-5" />,
     },
   ];
