@@ -39,7 +39,7 @@ export default function Bio() {
 
   return (
     <motion.div
-      className="font-calibri relative"
+      className="font-montserrat relative"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -68,7 +68,7 @@ export default function Bio() {
             >
               <User className="w-5 h-5 text-portfolioBlue" />
             </motion.div>
-            <h3 className="text-xl font-semibold text-gray-800">Personal Information</h3>
+            <h3 className="text-xl font-playfair font-bold bg-gradient-to-r from-primary via-portfolioPurple to-portfolioPink text-transparent bg-clip-text">Personal Information</h3>
           </div>
           
           <GlassCard className="h-full">
@@ -98,7 +98,7 @@ export default function Bio() {
                     >
                       {item.icon}
                     </motion.div>
-                    <span className="text-sm font-medium text-gray-500">{item.title}</span>
+                    <span className="text-sm font-medium text-gray-500 dark:text-gray-300">{item.title}</span>
                   </div>
                   <motion.span 
                     className={`text-lg ml-7 ${index % 2 === 0 ? "text-portfolioBlue" : "text-portfolioPink"}`}
@@ -135,7 +135,7 @@ export default function Bio() {
             >
               <Briefcase className="w-5 h-5 text-portfolioPurple" />
             </motion.div>
-            <h3 className="text-xl font-semibold text-gray-800">Professional Summary</h3>
+            <h3 className="text-xl font-playfair font-bold bg-gradient-to-r from-primary via-portfolioPurple to-portfolioPink text-transparent bg-clip-text">Professional Summary</h3>
           </div>
           
           <GlassCard className="h-full">
@@ -165,7 +165,7 @@ export default function Bio() {
                     >
                       {item.icon}
                     </motion.div>
-                    <span className="text-sm font-medium text-gray-500">{item.title}</span>
+                    <span className="text-sm font-medium text-gray-500 dark:text-gray-300">{item.title}</span>
                   </div>
                   <motion.span 
                     className={`text-lg ml-7 ${index % 2 === 0 ? "text-portfolioOrange" : "text-portfolioPurple"}`}
@@ -204,7 +204,7 @@ export default function Bio() {
             >
               <Sparkles className="w-8 h-8 text-white animate-pulse" />
             </motion.div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-4">Ready to Work Together?</h3>
+            <h3 className="text-2xl font-playfair font-bold bg-gradient-to-r from-primary via-portfolioPurple to-portfolioPink text-transparent bg-clip-text mb-4">Ready to Work Together?</h3>
             <p className={`mb-6 max-w-2xl mx-auto ${paragraphColors.callToAction}`}>
               I'm passionate about creating elegant, functional web applications that solve real-world problems.
               Let's connect and discuss how I can contribute to your next project!

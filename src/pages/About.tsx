@@ -54,7 +54,7 @@ export default function About() {
 
   return (
     <motion.div
-      className="font-helvetica relative"
+      className="font-montserrat relative"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -77,7 +77,7 @@ export default function About() {
               transition={{ duration: 0.5, delay: 0.4 }}
             >
               <ScrollText className="w-6 h-6 text-primary mr-2" />
-              <h3 className="text-2xl font-semibold text-gray-800">My Background</h3>
+              <h3 className="text-2xl font-playfair font-bold bg-gradient-to-r from-primary via-portfolioPurple to-portfolioPink text-transparent bg-clip-text">My Background</h3>
             </motion.div>
             
             <GlassCard>
@@ -102,7 +102,7 @@ export default function About() {
               transition={{ duration: 0.5, delay: 0.5 }}
             >
               <Award className="w-6 h-6 text-primary mr-2" />
-              <h3 className="text-2xl font-semibold text-gray-800">What I Bring</h3>
+              <h3 className="text-2xl font-playfair font-bold bg-gradient-to-r from-primary via-portfolioPurple to-portfolioPink text-transparent bg-clip-text">What I Bring</h3>
             </motion.div>
             
             <GlassCard>
@@ -161,7 +161,7 @@ export default function About() {
           transition={{ duration: 0.5, delay: 0.7 }}
         >
           <Code className="w-6 h-6 text-primary mr-2 animate-spin-slow" />
-          <h3 className="text-2xl font-semibold text-gray-800">Technical Skills</h3>
+          <h3 className="text-2xl font-playfair font-bold bg-gradient-to-r from-primary via-portfolioPurple to-portfolioPink text-transparent bg-clip-text">Technical Skills</h3>
         </motion.div>
         
         <GlassCard>
