@@ -146,6 +146,17 @@ const HeroSection = ({ profileImageUrl, skills }: HeroSectionProps) => {
               </motion.span>
             </motion.button>
           </Link>
+          <Link to="/about">
+            <motion.button 
+              className="px-6 py-3 bg-transparent text-primary border border-primary rounded-full shadow-sm font-medium hover:bg-primary hover:text-white transition-colors"
+              whileHover={{ 
+                scale: 1.03,
+              }}
+              whileTap={{ scale: 0.97 }}
+            >
+              Read My Story
+            </motion.button>
+          </Link>
           <Link to="/contact">
             <motion.button 
               className="px-6 py-3 bg-transparent text-gray-800 dark:text-white border border-gray-300 dark:border-gray-700 rounded-full shadow-sm font-medium"

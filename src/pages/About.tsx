@@ -1,10 +1,11 @@
 
 import { motion } from "framer-motion";
-import { User, Code, Award, ScrollText, Cpu } from "lucide-react";
+import { Code, Award, ScrollText } from "lucide-react";
 import SectionTitle from "../components/SectionTitle";
 import GlassCard from "../components/GlassCard";
 import SkillTag from "../components/SkillTag";
 import StarAnimation from "../components/animations/StarAnimation";
+import SelfIntroduction from "../components/SelfIntroduction";
 
 export default function About() {
   const skills = [
@@ -60,31 +61,7 @@ export default function About() {
     >
       <StarAnimation />
       
-      <SectionTitle icon={<User size={28} />}>About Me</SectionTitle>
-      
-      <motion.div 
-        variants={cardVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <GlassCard className="mb-8">
-          <p className={`mb-6 leading-relaxed text-lg ${paragraphColors.p1}`}>
-            I'm a full-stack developer seeking a challenging full-time role where
-            I can apply my strong interpersonal, time management, and
-            problem-solving skills to drive organizational success. With 9+ years
-            of experience as an educator, I have honed my ability to communicate
-            complex concepts effectively, fostering growth and understanding among
-            diverse learners.
-          </p>
-          <p className={`mb-6 leading-relaxed text-lg ${paragraphColors.p2}`}>
-            Holding an M.Sc. in Chemistry and a B.Ed., I bring a
-            strong analytical mindset, complemented by technical expertise in web
-            development. My passion for continuous learning and innovation allows
-            me to bridge the gap between education and technology, contributing to
-            dynamic and impactful solutions.
-          </p>
-        </GlassCard>
-      </motion.div>
+      <SelfIntroduction />
       
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
