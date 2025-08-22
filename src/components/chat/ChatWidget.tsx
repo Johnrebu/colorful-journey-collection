@@ -1,4 +1,4 @@
-import React, { useState, lazy, Suspense } from "react";
+import React, { useState, lazy, Suspense, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, Loader2 } from "lucide-react";
 import { useLocation } from "react-router-dom";
@@ -16,93 +16,71 @@ interface Message {
   timestamp: Date;
 }
 
-const getContextualPrompts = (pathname: string) => {
-  const prompts = {
-    "/": [
-      "Tell me about your skills",
-      "What projects have you worked on?",
-      "How can I contact you?"
-    ],
-    "/about": [
-      "What's your background?",
-      "What technologies do you use?",
-      "What makes you unique?"
-    ],
-    "/bio": [
-      "Tell me about your journey",
-      "What are your interests?",
-      "Where are you based?"
-    ],
-    "/resume": [
-      "What's your experience?",
-      "Can I download your resume?",
-      "What are your key skills?"
-    ],
-    "/projects": [
-      "Show me your best work",
-      "What technologies did you use?",
-      "Can I see the source code?"
-    ],
-    "/contact": [
-      "How can we work together?",
-      "What's your availability?",
-      "What are your rates?"
-    ]
-  };
-  
-  return prompts[pathname as keyof typeof prompts] || prompts["/"];
+// Dynamic imports for performance - loaded only when chat opens
+let knowledgeModule: any = null;
+let intentsModule: any = null;
+
+const loadChatModules = async () => {
+  if (!knowledgeModule || !intentsModule) {
+    const [knowledge, intents] = await Promise.all([
+      import('@/lib/chat/knowledge'),
+      import('@/lib/chat/intents')
+    ]);
+    knowledgeModule = knowledge;
+    intentsModule = intents;
+  }
+  return { knowledge: knowledgeModule, intents: intentsModule };
 };
 
-const getBotResponse = (message: string, pathname: string): string => {
-  const lowerMessage = message.toLowerCase();
-  
-  // Context-aware responses
-  if (pathname === "/contact" && (lowerMessage.includes("contact") || lowerMessage.includes("work together"))) {
-    return "You can reach me through the contact form on this page, or connect with me on LinkedIn and GitHub. I'm always open to discussing new opportunities!";
+const getContextualPrompts = async (pathname: string): Promise<string[]> => {
+  try {
+    if (!knowledgeModule) {
+      const { knowledge } = await loadChatModules();
+      return knowledge.getSuggestedPrompts(pathname);
+    }
+    return knowledgeModule.getSuggestedPrompts(pathname);
+  } catch (error) {
+    console.error('Error loading prompts:', error);
+    // Fallback prompts
+    return pathname === "/bio" 
+      ? ["Tell me about your journey", "What are your interests?", "Where are you based?"]
+      : ["Tell me about yourself", "What are your skills?", "Show me your projects"];
   }
-  
-  if (pathname === "/projects" && lowerMessage.includes("project")) {
-    return "I've worked on various projects including web applications, mobile apps, and full-stack solutions. Check out my featured projects on this page for detailed case studies!";
+};
+
+const getBotResponse = async (message: string, pathname: string): Promise<string> => {
+  try {
+    if (!intentsModule) {
+      await loadChatModules();
+    }
+    
+    const intent = intentsModule.matchIntent(message, pathname);
+    return intentsModule.answerForIntent(intent || 'default', pathname);
+  } catch (error) {
+    console.error('Error generating bot response:', error);
+    return "I can help with questions about Johnson's background, skills, projects, education, experience, availability, or how to contact him. Try asking: 'How did you transition from teaching to IT?'";
   }
-  
-  if (pathname === "/resume" && (lowerMessage.includes("resume") || lowerMessage.includes("download"))) {
-    return "You can download my complete resume using the button on this page. It includes my full work experience, education, and technical skills.";
-  }
-  
-  // General responses
-  if (lowerMessage.includes("skill") || lowerMessage.includes("technology")) {
-    return "I specialize in React, TypeScript, Node.js, and modern web technologies. I'm passionate about creating responsive, user-friendly applications with clean, maintainable code.";
-  }
-  
-  if (lowerMessage.includes("experience") || lowerMessage.includes("background")) {
-    return "I'm a full-stack developer with experience in both frontend and backend development. I love solving complex problems and creating intuitive user experiences.";
-  }
-  
-  if (lowerMessage.includes("contact") || lowerMessage.includes("reach")) {
-    return "You can reach me through the contact page, or connect with me on LinkedIn and GitHub. I'm always happy to discuss new projects and opportunities!";
-  }
-  
-  if (lowerMessage.includes("hello") || lowerMessage.includes("hi")) {
-    return "Hello! 👋 I'm excited you're here. Feel free to ask me anything about my work, skills, or experience. How can I help you today?";
-  }
-  
-  return "Thanks for your message! I'd love to help you learn more about my work and experience. You can explore my projects, check out my resume, or get in touch through the contact page.";
 };
 
 const ChatContent = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      text: "Hi! I'm here to help you learn more about my work and experience. What would you like to know?",
+      text: "Hi! I'm Johnson. I can help you learn about my background, skills, projects, and experience. What would you like to know?",
       isBot: true,
       timestamp: new Date()
     }
   ]);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [contextualPrompts, setContextualPrompts] = useState<string[]>([]);
+  const [modulesLoaded, setModulesLoaded] = useState(false);
   const location = useLocation();
-  const contextualPrompts = getContextualPrompts(location.pathname);
+
+  // Load contextual prompts when pathname changes
+  useEffect(() => {
+    getContextualPrompts(location.pathname).then(setContextualPrompts);
+  }, [location.pathname]);
 
   const handleSendMessage = async (text?: string) => {
     const messageText = text || inputValue.trim();
@@ -119,18 +97,42 @@ const ChatContent = () => {
     setInputValue("");
     setIsTyping(true);
 
-    // Simulate bot response delay
-    setTimeout(() => {
-      const botResponse: Message = {
-        id: (Date.now() + 1).toString(),
-        text: getBotResponse(messageText, location.pathname),
-        isBot: true,
-        timestamp: new Date()
-      };
-      
-      setMessages(prev => [...prev, botResponse]);
+    try {
+      // Load modules if not already loaded
+      if (!modulesLoaded) {
+        await loadChatModules();
+        setModulesLoaded(true);
+      }
+
+      // Generate bot response with reduced delay for better UX
+      setTimeout(async () => {
+        try {
+          const botResponseText = await getBotResponse(messageText, location.pathname);
+          const botResponse: Message = {
+            id: (Date.now() + 1).toString(),
+            text: botResponseText,
+            isBot: true,
+            timestamp: new Date()
+          };
+          
+          setMessages(prev => [...prev, botResponse]);
+          setIsTyping(false);
+        } catch (error) {
+          console.error('Error in bot response:', error);
+          const errorResponse: Message = {
+            id: (Date.now() + 1).toString(),
+            text: "I'm having trouble processing that right now. Please try asking about Johnson's background, projects, or experience.",
+            isBot: true,
+            timestamp: new Date()
+          };
+          setMessages(prev => [...prev, errorResponse]);
+          setIsTyping(false);
+        }
+      }, 700); // Reduced from 1000+ for snappier responses
+    } catch (error) {
+      console.error('Error loading chat modules:', error);
       setIsTyping(false);
-    }, 1000 + Math.random() * 1000);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
