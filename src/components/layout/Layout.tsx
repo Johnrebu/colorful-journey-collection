@@ -5,6 +5,7 @@ import { useTheme } from "../ThemeProvider";
 import Header from "./Header";
 import AnimatedRoutes from "./AnimatedRoutes";
 import ScrollToTop from "./ScrollToTop";
+import ChatWidget from "../chat/ChatWidget";
 import { Toaster } from "sonner";
 
 // Update the profile image URL
@@ -52,6 +53,7 @@ const Layout = () => {
       </main>
 
       <ScrollToTop />
+      <ChatWidget />
     </motion.div>
   );
 };
