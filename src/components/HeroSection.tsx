@@ -4,7 +4,6 @@ import { Github, Linkedin, Mail, Rocket, Sparkles, ArrowRight } from "lucide-rea
 import { Link } from "react-router-dom";
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 import SkillTag from "./SkillTag";
-import { Boxes } from "./ui/background-boxes";
 
 type Skill = {
   name: string;
@@ -35,11 +34,6 @@ const HeroSection = ({ profileImageUrl, skills }: HeroSectionProps) => {
 
   return (
     <div className="relative flex flex-col md:flex-row items-center justify-between gap-12 py-16 overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 w-full h-full bg-background z-0 overflow-hidden">
-        <div className="absolute inset-0 w-full h-full bg-background z-10 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
-        <Boxes />
-      </div>
       {/* Left side - Text Content */}
       <div className="relative z-20 w-full md:w-1/2 space-y-8">
         <motion.div
