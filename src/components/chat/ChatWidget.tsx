@@ -3,8 +3,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, Loader2 } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -23,8 +35,8 @@ let intentsModule: any = null;
 const loadChatModules = async () => {
   if (!knowledgeModule || !intentsModule) {
     const [knowledge, intents] = await Promise.all([
-      import('@/lib/chat/knowledge'),
-      import('@/lib/chat/intents')
+      import("@/lib/chat/knowledge"),
+      import("@/lib/chat/intents"),
     ]);
     knowledgeModule = knowledge;
     intentsModule = intents;
@@ -40,24 +52,35 @@ const getContextualPrompts = async (pathname: string): Promise<string[]> => {
     }
     return knowledgeModule.getSuggestedPrompts(pathname);
   } catch (error) {
-    console.error('Error loading prompts:', error);
+    console.error("Error loading prompts:", error);
     // Fallback prompts
-    return pathname === "/bio" 
-      ? ["Tell me about your journey", "What are your interests?", "Where are you based?"]
-      : ["Tell me about yourself", "What are your skills?", "Show me your projects"];
+    return pathname === "/bio"
+      ? [
+          "Tell me about your journey",
+          "What are your interests?",
+          "Where are you based?",
+        ]
+      : [
+          "Tell me about yourself",
+          "What are your skills?",
+          "Show me your projects",
+        ];
   }
 };
 
-const getBotResponse = async (message: string, pathname: string): Promise<string> => {
+const getBotResponse = async (
+  message: string,
+  pathname: string
+): Promise<string> => {
   try {
     if (!intentsModule) {
       await loadChatModules();
     }
-    
+
     const intent = intentsModule.matchIntent(message, pathname);
-    return intentsModule.answerForIntent(intent || 'default', pathname);
+    return intentsModule.answerForIntent(intent || "default", pathname);
   } catch (error) {
-    console.error('Error generating bot response:', error);
+    console.error("Error generating bot response:", error);
     return "I can help with questions about Johnson's background, skills, projects, education, experience, availability, or how to contact him. Try asking: 'How did you transition from teaching to IT?'";
   }
 };
@@ -68,8 +91,8 @@ const ChatContent = () => {
       id: "1",
       text: "Hi! I'm Johnson. I can help you learn about my background, skills, projects, and experience. What would you like to know?",
       isBot: true,
-      timestamp: new Date()
-    }
+      timestamp: new Date(),
+    },
   ]);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -90,10 +113,10 @@ const ChatContent = () => {
       id: Date.now().toString(),
       text: messageText,
       isBot: false,
-      timestamp: new Date()
+      timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInputValue("");
     setIsTyping(true);
 
@@ -107,30 +130,33 @@ const ChatContent = () => {
       // Generate bot response with reduced delay for better UX
       setTimeout(async () => {
         try {
-          const botResponseText = await getBotResponse(messageText, location.pathname);
+          const botResponseText = await getBotResponse(
+            messageText,
+            location.pathname
+          );
           const botResponse: Message = {
             id: (Date.now() + 1).toString(),
             text: botResponseText,
             isBot: true,
-            timestamp: new Date()
+            timestamp: new Date(),
           };
-          
-          setMessages(prev => [...prev, botResponse]);
+
+          setMessages((prev) => [...prev, botResponse]);
           setIsTyping(false);
         } catch (error) {
-          console.error('Error in bot response:', error);
+          console.error("Error in bot response:", error);
           const errorResponse: Message = {
             id: (Date.now() + 1).toString(),
             text: "I'm having trouble processing that right now. Please try asking about Johnson's background, projects, or experience.",
             isBot: true,
-            timestamp: new Date()
+            timestamp: new Date(),
           };
-          setMessages(prev => [...prev, errorResponse]);
+          setMessages((prev) => [...prev, errorResponse]);
           setIsTyping(false);
         }
       }, 700); // Reduced from 1000+ for snappier responses
     } catch (error) {
-      console.error('Error loading chat modules:', error);
+      console.error("Error loading chat modules:", error);
       setIsTyping(false);
     }
   };
@@ -170,7 +196,9 @@ const ChatContent = () => {
               key={message.id}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className={`flex ${message.isBot ? "justify-start" : "justify-end"}`}
+              className={`flex ${
+                message.isBot ? "justify-start" : "justify-end"
+              }`}
             >
               <div
                 className={`max-w-[80%] p-3 rounded-lg ${
@@ -183,7 +211,7 @@ const ChatContent = () => {
               </div>
             </motion.div>
           ))}
-          
+
           {isTyping && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -266,14 +294,14 @@ const ChatWidget = () => {
   if (isMobile) {
     return (
       <Drawer open={isOpen} onOpenChange={setIsOpen}>
-        <DrawerTrigger asChild>
-          {trigger}
-        </DrawerTrigger>
+        <DrawerTrigger asChild>{trigger}</DrawerTrigger>
         <DrawerContent>
           <DrawerHeader>
             <DrawerTitle>Chat with me</DrawerTitle>
           </DrawerHeader>
-          <Suspense fallback={<div className="p-4 text-center">Loading chat...</div>}>
+          <Suspense
+            fallback={<div className="p-4 text-center">Loading chat...</div>}
+          >
             <ChatContent />
           </Suspense>
         </DrawerContent>
@@ -283,14 +311,14 @@ const ChatWidget = () => {
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
-      <SheetTrigger asChild>
-        {trigger}
-      </SheetTrigger>
+      <SheetTrigger asChild>{trigger}</SheetTrigger>
       <SheetContent side="right" className="w-[400px] sm:w-[540px]">
         <SheetHeader>
           <SheetTitle>Chat with me</SheetTitle>
         </SheetHeader>
-        <Suspense fallback={<div className="p-4 text-center">Loading chat...</div>}>
+        <Suspense
+          fallback={<div className="p-4 text-center">Loading chat...</div>}
+        >
           <ChatContent />
         </Suspense>
       </SheetContent>

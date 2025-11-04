@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { FileText } from "lucide-react";
 import SectionTitle from "../components/SectionTitle";
@@ -14,32 +13,18 @@ import Certifications from "../components/resume/Certifications";
 import ResumeDownload from "../components/resume/ResumeDownload";
 
 // Import resume data
-import { 
-  workExperiences, 
-  educationItems, 
-  skills, 
+import {
+  workExperiences,
+  educationItems,
+  skills,
   certifications,
-  paragraphColors 
+  paragraphColors,
 } from "../components/resume/resumeData";
 
 export default function Resume() {
-  const handleDownloadResume = () => {
-    // Create a link to download the resume
-    const resumeUrl = "https://drive.google.com/uc?export=download&id=1FnME7oKuZuQNgCBQ5rfID-hXfOJsVeO0";
-    
-    // Create a temporary anchor element
-    const link = document.createElement('a');
-    link.href = resumeUrl;
-    link.setAttribute('download', 'Johnson_T_Resume.pdf');
-    link.setAttribute('target', '_blank');
-    
-    // Append to the document and trigger the download
-    document.body.appendChild(link);
-    link.click();
-    
-    // Clean up
-    document.body.removeChild(link);
-  };
+  // Direct URL for the resume download
+  const resumeUrl =
+    "https://drive.google.com/uc?export=download&id=1FnME7oKuZuQNgCBQ5rfID-hXfOJsVeO0";
 
   return (
     <motion.div
@@ -55,7 +40,9 @@ export default function Resume() {
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.7, delay: 0.1 }}
       >
-        <SectionTitle icon={<FileText size={28} />} colorScheme="gradient">My Resume</SectionTitle>
+        <SectionTitle icon={<FileText size={28} />} colorScheme="gradient">
+          My Resume
+        </SectionTitle>
       </motion.div>
 
       {/* Professional Summary */}
@@ -71,19 +58,21 @@ export default function Resume() {
       <Skills skills={skills} />
 
       {/* Projects */}
-      <Projects paragraphColors={{
-        project1: paragraphColors.project1,
-        project2: paragraphColors.project2,
-        project3: paragraphColors.project3
-      }} />
+      <Projects
+        paragraphColors={{
+          project1: paragraphColors.project1,
+          project2: paragraphColors.project2,
+          project3: paragraphColors.project3,
+        }}
+      />
 
       {/* Certifications */}
       <Certifications certifications={certifications} />
-      
+
       {/* Download Resume */}
-      <ResumeDownload 
+      <ResumeDownload
+        resumeUrl={resumeUrl}
         downloadTextColor={paragraphColors.downloadText}
-        handleDownloadResume={handleDownloadResume}
       />
     </motion.div>
   );
