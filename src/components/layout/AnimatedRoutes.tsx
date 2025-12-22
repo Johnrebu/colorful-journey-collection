@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
@@ -11,6 +10,7 @@ import Resume from "../../pages/Resume";
 import Projects from "../../pages/Projects";
 import Contact from "../../pages/Contact";
 import Wikipedia from "../../pages/Wikipedia";
+import NotFound from "../../pages/NotFound";
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -25,6 +25,7 @@ const AnimatedRoutes = () => {
         <Route path="/projects" element={<Projects />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/wikipedia" element={<Wikipedia />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
   );
