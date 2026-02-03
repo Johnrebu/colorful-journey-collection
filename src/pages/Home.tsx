@@ -2,6 +2,8 @@
 import { motion } from "framer-motion";
 import { Code, ChevronDown } from "lucide-react";
 import HeroSection from "../components/HeroSection";
+import TerminalIntro from "../components/animations/TerminalIntro";
+import CodeFlowAnimation from "../components/animations/CodeFlowAnimation";
 
 // Replace the placeholder image with your profile picture
 const profileImageUrl = "https://i.postimg.cc/dQ741Z2x/Firefly-20250216210550.png";
@@ -23,6 +25,26 @@ export default function Home() {
 
   return (
     <div className="min-h-[calc(100vh-12rem)] flex flex-col">
+      {/* Terminal Intro */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.6 }}
+      >
+        <TerminalIntro />
+      </motion.div>
+
+      {/* Code Flow Animation */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 0.6 }}
+        className="mb-8"
+      >
+        <CodeFlowAnimation />
+      </motion.div>
+
+      {/* Main Hero Section */}
       <HeroSection profileImageUrl={profileImageUrl} skills={skills} />
       
       <motion.div 

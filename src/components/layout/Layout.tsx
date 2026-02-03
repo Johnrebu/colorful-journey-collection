@@ -6,6 +6,7 @@ import Header from "./Header";
 import AnimatedRoutes from "./AnimatedRoutes";
 import ScrollToTop from "./ScrollToTop";
 import ChatWidget from "../chat/ChatWidget";
+import CursorFollower from "../CursorFollower";
 import { Toaster } from "sonner";
 
 // Update the profile image URL
@@ -34,11 +35,14 @@ const Layout = () => {
 
   return (
     <motion.div
-      className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-dark-100' : 'bg-gradient-to-br from-white to-blue-50'}`}
+      className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark bg-dark-100 text-white' : 'bg-gradient-to-br from-white to-blue-50 text-gray-900'}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
+      {/* Custom cursor follower */}
+      <CursorFollower />
+      
       <Toaster position="top-right" richColors closeButton />
       
       <Header 
@@ -48,7 +52,7 @@ const Layout = () => {
         toggleDarkMode={toggleTheme}
       />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-28">
+      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-28">
         <AnimatedRoutes />
       </main>
 

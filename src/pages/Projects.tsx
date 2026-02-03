@@ -1,10 +1,10 @@
 
 import { motion } from "framer-motion";
-import { Github, ExternalLink, Code, Layout, Figma } from "lucide-react";
+import { Code, Layout, Figma } from "lucide-react";
 import SectionTitle from "../components/SectionTitle";
-import GlassCard from "../components/GlassCard";
-import SkillTag from "../components/SkillTag";
+import Project3DCard from "../components/Project3DCard";
 import StarAnimation from "../components/animations/StarAnimation";
+import GlassCard from "../components/GlassCard";
 
 export default function Projects() {
   const projects = [
@@ -58,14 +58,6 @@ export default function Projects() {
     },
   ];
 
-  // Define paragraph colors
-  const paragraphColors = {
-    projectDesc1: "text-portfolioBlue",
-    projectDesc2: "text-portfolioPurple",
-    projectDesc3: "text-portfolioPink",
-    callToAction: "text-portfolioOrange",
-  };
-
   return (
     <motion.div
       className="font-lucida relative"
@@ -85,109 +77,7 @@ export default function Projects() {
             transition={{ duration: 0.5, delay: index * 0.2 }}
             className="h-full"
           >
-            <GlassCard className="h-full flex flex-col">
-              <div className="relative overflow-hidden rounded-lg mb-6 group">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">
-                  <div className="text-white font-medium">{project.title}</div>
-                  <div className="flex space-x-2">
-                    <motion.a
-                      href={project.githubUrl}
-                      className="p-2 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/40 transition-colors"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.2, rotate: 5 }}
-                    >
-                      <Github className="w-4 h-4" />
-                    </motion.a>
-                    <motion.a
-                      href={project.liveUrl}
-                      className="p-2 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/40 transition-colors"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.2, rotate: -5 }}
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                    </motion.a>
-                  </div>
-                </div>
-                <motion.img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-48 object-cover"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.5 }}
-                />
-                <motion.div 
-                  className="absolute top-3 left-3 p-2 bg-white/80 backdrop-blur-sm rounded-full text-primary"
-                  animate={{ 
-                    rotate: [0, 5, 0, -5, 0],
-                    scale: [1, 1.1, 1, 1.1, 1]
-                  }}
-                  transition={{ 
-                    duration: 5,
-                    repeat: Infinity,
-                    delay: index * 0.5
-                  }}
-                >
-                  {project.icon}
-                </motion.div>
-              </div>
-              
-              <div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-3">
-                  {project.title}
-                </h3>
-                <p className={`mb-6 line-clamp-3 ${
-                  index === 0 ? paragraphColors.projectDesc1 : 
-                  index === 1 ? paragraphColors.projectDesc2 : 
-                  paragraphColors.projectDesc3
-                }`}>
-                  {project.description}
-                </p>
-              </div>
-              
-              <div className="mt-auto">
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.technologies.map((tech, techIndex) => (
-                    <motion.div
-                      key={techIndex}
-                      whileHover={{ scale: 1.1 }}
-                      className="animate-float-tools"
-                      style={{ animationDelay: `${techIndex * 0.3}s` }}
-                    >
-                      <SkillTag colorScheme={tech.scheme as any}>
-                        {tech.name}
-                      </SkillTag>
-                    </motion.div>
-                  ))}
-                </div>
-                
-                <div className="flex space-x-4">
-                  <motion.a
-                    href={project.githubUrl}
-                    className="flex items-center text-gray-700 hover:text-primary transition-colors"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05, x: 3 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Github className="w-5 h-5 mr-1" />
-                    <span>Code</span>
-                  </motion.a>
-                  <motion.a
-                    href={project.liveUrl}
-                    className="flex items-center text-gray-700 hover:text-primary transition-colors"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05, x: 3 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <ExternalLink className="w-5 h-5 mr-1" />
-                    <span>Live Demo</span>
-                  </motion.a>
-                </div>
-              </div>
-            </GlassCard>
+            <Project3DCard {...project} />
           </motion.div>
         ))}
       </div>
@@ -200,8 +90,8 @@ export default function Projects() {
       >
         <GlassCard>
           <div className="text-center">
-            <h3 className="text-2xl font-bold text-gray-800 mb-4">Interested in working together?</h3>
-            <p className={`mb-6 max-w-2xl mx-auto ${paragraphColors.callToAction}`}>
+            <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Interested in working together?</h3>
+            <p className="mb-6 max-w-2xl mx-auto text-portfolioOrange">
               I'm always looking for new and exciting projects to work on.
               If you like my work and have a project in mind, feel free to reach out!
             </p>

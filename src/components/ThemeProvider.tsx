@@ -18,27 +18,48 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>('light');
-
-  useEffect(() => {
-    // Check for user preference in localStorage
+  // Initialize theme from localStorage or system preference
+  const getInitialTheme = (): Theme => {
+    // Check localStorage first
     const savedTheme = localStorage.getItem('theme') as Theme | null;
+    if (savedTheme) return savedTheme;
     
-    if (savedTheme) {
-      setTheme(savedTheme);
-    } else {
-      // Check system preference
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setTheme(prefersDark ? 'dark' : 'light');
+    // Check system preference
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
     }
+    
+    return 'light';
+  };
+
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+
+  // Apply theme on first render
+  useEffect(() => {
+    const htmlElement = document.documentElement;
+    const currentTheme = getInitialTheme();
+    
+    if (currentTheme === 'dark') {
+      htmlElement.classList.add('dark');
+      document.body.classList.add('dark');
+    } else {
+      htmlElement.classList.remove('dark');
+      document.body.classList.remove('dark');
+    }
+    
+    setTheme(currentTheme);
   }, []);
 
   useEffect(() => {
-    // Update class on document element when theme changes
+    // Update class on html element when theme changes
+    const htmlElement = document.documentElement;
+    
     if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
+      htmlElement.classList.add('dark');
+      document.body.classList.add('dark');
     } else {
-      document.documentElement.classList.remove('dark');
+      htmlElement.classList.remove('dark');
+      document.body.classList.remove('dark');
     }
     
     // Save preference to localStorage
