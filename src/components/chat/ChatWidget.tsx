@@ -258,12 +258,13 @@ const ChatWidget = () => {
 
   const trigger = (
     <motion.button
-      className="fixed bottom-20 right-6 p-4 rounded-full bg-primary text-primary-foreground shadow-lg z-40 hover:shadow-xl transition-shadow"
+      className="fixed bottom-20 right-6 p-4 rounded-full bg-primary text-primary-foreground shadow-lg z-50 hover:shadow-xl transition-shadow"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.3 }}
+      aria-label="Open chat"
     >
       <AnimatePresence mode="wait">
         {isOpen ? (
@@ -295,7 +296,7 @@ const ChatWidget = () => {
     return (
       <Drawer open={isOpen} onOpenChange={setIsOpen}>
         <DrawerTrigger asChild>{trigger}</DrawerTrigger>
-        <DrawerContent>
+        <DrawerContent className="z-50">
           <DrawerHeader>
             <DrawerTitle>Chat with me</DrawerTitle>
           </DrawerHeader>
@@ -312,7 +313,7 @@ const ChatWidget = () => {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>{trigger}</SheetTrigger>
-      <SheetContent side="right" className="w-[400px] sm:w-[540px]">
+      <SheetContent side="right" className="w-[400px] sm:w-[540px] z-50">
         <SheetHeader>
           <SheetTitle>Chat with me</SheetTitle>
         </SheetHeader>
