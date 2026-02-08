@@ -67,8 +67,8 @@ const ContactForm = ({ className }: ContactFormProps) => {
       
       // Updated EmailJS configuration with correct values
       const result = await emailjs.send(
-        'service_gedo5ah', 
-        'template_nap8wvp',
+        'service_4vlc0r7', 
+        'template_eiiy98f',
         templateParams,
         'ogQh6AcgQUAdLCNuG'
       );
