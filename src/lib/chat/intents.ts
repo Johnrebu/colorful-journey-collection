@@ -83,7 +83,7 @@ const intents: Intent[] = [
 
 export const matchIntent = (message: string, pathname: string): string | null => {
   const lowerMessage = message.toLowerCase();
-  let bestIntent = null;
+  let bestIntent: string | null = null;
   let bestScore = 0;
 
   for (const intent of intents) {

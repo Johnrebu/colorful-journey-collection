@@ -13,11 +13,8 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 
 interface ContactFormProps {
   className?: string;
@@ -27,6 +24,7 @@ interface ContactFormProps {
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }).max(50),
   email: z.string().email({ message: "Please enter a valid email address" }),
+  phone: z.string().optional(),
   message: z.string().min(10, { message: "Message must be at least 10 characters" })
 });
 
@@ -35,6 +33,7 @@ type FormValues = z.infer<typeof formSchema>;
 const ContactForm = ({ className }: ContactFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const isDark = className?.includes('dark-theme');
   
   // Initialize EmailJS once
   useEffect(() => {
@@ -47,6 +46,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
     defaultValues: {
       name: "",
       email: "",
+      phone: "",
       message: ""
     }
   });
@@ -59,6 +59,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
       const templateParams = {
         from_name: values.name,
         from_email: values.email,
+        phone: values.phone || 'Not provided',
         message: values.message,
         to_name: "Johnson T",
         reply_to: values.email,
@@ -90,26 +91,29 @@ const ContactForm = ({ className }: ContactFormProps) => {
     );
   }
 
+  const inputClasses = isDark 
+    ? "w-full bg-transparent border-b border-gray-500 py-3 text-white placeholder:text-gray-400 focus:border-white focus:outline-none transition-colors"
+    : "w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent bg-white shadow-sm";
+
   return (
     <Form {...form}>
       <form 
         onSubmit={form.handleSubmit(onSubmit)} 
-        className={`space-y-5 ${className}`}
+        className={`space-y-6 ${className}`}
       >
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-sm font-medium text-gray-700">Name</FormLabel>
               <FormControl>
-                <Input 
-                  placeholder="Your name" 
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent bg-white shadow-sm"
+                <input 
+                  placeholder="Name" 
+                  className={inputClasses}
                   {...field} 
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage className={isDark ? "text-red-400" : ""} />
             </FormItem>
           )}
         />
@@ -119,16 +123,33 @@ const ContactForm = ({ className }: ContactFormProps) => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-sm font-medium text-gray-700">Email</FormLabel>
               <FormControl>
-                <Input 
+                <input 
                   type="email" 
-                  placeholder="your@email.com" 
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent bg-white shadow-sm"
+                  placeholder="Email" 
+                  className={inputClasses}
                   {...field} 
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage className={isDark ? "text-red-400" : ""} />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="phone"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <input 
+                  type="tel" 
+                  placeholder="Phone number" 
+                  className={inputClasses}
+                  {...field} 
+                />
+              </FormControl>
+              <FormMessage className={isDark ? "text-red-400" : ""} />
             </FormItem>
           )}
         />
@@ -138,38 +159,40 @@ const ContactForm = ({ className }: ContactFormProps) => {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-sm font-medium text-gray-700">Message</FormLabel>
               <FormControl>
-                <Textarea 
-                  placeholder="Your message..." 
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent bg-white shadow-sm resize-y min-h-[120px]"
+                <textarea 
+                  placeholder="Message" 
+                  rows={3}
+                  className={`${inputClasses} resize-none`}
                   {...field} 
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage className={isDark ? "text-red-400" : ""} />
             </FormItem>
           )}
         />
         
         <motion.button
           type="submit"
-          className="w-full py-3 px-4 bg-gradient-to-r from-primary to-portfolioPurple text-white rounded-lg shadow-md font-medium flex items-center justify-center"
-          whileHover={{ scale: 1.02, boxShadow: "0 10px 25px -5px rgba(59, 130, 246, 0.5)" }}
+          className={`py-3 px-8 rounded-full font-medium flex items-center justify-center transition-all ${
+            isDark 
+              ? "bg-transparent border-2 border-white text-white hover:bg-white hover:text-[#1e2a4a]" 
+              : "w-full bg-gradient-to-r from-primary to-portfolioPurple text-white shadow-md"
+          }`}
+          whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           disabled={isSubmitting}
         >
           {isSubmitting ? (
             <>
-              <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <svg className="animate-spin -ml-1 mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
               Sending...
             </>
           ) : (
-            <>
-              <Send className="w-4 h-4 mr-2" /> Send Message
-            </>
+            "Send Message"
           )}
         </motion.button>
       </form>
