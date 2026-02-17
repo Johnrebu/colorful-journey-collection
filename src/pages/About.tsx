@@ -120,27 +120,30 @@ export default function About() {
         animate="visible"
       >
         <SectionTitle icon={<ScrollText size={28} />}>My Journey</SectionTitle>
-        <div className="relative pl-6 after:absolute after:inset-y-0 after:left-6 after:w-0.5 after:bg-gray-200 dark:after:bg-gray-700">
+        <div className="space-y-4 mt-8">
           {timelineEvents.map((event, index) => (
             <motion.div
               key={index}
               variants={cardVariants}
-              className="relative pl-8 py-4 group"
             >
-              <div
-                className={`absolute left-0 top-4 -translate-x-1/2 w-10 h-10 rounded-full flex items-center justify-center bg-${event.color}-100 text-${event.color}-600 ring-8 ring-background group-hover:scale-110 transition-transform`}
-              >
-                {event.icon}
+              <div className="pb-6 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+                <div className="flex items-start space-x-4">
+                  <div className={`flex-shrink-0 text-${event.color}-600 dark:text-${event.color}-400 pt-1`}>
+                    {event.icon}
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
+                      {event.date}
+                    </div>
+                    <h4 className="font-semibold text-lg text-gray-800 dark:text-white mb-2">
+                      {event.title}
+                    </h4>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                      {event.description}
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className="mb-1 text-sm font-semibold text-primary">
-                {event.date}
-              </div>
-              <h4 className="font-bold text-lg text-gray-800 dark:text-white mb-2">
-                {event.title}
-              </h4>
-              <p className="text-gray-600 dark:text-gray-400">
-                {event.description}
-              </p>
             </motion.div>
           ))}
         </div>
@@ -155,27 +158,23 @@ export default function About() {
         <SectionTitle icon={<Award size={28} />}>
           What I Bring to the Table
         </SectionTitle>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
           {valuePropositions.map((prop, index) => (
-            <motion.div key={index} variants={cardVariants}>
-              <GlassCard className="h-full">
-                <div className="flex items-start space-x-4">
-                  <motion.div
-                    className="flex-shrink-0"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                  >
-                    {prop.icon}
-                  </motion.div>
-                  <div>
-                    <h4 className="font-bold text-lg text-gray-800 dark:text-white mb-1">
-                      {prop.title}
-                    </h4>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      {prop.description}
-                    </p>
-                  </div>
+            <motion.div 
+              key={index} 
+              variants={cardVariants}
+            >
+              <div className="space-y-3">
+                <div className="flex items-center space-x-3">
+                  {prop.icon}
+                  <h4 className="font-semibold text-gray-800 dark:text-white">
+                    {prop.title}
+                  </h4>
                 </div>
-              </GlassCard>
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed ml-9">
+                  {prop.description}
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -189,30 +188,24 @@ export default function About() {
       >
         <SectionTitle icon={<Code size={28} />}>Technical Skills</SectionTitle>
 
-        <motion.div variants={cardVariants}>
-          <GlassCard>
-            <motion.div
-              className="flex flex-wrap gap-3"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              {skills.map((skill, index) => (
-                <motion.div
-                  key={index}
-                  variants={cardVariants}
-                  whileHover={{
-                    y: -3,
-                    transition: { type: "spring", stiffness: 300 },
-                  }}
-                >
-                  <SkillTag colorScheme={skill.scheme as any}>
-                    {skill.name}
-                  </SkillTag>
-                </motion.div>
-              ))}
-            </motion.div>
-          </GlassCard>
+        <motion.div variants={containerVariants} className="mt-8">
+          <motion.div
+            className="flex flex-wrap gap-3"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {skills.map((skill, index) => (
+              <motion.div
+                key={index}
+                variants={cardVariants}
+              >
+                <SkillTag colorScheme={skill.scheme as any}>
+                  {skill.name}
+                </SkillTag>
+              </motion.div>
+            ))}
+          </motion.div>
         </motion.div>
       </motion.div>
     </motion.div>
