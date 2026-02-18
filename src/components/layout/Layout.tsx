@@ -8,7 +8,7 @@ import ChatWidget from "../chat/ChatWidget";
 import CursorFollower from "../CursorFollower";
 import { Toaster } from "sonner";
 
-const profileImageUrl = "https://i.postimg.cc/dQ741Z2x/Firefly-20250216210550.png";
+const profileImageUrl = "/profile-logo.png";
 
 const Layout = () => {
   const { theme, toggleTheme } = useTheme();
