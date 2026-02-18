@@ -1,213 +1,133 @@
 import { motion } from "framer-motion";
-import {
-  Code,
-  Award,
-  ScrollText,
-  BookOpen,
-  Briefcase,
-  BrainCircuit,
-  User,
-  Sparkles,
-} from "lucide-react";
-import SectionTitle from "../components/SectionTitle";
-import GlassCard from "../components/GlassCard";
-import SkillTag from "../components/SkillTag";
-import StarAnimation from "../components/animations/StarAnimation";
-import SelfIntroduction from "../components/SelfIntroduction";
+import { ArrowRight, Award, Brain, CheckCircle2, GraduationCap, Lightbulb, Target } from "lucide-react";
+
+const journey = [
+  {
+    period: "2015 - 2024",
+    title: "Science Educator",
+    detail:
+      "Built deep communication and structured problem-solving skills by teaching Chemistry and Science for nearly a decade.",
+    icon: <GraduationCap size={18} />,
+  },
+  {
+    period: "2024",
+    title: "Career Transition",
+    detail:
+      "Completed an intensive full-stack training path focused on Python, modern frontend systems, and applied product development.",
+    icon: <Lightbulb size={18} />,
+  },
+  {
+    period: "2024 - Present",
+    title: "Frontend + Product Builder",
+    detail:
+      "Shipped production UI work in React and WordPress environments while collaborating with design, content, and business teams.",
+    icon: <Target size={18} />,
+  },
+];
+
+const strengths = [
+  {
+    title: "Analytical by Training",
+    detail: "I break broad product goals into testable, deliverable technical steps.",
+    icon: <Brain size={18} />,
+  },
+  {
+    title: "Clear Communicator",
+    detail: "I write and explain implementation choices so teams move faster with less friction.",
+    icon: <CheckCircle2 size={18} />,
+  },
+  {
+    title: "Execution Discipline",
+    detail: "I value clean implementation, reviewable code, and predictable delivery.",
+    icon: <Award size={18} />,
+  },
+];
+
+const skills = [
+  "React",
+  "TypeScript",
+  "Tailwind CSS",
+  "Framer Motion",
+  "Python",
+  "Django",
+  "SQL",
+  "WordPress",
+  "API Integration",
+  "Prompt-Centered UX",
+];
 
 export default function About() {
-  const timelineEvents = [
-    {
-      icon: <BookOpen />,
-      date: "2015 - 2024",
-      title: "Educator & Innovator",
-      description:
-        "Spent nearly a decade as a Chemistry and Science teacher, honing skills in communication, problem-solving, and curriculum development. Received 'Teacher of the Year' honors in 2019.",
-      color: "blue",
-    },
-    {
-      icon: <Code />,
-      date: "2024",
-      title: "Transition to Tech",
-      description:
-        "Driven by curiosity, I completed a 9-month Python full-stack developer course, officially pivoting my career into the IT industry.",
-      color: "purple",
-    },
-    {
-      icon: <Briefcase />,
-      date: "2024 - Present",
-      title: "Full-Stack Developer",
-      description:
-        "Gained 8 months of hands-on experience as a React and WordPress developer intern at OOR Cabs, working with modern web technologies and AI tools.",
-      color: "pink",
-    },
-  ];
-
-  const skills = [
-    { name: "HTML", scheme: "orange" },
-    { name: "CSS", scheme: "blue" },
-    { name: "JavaScript", scheme: "orange" },
-    { name: "React.JS", scheme: "blue" },
-    { name: "TypeScript", scheme: "blue" },
-    { name: "Tailwind CSS", scheme: "blue" },
-    { name: "Python", scheme: "blue" },
-    { name: "Django", scheme: "purple" },
-    { name: "SQL", scheme: "purple" },
-    { name: "WordPress", scheme: "blue" },
-  ];
-
-  const valuePropositions = [
-    {
-      icon: <BrainCircuit size={28} className="text-primary" />,
-      title: "Analytical Problem-Solving",
-      description:
-        "My scientific background provides a methodical, analytical approach to debugging and development.",
-    },
-    {
-      icon: <User size={28} className="text-portfolioPurple" />,
-      title: "Clear Communication",
-      description:
-        "Years of teaching complex topics enable me to communicate technical ideas clearly to any audience.",
-    },
-    {
-      icon: <Award size={28} className="text-portfolioPink" />,
-      title: "Disciplined & Adaptable",
-      description:
-        "I bring a strong work ethic and a proven ability to quickly master new technologies and concepts.",
-    },
-    {
-      icon: <Sparkles size={28} className="text-portfolioOrange" />,
-      title: "Educational Insight",
-      description:
-        "I combine educational principles with tech to build intuitive, user-centric applications.",
-    },
-  ];
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
   return (
     <motion.div
-      className="font-montserrat relative space-y-16"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      className="space-y-10"
+      initial={{ opacity: 0, y: 14 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -14 }}
+      transition={{ duration: 0.45 }}
     >
-      <StarAnimation />
+      <section className="portfolio-panel">
+        <p className="text-xs uppercase tracking-[0.16em] text-slate-500 dark:text-zinc-400">About Johnson</p>
+        <h1 className="mt-2 font-display text-4xl text-slate-900 dark:text-zinc-100 md:text-5xl">
+          Building ambitious software with clarity, speed, and craft.
+        </h1>
+        <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-700 dark:text-zinc-300">
+          My background in education sharpened the way I think about users: every interface should reduce
+          confusion, guide action, and build trust quickly. That mindset now drives how I build modern web
+          products and why I am aiming to contribute at companies solving complex problems at scale.
+        </p>
+        <a
+          href="/contact"
+          className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1456d8] px-5 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#1149b6]"
+        >
+          Let us connect
+          <ArrowRight size={16} />
+        </a>
+      </section>
 
-      {/* Component that tells the personal story */}
-      <SelfIntroduction />
-
-      {/* My Journey Timeline */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <SectionTitle icon={<ScrollText size={28} />}>My Journey</SectionTitle>
-        <div className="space-y-4 mt-8">
-          {timelineEvents.map((event, index) => (
-            <motion.div
-              key={index}
-              variants={cardVariants}
-            >
-              <div className="pb-6 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
-                <div className="flex items-start space-x-4">
-                  <div className={`flex-shrink-0 text-${event.color}-600 dark:text-${event.color}-400 pt-1`}>
-                    {event.icon}
-                  </div>
-                  <div className="flex-1">
-                    <div className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
-                      {event.date}
-                    </div>
-                    <h4 className="font-semibold text-lg text-gray-800 dark:text-white mb-2">
-                      {event.title}
-                    </h4>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                      {event.description}
-                    </p>
-                  </div>
-                </div>
+      <section>
+        <h2 className="mb-4 font-display text-2xl text-slate-900 dark:text-zinc-100">Journey</h2>
+        <div className="grid gap-4 md:grid-cols-3">
+          {journey.map((item) => (
+            <article key={item.title} className="portfolio-panel">
+              <div className="mb-3 inline-flex rounded-xl bg-slate-900 p-2 text-white dark:bg-white dark:text-slate-900">
+                {item.icon}
               </div>
-            </motion.div>
+              <p className="text-xs uppercase tracking-[0.16em] text-slate-500 dark:text-zinc-400">{item.period}</p>
+              <h3 className="mt-2 font-display text-xl text-slate-900 dark:text-zinc-100">{item.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-zinc-300">{item.detail}</p>
+            </article>
           ))}
         </div>
-      </motion.div>
+      </section>
 
-      {/* What I Bring Section */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <SectionTitle icon={<Award size={28} />}>
-          What I Bring to the Table
-        </SectionTitle>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-          {valuePropositions.map((prop, index) => (
-            <motion.div 
-              key={index} 
-              variants={cardVariants}
-            >
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  {prop.icon}
-                  <h4 className="font-semibold text-gray-800 dark:text-white">
-                    {prop.title}
-                  </h4>
-                </div>
-                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed ml-9">
-                  {prop.description}
-                </p>
+      <section>
+        <h2 className="mb-4 font-display text-2xl text-slate-900 dark:text-zinc-100">What I Bring</h2>
+        <div className="grid gap-4 md:grid-cols-3">
+          {strengths.map((item) => (
+            <article key={item.title} className="portfolio-panel">
+              <div className="mb-3 inline-flex rounded-xl border border-slate-300 p-2 text-slate-800 dark:border-zinc-600 dark:text-zinc-100">
+                {item.icon}
               </div>
-            </motion.div>
+              <h3 className="font-display text-xl text-slate-900 dark:text-zinc-100">{item.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-zinc-300">{item.detail}</p>
+            </article>
           ))}
         </div>
-      </motion.div>
+      </section>
 
-      {/* Technical Skills Section */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <SectionTitle icon={<Code size={28} />}>Technical Skills</SectionTitle>
-
-        <motion.div variants={containerVariants} className="mt-8">
-          <motion.div
-            className="flex flex-wrap gap-3"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            {skills.map((skill, index) => (
-              <motion.div
-                key={index}
-                variants={cardVariants}
-              >
-                <SkillTag colorScheme={skill.scheme as any}>
-                  {skill.name}
-                </SkillTag>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
-      </motion.div>
+      <section className="portfolio-panel">
+        <h2 className="mb-4 font-display text-2xl text-slate-900 dark:text-zinc-100">Core Skills</h2>
+        <div className="flex flex-wrap gap-2">
+          {skills.map((skill) => (
+            <span
+              key={skill}
+              className="rounded-full border border-slate-300 bg-white px-3 py-1 text-sm font-medium text-slate-700 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-200"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+      </section>
     </motion.div>
   );
 }

@@ -1,6 +1,5 @@
-
 import React from "react";
-import { useLocation, Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
 interface NavLinkProps {
@@ -8,17 +7,16 @@ interface NavLinkProps {
   to: string;
 }
 
-// Desktop Nav Link with animations
 const NavLink = ({ children, to }: NavLinkProps) => {
   const location = useLocation();
   const isActive = location.pathname === to;
-  
+
   return (
     <Link to={to}>
       <motion.span
-        className={`nav-link ${isActive ? 'text-primary after:w-full' : ''}`}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        className={`nav-link-modern ${isActive ? "nav-link-modern-active" : ""}`}
+        whileHover={{ y: -1 }}
+        whileTap={{ scale: 0.98 }}
       >
         {children}
       </motion.span>

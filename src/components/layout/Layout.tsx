@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { useTheme } from "../ThemeProvider";
 import Header from "./Header";
@@ -9,50 +8,27 @@ import ChatWidget from "../chat/ChatWidget";
 import CursorFollower from "../CursorFollower";
 import { Toaster } from "sonner";
 
-// Update the profile image URL
 const profileImageUrl = "https://i.postimg.cc/dQ741Z2x/Firefly-20250216210550.png";
 
 const Layout = () => {
-  const [scrolled, setScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
-  const darkMode = theme === 'dark';
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const offset = window.scrollY;
-      if (offset > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  const darkMode = theme === "dark";
 
   return (
     <motion.div
-      className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark bg-dark-100 text-white' : 'bg-gradient-to-br from-white to-blue-50 text-gray-900'}`}
+      className={`min-h-screen transition-colors duration-300 ${
+        darkMode ? "dark bg-[#0f1523] text-white" : "bg-[#eef3fb] text-slate-900"
+      }`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
+      transition={{ duration: 0.55 }}
     >
-      {/* Custom cursor follower */}
       <CursorFollower />
-      
       <Toaster position="top-right" richColors closeButton />
-      
-      <Header 
-        profileImageUrl={profileImageUrl}
-        scrolled={scrolled}
-        darkMode={darkMode}
-        toggleDarkMode={toggleTheme}
-      />
 
-      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-28">
+      <Header profileImageUrl={profileImageUrl} darkMode={darkMode} toggleDarkMode={toggleTheme} />
+
+      <main className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-10 pt-28 sm:px-6 lg:px-8">
         <AnimatedRoutes />
       </main>
 

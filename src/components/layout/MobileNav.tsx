@@ -1,6 +1,5 @@
-
 import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import MobileNavLink from "./MobileNavLink";
 
 interface MobileNavProps {
@@ -14,18 +13,16 @@ const MobileNav = ({ isOpen, onClose }: MobileNavProps) => {
       {isOpen && (
         <motion.div
           className="md:hidden"
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          transition={{ duration: 0.3 }}
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.22 }}
         >
-          <div className="glass-card m-4 rounded-2xl space-y-1">
+          <div className="mt-3 rounded-3xl border border-white/40 bg-white/85 p-3 shadow-[0_10px_30px_rgba(14,25,40,0.16)] backdrop-blur-xl dark:border-white/10 dark:bg-zinc-950/90">
             <MobileNavLink to="/" onClick={onClose}>Home</MobileNavLink>
-            <MobileNavLink to="/about" onClick={onClose}>About Me</MobileNavLink>
-            <MobileNavLink to="/bio" onClick={onClose}>Bio Data</MobileNavLink>
-            <MobileNavLink to="/wikipedia" onClick={onClose}>Wikipedia</MobileNavLink>
-            <MobileNavLink to="/resume" onClick={onClose}>Resume</MobileNavLink>
+            <MobileNavLink to="/about" onClick={onClose}>About</MobileNavLink>
             <MobileNavLink to="/projects" onClick={onClose}>Projects</MobileNavLink>
+            <MobileNavLink to="/resume" onClick={onClose}>Resume</MobileNavLink>
             <MobileNavLink to="/contact" onClick={onClose}>Contact</MobileNavLink>
           </div>
         </motion.div>

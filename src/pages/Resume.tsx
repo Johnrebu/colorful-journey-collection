@@ -1,7 +1,9 @@
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { FileText } from "lucide-react";
 import SectionTitle from "../components/SectionTitle";
 import StarAnimation from "../components/animations/StarAnimation";
+import { toast } from "sonner";
 
 // Import resume components
 import ProfessionalSummary from "../components/resume/ProfessionalSummary";
@@ -22,9 +24,87 @@ import {
 } from "../components/resume/resumeData";
 
 export default function Resume() {
-  // Direct URL for the resume download
-  const resumeUrl =
-    "https://drive.google.com/uc?export=download&id=1FnME7oKuZuQNgCBQ5rfID-hXfOJsVeO0";
+  const resumeRef = useRef<HTMLDivElement>(null);
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const handleDownloadResume = async () => {
+    if (!resumeRef.current || isDownloading) return;
+
+    try {
+      setIsDownloading(true);
+      const [{ default: html2canvas }, { default: jsPDF }] = await Promise.all([
+        import("html2canvas"),
+        import("jspdf"),
+      ]);
+
+      const canvas = await html2canvas(resumeRef.current, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: "#ffffff",
+        scrollX: 0,
+        scrollY: -window.scrollY,
+        onclone: (clonedDoc) => {
+          clonedDoc.querySelectorAll("*").forEach((node) => {
+            const element = node as HTMLElement;
+            element.style.animation = "none";
+            element.style.transition = "none";
+          });
+        },
+      });
+
+      const pdf = new jsPDF("p", "mm", "a4");
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const margin = 10;
+      const contentWidth = pageWidth - margin * 2;
+      const contentHeight = pageHeight - margin * 2;
+      const pageHeightPx = Math.floor((canvas.width * contentHeight) / contentWidth);
+      const totalPages = Math.ceil(canvas.height / pageHeightPx);
+
+      for (let pageIndex = 0; pageIndex < totalPages; pageIndex += 1) {
+        if (pageIndex > 0) {
+          pdf.addPage();
+        }
+
+        const sourceY = pageIndex * pageHeightPx;
+        const sliceHeight = Math.min(pageHeightPx, canvas.height - sourceY);
+        const pageCanvas = document.createElement("canvas");
+        pageCanvas.width = canvas.width;
+        pageCanvas.height = sliceHeight;
+
+        const pageContext = pageCanvas.getContext("2d");
+        if (!pageContext) {
+          throw new Error("Unable to prepare PDF page context");
+        }
+
+        pageContext.fillStyle = "#ffffff";
+        pageContext.fillRect(0, 0, pageCanvas.width, pageCanvas.height);
+        pageContext.drawImage(
+          canvas,
+          0,
+          sourceY,
+          canvas.width,
+          sliceHeight,
+          0,
+          0,
+          pageCanvas.width,
+          pageCanvas.height
+        );
+
+        const pageImageData = pageCanvas.toDataURL("image/jpeg", 0.95);
+        const renderHeight = (sliceHeight * contentWidth) / canvas.width;
+        pdf.addImage(pageImageData, "JPEG", margin, margin, contentWidth, renderHeight, undefined, "FAST");
+      }
+
+      pdf.save("Johnson_T_Resume.pdf");
+      toast.success("Resume PDF downloaded");
+    } catch (error) {
+      console.error("PDF generation failed", error);
+      toast.error("Unable to generate PDF. Please try again.");
+    } finally {
+      setIsDownloading(false);
+    }
+  };
 
   return (
     <motion.div
@@ -33,6 +113,7 @@ export default function Resume() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.7 }}
+      ref={resumeRef}
     >
       <StarAnimation />
       <motion.div
@@ -71,8 +152,9 @@ export default function Resume() {
 
       {/* Download Resume */}
       <ResumeDownload
-        resumeUrl={resumeUrl}
         downloadTextColor={paragraphColors.downloadText}
+        onDownload={handleDownloadResume}
+        isDownloading={isDownloading}
       />
     </motion.div>
   );

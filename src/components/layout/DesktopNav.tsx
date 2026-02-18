@@ -1,8 +1,7 @@
-
 import React from "react";
-import NavLink from "./NavLink";
 import { motion } from "framer-motion";
-import { Sun, Moon } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
+import NavLink from "./NavLink";
 
 interface DesktopNavProps {
   darkMode: boolean;
@@ -11,22 +10,20 @@ interface DesktopNavProps {
 
 const DesktopNav = ({ darkMode, toggleDarkMode }: DesktopNavProps) => {
   return (
-    <div className="hidden md:flex items-center space-x-8">
+    <div className="hidden items-center gap-1 md:flex">
       <NavLink to="/">Home</NavLink>
-      <NavLink to="/about">About Me</NavLink>
-      <NavLink to="/wikipedia">Wikipedia</NavLink>
-      <NavLink to="/resume">Resume</NavLink>
+      <NavLink to="/about">About</NavLink>
       <NavLink to="/projects">Projects</NavLink>
+      <NavLink to="/resume">Resume</NavLink>
       <NavLink to="/contact">Contact</NavLink>
-      
-      {/* Dark mode toggle */}
+
       <motion.button
         onClick={toggleDarkMode}
-        className="p-2 rounded-full bg-white/80 dark:bg-dark-300/80 backdrop-blur-sm shadow-sm text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary focus:outline-none"
+        className="ml-2 inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-700 transition hover:border-slate-500 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:border-zinc-400"
         whileTap={{ scale: 0.95 }}
-        whileHover={{ scale: 1.05 }}
+        whileHover={{ y: -1 }}
       >
-        {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+        {darkMode ? <Sun size={17} /> : <Moon size={17} />}
       </motion.button>
     </div>
   );

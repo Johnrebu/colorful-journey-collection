@@ -5,23 +5,26 @@ import GlassCard from "../GlassCard";
 
 interface ResumeDownloadProps {
   downloadTextColor: string;
-  resumeUrl: string;
+  onDownload: () => Promise<void>;
+  isDownloading: boolean;
 }
 
 const ResumeDownload: React.FC<ResumeDownloadProps> = ({
   downloadTextColor,
-  resumeUrl,
+  onDownload,
+  isDownloading,
 }) => {
   return (
     <motion.div
       className="mt-16 mb-8"
+      data-html2canvas-ignore="true"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.8, duration: 0.6 }}
     >
       <GlassCard>
         <div className="text-center">
-          <h3 className="text-2xl md:text-3xl font-playfair font-bold text-gray-800 mb-4">
+          <h3 className="text-2xl md:text-3xl font-playfair font-bold text-gray-800 dark:text-white mb-4">
             Ready to Download My Resume?
           </h3>
           <p
@@ -29,10 +32,10 @@ const ResumeDownload: React.FC<ResumeDownloadProps> = ({
           >
             Get a complete copy of my resume in PDF format for your records.
           </p>
-          <motion.a
-            href={resumeUrl}
-            className="inline-flex items-center gap-2 px-8 py-3 bg-primary text-white rounded-full font-montserrat shadow-md"
-            download="Johnson_T_Resume.pdf"
+          <motion.button
+            onClick={onDownload}
+            disabled={isDownloading}
+            className="inline-flex items-center gap-2 px-8 py-3 bg-primary text-white rounded-full font-montserrat shadow-md disabled:opacity-60 disabled:cursor-not-allowed"
             whileHover={{
               scale: 1.05,
               boxShadow: "0 10px 25px -5px rgba(59, 130, 246, 0.5)",
@@ -47,8 +50,8 @@ const ResumeDownload: React.FC<ResumeDownloadProps> = ({
             }}
           >
             <Download size={18} />
-            Download PDF
-          </motion.a>
+            {isDownloading ? "Generating PDF..." : "Download PDF"}
+          </motion.button>
         </div>
       </GlassCard>
     </motion.div>
