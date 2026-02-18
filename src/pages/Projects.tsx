@@ -1,114 +1,271 @@
-
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Code, Layout, Figma } from "lucide-react";
-import SectionTitle from "../components/SectionTitle";
-import Project3DCard from "../components/Project3DCard";
-import StarAnimation from "../components/animations/StarAnimation";
-import GlassCard from "../components/GlassCard";
+import { ExternalLink, GitFork, Github, Rocket, Star } from "lucide-react";
+
+type GitHubRepo = {
+  id: number;
+  name: string;
+  full_name: string;
+  description: string | null;
+  html_url: string;
+  homepage: string | null;
+  stargazers_count: number;
+  forks_count: number;
+  language: string | null;
+  topics?: string[];
+  archived: boolean;
+  fork: boolean;
+  updated_at: string;
+};
+
+const GITHUB_USERNAME = "Johnrebu";
+
+const featuredProjectNames = [
+  "WeatherApp_ReactResumeProject",
+  "E-Commerce_Website",
+  "Pro_ForCecilAnna_sortSerch",
+];
+
+const fallbackProjects = [
+  {
+    name: "WeatherApp_ReactResumeProject",
+    description: "React weather app with modern UI and API integration.",
+    html_url: "https://github.com/Johnrebu/WeatherApp_ReactResumeProject",
+    homepage: "https://chimerical-sunburst-6fe1b4.netlify.app/",
+    language: "TypeScript",
+    stargazers_count: 0,
+    forks_count: 0,
+  },
+  {
+    name: "Pro_ForCecilAnna_sortSerch",
+    description: "Employee directory with search, sorting, and filtering workflows.",
+    html_url: "https://github.com/Johnrebu/Pro_ForCecilAnna_sortSerch",
+    homepage: "https://stellular-cactus-7acb12.netlify.app/",
+    language: "TypeScript",
+    stargazers_count: 0,
+    forks_count: 0,
+  },
+  {
+    name: "E-Commerce_Website",
+    description: "MERN-style e-commerce experience with React frontend.",
+    html_url: "https://github.com/Johnrebu/E-Commerce_Website",
+    homepage: "https://ecommercejohn.netlify.app/",
+    language: "JavaScript",
+    stargazers_count: 0,
+    forks_count: 0,
+  },
+];
+
+const formatDate = (value: string) =>
+  new Date(value).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
 
 export default function Projects() {
-  const projects = [
-    {
-      title: "React Colorful Weather Widget",
-      description:
-        "This project demonstrates modern web development practices while creating a beautiful and functional weather application. The combination of React, Tailwind CSS, and modern API integration creates a production-ready application that's both performant and visually appealing.",
-      image:
-        "https://media.istockphoto.com/id/2110814435/photo/hot-climate.jpg?s=612x612&w=0&k=20&c=xSGU2_TfO0LJreK3i93aKaP9Wj5qjBwdCNFfw65izPM=",
-      technologies: [
-        { name: "React", scheme: "blue" },
-        { name: "Tailwind CSS", scheme: "blue" },
-        { name: "TypeScript", scheme: "blue" },
-        { name: "OpenWeatherMap API", scheme: "purple" },
-      ],
-      githubUrl: "https://github.com/Johnrebu/WeatherApp_ReactResumeProject",
-      liveUrl: "https://chimerical-sunburst-6fe1b4.netlify.app/",
-      icon: <Layout className="w-5 h-5" />,
-    },
-    {
-      title: "Employee Directory Application",
-      description:
-        "This is a modern React-based Employee Directory application that allows organizations to manage and visualize their employee data through an intuitive interface. The application provides a comprehensive view of employee information with powerful filtering, sorting, and visualization capabilities.",
-      image:
-        "https://media.istockphoto.com/id/1430370901/es/foto/lista-de-verificaci%C3%B3n-r%C3%A1pida-y-gesti%C3%B3n-de-tareas-del-portapapeles-completando-formularios-de.jpg?s=612x612&w=0&k=20&c=UJW8NNYOUZsem8H6kiFLEpDJ1mcbB0fR26Z1pkAAK3k=",
-      technologies: [
-        { name: "React", scheme: "blue" },
-        { name: "Tailwind CSS", scheme: "blue" },
-        { name: "TypeScript", scheme: "blue" },
-        { name: "useMemo", scheme: "purple" },
-      ],
-      githubUrl: "https://github.com/Johnrebu/Pro_ForCecilAnna_sortSerch",
-      liveUrl: "https://stellular-cactus-7acb12.netlify.app/",
-      icon: <Figma className="w-5 h-5" />,
-    },
-    {
-      title: "E-commerce Website",
-      description:
-        "Complete e-commerce website using React JS and the MERN stack. The project covers front-end development using React, including component creation, routing, state management, and integration with a back-end database (MongoDB).",
-      image:
-        "https://media.istockphoto.com/id/839422436/photo/business-man-showing-online-shopping-concept-in-color-background.jpg?s=612x612&w=0&k=20&c=dRFLX-_NnPdj4nfol4A24-aR0Sw3rCeBiVvSejnSw74=",
-      technologies: [
-        { name: "React", scheme: "blue" },
-        { name: "Routing", scheme: "orange" },
-        { name: "Context API", scheme: "purple" },
-        { name: "MongoDB", scheme: "green" },
-      ],
-      githubUrl: "https://github.com/Johnrebu/E-Commerce_Website",
-      liveUrl: "https://ecommercejohn.netlify.app/",
-      icon: <Code className="w-5 h-5" />,
-    },
-  ];
+  const [repos, setRepos] = useState<GitHubRepo[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const loadRepos = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const response = await fetch(
+          `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`,
+          { signal: controller.signal }
+        );
+
+        if (!response.ok) {
+          throw new Error(`GitHub API error (${response.status})`);
+        }
+
+        const data = (await response.json()) as GitHubRepo[];
+        const cleaned = data
+          .filter((repo) => !repo.fork && !repo.archived)
+          .sort(
+            (a, b) =>
+              new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+          );
+
+        setRepos(cleaned);
+      } catch (err) {
+        if ((err as Error).name !== "AbortError") {
+          setError("Unable to fetch GitHub projects right now.");
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    void loadRepos();
+    return () => controller.abort();
+  }, []);
+
+  const featuredProjects = useMemo(() => {
+    if (!repos.length) return [];
+    const byName = new Map(repos.map((repo) => [repo.name, repo]));
+    return featuredProjectNames
+      .map((name) => byName.get(name))
+      .filter((repo): repo is GitHubRepo => Boolean(repo));
+  }, [repos]);
+
+  const otherProjects = useMemo(() => {
+    const featuredSet = new Set(featuredProjects.map((repo) => repo.name));
+    return repos.filter((repo) => !featuredSet.has(repo.name));
+  }, [repos, featuredProjects]);
+
+  const renderCard = (repo: {
+    name: string;
+    description: string | null;
+    html_url: string;
+    homepage: string | null;
+    language: string | null;
+    stargazers_count: number;
+    forks_count: number;
+    topics?: string[];
+    updated_at?: string;
+  }) => (
+    <article
+      key={repo.name}
+      className="portfolio-panel flex h-full flex-col justify-between"
+    >
+      <div>
+        <h3 className="font-display text-xl text-slate-900 dark:text-zinc-100">
+          {repo.name.replaceAll("_", " ")}
+        </h3>
+        <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-zinc-300">
+          {repo.description || "No description provided yet."}
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {repo.language ? (
+            <span className="rounded-full border border-slate-300 px-3 py-1 text-xs font-medium text-slate-700 dark:border-zinc-600 dark:text-zinc-200">
+              {repo.language}
+            </span>
+          ) : null}
+          {repo.topics?.slice(0, 3).map((topic) => (
+            <span
+              key={topic}
+              className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs text-slate-600 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300"
+            >
+              #{topic}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-5 space-y-3">
+        <div className="flex items-center gap-4 text-xs text-slate-500 dark:text-zinc-400">
+          <span className="inline-flex items-center gap-1">
+            <Star size={14} />
+            {repo.stargazers_count}
+          </span>
+          <span className="inline-flex items-center gap-1">
+            <GitFork size={14} />
+            {repo.forks_count}
+          </span>
+          {repo.updated_at ? <span>Updated {formatDate(repo.updated_at)}</span> : null}
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          <a
+            href={repo.html_url}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-500 dark:border-zinc-600 dark:text-zinc-200"
+          >
+            <Github size={15} />
+            Code
+          </a>
+          {repo.homepage ? (
+            <a
+              href={repo.homepage}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700 dark:bg-white dark:text-slate-900"
+            >
+              <ExternalLink size={15} />
+              Live Demo
+            </a>
+          ) : null}
+        </div>
+      </div>
+    </article>
+  );
 
   return (
     <motion.div
-      className="font-lucida relative"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      className="space-y-10"
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -12 }}
+      transition={{ duration: 0.45 }}
     >
-      <StarAnimation />
-      <SectionTitle icon={<Code size={28} />}>Projects</SectionTitle>
-      
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        {projects.map((project, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.2 }}
-            className="h-full"
+      <section className="portfolio-panel">
+        <p className="text-xs uppercase tracking-[0.16em] text-slate-500 dark:text-zinc-400">
+          Real GitHub Data
+        </p>
+        <h1 className="mt-2 font-display text-4xl text-slate-900 dark:text-zinc-100 md:text-5xl">
+          Projects synced from GitHub
+        </h1>
+        <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-700 dark:text-zinc-300">
+          This page auto-loads repositories from{" "}
+          <a
+            className="font-semibold text-[#1456d8] underline underline-offset-4"
+            href={`https://github.com/${GITHUB_USERNAME}`}
+            target="_blank"
+            rel="noreferrer"
           >
-            <Project3DCard {...project} />
-          </motion.div>
-        ))}
-      </div>
-      
-      <motion.div 
-        className="mt-16"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6, duration: 0.6 }}
-      >
-        <GlassCard>
-          <div className="text-center">
-            <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Interested in working together?</h3>
-            <p className="mb-6 max-w-2xl mx-auto text-portfolioOrange">
-              I'm always looking for new and exciting projects to work on.
-              If you like my work and have a project in mind, feel free to reach out!
-            </p>
-            <motion.a
-              href="/contact"
-              className="inline-block px-8 py-3 bg-primary text-white rounded-full font-medium shadow-md"
-              whileHover={{ 
-                scale: 1.05, 
-                boxShadow: "0 10px 25px -5px rgba(59, 130, 246, 0.5)" 
-              }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Let's Talk
-            </motion.a>
+            github.com/{GITHUB_USERNAME}
+          </a>
+          . Add a good description and topics in GitHub, and your portfolio updates here automatically.
+        </p>
+      </section>
+
+      <section>
+        <div className="mb-4 flex items-center gap-2 text-slate-800 dark:text-zinc-100">
+          <Rocket size={18} />
+          <h2 className="font-display text-2xl">Featured Projects</h2>
+        </div>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {(featuredProjects.length ? featuredProjects : fallbackProjects).map(renderCard)}
+        </div>
+      </section>
+
+      <section>
+        <h2 className="mb-4 font-display text-2xl text-slate-900 dark:text-zinc-100">
+          All Recent Repositories
+        </h2>
+
+        {loading ? (
+          <div className="portfolio-panel text-sm text-slate-600 dark:text-zinc-300">
+            Loading GitHub repositories...
           </div>
-        </GlassCard>
-      </motion.div>
+        ) : null}
+
+        {error ? (
+          <div className="portfolio-panel text-sm text-red-600 dark:text-red-300">
+            {error} Showing fallback projects above.
+          </div>
+        ) : null}
+
+        {!loading && !error ? (
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {otherProjects.length ? (
+              otherProjects.map(renderCard)
+            ) : (
+              <div className="portfolio-panel text-sm text-slate-600 dark:text-zinc-300">
+                No additional repositories found yet.
+              </div>
+            )}
+          </div>
+        ) : null}
+      </section>
     </motion.div>
   );
 }
