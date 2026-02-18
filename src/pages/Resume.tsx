@@ -27,16 +27,16 @@ const profile = {
 
 const selectedProjects = [
   {
-    name: "Weather App (React)",
-    summary: "Built a responsive weather experience with API-driven data and polished UI states.",
-    github: "https://github.com/Johnrebu/WeatherApp_ReactResumeProject",
-    live: "https://chimerical-sunburst-6fe1b4.netlify.app/",
+    name: "event-companion",
+    summary: "Built an event-focused platform experience with clear user flows and practical planning interactions.",
+    github: "https://github.com/Johnrebu/event-companion",
+    live: "https://moneypechuevents.netlify.app/",
   },
   {
-    name: "Employee Directory",
-    summary: "Implemented search, filtering, and sorting for employee records with clean information hierarchy.",
-    github: "https://github.com/Johnrebu/Pro_ForCecilAnna_sortSerch",
-    live: "https://stellular-cactus-7acb12.netlify.app/",
+    name: "rebekha-catering-website",
+    summary: "Developed a catering business website focused on service presentation, inquiry flow, and conversion.",
+    github: "https://github.com/Johnrebu/rebekha-catering-website",
+    live: "https://rebekhacaterers.online/",
   },
   {
     name: "E-Commerce Website",
@@ -261,10 +261,12 @@ export default function Resume() {
                     <Github size={14} />
                     Source
                   </a>
-                  <a href={project.live} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-[#1456d8] hover:underline">
-                    <ExternalLink size={14} />
-                    Live Demo
-                  </a>
+                  {project.live ? (
+                    <a href={project.live} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-[#1456d8] hover:underline">
+                      <ExternalLink size={14} />
+                      Live Demo
+                    </a>
+                  ) : null}
                 </div>
               </article>
             ))}
