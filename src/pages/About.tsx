@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Award, Brain, CheckCircle2, GraduationCap, Lightbulb, Target } from "lucide-react";
+import useSeo from "@/hooks/useSeo";
 
 const journey = [
   {
@@ -57,6 +58,13 @@ const skills = [
 ];
 
 export default function About() {
+  // Set up SEO meta tags for about page
+  useSeo({
+    title: "About - Johnson | Science Educator Turned Developer",
+    description: "Learn about Johnson's journey from science education to full-stack development. 9+ years teaching communication and problem-solving, now building thoughtful web applications.",
+    keywords: "about, bio, background, career, science educator, full-stack developer, journey",
+  });
+
   return (
     <motion.div
       className="space-y-10"

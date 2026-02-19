@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, GitFork, Github, Rocket, Star } from "lucide-react";
+import useSeo from "@/hooks/useSeo";
 
 type GitHubRepo = {
   id: number;
@@ -67,6 +68,13 @@ export default function Projects() {
   const [repos, setRepos] = useState<GitHubRepo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Set up SEO meta tags for projects page
+  useSeo({
+    title: "Projects - Johnson's Portfolio | React, TypeScript & Web Development",
+    description: "Explore Johnson's featured projects including weather apps, e-commerce platforms, and modern web applications built with React, TypeScript, and cutting-edge technologies.",
+    keywords: "projects, portfolio, React, TypeScript, JavaScript, web development, GitHub, full-stack",
+  });
 
   useEffect(() => {
     const controller = new AbortController();

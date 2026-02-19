@@ -1,0 +1,168 @@
+/**
+ * SEO Meta Tags Manager
+ * Dynamically updates document head for better SEO
+ */
+
+interface MetaConfig {
+  title: string;
+  description: string;
+  keywords?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  ogUrl?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
+  twitterImage?: string;
+  canonical?: string;
+}
+
+const DEFAULT_OG_IMAGE = '/profile-logo.png';
+const SITE_URL = typeof window !== 'undefined' ? window.location.origin : '';
+const TWITTER_HANDLE = '@johnsondeveloper'; // Update with your handle
+
+export const updateMetaTags = (config: MetaConfig) => {
+  // Update title
+  document.title = config.title;
+
+  // Update or create meta tags
+  const updateOrCreateMeta = (name: string, value: string, isProperty = false) => {
+    const attr = isProperty ? 'property' : 'name';
+    let element = document.querySelector(`meta[${attr}="${name}"]`) as HTMLMetaElement;
+    
+    if (!element) {
+      element = document.createElement('meta');
+      element.setAttribute(attr, name);
+      document.head.appendChild(element);
+    }
+    
+    element.content = value;
+  };
+
+  // Basic meta tags
+  updateOrCreateMeta('description', config.description);
+  if (config.keywords) {
+    updateOrCreateMeta('keywords', config.keywords);
+  }
+
+  // Open Graph tags
+  updateOrCreateMeta('og:title', config.ogTitle || config.title, true);
+  updateOrCreateMeta('og:description', config.ogDescription || config.description, true);
+  updateOrCreateMeta('og:image', config.ogImage || DEFAULT_OG_IMAGE, true);
+  updateOrCreateMeta('og:url', config.ogUrl || SITE_URL, true);
+  updateOrCreateMeta('og:type', 'website', true);
+
+  // Twitter Card tags
+  updateOrCreateMeta('twitter:card', 'summary_large_image', true);
+  updateOrCreateMeta('twitter:title', config.twitterTitle || config.title, true);
+  updateOrCreateMeta('twitter:description', config.twitterDescription || config.description, true);
+  updateOrCreateMeta('twitter:image', config.twitterImage || DEFAULT_OG_IMAGE, true);
+  if (TWITTER_HANDLE) {
+    updateOrCreateMeta('twitter:creator', TWITTER_HANDLE, true);
+  }
+
+  // Canonical URL
+  let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+  if (!canonicalLink) {
+    canonicalLink = document.createElement('link');
+    canonicalLink.rel = 'canonical';
+    document.head.appendChild(canonicalLink);
+  }
+  canonicalLink.href = config.canonical || config.ogUrl || SITE_URL;
+};
+
+/**
+ * Update structured data (JSON-LD) for rich snippets
+ */
+export const updateStructuredData = (data: Record<string, unknown>) => {
+  let script = document.querySelector('script[type="application/ld+json"][data-seo="true"]') as HTMLScriptElement;
+  
+  if (!script) {
+    script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.setAttribute('data-seo', 'true');
+    document.head.appendChild(script);
+  }
+  
+  script.textContent = JSON.stringify(data);
+};
+
+/**
+ * Schema.org Person Schema for your profile
+ */
+export const getPersonSchema = () => {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Johnson',
+    jobTitle: 'Frontend Developer & Product Engineer',
+    url: SITE_URL,
+    image: `${SITE_URL}/profile-logo.png`,
+    sameAs: [
+      'https://twitter.com/johnsondeveloper', // Update these
+      'https://linkedin.com/in/johnsondeveloper',
+      'https://github.com/johnsondeveloper',
+    ],
+    description: 'Frontend-focused developer with a science-education background. Building thoughtful, performance-aware interfaces.',
+  };
+};
+
+/**
+ * Schema.org Website Schema for homepage
+ */
+export const getWebsiteSchema = () => {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    url: SITE_URL,
+    name: 'Johnson Portfolio',
+    description: 'Johnson portfolio: full-stack developer building high-performance web applications.',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${SITE_URL}/projects?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
+  };
+};
+
+/**
+ * Schema.org BreadcrumbList for navigation
+ */
+export const getBreadcrumbSchema = (breadcrumbs: Array<{ name: string; url: string }>) => {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
+};
+
+/**
+ * Schema.org Project/Portfolio Item
+ */
+export const getProjectSchema = (project: {
+  name: string;
+  description: string;
+  image?: string;
+  url?: string;
+  datePublished?: string;
+  skills?: string[];
+}) => {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: project.name,
+    description: project.description,
+    image: project.image,
+    url: project.url,
+    datePublished: project.datePublished,
+    keywords: project.skills?.join(', '),
+  };
+};

@@ -12,6 +12,7 @@ import {
   Phone,
 } from "lucide-react";
 import { toast } from "sonner";
+import useSeo from "@/hooks/useSeo";
 import ResumeDownload from "../components/resume/ResumeDownload";
 import { certifications, educationItems, skills, workExperiences } from "../components/resume/resumeData";
 
@@ -54,6 +55,13 @@ const normalizePeriod = (value: string) => value.replace("â€¢", "•");
 export default function Resume() {
   const resumeRef = useRef<HTMLDivElement>(null);
   const [isDownloading, setIsDownloading] = useState(false);
+
+  // Set up SEO meta tags for resume page
+  useSeo({
+    title: "Resume & Experience - Johnson | Full-Stack Developer",
+    description: "View Johnson's professional resume: Full-Stack Developer with 9+ years in education, expertise in React, TypeScript, Python, Django, and modern web development.",
+    keywords: "resume, experience, full-stack developer, React, TypeScript, Python, Django, education, portfolio",
+  });
 
   const handleDownloadResume = async () => {
     if (!resumeRef.current || isDownloading) return;

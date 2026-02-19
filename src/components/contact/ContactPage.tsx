@@ -2,9 +2,16 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Linkedin, Github, Facebook, Twitter, Youtube } from "lucide-react";
+import useSeo from "@/hooks/useSeo";
 import ContactForm from "./ContactForm";
 
 export default function ContactPage() {
+  // Set up SEO meta tags for contact page
+  useSeo({
+    title: "Contact - Johnson | Get In Touch",
+    description: "Contact Johnson for project inquiries, collaboration opportunities, or just to say hello. Available for freelance work and full-time opportunities.",
+    keywords: "contact, email, phone, get in touch, collaboration, freelance, hire",
+  });
   return (
     <motion.div
       initial={{ opacity: 0 }}

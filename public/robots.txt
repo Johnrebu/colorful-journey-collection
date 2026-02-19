@@ -1,0 +1,23 @@
+# Allow all bots to crawl the site
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /.git/
+Disallow: /node_modules/
+
+# Specific rules for Google
+User-agent: Googlebot
+Allow: /
+
+# Specific rules for Bing
+User-agent: Bingbot
+Allow: /
+
+# Sitemap location
+Sitemap: https://yourportfolio.com/sitemap.xml
+
+# Crawl delay (in seconds) - allows 1 request per 1 second
+Crawl-delay: 1
+
+# Request rate (for Yandex)
+Request-rate: 1/1

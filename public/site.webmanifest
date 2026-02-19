@@ -1,0 +1,43 @@
+{
+  "name": "Johnson - Frontend Developer & Product Engineer",
+  "short_name": "Johnson Portfolio",
+  "description": "Thoughtful, performance-aware interfaces engineered for high-impact teams.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1456d8",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/profile-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/profile-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/profile-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": [
+    "technology",
+    "business"
+  ],
+  "screenshots": [
+    {
+      "src": "/profile-logo.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ]
+}

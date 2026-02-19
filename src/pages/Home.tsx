@@ -8,6 +8,8 @@ import {
   Star,
   Workflow,
 } from "lucide-react";
+import useSeo from "@/hooks/useSeo";
+import { getPersonSchema, getWebsiteSchema } from "@/lib/seo";
 
 const focusAreas = [
   {
@@ -55,6 +57,20 @@ const principles = [
 ];
 
 export default function Home() {
+  // Set up SEO meta tags and structured data for the home page
+  useSeo({
+    title: "Johnson - Frontend Developer & Product Engineer | Portfolio",
+    description: "Explore Johnson's portfolio: AI-first product thinking, thoughtful interfaces, and 12+ shipped projects. Building high-performance web applications.",
+    keywords: "frontend developer, React, TypeScript, portfolio, AI products, UI design, web development",
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        getPersonSchema(),
+        getWebsiteSchema(),
+      ],
+    },
+  });
+
   return (
     <motion.div
       className="space-y-14"
