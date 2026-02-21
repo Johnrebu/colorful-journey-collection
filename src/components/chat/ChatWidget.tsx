@@ -1,4 +1,4 @@
-import React, { useState, lazy, Suspense, useEffect } from "react";
+import React, { useState, Suspense, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, Loader2 } from "lucide-react";
 import { useLocation } from "react-router-dom";
@@ -28,7 +28,6 @@ interface Message {
   timestamp: Date;
 }
 
-// Dynamic imports for performance - loaded only when chat opens
 let knowledgeModule: any = null;
 let intentsModule: any = null;
 
@@ -53,7 +52,6 @@ const getContextualPrompts = async (pathname: string): Promise<string[]> => {
     return knowledgeModule.getSuggestedPrompts(pathname);
   } catch (error) {
     console.error("Error loading prompts:", error);
-    // Fallback prompts
     return pathname === "/bio"
       ? [
           "Tell me about your journey",
@@ -70,18 +68,29 @@ const getContextualPrompts = async (pathname: string): Promise<string[]> => {
 
 const getBotResponse = async (
   message: string,
-  pathname: string
-): Promise<string> => {
+  pathname: string,
+  previousIntent?: string | null
+): Promise<{ response: string; intent: string }> => {
   try {
     if (!intentsModule) {
       await loadChatModules();
     }
 
-    const intent = intentsModule.matchIntent(message, pathname);
-    return intentsModule.answerForIntent(intent || "default", pathname);
+    const reply = intentsModule.generateChatReply(message, pathname, {
+      previousIntent: previousIntent || null,
+    });
+
+    return {
+      response: reply.response,
+      intent: reply.intent,
+    };
   } catch (error) {
     console.error("Error generating bot response:", error);
-    return "I can help with questions about Johnson's background, skills, projects, education, experience, availability, or how to contact him. Try asking: 'How did you transition from teaching to IT?'";
+    return {
+      response:
+        "I can help with Johnson's portfolio and also practical learning, interview, and career advice. Try asking: 'Create a 30-day frontend roadmap.'",
+      intent: "default",
+    };
   }
 };
 
@@ -89,7 +98,7 @@ const ChatContent = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      text: "Hi! I'm Johnson. I can help you learn about my background, skills, projects, and experience. What would you like to know?",
+      text: "Hi! I'm Johnson's assistant. I can answer about Johnson's portfolio and also give practical guidance on learning, interviews, and career growth. What would you like to ask?",
       isBot: true,
       timestamp: new Date(),
     },
@@ -98,9 +107,9 @@ const ChatContent = () => {
   const [isTyping, setIsTyping] = useState(false);
   const [contextualPrompts, setContextualPrompts] = useState<string[]>([]);
   const [modulesLoaded, setModulesLoaded] = useState(false);
+  const [lastIntent, setLastIntent] = useState<string | null>(null);
   const location = useLocation();
 
-  // Load contextual prompts when pathname changes
   useEffect(() => {
     getContextualPrompts(location.pathname).then(setContextualPrompts);
   }, [location.pathname]);
@@ -121,27 +130,23 @@ const ChatContent = () => {
     setIsTyping(true);
 
     try {
-      // Load modules if not already loaded
       if (!modulesLoaded) {
         await loadChatModules();
         setModulesLoaded(true);
       }
 
-      // Generate bot response with reduced delay for better UX
       setTimeout(async () => {
         try {
-          const botResponseText = await getBotResponse(
-            messageText,
-            location.pathname
-          );
+          const botReply = await getBotResponse(messageText, location.pathname, lastIntent);
           const botResponse: Message = {
             id: (Date.now() + 1).toString(),
-            text: botResponseText,
+            text: botReply.response,
             isBot: true,
             timestamp: new Date(),
           };
 
           setMessages((prev) => [...prev, botResponse]);
+          setLastIntent(botReply.intent);
           setIsTyping(false);
         } catch (error) {
           console.error("Error in bot response:", error);
@@ -154,7 +159,7 @@ const ChatContent = () => {
           setMessages((prev) => [...prev, errorResponse]);
           setIsTyping(false);
         }
-      }, 700); // Reduced from 1000+ for snappier responses
+      }, 700);
     } catch (error) {
       console.error("Error loading chat modules:", error);
       setIsTyping(false);
@@ -170,7 +175,6 @@ const ChatContent = () => {
 
   return (
     <div className="flex flex-col h-full max-h-[600px]">
-      {/* Quick Prompts */}
       <div className="p-4 border-b border-border">
         <p className="text-sm text-muted-foreground mb-3">Quick questions:</p>
         <div className="flex flex-wrap gap-2">
@@ -188,7 +192,6 @@ const ChatContent = () => {
         </div>
       </div>
 
-      {/* Messages */}
       <ScrollArea className="flex-1 p-4">
         <div className="space-y-4">
           {messages.map((message) => (
@@ -196,15 +199,11 @@ const ChatContent = () => {
               key={message.id}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className={`flex ${
-                message.isBot ? "justify-start" : "justify-end"
-              }`}
+              className={`flex ${message.isBot ? "justify-start" : "justify-end"}`}
             >
               <div
                 className={`max-w-[80%] p-3 rounded-lg ${
-                  message.isBot
-                    ? "bg-muted text-foreground"
-                    : "bg-primary text-primary-foreground"
+                  message.isBot ? "bg-muted text-foreground" : "bg-primary text-primary-foreground"
                 }`}
               >
                 <p className="text-sm">{message.text}</p>
@@ -229,7 +228,6 @@ const ChatContent = () => {
         </div>
       </ScrollArea>
 
-      {/* Input */}
       <div className="p-4 border-t border-border">
         <div className="flex space-x-2">
           <Input
@@ -239,11 +237,7 @@ const ChatContent = () => {
             placeholder="Ask me anything..."
             className="flex-1"
           />
-          <Button
-            onClick={() => handleSendMessage()}
-            disabled={!inputValue.trim() || isTyping}
-            size="sm"
-          >
+          <Button onClick={() => handleSendMessage()} disabled={!inputValue.trim() || isTyping} size="sm">
             <Send className="w-4 h-4" />
           </Button>
         </div>
@@ -300,9 +294,7 @@ const ChatWidget = () => {
           <DrawerHeader>
             <DrawerTitle>Chat with me</DrawerTitle>
           </DrawerHeader>
-          <Suspense
-            fallback={<div className="p-4 text-center">Loading chat...</div>}
-          >
+          <Suspense fallback={<div className="p-4 text-center">Loading chat...</div>}>
             <ChatContent />
           </Suspense>
         </DrawerContent>
@@ -317,9 +309,7 @@ const ChatWidget = () => {
         <SheetHeader>
           <SheetTitle>Chat with me</SheetTitle>
         </SheetHeader>
-        <Suspense
-          fallback={<div className="p-4 text-center">Loading chat...</div>}
-        >
+        <Suspense fallback={<div className="p-4 text-center">Loading chat...</div>}>
           <ChatContent />
         </Suspense>
       </SheetContent>
