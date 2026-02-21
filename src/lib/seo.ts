@@ -19,6 +19,7 @@ interface MetaConfig {
 
 const DEFAULT_OG_IMAGE = '/profile-logo.png';
 const SITE_URL = typeof window !== 'undefined' ? window.location.origin : '';
+const CURRENT_URL = typeof window !== 'undefined' ? window.location.href : SITE_URL;
 const TWITTER_HANDLE = '@johnsondeveloper'; // Update with your handle
 
 export const updateMetaTags = (config: MetaConfig) => {
@@ -49,16 +50,16 @@ export const updateMetaTags = (config: MetaConfig) => {
   updateOrCreateMeta('og:title', config.ogTitle || config.title, true);
   updateOrCreateMeta('og:description', config.ogDescription || config.description, true);
   updateOrCreateMeta('og:image', config.ogImage || DEFAULT_OG_IMAGE, true);
-  updateOrCreateMeta('og:url', config.ogUrl || SITE_URL, true);
+  updateOrCreateMeta('og:url', config.ogUrl || CURRENT_URL, true);
   updateOrCreateMeta('og:type', 'website', true);
 
   // Twitter Card tags
-  updateOrCreateMeta('twitter:card', 'summary_large_image', true);
-  updateOrCreateMeta('twitter:title', config.twitterTitle || config.title, true);
-  updateOrCreateMeta('twitter:description', config.twitterDescription || config.description, true);
-  updateOrCreateMeta('twitter:image', config.twitterImage || DEFAULT_OG_IMAGE, true);
+  updateOrCreateMeta('twitter:card', 'summary_large_image');
+  updateOrCreateMeta('twitter:title', config.twitterTitle || config.title);
+  updateOrCreateMeta('twitter:description', config.twitterDescription || config.description);
+  updateOrCreateMeta('twitter:image', config.twitterImage || DEFAULT_OG_IMAGE);
   if (TWITTER_HANDLE) {
-    updateOrCreateMeta('twitter:creator', TWITTER_HANDLE, true);
+    updateOrCreateMeta('twitter:creator', TWITTER_HANDLE);
   }
 
   // Canonical URL
@@ -68,7 +69,7 @@ export const updateMetaTags = (config: MetaConfig) => {
     canonicalLink.rel = 'canonical';
     document.head.appendChild(canonicalLink);
   }
-  canonicalLink.href = config.canonical || config.ogUrl || SITE_URL;
+  canonicalLink.href = config.canonical || config.ogUrl || CURRENT_URL;
 };
 
 /**

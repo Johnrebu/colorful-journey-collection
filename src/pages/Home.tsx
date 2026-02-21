@@ -1,73 +1,72 @@
 import { motion } from "framer-motion";
 import {
   ArrowRight,
+  BarChart3,
   BrainCircuit,
-  Layers,
-  Rocket,
-  Sparkles,
-  Star,
-  Workflow,
+  Cpu,
+  Search,
+  ShieldCheck,
+  Sparkle,
+  Zap,
 } from "lucide-react";
 import useSeo from "@/hooks/useSeo";
 import { getPersonSchema, getWebsiteSchema } from "@/lib/seo";
 
-const focusAreas = [
+const googleFocusAreas = [
   {
-    icon: <BrainCircuit size={22} />,
-    title: "AI-First Product Thinking",
+    icon: <Search size={20} />,
+    title: "Search-Friendly Architecture",
     description:
-      "Designing interfaces that feel human while integrating practical AI capabilities.",
+      "Semantic content structure, meaningful headings, and crawlable page patterns that support ranking.",
   },
   {
-    icon: <Workflow size={22} />,
-    title: "Systematic Delivery",
+    icon: <Zap size={20} />,
+    title: "Core Web Vitals Discipline",
     description:
-      "Clear architecture, reliable components, and documentation that supports fast iteration.",
+      "LCP, CLS, and interaction performance are treated as product requirements, not post-launch cleanup.",
   },
   {
-    icon: <Layers size={22} />,
-    title: "Frontend Craft",
+    icon: <Cpu size={20} />,
+    title: "Scale-Ready Frontend Systems",
     description:
-      "Purposeful layout, animation, and usability designed to communicate intent at a glance.",
+      "Reliable component boundaries and predictable state flows for large product surfaces.",
   },
 ];
 
-const featuredProjects = [
+const executionSignals = [
   {
-    name: "Adaptive Learning Workspace",
-    stack: "React, TypeScript, Python",
-    highlight: "Personalized educational workflows powered by behavior-based recommendations.",
+    metric: "95+",
+    label: "Lighthouse Performance",
+    context: "Maintained on modern React builds with image and bundle optimization.",
   },
   {
-    name: "Data Storytelling Dashboard",
-    stack: "React, Tailwind, SQL",
-    highlight: "Real-time visual insights for decision-makers with clear narrative structure.",
+    metric: "12+",
+    label: "Shipped Interfaces",
+    context: "From data dashboards to AI workflows with measurable UX improvements.",
   },
   {
-    name: "AI Support Co-Pilot",
-    stack: "React, NLP APIs, Node",
-    highlight: "Context-aware support assistant with intent routing and action suggestions.",
+    metric: "9 yrs",
+    label: "Communication-Heavy Delivery",
+    context: "Science education background supporting clear documentation and collaboration.",
   },
 ];
 
-const principles = [
-  "Build with clarity before complexity.",
-  "Ship fast, but with standards.",
-  "Prioritize user confidence over visual noise.",
+const roleAlignment = [
+  "Translate ambiguous product goals into measurable frontend milestones.",
+  "Build trustworthy interfaces for complex technical systems and user flows.",
+  "Partner across design, engineering, and product with concise execution updates.",
 ];
 
 export default function Home() {
-  // Set up SEO meta tags and structured data for the home page
   useSeo({
-    title: "Johnson - Frontend Developer & Product Engineer | Portfolio",
-    description: "Explore Johnson's portfolio: AI-first product thinking, thoughtful interfaces, and 12+ shipped projects. Building high-performance web applications.",
-    keywords: "frontend developer, React, TypeScript, portfolio, AI products, UI design, web development",
+    title: "Johnson | Frontend Portfolio for Google-Scale Products",
+    description:
+      "Portfolio redesign focused on Google-level expectations: SEO-ready architecture, Core Web Vitals, accessible UX, and production React engineering.",
+    keywords:
+      "Google frontend portfolio, React TypeScript engineer, technical SEO, Core Web Vitals, accessible UI engineering",
     structuredData: {
-      '@context': 'https://schema.org',
-      '@graph': [
-        getPersonSchema(),
-        getWebsiteSchema(),
-      ],
+      "@context": "https://schema.org",
+      "@graph": [getPersonSchema(), getWebsiteSchema()],
     },
   });
 
@@ -79,88 +78,86 @@ export default function Home() {
       exit={{ opacity: 0, y: -16 }}
       transition={{ duration: 0.5 }}
     >
-      <section className="relative overflow-hidden rounded-[2rem] border border-white/45 bg-white/70 p-6 backdrop-blur-xl shadow-[0_24px_70px_rgba(13,23,40,0.12)] dark:border-white/10 dark:bg-zinc-950/60 md:p-12">
-        <div className="pointer-events-none absolute -left-12 top-8 h-48 w-48 rounded-full bg-[radial-gradient(circle,_rgba(43,132,255,0.35),_transparent_70%)] blur-2xl" />
-        <div className="pointer-events-none absolute -right-16 bottom-0 h-56 w-56 rounded-full bg-[radial-gradient(circle,_rgba(243,122,59,0.35),_transparent_72%)] blur-2xl" />
+      <section className="google-surface relative overflow-hidden rounded-[2rem] p-6 md:p-12">
+        <div className="google-spotlight pointer-events-none absolute -left-16 top-6 h-56 w-56 rounded-full" />
+        <div className="google-spotlight pointer-events-none absolute -right-20 bottom-0 h-72 w-72 rounded-full opacity-80" />
 
-        <div className="relative grid gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
-          <div className="space-y-6">
-            <span className="inline-flex items-center gap-2 rounded-full border border-sky-300/60 bg-sky-100/70 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-sky-900 dark:border-sky-400/40 dark:bg-sky-400/10 dark:text-sky-200">
-              <Sparkles size={14} />
-              Building For High-Impact Teams
+        <div className="google-grid-bg absolute inset-0 opacity-70" />
+
+        <div className="relative grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+          <div className="space-y-7">
+            <span className="google-chip inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700 dark:text-slate-200">
+              <Sparkle size={14} />
+              Portfolio Redesign for Google-Level Standards
             </span>
 
             <h1 className="font-display text-4xl leading-tight text-slate-900 dark:text-white md:text-6xl">
-              Portfolio engineered for teams like
-              <span className="block bg-gradient-to-r from-[#1456d8] via-[#1296c8] to-[#ef7b38] bg-clip-text text-transparent">
-                OpenAI.
+              Frontend engineering portfolio built for
+              <span className="block bg-gradient-to-r from-[#4285F4] via-[#34A853] to-[#EA4335] bg-clip-text text-transparent">
+                Google-scale product teams.
               </span>
             </h1>
 
-            <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-zinc-300 md:text-lg">
-              I am Johnson, a frontend-focused developer with a science-education background. I build
-              thoughtful, performance-aware interfaces and collaborate with precision across product,
-              engineering, and users.
+            <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-zinc-200 md:text-lg">
+              I design and ship React interfaces that are fast, accessible, and search-ready. This
+              portfolio emphasizes the quality bars relevant to Google: technical SEO, Web Vitals, and
+              scalable frontend architecture.
             </p>
 
             <div className="flex flex-wrap gap-3">
               <a
                 href="/projects"
-                className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-700 dark:bg-white dark:text-slate-900 dark:hover:bg-zinc-200"
+                className="inline-flex items-center gap-2 rounded-full bg-[#1a73e8] px-5 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#1558b5]"
               >
-                View Projects
+                Review Projects
                 <ArrowRight size={16} />
               </a>
               <a
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white/70 px-5 py-2.5 text-sm font-semibold text-slate-800 transition hover:-translate-y-0.5 hover:border-slate-500 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100"
+                className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white/90 px-5 py-2.5 text-sm font-semibold text-slate-800 transition hover:-translate-y-0.5 hover:border-[#1a73e8] hover:text-[#1a73e8] dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100"
               >
-                Contact Me
+                Contact Johnson
               </a>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div className="portfolio-panel col-span-2">
-              <p className="text-xs uppercase tracking-[0.16em] text-slate-500 dark:text-zinc-400">Current Focus</p>
-              <p className="mt-2 text-lg font-semibold text-slate-900 dark:text-white">AI-enhanced web products</p>
+              <p className="text-xs uppercase tracking-[0.16em] text-slate-500 dark:text-zinc-400">Now Optimizing</p>
+              <p className="mt-2 text-lg font-semibold text-slate-900 dark:text-white">
+                Technical SEO and performance for hiring visibility
+              </p>
             </div>
-            <div className="portfolio-panel">
-              <p className="text-2xl font-bold text-slate-900 dark:text-white">12+</p>
-              <p className="mt-1 text-sm text-slate-600 dark:text-zinc-300">Shipped interfaces</p>
-            </div>
-            <div className="portfolio-panel">
-              <p className="text-2xl font-bold text-slate-900 dark:text-white">9 yrs</p>
-              <p className="mt-1 text-sm text-slate-600 dark:text-zinc-300">Teaching + communication</p>
-            </div>
+            {executionSignals.map((signal) => (
+              <div className="portfolio-panel" key={signal.label}>
+                <p className="text-2xl font-bold text-slate-900 dark:text-white">{signal.metric}</p>
+                <p className="mt-1 text-sm text-slate-600 dark:text-zinc-300">{signal.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="space-y-4">
-        <div className="flex items-center gap-2 text-slate-700 dark:text-zinc-200">
-          <BrainCircuit size={20} className="text-[#1456d8] dark:text-sky-300" />
-          <h2 className="font-display text-2xl">Core Focus Areas</h2>
+      <section className="space-y-5">
+        <div className="flex items-center gap-2 text-slate-800 dark:text-zinc-100">
+          <BrainCircuit size={20} className="text-[#1a73e8]" />
+          <h2 className="font-display text-2xl">How I Build for Google Expectations</h2>
         </div>
         <div className="grid gap-4 md:grid-cols-3">
-          {focusAreas.map((item, index) => (
+          {googleFocusAreas.map((item, index) => (
             <motion.article
               key={item.title}
               className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 transition dark:border-zinc-700 dark:from-zinc-900 dark:to-zinc-950"
-              whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(0,0,0,0.1)" }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
+              whileHover={{ y: -8, boxShadow: "0 20px 38px rgba(15, 23, 42, 0.12)" }}
+              transition={{ duration: 0.25, delay: index * 0.08 }}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-sky-500/0 to-orange-500/0 opacity-0 transition group-hover:opacity-10 dark:group-hover:opacity-20" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[#4285F4]/0 via-[#34A853]/0 to-[#EA4335]/0 opacity-0 transition group-hover:opacity-10 dark:group-hover:opacity-20" />
               <div className="relative space-y-3">
-                <motion.div
-                  className="inline-flex rounded-xl bg-gradient-to-br from-sky-500/20 to-orange-500/20 p-3 text-slate-900 dark:text-sky-300"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  transition={{ duration: 0.2 }}
-                >
+                <div className="inline-flex rounded-xl bg-gradient-to-br from-[#4285F4]/20 to-[#FBBC05]/20 p-3 text-slate-900 dark:text-zinc-100">
                   {item.icon}
-                </motion.div>
+                </div>
                 <h3 className="font-display text-lg font-semibold text-slate-900 dark:text-zinc-100">
                   {item.title}
                 </h3>
@@ -171,88 +168,81 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="space-y-4">
-        <div className="flex items-center gap-2 text-slate-700 dark:text-zinc-200">
-          <Rocket size={20} className="text-orange-500 dark:text-orange-400" />
-          <h2 className="font-display text-2xl">Featured Projects</h2>
+      <section className="space-y-5">
+        <div className="flex items-center gap-2 text-slate-800 dark:text-zinc-100">
+          <BarChart3 size={20} className="text-[#34A853]" />
+          <h2 className="font-display text-2xl">Execution Signals</h2>
         </div>
         <div className="grid gap-4 md:grid-cols-3">
-          {featuredProjects.map((project, index) => (
+          {executionSignals.map((signal, index) => (
             <motion.article
-              key={project.name}
-              className="group relative rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 dark:border-zinc-700 dark:from-zinc-900 dark:to-zinc-950"
-              whileHover={{ y: -8 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-              initial={{ opacity: 0, y: 16 }}
+              key={signal.label}
+              className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-zinc-700 dark:bg-zinc-900/70"
+              whileHover={{ y: -6 }}
+              transition={{ duration: 0.25, delay: index * 0.05 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
             >
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-sky-500/0 via-transparent to-orange-500/0 opacity-0 transition group-hover:opacity-10 dark:group-hover:opacity-20" />
-              <div className="relative space-y-4">
-                <div className="space-y-1">
-                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-sky-600 dark:text-sky-300">
-                    {project.stack}
-                  </p>
-                  <h3 className="font-display text-lg text-slate-900 dark:text-zinc-100">{project.name}</h3>
-                </div>
-                <p className="leading-relaxed text-slate-600 dark:text-zinc-300">{project.highlight}</p>
-                <div className="overflow-hidden pt-2">
-                  <motion.div
-                    className="inline-flex items-center gap-1 text-sm font-semibold text-slate-900 dark:text-sky-300"
-                    initial={{ x: -4, opacity: 0 }}
-                    whileHover={{ x: 4 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    Explore<ArrowRight size={14} />
-                  </motion.div>
-                </div>
-              </div>
+              <p className="text-3xl font-bold text-slate-900 dark:text-white">{signal.metric}</p>
+              <h3 className="mt-2 font-display text-lg text-slate-900 dark:text-zinc-100">{signal.label}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-zinc-300">{signal.context}</p>
             </motion.article>
           ))}
         </div>
       </section>
 
       <motion.section
-        className="rounded-2xl border border-gradient-to-r border-slate-200 bg-gradient-to-br from-white via-white to-slate-50 p-8 dark:border-zinc-700 dark:from-zinc-900/50 dark:via-zinc-950/50 dark:to-zinc-900"
+        className="rounded-2xl border border-slate-200 bg-gradient-to-r from-white via-slate-50 to-white p-8 dark:border-zinc-700 dark:from-zinc-900/60 dark:via-zinc-900/40 dark:to-zinc-900/60"
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        transition={{ duration: 0.45, delay: 0.15 }}
       >
-        <div className="mb-8 flex items-center gap-3">
-          <motion.div
-            whileHover={{ rotate: 20 }}
-            transition={{ duration: 0.2 }}
-          >
-            <Star size={22} className="text-sky-500 dark:text-sky-300" />
-          </motion.div>
-          <h2 className="font-display text-2xl text-slate-900 dark:text-zinc-100">Working Principles</h2>
+        <div className="mb-6 flex items-center gap-2">
+          <ShieldCheck size={21} className="text-[#EA4335]" />
+          <h2 className="font-display text-2xl text-slate-900 dark:text-zinc-100">
+            Team Contributions I Bring
+          </h2>
         </div>
-        <div className="grid gap-4 md:grid-cols-3">
-          {principles.map((principle, index) => (
-            <motion.div
-              key={principle}
-              className="group relative overflow-hidden rounded-xl border border-slate-200 bg-white p-5 transition hover:border-sky-300 dark:border-zinc-700 dark:bg-zinc-800/50 dark:hover:border-sky-400/50"
+        <ul className="grid gap-4 md:grid-cols-3">
+          {roleAlignment.map((point, index) => (
+            <motion.li
+              key={point}
+              className="rounded-xl border border-slate-200 bg-white p-5 dark:border-zinc-700 dark:bg-zinc-900/70"
               whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.2, delay: index * 0.08 }}
-              initial={{ opacity: 0, y: 8 }}
+              transition={{ duration: 0.2, delay: index * 0.06 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
             >
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-sky-500/0 to-orange-500/0 opacity-0 transition group-hover:opacity-5 dark:group-hover:opacity-10" />
-              <div className="relative flex items-start gap-3">
-                <motion.div
-                  className="mt-0.5 flex-shrink-0"
-                  whileHover={{ scale: 1.2 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-orange-500 text-xs font-bold text-white">
-                    {index + 1}
-                  </div>
-                </motion.div>
-                <p className="font-medium leading-relaxed text-slate-700 dark:text-zinc-100">{principle}</p>
+              <div className="flex items-start gap-3">
+                <div className="mt-1 inline-flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[#34A853] text-xs font-bold text-white">
+                  {index + 1}
+                </div>
+                <p className="leading-relaxed text-slate-700 dark:text-zinc-200">{point}</p>
               </div>
-            </motion.div>
+            </motion.li>
           ))}
-        </div>
+        </ul>
       </motion.section>
+
+      <section className="rounded-2xl border border-slate-200 bg-white p-8 dark:border-zinc-700 dark:bg-zinc-900/70">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h2 className="font-display text-2xl text-slate-900 dark:text-zinc-100">
+              Looking for a frontend engineer aligned with Google-quality bars?
+            </h2>
+            <p className="mt-2 text-slate-600 dark:text-zinc-300">
+              Explore project case studies, performance strategy, and delivery process.
+            </p>
+          </div>
+          <a
+            href="/contact"
+            className="inline-flex items-center gap-2 rounded-full bg-[#34A853] px-5 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#2b8c46]"
+          >
+            Start a Conversation
+            <ArrowRight size={16} />
+          </a>
+        </div>
+      </section>
     </motion.div>
   );
 }
