@@ -9,6 +9,7 @@ const journey = [
     detail:
       "Built deep communication and structured problem-solving skills by teaching Chemistry and Science for nearly a decade.",
     icon: <GraduationCap size={18} />,
+    accent: "#4285F4",
   },
   {
     period: "2024",
@@ -16,6 +17,7 @@ const journey = [
     detail:
       "Completed an intensive full-stack training path focused on Python, modern frontend systems, and applied product development.",
     icon: <Lightbulb size={18} />,
+    accent: "#FBBC05",
   },
   {
     period: "2024 - Present",
@@ -23,6 +25,7 @@ const journey = [
     detail:
       "Shipped production UI work in React and WordPress environments while collaborating with design, content, and business teams.",
     icon: <Target size={18} />,
+    accent: "#34A853",
   },
 ];
 
@@ -58,10 +61,10 @@ const skills = [
 ];
 
 export default function About() {
-  // Set up SEO meta tags for about page
   useSeo({
     title: "About - Johnson | Science Educator Turned Developer",
-    description: "Learn about Johnson's journey from science education to full-stack development. 9+ years teaching communication and problem-solving, now building thoughtful web applications.",
+    description:
+      "Learn about Johnson's journey from science education to full-stack development. 9+ years teaching communication and problem-solving, now building thoughtful web applications.",
     keywords: "about, bio, background, career, science educator, full-stack developer, journey",
   });
 
@@ -73,31 +76,38 @@ export default function About() {
       exit={{ opacity: 0, y: -14 }}
       transition={{ duration: 0.45 }}
     >
-      <section className="portfolio-panel">
-        <p className="text-xs uppercase tracking-[0.16em] text-slate-500 dark:text-zinc-400">About Johnson</p>
-        <h1 className="mt-2 font-display text-4xl text-slate-900 dark:text-zinc-100 md:text-5xl">
-          Building ambitious software with clarity, speed, and craft.
-        </h1>
-        <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-700 dark:text-zinc-300">
-          My background in education sharpened the way I think about users: every interface should reduce
-          confusion, guide action, and build trust quickly. That mindset now drives how I build modern web
-          products and why I am aiming to contribute at companies solving complex problems at scale.
-        </p>
-        <a
-          href="/contact"
-          className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1456d8] px-5 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#1149b6]"
-        >
-          Let us connect
-          <ArrowRight size={16} />
-        </a>
+      <section className="google-surface relative overflow-hidden rounded-[2rem] p-6 md:p-10">
+        <div className="google-grid-bg absolute inset-0 opacity-60" />
+        <div className="relative">
+          <span className="google-chip inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700 dark:text-slate-200">
+            About Johnson
+          </span>
+          <h1 className="mt-4 font-display text-4xl text-slate-900 dark:text-zinc-100 md:text-5xl">
+            Building ambitious software with clarity, speed, and craft.
+          </h1>
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-700 dark:text-zinc-300">
+            My background in education sharpened the way I think about users: every interface should reduce confusion,
+            guide action, and build trust quickly. That mindset now drives how I build modern web products.
+          </p>
+          <a
+            href="/contact"
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] px-5 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#1558b5]"
+          >
+            Let us connect
+            <ArrowRight size={16} />
+          </a>
+        </div>
       </section>
 
       <section>
-        <h2 className="mb-4 font-display text-2xl text-slate-900 dark:text-zinc-100">Journey</h2>
+        <div className="mb-4 flex items-center gap-2">
+          <span className="h-2.5 w-2.5 rounded-full bg-[#4285F4]" />
+          <h2 className="font-display text-2xl text-slate-900 dark:text-zinc-100">Journey</h2>
+        </div>
         <div className="grid gap-4 md:grid-cols-3">
           {journey.map((item) => (
             <article key={item.title} className="portfolio-panel">
-              <div className="mb-3 inline-flex rounded-xl bg-slate-900 p-2 text-white dark:bg-white dark:text-slate-900">
+              <div className="mb-3 inline-flex rounded-xl p-2 text-white" style={{ backgroundColor: item.accent }}>
                 {item.icon}
               </div>
               <p className="text-xs uppercase tracking-[0.16em] text-slate-500 dark:text-zinc-400">{item.period}</p>
@@ -109,7 +119,10 @@ export default function About() {
       </section>
 
       <section>
-        <h2 className="mb-4 font-display text-2xl text-slate-900 dark:text-zinc-100">What I Bring</h2>
+        <div className="mb-4 flex items-center gap-2">
+          <span className="h-2.5 w-2.5 rounded-full bg-[#EA4335]" />
+          <h2 className="font-display text-2xl text-slate-900 dark:text-zinc-100">What I Bring</h2>
+        </div>
         <div className="grid gap-4 md:grid-cols-3">
           {strengths.map((item) => (
             <article key={item.title} className="portfolio-panel">
@@ -124,7 +137,10 @@ export default function About() {
       </section>
 
       <section className="portfolio-panel">
-        <h2 className="mb-4 font-display text-2xl text-slate-900 dark:text-zinc-100">Core Skills</h2>
+        <div className="mb-4 flex items-center gap-2">
+          <span className="h-2.5 w-2.5 rounded-full bg-[#34A853]" />
+          <h2 className="font-display text-2xl text-slate-900 dark:text-zinc-100">Core Skills</h2>
+        </div>
         <div className="flex flex-wrap gap-2">
           {skills.map((skill) => (
             <span

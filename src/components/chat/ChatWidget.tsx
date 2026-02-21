@@ -174,9 +174,9 @@ const ChatContent = () => {
   };
 
   return (
-    <div className="flex flex-col h-full max-h-[600px]">
-      <div className="p-4 border-b border-border">
-        <p className="text-sm text-muted-foreground mb-3">Quick questions:</p>
+    <div className="flex h-full max-h-[600px] flex-col">
+      <div className="border-b border-slate-200 p-4 dark:border-zinc-700">
+        <p className="mb-3 text-sm text-slate-500 dark:text-zinc-400">Quick questions:</p>
         <div className="flex flex-wrap gap-2">
           {contextualPrompts.map((prompt, index) => (
             <Button
@@ -184,7 +184,7 @@ const ChatContent = () => {
               variant="outline"
               size="sm"
               onClick={() => handleSendMessage(prompt)}
-              className="text-xs h-auto py-2 px-3"
+              className="h-auto rounded-full border-slate-300 bg-white px-3 py-2 text-xs text-slate-700 hover:border-[#4285F4] hover:text-[#4285F4] dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-200"
             >
               {prompt}
             </Button>
@@ -203,7 +203,9 @@ const ChatContent = () => {
             >
               <div
                 className={`max-w-[80%] p-3 rounded-lg ${
-                  message.isBot ? "bg-muted text-foreground" : "bg-primary text-primary-foreground"
+                  message.isBot
+                    ? "border border-slate-200 bg-white text-slate-800 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
+                    : "bg-gradient-to-r from-[#4285F4] via-[#EA4335] to-[#34A853] text-white"
                 }`}
               >
                 <p className="text-sm">{message.text}</p>
@@ -217,7 +219,7 @@ const ChatContent = () => {
               animate={{ opacity: 1, y: 0 }}
               className="flex justify-start"
             >
-              <div className="bg-muted text-foreground p-3 rounded-lg">
+              <div className="rounded-lg border border-slate-200 bg-white p-3 text-slate-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100">
                 <div className="flex items-center space-x-1">
                   <Loader2 className="w-4 h-4 animate-spin" />
                   <span className="text-sm">Typing...</span>
@@ -235,9 +237,14 @@ const ChatContent = () => {
             onChange={(e) => setInputValue(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="Ask me anything..."
-            className="flex-1"
+            className="flex-1 rounded-full border-slate-300 bg-white focus-visible:ring-[#4285F4]/40 dark:border-zinc-600 dark:bg-zinc-900"
           />
-          <Button onClick={() => handleSendMessage()} disabled={!inputValue.trim() || isTyping} size="sm">
+          <Button
+            onClick={() => handleSendMessage()}
+            disabled={!inputValue.trim() || isTyping}
+            size="sm"
+            className="rounded-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] to-[#34A853] text-white"
+          >
             <Send className="w-4 h-4" />
           </Button>
         </div>
@@ -252,7 +259,7 @@ const ChatWidget = () => {
 
   const trigger = (
     <motion.button
-      className="fixed bottom-20 right-6 p-4 rounded-full bg-primary text-primary-foreground shadow-lg z-50 hover:shadow-xl transition-shadow"
+      className="fixed bottom-20 right-6 z-50 rounded-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] to-[#34A853] p-4 text-white shadow-lg transition-shadow hover:shadow-xl"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       initial={{ opacity: 0, scale: 0.8 }}
@@ -290,9 +297,17 @@ const ChatWidget = () => {
     return (
       <Drawer open={isOpen} onOpenChange={setIsOpen}>
         <DrawerTrigger asChild>{trigger}</DrawerTrigger>
-        <DrawerContent className="z-50">
-          <DrawerHeader>
-            <DrawerTitle>Chat with me</DrawerTitle>
+        <DrawerContent className="z-50 border-slate-200 bg-white/95 backdrop-blur-xl dark:border-zinc-700 dark:bg-zinc-950/95">
+          <DrawerHeader className="border-b border-slate-200 pb-4 dark:border-zinc-700">
+            <DrawerTitle className="flex items-center justify-between font-display text-slate-900 dark:text-white">
+              Chat with me
+              <span className="flex items-center gap-1.5">
+                <span className="h-2.5 w-2.5 rounded-full bg-[#4285F4]" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[#EA4335]" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[#FBBC05]" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[#34A853]" />
+              </span>
+            </DrawerTitle>
           </DrawerHeader>
           <Suspense fallback={<div className="p-4 text-center">Loading chat...</div>}>
             <ChatContent />
@@ -305,9 +320,20 @@ const ChatWidget = () => {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>{trigger}</SheetTrigger>
-      <SheetContent side="right" className="w-[400px] sm:w-[540px] z-50">
-        <SheetHeader>
-          <SheetTitle>Chat with me</SheetTitle>
+      <SheetContent
+        side="right"
+        className="z-50 w-[400px] border-slate-200 bg-white/95 backdrop-blur-xl dark:border-zinc-700 dark:bg-zinc-950/95 sm:w-[540px]"
+      >
+        <SheetHeader className="border-b border-slate-200 pb-4 dark:border-zinc-700">
+          <SheetTitle className="flex items-center justify-between font-display text-slate-900 dark:text-white">
+            Chat with me
+            <span className="flex items-center gap-1.5">
+              <span className="h-2.5 w-2.5 rounded-full bg-[#4285F4]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#EA4335]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#FBBC05]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#34A853]" />
+            </span>
+          </SheetTitle>
         </SheetHeader>
         <Suspense fallback={<div className="p-4 text-center">Loading chat...</div>}>
           <ChatContent />

@@ -185,7 +185,7 @@ export default function Projects() {
             href={repo.html_url}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-500 dark:border-zinc-600 dark:text-zinc-200"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-[#4285F4] hover:text-[#4285F4] dark:border-zinc-600 dark:text-zinc-200"
           >
             <Github size={15} />
             Code
@@ -195,7 +195,7 @@ export default function Projects() {
               href={repo.homepage}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700 dark:bg-white dark:text-slate-900"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#4285F4] to-[#34A853] px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90"
             >
               <ExternalLink size={15} />
               Live Demo
@@ -214,7 +214,9 @@ export default function Projects() {
       exit={{ opacity: 0, y: -12 }}
       transition={{ duration: 0.45 }}
     >
-      <section className="portfolio-panel">
+      <section className="google-surface relative overflow-hidden rounded-[2rem] p-6 md:p-10">
+        <div className="google-grid-bg absolute inset-0 opacity-60" />
+        <div className="relative">
         <p className="text-xs uppercase tracking-[0.16em] text-slate-500 dark:text-zinc-400">
           Real GitHub Data
         </p>
@@ -233,11 +235,12 @@ export default function Projects() {
           </a>
           . Add a good description and topics in GitHub, and your portfolio updates here automatically.
         </p>
+        </div>
       </section>
 
       <section>
         <div className="mb-4 flex items-center gap-2 text-slate-800 dark:text-zinc-100">
-          <Rocket size={18} />
+          <Rocket size={18} className="text-[#EA4335]" />
           <h2 className="font-display text-2xl">Featured Projects</h2>
         </div>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
