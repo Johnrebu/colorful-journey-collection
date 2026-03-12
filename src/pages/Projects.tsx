@@ -145,7 +145,7 @@ export default function Projects() {
     >
       <div>
         <h3 className="font-display text-xl text-slate-900 dark:text-zinc-100">
-          {repo.name.replaceAll("_", " ")}
+          {repo.name.replace(/_/g, " ")}
         </h3>
         <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-zinc-300">
           {repo.description || "No description provided yet."}
