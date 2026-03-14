@@ -12,19 +12,19 @@
     --card-foreground: 219 35% 14%;
     --popover: 0 0% 100%;
     --popover-foreground: 219 35% 14%;
-    --primary: 218 78% 46%;
+    --primary: 190 95% 43%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 24% 92%;
+    --secondary: 327 82% 61%;
     --secondary-foreground: 220 20% 18%;
     --muted: 210 24% 92%;
     --muted-foreground: 215 14% 42%;
-    --accent: 23 86% 57%;
+    --accent: 45 96% 56%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --border: 213 26% 84%;
     --input: 213 26% 84%;
-    --ring: 218 78% 46%;
+    --ring: 190 95% 43%;
     --radius: 1.1rem;
   }
 
@@ -35,19 +35,19 @@
     --card-foreground: 210 40% 98%;
     --popover: 225 17% 12%;
     --popover-foreground: 210 40% 98%;
-    --primary: 197 90% 61%;
+    --primary: 190 95% 60%;
     --primary-foreground: 220 36% 12%;
-    --secondary: 225 14% 19%;
+    --secondary: 327 82% 70%;
     --secondary-foreground: 210 40% 98%;
     --muted: 225 14% 19%;
     --muted-foreground: 220 10% 70%;
-    --accent: 29 85% 63%;
+    --accent: 45 96% 65%;
     --accent-foreground: 220 36% 12%;
     --destructive: 0 63% 41%;
     --destructive-foreground: 210 40% 98%;
     --border: 225 13% 24%;
     --input: 225 13% 24%;
-    --ring: 197 90% 61%;
+    --ring: 190 95% 60%;
   }
 
   * {
@@ -62,8 +62,8 @@
     @apply bg-background text-foreground antialiased;
     font-family: "Space Grotesk", system-ui, sans-serif;
     background-image:
-      radial-gradient(circle at 0% 0%, rgba(20, 86, 216, 0.1), transparent 30%),
-      radial-gradient(circle at 100% 10%, rgba(239, 123, 56, 0.1), transparent 28%);
+      radial-gradient(circle at 0% 0%, hsla(190, 95%, 43%, 0.1), transparent 30%),
+      radial-gradient(circle at 100% 10%, hsla(45, 96%, 56%, 0.1), transparent 28%);
     min-height: 100vh;
   }
 
@@ -123,6 +123,18 @@
 
   .nav-link-modern-active::after {
     @apply hidden;
+  }
+
+  .space-panel {
+    @apply rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(13,24,53,0.92),rgba(6,12,31,0.9))] shadow-[0_28px_80px_rgba(2,6,23,0.42)] backdrop-blur-xl;
+  }
+
+  .cosmos-button {
+    @apply rounded-full bg-gradient-to-r from-cyan-300 via-cyan-400 to-teal-300 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:-translate-y-0.5 hover:shadow-[0_0_28px_rgba(34,211,238,0.32)];
+  }
+
+  .cosmos-button-secondary {
+    @apply rounded-full border border-white/[.12] bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-cyan-300/[.35] hover:bg-cyan-300/10;
   }
 }
 

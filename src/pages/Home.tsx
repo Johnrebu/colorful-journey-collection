@@ -92,7 +92,7 @@ export default function Home() {
                 Portfolio Redesign for Google-Level Standards
               </span>
 
-              <h1 className="font-display text-4xl leading-tight text-slate-900 dark:text-white md:text-6xl">
+              <h1 className="text-4xl leading-tight text-slate-900 dark:text-white md:text-6xl">
                 Frontend engineering portfolio built for
                 <span className="block bg-gradient-to-r from-[#4285F4] via-[#34A853] to-[#EA4335] bg-clip-text text-transparent">
                   Google-scale product teams.
@@ -142,7 +142,7 @@ export default function Home() {
         <section className="space-y-5">
           <div className="flex items-center gap-2 text-slate-800 dark:text-zinc-100">
             <BrainCircuit size={20} className="text-[#1a73e8]" />
-            <h2 className="font-display text-2xl">How I Build for Google Expectations</h2>
+            <h2 className="text-2xl">How I Build for Google Expectations</h2>
           </div>
           <div className="grid gap-4 md:grid-cols-3">
             {googleFocusAreas.map((item, index) => (
@@ -159,7 +159,7 @@ export default function Home() {
                   <div className="inline-flex rounded-xl bg-gradient-to-br from-[#4285F4]/20 to-[#FBBC05]/20 p-3 text-slate-900 dark:text-zinc-100">
                     {item.icon}
                   </div>
-                  <h3 className="font-display text-lg font-semibold text-slate-900 dark:text-zinc-100">
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-zinc-100">
                     {item.title}
                   </h3>
                   <p className="leading-relaxed text-slate-600 dark:text-zinc-300">{item.description}</p>
@@ -172,7 +172,7 @@ export default function Home() {
         <section className="space-y-5">
           <div className="flex items-center gap-2 text-slate-800 dark:text-zinc-100">
             <BarChart3 size={20} className="text-[#34A853]" />
-            <h2 className="font-display text-2xl">Execution Signals</h2>
+            <h2 className="text-2xl">Execution Signals</h2>
           </div>
           <div className="grid gap-4 md:grid-cols-3">
             {executionSignals.map((signal, index) => (
@@ -185,7 +185,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
               >
                 <p className="text-3xl font-bold text-slate-900 dark:text-white">{signal.metric}</p>
-                <h3 className="mt-2 font-display text-lg text-slate-900 dark:text-zinc-100">{signal.label}</h3>
+                <h3 className="mt-2 text-lg text-slate-900 dark:text-zinc-100">{signal.label}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-zinc-300">{signal.context}</p>
               </motion.article>
             ))}
@@ -200,7 +200,7 @@ export default function Home() {
         >
           <div className="mb-6 flex items-center gap-2">
             <ShieldCheck size={21} className="text-[#EA4335]" />
-            <h2 className="font-display text-2xl text-slate-900 dark:text-zinc-100">
+            <h2 className="text-2xl text-slate-900 dark:text-zinc-100">
               Team Contributions I Bring
             </h2>
           </div>
@@ -228,7 +228,7 @@ export default function Home() {
         <section className="rounded-2xl border border-slate-200 bg-white p-8 dark:border-zinc-700 dark:bg-zinc-900/70">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
-              <h2 className="font-display text-2xl text-slate-900 dark:text-zinc-100">
+              <h2 className="text-2xl text-slate-900 dark:text-zinc-100">
                 Looking for a frontend engineer aligned with Google-quality bars?
               </h2>
               <p className="mt-2 text-slate-600 dark:text-zinc-300">

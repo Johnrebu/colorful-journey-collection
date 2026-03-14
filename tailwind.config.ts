@@ -54,14 +54,14 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				// Custom portfolio colors
-				portfolioBlue: '#0EA5E9',
-				portfolioPurple: '#8B5CF6',
-				portfolioPink: '#E94560',
-				portfolioOrange: '#F97316',
-				portfolioLightBlue: '#D3E4FD',
-				portfolioLightPurple: '#E5DEFF',
-				portfolioLightPink: '#FFDEE2',
-				portfolioLightOrange: '#FEC6A1',
+				portfolioBlue: '#06B6D4',
+				portfolioPurple: '#EC4899',
+				portfolioPink: '#FBBF24',
+				portfolioOrange: '#8B5CF6',
+				portfolioLightBlue: '#CFFAFE',
+				portfolioLightPurple: '#FCE7F3',
+				portfolioLightPink: '#FEF3C7',
+				portfolioLightOrange: '#E5DEFF',
 				dark: {
 					100: '#121212',
 					200: '#1E1E1E',

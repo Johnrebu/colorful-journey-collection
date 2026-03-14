@@ -15,7 +15,7 @@ export default function Wikipedia() {
       <section className="google-surface relative overflow-hidden rounded-[2rem] p-6 md:p-10">
         <div className="google-grid-bg absolute inset-0 opacity-50" />
         <div className="relative">
-          <h1 className="font-display text-4xl text-slate-900 dark:text-zinc-100 md:text-5xl">Johnson T</h1>
+          <h1 className="text-4xl text-slate-900 dark:text-zinc-100 md:text-5xl">Johnson T</h1>
           <p className="mt-2 text-slate-600 dark:text-zinc-300">From a Wikipedia-style personal profile</p>
         </div>
       </section>
@@ -32,7 +32,7 @@ export default function Wikipedia() {
 
           <Card className="border-slate-200 bg-white/80 dark:border-zinc-700 dark:bg-zinc-900/70">
             <CardContent className="p-5 space-y-4">
-              <h2 className="font-display text-2xl text-slate-900 dark:text-white">Technical Skills and Certifications</h2>
+              <h2 className="text-2xl text-slate-900 dark:text-white">Technical Skills and Certifications</h2>
               <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
                 {skills.map((skill) => (
                   <Badge key={skill.name} variant="secondary" className="justify-center py-1">
@@ -50,7 +50,7 @@ export default function Wikipedia() {
 
           <Card className="border-slate-200 bg-white/80 dark:border-zinc-700 dark:bg-zinc-900/70">
             <CardContent className="p-5 space-y-4">
-              <h2 className="font-display text-2xl text-slate-900 dark:text-white">Career Summary</h2>
+              <h2 className="text-2xl text-slate-900 dark:text-white">Career Summary</h2>
               <p className="text-slate-700 dark:text-zinc-300">
                 Johnson worked in education for nearly a decade, then transitioned to software engineering in 2024 through structured learning and project-based execution.
               </p>
