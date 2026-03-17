@@ -861,3 +861,4 @@ export default function Projects() {
     </motion.div>
   );
 }
+// This is the projects page of the portfolio, showcasing the Github repository feed with a premium, space-themed design, live sync, and featured project highlights.
