@@ -5,7 +5,6 @@ import Header from "./Header";
 import AnimatedRoutes from "./AnimatedRoutes";
 import ScrollToTop from "./ScrollToTop";
 import ChatWidget from "../chat/ChatWidget";
-import CursorFollower from "../CursorFollower";
 import { Toaster } from "sonner";
 
 const profileImageUrl = "/profile-logo.png";
@@ -23,7 +22,6 @@ const Layout = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.55 }}
     >
-      <CursorFollower />
       <Toaster position="top-right" richColors closeButton />
 
       <Header profileImageUrl={profileImageUrl} darkMode={darkMode} toggleDarkMode={toggleTheme} />
