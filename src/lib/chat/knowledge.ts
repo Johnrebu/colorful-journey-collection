@@ -28,6 +28,41 @@ export const portfolioData = {
 
   projects: [
     {
+      name: "Money Pechu Events",
+      stack: ["React", "TypeScript", "Tailwind CSS"],
+      description: "Live event management and ticketing web platform",
+      url: "https://moneypechuevents.netlify.app/",
+      keywords: ["moneypechu", "events", "ticketing", "live"],
+    },
+    {
+      name: "Rebekha Caterers",
+      stack: ["Full-Stack", "React", "Custom UI"],
+      description: "Full catering business website with menu showcases and booking workflows",
+      url: "https://rebekhacaterers.online/",
+      keywords: ["rebekha", "caterers", "catering", "live"],
+    },
+    {
+      name: "Tiffin Coffee Range CRM",
+      stack: ["Full-Stack", "Python", "React"],
+      description: "Enterprise CRM & management portal for Tiffin Coffee Range",
+      url: "https://crm.tiffincoffeerange.com/",
+      keywords: ["crm", "tiffin coffee", "enterprise", "dashboard"],
+    },
+    {
+      name: "Dalphina Academy",
+      stack: ["React", "TypeScript", "Tailwind CSS"],
+      description: "Educational academy portal presenting curriculums and student enrollment pathways",
+      url: "https://dalphinaacademy.netlify.app/",
+      keywords: ["dalphina", "academy", "education", "courses"],
+    },
+    {
+      name: "Tiffin Coffee Range Main Site",
+      stack: ["Full-Stack", "Commercial Web"],
+      description: "Official commercial website for Tiffin Coffee Range brand showcasing outlets and menus",
+      url: "https://tiffincoffeerange.com/",
+      keywords: ["tiffin coffee", "commercial", "brand"],
+    },
+    {
       name: "React Colorful Weather Widget",
       stack: ["React", "TypeScript", "Tailwind CSS", "OpenWeatherMap API"],
       description: "Dynamic weather widget with colorful UI",

@@ -66,40 +66,62 @@ const techCategories = [
   },
 ];
 
-// Featured Projects Showcase
+// Featured Projects Showcase (Live Client Sites & Commercial Deployments)
 const featuredProjects = [
   {
-    id: "weather-app",
-    title: "WeatherApp Forecast Platform",
-    category: "React / TypeScript / API",
+    id: "moneypechu-events",
+    title: "Money Pechu Events",
+    category: "Live Client Platform",
     description:
-      "Interactive weather forecasting application featuring real-time location detection, dynamic weather visualizers, and responsive layout performance.",
-    tags: ["React", "TypeScript", "Tailwind CSS", "REST API", "Netlify"],
-    liveUrl: "https://chimerical-sunburst-6fe1b4.netlify.app/",
-    githubUrl: "https://github.com/Johnrebu/WeatherApp_ReactResumeProject",
-    highlights: ["Geolocation lookup", "Dynamic background updates", "Fast state transitions"],
+      "Modern event management and registration web platform built for Money Pechu Events, featuring interactive event schedules, registration flows, and mobile UX.",
+    tags: ["React", "TypeScript", "Tailwind CSS", "Event UX", "Live Site"],
+    liveUrl: "https://moneypechuevents.netlify.app/",
+    githubUrl: "https://github.com/Johnrebu",
+    highlights: ["Event registration flows", "Interactive agenda", "Mobile-optimized UX"],
   },
   {
-    id: "employee-directory",
-    title: "Employee Directory & Filter System",
-    category: "React / Data Filtering UX",
+    id: "rebekha-caterers",
+    title: "Rebekha Caterers",
+    category: "Commercial Business Site",
     description:
-      "Enterprise-style employee directory application optimized for fast search indexing, multi-attribute filtering, and accessible sorting workflows.",
-    tags: ["React", "TypeScript", "Search & Filter UX", "Tailwind CSS"],
-    liveUrl: "https://stellular-cactus-7acb12.netlify.app/",
-    githubUrl: "https://github.com/Johnrebu/Pro_ForCecilAnna_sortSerch",
-    highlights: ["Instant multi-field filtering", "Keyboard accessibility", "Clean data grid"],
+      "Full catering business web portal featuring service menu showcases, event package booking, interactive galleries, and instant client query workflows.",
+    tags: ["Full-Stack", "React", "Custom UI", "Catering UX", "Live Site"],
+    liveUrl: "https://rebekhacaterers.online/",
+    githubUrl: "https://github.com/Johnrebu",
+    highlights: ["Interactive menu showcase", "Event query booking", "Responsive mobile UX"],
   },
   {
-    id: "ecommerce-store",
-    title: "E-Commerce Storefront Experience",
-    category: "JavaScript / Storefront UX",
+    id: "tiffin-coffee-crm",
+    title: "Tiffin Coffee Range CRM",
+    category: "Enterprise Full-Stack CRM",
     description:
-      "Full-featured online storefront experience with dynamic product filtering, cart drawer state management, and conversion-focused design.",
-    tags: ["JavaScript", "React", "Storefront UX", "CSS Modules"],
-    liveUrl: "https://ecommercejohn.netlify.app/",
-    githubUrl: "https://github.com/Johnrebu/E-Commerce_Website",
-    highlights: ["Reactive shopping cart", "Product catalog filter", "Responsive mobile UX"],
+      "Custom enterprise CRM & administrative management portal built for Tiffin Coffee Range, handling customer relationship tracking, order workflows, and analytics.",
+    tags: ["Full-Stack", "Python", "React", "Enterprise Dashboard", "Live Site"],
+    liveUrl: "https://crm.tiffincoffeerange.com/",
+    githubUrl: "https://github.com/Johnrebu",
+    highlights: ["Customer management", "Order pipelines", "Administrative analytics"],
+  },
+  {
+    id: "dalphina-academy",
+    title: "Dalphina Academy",
+    category: "Education & Learning Portal",
+    description:
+      "Educational academy web portal featuring course curriculums, interactive inquiry channels, student enrollment pathways, and clean mobile UX.",
+    tags: ["React", "TypeScript", "Education UX", "Tailwind CSS", "Live Site"],
+    liveUrl: "https://dalphinaacademy.netlify.app/",
+    githubUrl: "https://github.com/Johnrebu",
+    highlights: ["Course curriculum view", "Student inquiry form", "Responsive layout"],
+  },
+  {
+    id: "tiffin-coffee-official",
+    title: "Tiffin Coffee Range",
+    category: "Commercial Brand Site",
+    description:
+      "Official commercial website for Tiffin Coffee Range brand showcasing food & beverage offerings, outlet locations, dynamic menus, and brand experience.",
+    tags: ["Full-Stack", "Commercial Web", "Responsive Design", "Live Site"],
+    liveUrl: "https://tiffincoffeerange.com/",
+    githubUrl: "https://github.com/Johnrebu",
+    highlights: ["Brand menu showcase", "Outlet locator", "Cross-device responsiveness"],
   },
 ];
 
@@ -486,7 +508,7 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-3 pt-8">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 pt-8">
           {featuredProjects.map((project, index) => (
             <motion.article
               key={project.id}

@@ -89,6 +89,59 @@ const fallbackProjects: ProjectCard[] = [
   },
 ];
 
+const liveClientProjects: ProjectCard[] = [
+  {
+    name: "Money Pechu Events",
+    description: "Modern event management and ticketing web platform built for Money Pechu Events, featuring interactive event schedules, registration flows, and mobile UX.",
+    html_url: "https://github.com/Johnrebu",
+    homepage: "https://moneypechuevents.netlify.app/",
+    language: "React / TypeScript",
+    stargazers_count: 0,
+    forks_count: 0,
+    topics: ["events", "react", "live-client", "netlify"],
+  },
+  {
+    name: "Rebekha Caterers",
+    description: "Full catering business web portal featuring service menu showcases, event package booking, interactive galleries, and instant client query workflows.",
+    html_url: "https://github.com/Johnrebu",
+    homepage: "https://rebekhacaterers.online/",
+    language: "Full-Stack",
+    stargazers_count: 0,
+    forks_count: 0,
+    topics: ["catering", "business", "live-client", "full-stack"],
+  },
+  {
+    name: "Tiffin Coffee Range CRM",
+    description: "Custom enterprise CRM & administrative management portal built for Tiffin Coffee Range, handling customer relationship tracking, order workflows, and analytics.",
+    html_url: "https://github.com/Johnrebu",
+    homepage: "https://crm.tiffincoffeerange.com/",
+    language: "Python / React",
+    stargazers_count: 0,
+    forks_count: 0,
+    topics: ["crm", "enterprise", "python", "live-client"],
+  },
+  {
+    name: "Dalphina Academy",
+    description: "Educational academy web portal featuring course curriculums, interactive inquiry channels, student enrollment pathways, and clean mobile UX.",
+    html_url: "https://github.com/Johnrebu",
+    homepage: "https://dalphinaacademy.netlify.app/",
+    language: "React / TypeScript",
+    stargazers_count: 0,
+    forks_count: 0,
+    topics: ["academy", "education", "react", "live-client"],
+  },
+  {
+    name: "Tiffin Coffee Range",
+    description: "Official commercial website for Tiffin Coffee Range brand showcasing food & beverage offerings, outlet locations, dynamic menus, and brand experience.",
+    html_url: "https://github.com/Johnrebu",
+    homepage: "https://tiffincoffeerange.com/",
+    language: "Full-Stack",
+    stargazers_count: 0,
+    forks_count: 0,
+    topics: ["commercial", "brand", "full-stack", "live-client"],
+  },
+];
+
 const missionThemes = [
   {
     label: "Flagship Mission",
@@ -808,6 +861,92 @@ export default function Projects() {
               </div>
             </section>
           </div>
+
+          {/* Live Production Sites Section */}
+          <section className="space-panel p-6 sm:p-7">
+            <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <span className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200">
+                  <Globe2 size={14} />
+                  Live Production Sites
+                </span>
+                <h2 className="mt-2 text-3xl font-bold text-white">Live Commercial & Client Deployments</h2>
+                <p className="mt-2 text-sm text-slate-300">
+                  Production client applications, enterprise CRMs, and live commercial websites launched on public domains.
+                </p>
+              </div>
+              <div className="rounded-full border border-cyan-300/30 bg-cyan-300/10 px-4 py-2 text-xs font-semibold text-cyan-200 shrink-0 self-start sm:self-auto">
+                5 Live Web Launches
+              </div>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {liveClientProjects.map((project, index) => (
+                <motion.article
+                  key={project.name}
+                  className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:-translate-y-1 hover:border-cyan-300/40 hover:shadow-[0_20px_50px_rgba(2,6,23,0.5)]"
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.35, delay: index * 0.08 }}
+                >
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs uppercase tracking-wider font-semibold text-cyan-300">
+                        {project.language}
+                      </span>
+                      <span className="inline-flex items-center gap-1 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2.5 py-1 text-[11px] font-semibold text-emerald-300">
+                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        Live Online
+                      </span>
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl font-bold text-white group-hover:text-cyan-200 transition-colors">
+                        {project.name}
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed text-slate-300">
+                        {project.description}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {project.topics?.map((topic) => (
+                        <span
+                          key={topic}
+                          className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-medium text-slate-300"
+                        >
+                          #{topic}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="pt-6 mt-6 border-t border-white/10 flex items-center justify-between gap-3">
+                    <a
+                      href={project.homepage!}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-300 via-cyan-400 to-teal-300 px-4 py-2 text-xs font-semibold text-slate-950 transition hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(34,211,238,0.3)]"
+                    >
+                      <ExternalLink size={14} />
+                      Launch Website
+                    </a>
+
+                    <a
+                      href={project.html_url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs text-slate-400 transition hover:text-white"
+                    >
+                      <Github size={13} />
+                      GitHub
+                    </a>
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+          </section>
 
           <section className="space-panel p-6 sm:p-7">
             <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
