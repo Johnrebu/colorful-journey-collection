@@ -93,7 +93,7 @@ const liveClientProjects: ProjectCard[] = [
   {
     name: "Money Pechu Events",
     description: "Modern event management and ticketing web platform built for Money Pechu Events, featuring interactive event schedules, registration flows, and mobile UX.",
-    html_url: "https://github.com/Johnrebu",
+    html_url: "https://github.com/Johnrebu/event-companion",
     homepage: "https://moneypechuevents.netlify.app/",
     language: "React / TypeScript",
     stargazers_count: 0,
@@ -103,7 +103,7 @@ const liveClientProjects: ProjectCard[] = [
   {
     name: "Rebekha Caterers",
     description: "Full catering business web portal featuring service menu showcases, event package booking, interactive galleries, and instant client query workflows.",
-    html_url: "https://github.com/Johnrebu",
+    html_url: "https://github.com/Johnrebu/rebekha-catering-website",
     homepage: "https://rebekhacaterers.online/",
     language: "Full-Stack",
     stargazers_count: 0,
@@ -113,7 +113,7 @@ const liveClientProjects: ProjectCard[] = [
   {
     name: "Tiffin Coffee Range CRM",
     description: "Custom enterprise CRM & administrative management portal built for Tiffin Coffee Range, handling customer relationship tracking, order workflows, and analytics.",
-    html_url: "https://github.com/Johnrebu",
+    html_url: "https://github.com/Johnrebu/lead-hub",
     homepage: "https://crm.tiffincoffeerange.com/",
     language: "Python / React",
     stargazers_count: 0,
@@ -123,7 +123,7 @@ const liveClientProjects: ProjectCard[] = [
   {
     name: "Dalphina Academy",
     description: "Educational academy web portal featuring course curriculums, interactive inquiry channels, student enrollment pathways, and clean mobile UX.",
-    html_url: "https://github.com/Johnrebu",
+    html_url: "https://github.com/Johnrebu/iragu-foundation-support",
     homepage: "https://dalphinaacademy.netlify.app/",
     language: "React / TypeScript",
     stargazers_count: 0,
@@ -133,7 +133,7 @@ const liveClientProjects: ProjectCard[] = [
   {
     name: "Tiffin Coffee Range",
     description: "Official commercial website for Tiffin Coffee Range brand showcasing food & beverage offerings, outlet locations, dynamic menus, and brand experience.",
-    html_url: "https://github.com/Johnrebu",
+    html_url: "https://github.com/Johnrebu/TiffinCoffeeRange",
     homepage: "https://tiffincoffeerange.com/",
     language: "Full-Stack",
     stargazers_count: 0,

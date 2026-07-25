@@ -76,7 +76,7 @@ const featuredProjects = [
       "Modern event management and registration web platform built for Money Pechu Events, featuring interactive event schedules, registration flows, and mobile UX.",
     tags: ["React", "TypeScript", "Tailwind CSS", "Event UX", "Live Site"],
     liveUrl: "https://moneypechuevents.netlify.app/",
-    githubUrl: "https://github.com/Johnrebu",
+    githubUrl: "https://github.com/Johnrebu/event-companion",
     highlights: ["Event registration flows", "Interactive agenda", "Mobile-optimized UX"],
   },
   {
@@ -87,7 +87,7 @@ const featuredProjects = [
       "Full catering business web portal featuring service menu showcases, event package booking, interactive galleries, and instant client query workflows.",
     tags: ["Full-Stack", "React", "Custom UI", "Catering UX", "Live Site"],
     liveUrl: "https://rebekhacaterers.online/",
-    githubUrl: "https://github.com/Johnrebu",
+    githubUrl: "https://github.com/Johnrebu/rebekha-catering-website",
     highlights: ["Interactive menu showcase", "Event query booking", "Responsive mobile UX"],
   },
   {
@@ -98,7 +98,7 @@ const featuredProjects = [
       "Custom enterprise CRM & administrative management portal built for Tiffin Coffee Range, handling customer relationship tracking, order workflows, and analytics.",
     tags: ["Full-Stack", "Python", "React", "Enterprise Dashboard", "Live Site"],
     liveUrl: "https://crm.tiffincoffeerange.com/",
-    githubUrl: "https://github.com/Johnrebu",
+    githubUrl: "https://github.com/Johnrebu/lead-hub",
     highlights: ["Customer management", "Order pipelines", "Administrative analytics"],
   },
   {
@@ -109,7 +109,7 @@ const featuredProjects = [
       "Educational academy web portal featuring course curriculums, interactive inquiry channels, student enrollment pathways, and clean mobile UX.",
     tags: ["React", "TypeScript", "Education UX", "Tailwind CSS", "Live Site"],
     liveUrl: "https://dalphinaacademy.netlify.app/",
-    githubUrl: "https://github.com/Johnrebu",
+    githubUrl: "https://github.com/Johnrebu/iragu-foundation-support",
     highlights: ["Course curriculum view", "Student inquiry form", "Responsive layout"],
   },
   {
@@ -120,7 +120,7 @@ const featuredProjects = [
       "Official commercial website for Tiffin Coffee Range brand showcasing food & beverage offerings, outlet locations, dynamic menus, and brand experience.",
     tags: ["Full-Stack", "Commercial Web", "Responsive Design", "Live Site"],
     liveUrl: "https://tiffincoffeerange.com/",
-    githubUrl: "https://github.com/Johnrebu",
+    githubUrl: "https://github.com/Johnrebu/TiffinCoffeeRange",
     highlights: ["Brand menu showcase", "Outlet locator", "Cross-device responsiveness"],
   },
 ];

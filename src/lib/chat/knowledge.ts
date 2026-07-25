@@ -32,6 +32,7 @@ export const portfolioData = {
       stack: ["React", "TypeScript", "Tailwind CSS"],
       description: "Live event management and ticketing web platform",
       url: "https://moneypechuevents.netlify.app/",
+      github: "https://github.com/Johnrebu/event-companion",
       keywords: ["moneypechu", "events", "ticketing", "live"],
     },
     {
@@ -39,6 +40,7 @@ export const portfolioData = {
       stack: ["Full-Stack", "React", "Custom UI"],
       description: "Full catering business website with menu showcases and booking workflows",
       url: "https://rebekhacaterers.online/",
+      github: "https://github.com/Johnrebu/rebekha-catering-website",
       keywords: ["rebekha", "caterers", "catering", "live"],
     },
     {
@@ -46,6 +48,7 @@ export const portfolioData = {
       stack: ["Full-Stack", "Python", "React"],
       description: "Enterprise CRM & management portal for Tiffin Coffee Range",
       url: "https://crm.tiffincoffeerange.com/",
+      github: "https://github.com/Johnrebu/lead-hub",
       keywords: ["crm", "tiffin coffee", "enterprise", "dashboard"],
     },
     {
@@ -53,6 +56,7 @@ export const portfolioData = {
       stack: ["React", "TypeScript", "Tailwind CSS"],
       description: "Educational academy portal presenting curriculums and student enrollment pathways",
       url: "https://dalphinaacademy.netlify.app/",
+      github: "https://github.com/Johnrebu/iragu-foundation-support",
       keywords: ["dalphina", "academy", "education", "courses"],
     },
     {
@@ -60,6 +64,7 @@ export const portfolioData = {
       stack: ["Full-Stack", "Commercial Web"],
       description: "Official commercial website for Tiffin Coffee Range brand showcasing outlets and menus",
       url: "https://tiffincoffeerange.com/",
+      github: "https://github.com/Johnrebu/TiffinCoffeeRange",
       keywords: ["tiffin coffee", "commercial", "brand"],
     },
     {
