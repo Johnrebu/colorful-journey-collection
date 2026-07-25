@@ -1,4 +1,4 @@
-import React, { useState, Suspense, useEffect } from "react";
+import React, { useState, Suspense, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, Loader2 } from "lucide-react";
 import { useLocation } from "react-router-dom";
@@ -19,7 +19,6 @@ import {
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface Message {
   id: string;
@@ -109,6 +108,15 @@ const ChatContent = () => {
   const [modulesLoaded, setModulesLoaded] = useState(false);
   const [lastIntent, setLastIntent] = useState<string | null>(null);
   const location = useLocation();
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isTyping]);
 
   useEffect(() => {
     getContextualPrompts(location.pathname).then(setContextualPrompts);
@@ -174,17 +182,18 @@ const ChatContent = () => {
   };
 
   return (
-    <div className="flex h-full max-h-[600px] flex-col">
-      <div className="border-b border-slate-200 p-4 dark:border-zinc-700">
-        <p className="mb-3 text-sm text-slate-500 dark:text-zinc-400">Quick questions:</p>
-        <div className="flex flex-wrap gap-2">
+    <div className="flex flex-1 flex-col min-h-0 overflow-hidden">
+      {/* Quick Questions Header */}
+      <div className="border-b border-slate-200 p-3 dark:border-zinc-700 flex-shrink-0 bg-slate-50/50 dark:bg-zinc-900/50">
+        <p className="mb-2 text-xs font-medium text-slate-500 dark:text-zinc-400">Quick questions:</p>
+        <div className="flex overflow-x-auto gap-2 pb-1 scrollbar-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden touch-pan-x">
           {contextualPrompts.map((prompt, index) => (
             <Button
               key={index}
               variant="outline"
               size="sm"
               onClick={() => handleSendMessage(prompt)}
-              className="h-auto rounded-full border-slate-300 bg-white px-3 py-2 text-xs text-slate-700 hover:border-[#4285F4] hover:text-[#4285F4] dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-200"
+              className="h-auto whitespace-nowrap rounded-full border-slate-300 bg-white px-3 py-1.5 text-xs text-slate-700 hover:border-[#4285F4] hover:text-[#4285F4] dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-200 shrink-0"
             >
               {prompt}
             </Button>
@@ -192,7 +201,11 @@ const ChatContent = () => {
         </div>
       </div>
 
-      <ScrollArea className="flex-1 p-4">
+      {/* Messages List Area */}
+      <div
+        className="flex-1 min-h-0 overflow-y-auto p-4 space-y-4 touch-pan-y [scrollbar-width:thin] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-300 dark:[&::-webkit-scrollbar-thumb]:bg-zinc-700"
+        data-vaul-no-drag
+      >
         <div className="space-y-4">
           {messages.map((message) => (
             <motion.div
@@ -202,13 +215,13 @@ const ChatContent = () => {
               className={`flex ${message.isBot ? "justify-start" : "justify-end"}`}
             >
               <div
-                className={`max-w-[80%] p-3 rounded-lg ${
+                className={`max-w-[85%] p-3 rounded-2xl ${
                   message.isBot
-                    ? "border border-slate-200 bg-white text-slate-800 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
-                    : "bg-gradient-to-r from-[#4285F4] via-[#EA4335] to-[#34A853] text-white"
+                    ? "border border-slate-200 bg-white text-slate-800 rounded-tl-sm dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
+                    : "bg-gradient-to-r from-[#4285F4] via-[#EA4335] to-[#34A853] text-white rounded-tr-sm"
                 }`}
               >
-                <p className="text-sm">{message.text}</p>
+                <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.text}</p>
               </div>
             </motion.div>
           ))}
@@ -219,31 +232,33 @@ const ChatContent = () => {
               animate={{ opacity: 1, y: 0 }}
               className="flex justify-start"
             >
-              <div className="rounded-lg border border-slate-200 bg-white p-3 text-slate-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100">
-                <div className="flex items-center space-x-1">
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  <span className="text-sm">Typing...</span>
+              <div className="rounded-2xl rounded-tl-sm border border-slate-200 bg-white p-3 text-slate-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100">
+                <div className="flex items-center space-x-1.5">
+                  <Loader2 className="w-4 h-4 animate-spin text-[#4285F4]" />
+                  <span className="text-sm font-medium">Typing...</span>
                 </div>
               </div>
             </motion.div>
           )}
+          <div ref={messagesEndRef} />
         </div>
-      </ScrollArea>
+      </div>
 
-      <div className="p-4 border-t border-border">
-        <div className="flex space-x-2">
+      {/* Input Area */}
+      <div className="p-3 border-t border-slate-200 dark:border-zinc-700 flex-shrink-0 bg-white dark:bg-zinc-950">
+        <div className="flex space-x-2 items-center">
           <Input
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="Ask me anything..."
-            className="flex-1 rounded-full border-slate-300 bg-white focus-visible:ring-[#4285F4]/40 dark:border-zinc-600 dark:bg-zinc-900"
+            className="flex-1 rounded-full border-slate-300 bg-slate-50 focus-visible:ring-[#4285F4]/40 dark:border-zinc-600 dark:bg-zinc-900 text-sm h-10 px-4"
           />
           <Button
             onClick={() => handleSendMessage()}
             disabled={!inputValue.trim() || isTyping}
-            size="sm"
-            className="rounded-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] to-[#34A853] text-white"
+            size="icon"
+            className="rounded-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] to-[#34A853] text-white shrink-0 h-10 w-10"
           >
             <Send className="w-4 h-4" />
           </Button>
@@ -259,7 +274,7 @@ const ChatWidget = () => {
 
   const trigger = (
     <motion.button
-      className="fixed bottom-20 right-6 z-50 rounded-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] to-[#34A853] p-4 text-white shadow-lg transition-shadow hover:shadow-xl"
+      className="fixed bottom-6 right-6 z-50 rounded-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] to-[#34A853] p-4 text-white shadow-lg transition-shadow hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4285F4]"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       initial={{ opacity: 0, scale: 0.8 }}
@@ -297,10 +312,10 @@ const ChatWidget = () => {
     return (
       <Drawer open={isOpen} onOpenChange={setIsOpen}>
         <DrawerTrigger asChild>{trigger}</DrawerTrigger>
-        <DrawerContent className="z-50 border-slate-200 bg-white/95 backdrop-blur-xl dark:border-zinc-700 dark:bg-zinc-950/95">
-          <DrawerHeader className="border-b border-slate-200 pb-4 dark:border-zinc-700">
-            <DrawerTitle className="flex items-center justify-between font-display text-slate-900 dark:text-white">
-              Chat with me
+        <DrawerContent className="z-50 border-slate-200 bg-white/95 backdrop-blur-xl dark:border-zinc-700 dark:bg-zinc-950/95 h-[85dvh] max-h-[85dvh] flex flex-col p-0 rounded-t-2xl">
+          <DrawerHeader className="border-b border-slate-200 pb-3 pt-2 px-4 dark:border-zinc-700 flex-shrink-0 text-left">
+            <DrawerTitle className="flex items-center justify-between font-display text-slate-900 dark:text-white text-base">
+              <span>Chat with me</span>
               <span className="flex items-center gap-1.5">
                 <span className="h-2.5 w-2.5 rounded-full bg-[#4285F4]" />
                 <span className="h-2.5 w-2.5 rounded-full bg-[#EA4335]" />
@@ -322,11 +337,11 @@ const ChatWidget = () => {
       <SheetTrigger asChild>{trigger}</SheetTrigger>
       <SheetContent
         side="right"
-        className="z-50 w-[400px] border-slate-200 bg-white/95 backdrop-blur-xl dark:border-zinc-700 dark:bg-zinc-950/95 sm:w-[540px]"
+        className="z-50 w-full sm:w-[450px] p-0 flex flex-col border-slate-200 bg-white/95 backdrop-blur-xl dark:border-zinc-700 dark:bg-zinc-950/95 h-full"
       >
-        <SheetHeader className="border-b border-slate-200 pb-4 dark:border-zinc-700">
-          <SheetTitle className="flex items-center justify-between font-display text-slate-900 dark:text-white">
-            Chat with me
+        <SheetHeader className="border-b border-slate-200 p-4 dark:border-zinc-700 flex-shrink-0 text-left">
+          <SheetTitle className="flex items-center justify-between font-display text-slate-900 dark:text-white text-base">
+            <span>Chat with me</span>
             <span className="flex items-center gap-1.5">
               <span className="h-2.5 w-2.5 rounded-full bg-[#4285F4]" />
               <span className="h-2.5 w-2.5 rounded-full bg-[#EA4335]" />
@@ -344,3 +359,4 @@ const ChatWidget = () => {
 };
 
 export default ChatWidget;
+
