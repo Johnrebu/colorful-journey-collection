@@ -96,7 +96,7 @@ export const getPersonSchema = () => {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: 'Johnson',
-    jobTitle: 'Frontend Developer & Product Engineer',
+    jobTitle: 'Full-Stack Developer & Software Engineer',
     url: SITE_URL,
     image: `${SITE_URL}/profile-logo.png`,
     sameAs: [
@@ -104,7 +104,7 @@ export const getPersonSchema = () => {
       'https://linkedin.com/in/johnsondeveloper',
       'https://github.com/johnsondeveloper',
     ],
-    description: 'Frontend-focused developer with a science-education background. Building thoughtful, performance-aware interfaces.',
+    description: 'Full-stack developer with a science-education background. Building thoughtful, high-performance web applications and systems.',
   };
 };
 
