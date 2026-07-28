@@ -181,18 +181,71 @@ const ChatContent = () => {
     }
   };
 
+  const quickQuestionsRef = useRef<HTMLDivElement>(null);
+  const [isMouseDown, setIsMouseDown] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeftPos, setScrollLeftPos] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const handleWheel = (e: React.WheelEvent) => {
+    if (quickQuestionsRef.current && e.deltaY !== 0) {
+      quickQuestionsRef.current.scrollLeft += e.deltaY;
+    }
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!quickQuestionsRef.current) return;
+    setIsMouseDown(true);
+    setIsDragging(false);
+    setStartX(e.pageX - quickQuestionsRef.current.offsetLeft);
+    setScrollLeftPos(quickQuestionsRef.current.scrollLeft);
+  };
+
+  const handleMouseUpOrLeave = () => {
+    setIsMouseDown(false);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isMouseDown || !quickQuestionsRef.current) return;
+    const x = e.pageX - quickQuestionsRef.current.offsetLeft;
+    if (Math.abs(x - startX) > 5) {
+      setIsDragging(true);
+    }
+    const walk = (x - startX) * 1.5;
+    quickQuestionsRef.current.scrollLeft = scrollLeftPos - walk;
+  };
+
   return (
     <div className="flex flex-1 flex-col min-h-0 overflow-hidden">
       {/* Quick Questions Header */}
       <div className="border-b border-slate-200 p-3 dark:border-zinc-700 flex-shrink-0 bg-slate-50/50 dark:bg-zinc-900/50">
-        <p className="mb-2 text-xs font-medium text-slate-500 dark:text-zinc-400">Quick questions:</p>
-        <div className="flex overflow-x-auto gap-2 pb-1 scrollbar-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden touch-pan-x">
+        <div className="flex items-center justify-between mb-2">
+          <p className="text-xs font-medium text-slate-500 dark:text-zinc-400">Quick questions:</p>
+          <span className="text-[10px] text-slate-400 dark:text-zinc-500 hidden sm:inline-block select-none">
+            Scroll mouse wheel or drag
+          </span>
+        </div>
+        <div
+          ref={quickQuestionsRef}
+          onWheel={handleWheel}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUpOrLeave}
+          onMouseLeave={handleMouseUpOrLeave}
+          onMouseMove={handleMouseMove}
+          className={`flex overflow-x-auto gap-2 pb-1 scrollbar-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden touch-pan-x select-none ${
+            isMouseDown ? "cursor-grabbing" : "cursor-grab"
+          }`}
+        >
           {contextualPrompts.map((prompt, index) => (
             <Button
               key={index}
               variant="outline"
               size="sm"
-              onClick={() => handleSendMessage(prompt)}
+              onClick={() => {
+                if (!isDragging) {
+                  handleSendMessage(prompt);
+                }
+              }}
               className="h-auto whitespace-nowrap rounded-full border-slate-300 bg-white px-3 py-1.5 text-xs text-slate-700 hover:border-[#4285F4] hover:text-[#4285F4] dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-200 shrink-0"
             >
               {prompt}
