@@ -65,7 +65,7 @@ const HeroSection = ({ profileImageUrl, skills }: HeroSectionProps) => {
 
   const titleWord = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } },
+    show: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 100 } },
   };
   return (
     <div className="relative flex flex-col md:flex-row items-center justify-between gap-12 py-16 overflow-hidden">
