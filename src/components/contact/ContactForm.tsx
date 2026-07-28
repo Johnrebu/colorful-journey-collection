@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { toast } from "sonner";
-import emailjs from "emailjs-com";
+import { supabase } from "@/integrations/supabase/client";
 import ContactSuccessMessage from "./ContactSuccessMessage";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -23,6 +23,8 @@ const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
   phone: z.string().optional(),
   message: z.string().min(10, { message: "Message must be at least 10 characters" }),
+  // Honeypot – hidden from humans, must remain empty.
+  website: z.string().max(0).optional(),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -32,10 +34,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
   const [submitted, setSubmitted] = useState(false);
   const isDark = className?.includes("dark-theme");
   const isGoogle = className?.includes("google-theme");
-
-  useEffect(() => {
-    emailjs.init("ogQh6AcgQUAdLCNuG");
-  }, []);
+  const mountedAt = useRef(Date.now());
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -44,6 +43,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
       email: "",
       phone: "",
       message: "",
+      website: "",
     },
   });
 
@@ -51,27 +51,24 @@ const ContactForm = ({ className }: ContactFormProps) => {
     setIsSubmitting(true);
 
     try {
-      const templateParams = {
-        from_name: values.name,
-        from_email: values.email,
-        phone: values.phone || "Not provided",
-        message: values.message,
-        to_name: "Johnson T",
-        reply_to: values.email,
-      };
+      const { error } = await supabase.functions.invoke("send-contact-email", {
+        body: {
+          name: values.name,
+          email: values.email,
+          phone: values.phone || "",
+          message: values.message,
+          website: values.website ?? "",
+          elapsedMs: Date.now() - mountedAt.current,
+        },
+      });
 
-      const result = await emailjs.send(
-        "service_4vlc0r7",
-        "template_eiiy98f",
-        templateParams,
-        "ogQh6AcgQUAdLCNuG"
-      );
+      if (error) throw error;
 
-      console.log("Email successfully sent!", result.text);
       toast.success("Message sent successfully!");
       setIsSubmitting(false);
       setSubmitted(true);
       form.reset();
+      mountedAt.current = Date.now();
     } catch (error) {
       console.error("Failed to send email:", error);
       toast.error("Failed to send message. Please try again.");
@@ -103,6 +100,18 @@ const ContactForm = ({ className }: ContactFormProps) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className={`space-y-5 ${className}`}>
+        {/* Honeypot field: visually hidden and skipped by assistive tech / tabbing */}
+        <div aria-hidden="true" className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden">
+          <label htmlFor="website">Website</label>
+          <input
+            id="website"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            {...form.register("website")}
+          />
+        </div>
+
         <FormField
           control={form.control}
           name="name"
