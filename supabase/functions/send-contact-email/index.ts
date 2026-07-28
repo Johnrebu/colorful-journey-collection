@@ -6,6 +6,10 @@ const BodySchema = z.object({
   email: z.string().trim().email().max(120),
   phone: z.string().trim().max(40).optional().default(''),
   message: z.string().trim().min(10).max(2000),
+  // Honeypot: must stay empty. Bots that fill every field get rejected.
+  website: z.string().max(200).optional().default(''),
+  // Milliseconds the form was on screen before submit.
+  elapsedMs: z.number().int().nonnegative().optional().default(99999),
 })
 
 // Simple in-memory rate limit: 3 submissions per IP per 10 minutes.
@@ -56,6 +60,13 @@ Deno.serve(async (req) => {
     return json({ error: parsed.error.flatten().fieldErrors }, 400)
   }
   const { name, email, phone, message } = parsed.data
+
+  // Spam heuristics: honeypot filled, or submitted implausibly fast (<3s).
+  if (parsed.data.website.trim() !== '' || parsed.data.elapsedMs < 3000) {
+    console.warn('Spam submission blocked', { ip, honeypot: parsed.data.website !== '' })
+    // Pretend success so bots do not learn the filter exists.
+    return json({ success: true })
+  }
 
   const serviceId = Deno.env.get('EMAILJS_SERVICE_ID')
   const templateId = Deno.env.get('EMAILJS_TEMPLATE_ID')
