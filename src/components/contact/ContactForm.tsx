@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import ContactSuccessMessage from "./ContactSuccessMessage";
@@ -23,6 +23,8 @@ const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
   phone: z.string().optional(),
   message: z.string().min(10, { message: "Message must be at least 10 characters" }),
+  // Honeypot – hidden from humans, must remain empty.
+  website: z.string().max(0).optional(),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -32,6 +34,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
   const [submitted, setSubmitted] = useState(false);
   const isDark = className?.includes("dark-theme");
   const isGoogle = className?.includes("google-theme");
+  const mountedAt = useRef(Date.now());
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -40,6 +43,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
       email: "",
       phone: "",
       message: "",
+      website: "",
     },
   });
 
@@ -53,6 +57,8 @@ const ContactForm = ({ className }: ContactFormProps) => {
           email: values.email,
           phone: values.phone || "",
           message: values.message,
+          website: values.website ?? "",
+          elapsedMs: Date.now() - mountedAt.current,
         },
       });
 
@@ -62,6 +68,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
       setIsSubmitting(false);
       setSubmitted(true);
       form.reset();
+      mountedAt.current = Date.now();
     } catch (error) {
       console.error("Failed to send email:", error);
       toast.error("Failed to send message. Please try again.");
@@ -93,6 +100,18 @@ const ContactForm = ({ className }: ContactFormProps) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className={`space-y-5 ${className}`}>
+        {/* Honeypot field: visually hidden and skipped by assistive tech / tabbing */}
+        <div aria-hidden="true" className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden">
+          <label htmlFor="website">Website</label>
+          <input
+            id="website"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            {...form.register("website")}
+          />
+        </div>
+
         <FormField
           control={form.control}
           name="name"
