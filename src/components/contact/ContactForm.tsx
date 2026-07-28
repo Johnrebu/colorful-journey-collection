@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { toast } from "sonner";
-import emailjs from "emailjs-com";
+import { supabase } from "@/integrations/supabase/client";
 import ContactSuccessMessage from "./ContactSuccessMessage";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -33,10 +33,6 @@ const ContactForm = ({ className }: ContactFormProps) => {
   const isDark = className?.includes("dark-theme");
   const isGoogle = className?.includes("google-theme");
 
-  useEffect(() => {
-    emailjs.init("ogQh6AcgQUAdLCNuG");
-  }, []);
-
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -51,23 +47,17 @@ const ContactForm = ({ className }: ContactFormProps) => {
     setIsSubmitting(true);
 
     try {
-      const templateParams = {
-        from_name: values.name,
-        from_email: values.email,
-        phone: values.phone || "Not provided",
-        message: values.message,
-        to_name: "Johnson T",
-        reply_to: values.email,
-      };
+      const { error } = await supabase.functions.invoke("send-contact-email", {
+        body: {
+          name: values.name,
+          email: values.email,
+          phone: values.phone || "",
+          message: values.message,
+        },
+      });
 
-      const result = await emailjs.send(
-        "service_4vlc0r7",
-        "template_eiiy98f",
-        templateParams,
-        "ogQh6AcgQUAdLCNuG"
-      );
+      if (error) throw error;
 
-      console.log("Email successfully sent!", result.text);
       toast.success("Message sent successfully!");
       setIsSubmitting(false);
       setSubmitted(true);
