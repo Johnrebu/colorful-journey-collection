@@ -100,6 +100,18 @@ const ContactForm = ({ className }: ContactFormProps) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className={`space-y-5 ${className}`}>
+        {/* Honeypot field: visually hidden and skipped by assistive tech / tabbing */}
+        <div aria-hidden="true" className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden">
+          <label htmlFor="website">Website</label>
+          <input
+            id="website"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            {...form.register("website")}
+          />
+        </div>
+
         <FormField
           control={form.control}
           name="name"
