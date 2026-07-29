@@ -8,6 +8,7 @@ import About from "../../pages/About";
 import Bio from "../../pages/Bio";
 import Resume from "../../pages/Resume";
 import Projects from "../../pages/Projects";
+import Services from "../../pages/Services";
 import Contact from "../../pages/Contact";
 import Wikipedia from "../../pages/Wikipedia";
 import NotFound from "../../pages/NotFound";
@@ -20,6 +21,7 @@ const AnimatedRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/services" element={<Services />} />
         <Route path="/bio" element={<Bio />} />
         <Route path="/resume" element={<Resume />} />
         <Route path="/projects" element={<Projects />} />

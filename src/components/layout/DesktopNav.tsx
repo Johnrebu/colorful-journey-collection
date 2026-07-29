@@ -13,6 +13,7 @@ const DesktopNav = ({ darkMode, toggleDarkMode }: DesktopNavProps) => {
     <div className="hidden items-center gap-1 md:flex">
       <NavLink to="/">Home</NavLink>
       <NavLink to="/about">About</NavLink>
+      <NavLink to="/services">Services</NavLink>
       <NavLink to="/projects">Projects</NavLink>
       <NavLink to="/resume">Resume</NavLink>
       <NavLink to="/contact">Contact</NavLink>

@@ -27,6 +27,7 @@ import {
 import useSeo from "@/hooks/useSeo";
 import { getPersonSchema, getWebsiteSchema } from "@/lib/seo";
 import johnImage from "@/images/john.jpg";
+import ServicesSection from "@/components/services/ServicesSection";
 
 // Quick Credibility Stats
 const heroSignals = [
@@ -594,6 +595,11 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* ============================================================ */}
+      {/* SERVICES & PRICING PACKAGES */}
+      {/* ============================================================ */}
+      <ServicesSection id="services" />
 
       {/* ============================================================ */}
       {/* 5. QUICK STATS & CREDIBILITY MARKERS */}

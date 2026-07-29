@@ -167,3 +167,46 @@ export const getProjectSchema = (project: {
     keywords: project.skills?.join(', '),
   };
 };
+
+/**
+ * Schema.org Service Schema for freelance development packages
+ */
+export const getServicesSchema = () => {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    serviceType: 'Web & Mobile Application Development',
+    provider: {
+      '@type': 'Person',
+      name: 'Johnson T',
+      url: SITE_URL,
+    },
+    areaServed: 'Worldwide',
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Development Services & Pricing Packages',
+      itemListElement: [
+        {
+          '@type': 'OfferCatalog',
+          name: 'Website Packages',
+          itemListElement: [
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Basic Landing Site' }, priceSpecification: { '@type': 'PriceSpecification', priceCurrency: 'INR', minPrice: 12000, maxPrice: 25000 } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Business + CMS / Blog' }, priceSpecification: { '@type': 'PriceSpecification', priceCurrency: 'INR', minPrice: 25000, maxPrice: 60000 } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'E-Commerce Website' }, priceSpecification: { '@type': 'PriceSpecification', priceCurrency: 'INR', minPrice: 60000, maxPrice: 200000 } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Custom Web App / Portal' }, priceSpecification: { '@type': 'PriceSpecification', priceCurrency: 'INR', minPrice: 80000, maxPrice: 500000 } },
+          ],
+        },
+        {
+          '@type': 'OfferCatalog',
+          name: 'Mobile App Packages',
+          itemListElement: [
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Basic Application' }, priceSpecification: { '@type': 'PriceSpecification', priceCurrency: 'INR', minPrice: 50000, maxPrice: 120000 } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Standard Application' }, priceSpecification: { '@type': 'PriceSpecification', priceCurrency: 'INR', minPrice: 150000, maxPrice: 400000 } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Complex Enterprise App' }, priceSpecification: { '@type': 'PriceSpecification', priceCurrency: 'INR', minPrice: 400000, maxPrice: 1000000 } },
+          ],
+        },
+      ],
+    },
+  };
+};
+
