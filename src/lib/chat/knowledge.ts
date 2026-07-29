@@ -97,6 +97,79 @@ export const portfolioData = {
     hobbies: ["Cricket", "Reading"],
     goals: "Long-term research and innovation in computer science",
   },
+
+  services: {
+    phone: "+91 875-477-4022",
+    whatsappUrl: "https://wa.me/918754774022",
+    webPackages: [
+      {
+        name: "Basic Landing Site",
+        price: "₹12,000 – ₹25,000",
+        timeline: "1 - 2 Weeks",
+        deliverables: ["5 Pages", "Fully Responsive UI", "Contact Form Integration", "Basic SEO Setup"],
+      },
+      {
+        name: "Business + CMS / Blog",
+        price: "₹25,000 – ₹60,000",
+        timeline: "2 - 4 Weeks",
+        deliverables: ["10 Pages", "Dynamic Blog Engine", "Admin CMS Panel", "On-Page SEO"],
+      },
+      {
+        name: "E-Commerce Website",
+        price: "₹60,000 – ₹2,00,000+",
+        timeline: "4 - 6 Weeks",
+        deliverables: ["Product Catalog", "Cart & Checkout", "Payment Gateway", "Admin Dashboard"],
+      },
+      {
+        name: "Custom Web App / Portal",
+        price: "₹80,000 – ₹5,00,000+",
+        timeline: "6 - 12 Weeks",
+        deliverables: ["Authentication", "Role Dashboards", "Custom Workflows", "REST/GraphQL APIs"],
+      },
+    ],
+    mobilePackages: [
+      {
+        name: "Basic Application",
+        price: "₹50,000 – ₹1,20,000",
+        timeline: "3 - 4 Weeks",
+        deliverables: ["4–5 Static/Dynamic Screens", "Clean UI", "Basic Form Inputs"],
+      },
+      {
+        name: "Standard Application",
+        price: "₹1,50,000 – ₹4,00,000",
+        timeline: "6 - 8 Weeks",
+        deliverables: ["User Auth", "Payment Gateway", "Admin Panel", "Custom APIs"],
+      },
+      {
+        name: "Complex Enterprise App",
+        price: "₹4,00,000 – ₹10,00,000+",
+        timeline: "10 - 16 Weeks",
+        deliverables: ["Real-time Features", "Booking System", "Full E-Commerce", "Custom Backend"],
+      },
+    ],
+    hourlyCustom: [
+      {
+        name: "Hourly Technical Consulting",
+        price: "₹800 – ₹2,000 / hr",
+        idealFor: "Bug fixes, code reviews, small feature enhancements, architecture consultation",
+      },
+      {
+        name: "Dedicated Daily Sprint",
+        price: "₹3,500 – ₹8,000 / day (8 Hours)",
+        idealFor: "Rapid prototyping, high-intensity feature builds, code refactoring",
+      },
+    ],
+    inclusions: [
+      "Responsive Design",
+      "2 Rounds of Revisions",
+      "1 Month Free Post-Launch Bug Support",
+      "Full Source Code Handover",
+    ],
+    exclusions: [
+      "Hosting & Domain registration fees",
+      "Paid 3rd-party API credits",
+    ],
+  },
 };
 
 export const routePrompts = {
@@ -114,6 +187,13 @@ export const routePrompts = {
     "Share your project links",
     "How should I present projects in interviews?",
   ],
+  "/services": [
+    "What web development packages do you offer?",
+    "How much does a mobile app cost?",
+    "What are your hourly & daily consulting rates?",
+    "What is included in fixed price projects?",
+    "How do I get a custom quote on WhatsApp?",
+  ],
   "/resume": [
     "Can I download your resume?",
     "What are your key skills?",
@@ -124,17 +204,17 @@ export const routePrompts = {
   "/contact": [
     "Are you available for freelance?",
     "What's the best way to reach you?",
-    "What are your rates?",
+    "What are your services & rates?",
     "How quickly do you respond?",
     "How should I write a good outreach message?",
   ],
   default: [
+    "What services & packages do you offer?",
     "What are your skills?",
     "Tell me about your projects",
+    "How much does a website or mobile app cost?",
     "How did you switch to IT?",
-    "Where are you from?",
     "Create a 30-day learning roadmap",
-    "How do I stay consistent while learning?",
   ],
 };
 

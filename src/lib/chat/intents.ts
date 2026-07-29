@@ -71,7 +71,42 @@ const intents: Intent[] = [
   {
     id: "availability_hiring",
     keywords: ["available", "hire", "rates", "freelance", "full-time", "job", "work", "opportunity"],
-    routeBoost: ["/contact"],
+    routeBoost: ["/contact", "/services"],
+  },
+  {
+    id: "services_overview",
+    keywords: ["services", "service", "packages", "pricing", "pricing list", "cost", "investment", "rates", "offerings", "how much", "tier"],
+    routeBoost: ["/services"],
+  },
+  {
+    id: "web_packages",
+    keywords: ["website cost", "web package", "landing site", "landing page", "business website", "cms", "blog", "e-commerce", "ecommerce", "web app", "portal", "website price"],
+    routeBoost: ["/services"],
+  },
+  {
+    id: "mobile_packages",
+    keywords: ["mobile app", "app development", "android app", "ios app", "mobile package", "app cost", "application cost", "mobile pricing"],
+    routeBoost: ["/services"],
+  },
+  {
+    id: "hourly_custom_rates",
+    keywords: ["hourly rate", "hourly consulting", "daily sprint", "day rate", "per hour", "consulting rate", "sprint cost"],
+    routeBoost: ["/services"],
+  },
+  {
+    id: "fixed_inclusions",
+    keywords: ["included", "inclusions", "revisions", "bug support", "source code", "guarantee", "what is included", "free support"],
+    routeBoost: ["/services"],
+  },
+  {
+    id: "scope_exclusions",
+    keywords: ["exclusions", "hosting fee", "domain registration", "extra charges", "hidden costs", "api credits", "3rd party cost"],
+    routeBoost: ["/services"],
+  },
+  {
+    id: "custom_quote_whatsapp",
+    keywords: ["custom quote", "get quote", "whatsapp", "discuss project", "book call", "quote"],
+    routeBoost: ["/services", "/contact"],
   },
   {
     id: "resume_download",
@@ -249,12 +284,68 @@ export const answerForIntent = (
     }
     case "internship":
       return "Johnson interned at OOR Cabs for 8 months, working on React and WordPress and using AI tools to improve delivery workflows.";
+    case "services_overview":
+      return `Johnson offers transparent development packages & consulting rates:
+      
+1. Web Development (₹12k - ₹5L+)
+2. Mobile App Development (₹50k - ₹10L+)
+3. Hourly Consulting (₹800 - ₹2,000/hr) & Daily Sprints (₹3,500 - ₹8,000/day)
+
+All fixed projects include responsive UI, 2 revision rounds, 1 month bug support & full source code handover.
+You can get a custom quote directly on WhatsApp: https://wa.me/918754774022`;
+
+    case "web_packages":
+      return `Website Development Tiers:
+• Basic Landing Site: ₹12,000 – ₹25,000 (1-2 Weeks) | 5 Pages, Responsive UI, Contact Form, Basic SEO.
+• Business + CMS / Blog: ₹25,000 – ₹60,000 (2-4 Weeks) | 10 Pages, Blog Engine, Admin CMS, On-Page SEO.
+• E-Commerce Website: ₹60,000 – ₹2,00,000+ (4-6 Weeks) | Product Catalog, Cart/Checkout, Payment Gateway, Dashboard.
+• Custom Web App / Portal: ₹80,000 – ₹5,00,000+ (6-12 Weeks) | Auth, Role Dashboards, Custom Workflows, APIs.
+
+Get a custom estimate on WhatsApp: https://wa.me/918754774022`;
+
+    case "mobile_packages":
+      return `Mobile App Packages:
+• Basic Application: ₹50,000 – ₹1,20,000 (3-4 Weeks) | 4-5 Screens, Clean UI, Form Inputs.
+• Standard Application: ₹1,50,000 – ₹4,00,000 (6-8 Weeks) | User Auth, Payment Gateway, Admin Panel, Custom APIs.
+• Complex Enterprise App: ₹4,00,000 – ₹10,00,000+ (10-16 Weeks) | Real-time Features, Booking System, Full E-Commerce, Custom Backend.
+
+Discuss your app idea on WhatsApp: https://wa.me/918754774022`;
+
+    case "hourly_custom_rates":
+      return `Hourly & Sprint Engagement Models:
+• Hourly Technical Consulting: ₹800 – ₹2,000 / hr (Ideal for bug fixes, code reviews, small features & architecture consultation).
+• Dedicated Daily Sprint: ₹3,500 – ₹8,000 / day - 8 Hours (Ideal for rapid prototyping, high-intensity feature delivery & refactoring).
+
+Book a session on WhatsApp: https://wa.me/918754774022`;
+
+    case "fixed_inclusions":
+      return `Standard Inclusions in all fixed projects:
+✅ Fully Responsive Design across all devices
+✅ 2 Rounds of Revisions
+✅ 1 Month Free Post-Launch Bug Support
+✅ Full Source Code & IP Handover
+
+Need a custom scope? Connect on WhatsApp: https://wa.me/918754774022`;
+
+    case "scope_exclusions":
+      return `Project Exclusions & Third-Party Costs:
+⚠️ Hosting & Domain Registration fees (paid direct to host provider)
+⚠️ Paid 3rd-Party API credits (e.g. OpenAI, Twilio, Google Maps)
+
+All project deliverables inside scope are 100% transparent with no hidden charges!`;
+
+    case "custom_quote_whatsapp":
+      return `For a custom quote or scope discussion, connect directly with Johnson:
+📱 WhatsApp: https://wa.me/918754774022
+📞 Phone: +91 875-477-4022
+📧 Email: johnchemist91@gmail.com`;
+
     case "availability_hiring":
-      return `${data.availability.status}. Preferred location: ${data.availability.location_preference}. Typical response window: ${data.availability.response_time}.`;
+      return `${data.availability.status}. Preferred location: ${data.availability.location_preference}. Typical response window: ${data.availability.response_time}. You can also review services & packages on the Services page!`;
     case "resume_download":
       return "You can view and download the latest resume on the Resume page.";
     case "contact_methods":
-      return `Best way to reach Johnson is via the Contact page form. Typical response time is ${data.availability.response_time}.`;
+      return `Best way to reach Johnson is via the Contact page form or direct on WhatsApp (https://wa.me/918754774022). Typical response time is ${data.availability.response_time}.`;
     case "hobbies_goals":
       return `Outside work, Johnson enjoys ${data.interests.hobbies.join(" and ")}. Long-term goal: ${data.interests.goals}.`;
     case "learning_plan":
@@ -264,6 +355,9 @@ export const answerForIntent = (
     case "communication":
       return adviceForIntent(effectiveIntent);
     default:
+      if (pathname === "/services") {
+        return "I can answer any questions about Johnson's Web Development, Mobile App, or Hourly Consulting packages, pricing, deliverables, and timelines. What would you like to know?";
+      }
       if (pathname === "/projects") {
         return "I can break down Johnson's projects by problem, tech stack, and outcome. Ask about Weather Widget, Employee Directory, or Ecommerce.";
       }
@@ -271,7 +365,7 @@ export const answerForIntent = (
         return "I can summarize Johnson's resume quickly: skills, transition story, internship, and strengths. Tell me which section you want.";
       }
       if (pathname === "/contact") {
-        return `If you want to work with Johnson, use the contact form. He is ${data.availability.status.toLowerCase()} and usually replies within ${data.availability.response_time}.`;
+        return `If you want to work with Johnson, use the contact form or WhatsApp (https://wa.me/918754774022). He is ${data.availability.status.toLowerCase()} and usually replies within ${data.availability.response_time}.`;
       }
       return adviceForIntent("default");
   }
