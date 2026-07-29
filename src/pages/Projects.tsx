@@ -2,20 +2,14 @@ import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
-  ArrowUpRight,
-  Boxes,
   Code2,
   Cpu,
   ExternalLink,
-  GitFork,
   Github,
   Globe2,
   Layers3,
-  Rocket,
   ShieldCheck,
   Sparkles,
-  Star,
-  Terminal,
   Workflow,
   Zap,
 } from "lucide-react";
@@ -172,14 +166,28 @@ const starPositions = Array.from({ length: 48 }, (_, index) => ({
   duration: 2.8 + (index % 5) * 0.7,
 }));
 
-const formatDate = (value: string) =>
-  new Date(value).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
-
 const formatProjectName = (name: string) => name.replace(/_/g, " ");
+
+const getRepoDescription = (repo: ProjectCard) => {
+  if (repo.description && repo.description.trim().length > 0) {
+    return repo.description;
+  }
+  const fallback = fallbackProjects.find((f) => f.name === repo.name);
+  if (fallback?.description) {
+    return fallback.description;
+  }
+  const nameLower = repo.name.toLowerCase();
+  if (nameLower.includes("weather")) {
+    return "Interactive weather forecasting web application featuring location-aware search, dynamic forecast cards, and real-time weather API integration.";
+  }
+  if (nameLower.includes("commerce") || nameLower.includes("e-commerce")) {
+    return "E-commerce storefront web application built with React, featuring product filtering, cart management, and responsive shopping UI.";
+  }
+  if (nameLower.includes("sort") || nameLower.includes("cecil") || nameLower.includes("directory")) {
+    return "High-performance employee directory and management portal with multi-column sorting, instant search, and optimized React state management.";
+  }
+  return "Production-ready web engineering project built with modern frontend tools, clean architecture, and responsive UI.";
+};
 
 export default function Projects() {
   const [repos, setRepos] = useState<GitHubRepo[]>([]);
@@ -238,7 +246,14 @@ export default function Projects() {
     const byName = new Map(repos.map((repo) => [repo.name, repo]));
 
     return featuredProjectNames
-      .map((name) => byName.get(name))
+      .map((name) => {
+        const repo = byName.get(name);
+        if (!repo) return null;
+        return {
+          ...repo,
+          description: getRepoDescription(repo),
+        };
+      })
       .filter((repo): repo is GitHubRepo => Boolean(repo));
   }, [repos]);
 
@@ -261,19 +276,18 @@ export default function Projects() {
     () => ({
       repoCount: dataFeed.length,
       liveCount: liveClientProjects.length,
-      starCount: dataFeed.reduce((sum, repo) => sum + repo.stargazers_count, 0),
     }),
     [dataFeed]
   );
 
   const renderProjectActions = (repo: ProjectCard) => (
-    <div className="flex flex-wrap gap-2 pt-2">
+    <div className="flex flex-wrap gap-2 pt-2 items-center">
       {repo.homepage && (
         <a
           href={repo.homepage}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-cyan-400 to-teal-300 px-4 py-2 text-xs font-bold text-slate-950 transition hover:scale-105 shadow-sm"
+          className="inline-flex items-center gap-1.5 rounded-full bg-slate-900 dark:bg-gradient-to-r dark:from-cyan-400 dark:to-teal-300 px-4 py-2 text-xs font-bold text-white dark:text-slate-950 transition hover:scale-105 shadow-sm"
         >
           <ExternalLink size={14} />
           <span>Launch Site</span>
@@ -283,7 +297,7 @@ export default function Projects() {
         href={repo.html_url}
         target="_blank"
         rel="noreferrer"
-        className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-semibold text-white transition hover:bg-white/10 hover:border-cyan-300/40"
+        className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 dark:border-white/15 bg-slate-100 dark:bg-white/5 px-4 py-2 text-xs font-semibold text-slate-800 dark:text-white transition hover:bg-slate-200 dark:hover:bg-white/10 hover:border-cyan-400"
       >
         <Github size={14} />
         <span>View Source</span>
@@ -294,7 +308,7 @@ export default function Projects() {
   const renderRepositoryCard = (repo: ProjectCard, index: number) => (
     <motion.article
       key={repo.name}
-      className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#0b152d]/90 p-6 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300/30 hover:shadow-xl"
+      className="group relative flex flex-col justify-between rounded-[1.8rem] border border-slate-200/90 bg-white/80 p-6 shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl dark:border-white/10 dark:bg-zinc-950/75 backdrop-blur-xl"
       initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -302,27 +316,27 @@ export default function Projects() {
     >
       <div className="space-y-3">
         <div className="flex items-center justify-between gap-2">
-          <span className="text-xs font-bold uppercase tracking-wider text-cyan-300">
+          <span className="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-300">
             {repo.language || "Web Stack"}
           </span>
-          <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[11px] text-slate-300">
+          <span className="rounded-full border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 px-2.5 py-0.5 text-[11px] font-semibold text-slate-700 dark:text-zinc-300">
             {repo.homepage ? "Live Site" : "Source Code"}
           </span>
         </div>
 
-        <h3 className="text-lg font-bold text-white group-hover:text-cyan-200 transition-colors">
+        <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">
           {formatProjectName(repo.name)}
         </h3>
 
-        <p className="text-xs leading-relaxed text-slate-300">
-          {repo.description || "Open source software repository hosted on GitHub."}
+        <p className="text-xs leading-relaxed text-slate-600 dark:text-zinc-300">
+          {getRepoDescription(repo)}
         </p>
 
         <div className="flex flex-wrap gap-1.5 pt-1">
-          {repo.topics?.slice(0, 3).map((topic) => (
+          {(repo.topics?.length ? repo.topics : [repo.language?.toLowerCase() || "react"]).slice(0, 3).map((topic) => (
             <span
               key={topic}
-              className="rounded-md border border-cyan-300/15 bg-cyan-300/10 px-2 py-0.5 text-[11px] text-cyan-200"
+              className="rounded-md border border-slate-200 bg-slate-100 dark:border-white/10 dark:bg-white/5 px-2.5 py-1 text-[11px] font-semibold text-slate-700 dark:text-zinc-300"
             >
               #{topic}
             </span>
@@ -330,7 +344,7 @@ export default function Projects() {
         </div>
       </div>
 
-      <div className="pt-5 mt-4 border-t border-white/10 flex items-center justify-between gap-3">
+      <div className="pt-5 mt-4 border-t border-slate-100 dark:border-white/10 flex items-center justify-between gap-3">
         {renderProjectActions(repo)}
       </div>
     </motion.article>
@@ -603,12 +617,12 @@ export default function Projects() {
                     {formatProjectName(repo.name)}
                   </h3>
                   <p className="mt-2 text-xs leading-relaxed text-slate-600 dark:text-zinc-300">
-                    {repo.description}
+                    {getRepoDescription(repo)}
                   </p>
                 </div>
 
                 <div className="flex flex-wrap gap-1.5 pt-1">
-                  {repo.topics?.map((topic) => (
+                  {(repo.topics?.length ? repo.topics : [repo.language?.toLowerCase() || "react"]).slice(0, 4).map((topic) => (
                     <span
                       key={topic}
                       className="rounded-md border border-slate-200 bg-slate-100 dark:border-white/10 dark:bg-white/5 px-2.5 py-1 text-[11px] font-semibold text-slate-700 dark:text-zinc-300"
@@ -619,7 +633,7 @@ export default function Projects() {
                 </div>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-slate-100 dark:border-white/10">
+              <div className="pt-6 mt-6 border-t border-slate-100 dark:border-white/10 flex items-center justify-between gap-3">
                 {renderProjectActions(repo)}
               </div>
             </motion.article>
