@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { GraduationCap, Lightbulb, Target, ChevronDown, ChevronUp, Calendar, CheckCircle2, Award } from "lucide-react";
+import { GraduationCap, Lightbulb, Target, ChevronDown, ChevronUp, Calendar, CheckCircle2, Award, Building2 } from "lucide-react";
 
 interface TimelineItem {
   id: string;
@@ -18,23 +18,50 @@ interface TimelineItem {
 
 const timelineData: TimelineItem[] = [
   {
-    id: "edu",
-    era: "education",
-    period: "2015 - 2024",
-    title: "Science Educator & Academic Mentor",
-    role: "Senior Chemistry & STEM Educator",
-    organization: "Schools & Educational Institutes (Chennai)",
+    id: "aionion",
+    era: "developer",
+    period: "2026 – Present",
+    title: "Full Stack Developer | AI & Digital Ops Specialist",
+    role: "Full Stack Developer • AI Video Creator • Automation Specialist • Graphic Designer • Event Coordinator • Content Creator",
+    organization: "Aionion Capital",
     accent: "#4285F4",
-    icon: <GraduationCap size={18} />,
+    icon: <Building2 size={18} />,
     summary:
-      "Taught Chemistry and General Science for nearly a decade, mastering the art of breaking complex theories into clear, structured, and relatable concepts.",
+      "Leading full-stack system automation, core API architectures, AI video content strategy, corporate branding, and live event production operations for Aionion Capital.",
     details: [
-      "Mentored and taught 1,000+ students across Secondary and Higher Secondary levels.",
-      "Designed interactive lesson plans and laboratory experiments that simplified abstract scientific principles.",
-      "Developed deep patience, empathetic communication, and public presentation skills.",
-      "Managed academic performance data and student evaluation frameworks.",
+      "⚡ Full-Stack Engineering & Automation: Built backend API routes maintaining <300ms response times, ≥ 99.5% system uptime, and 100% CRM lead sync accuracy.",
+      "🎥 AI Video Creation & Content Strategy: Scripted, edited & published 4+ AI educational videos/month with ≥ 40% average watch time and +10% MoM subscriber growth.",
+      "🎨 Graphic Design & Creative Branding: Delivered 100% of digital campaign visual assets minimum 5 days prior to launch, resulting in zero campaign delays.",
+      "📡 Event Coordination & Digital Operations: Orchestrated live event technology with ≥ 99% AV uptime during sessions, 2-hour dry-runs, and ≥ 95% escalation-free vendor delivery.",
     ],
-    skillsGained: ["Pedagogical Design", "Clear Communication", "Systemic Problem Solving", "Data Management"],
+    skillsGained: [
+      "React/TypeScript",
+      "API Automation",
+      "Sub-300ms Performance",
+      "AI Video Production",
+      "Graphic Design",
+      "Live AV Tech",
+      "CRM Sync",
+    ],
+  },
+  {
+    id: "dev",
+    era: "developer",
+    period: "2024 – 2026",
+    title: "Frontend & Web Application Developer",
+    role: "Web Application Developer",
+    organization: "Production & Client Projects",
+    accent: "#34A853",
+    icon: <Target size={18} />,
+    summary:
+      "Shipped high-quality web applications, responsive user interfaces, and custom digital solutions for clients and product initiatives.",
+    details: [
+      "Built responsive, high-performance web applications using React, TypeScript, Vite, and Framer Motion.",
+      "Created custom WordPress themes and elementor/PHP integrations for business clients.",
+      "Integrated AI assistant capabilities, MCP tools, and automated contact pipelines.",
+      "Focused on user-centered UI/UX design, SEO best practices, and clean maintainable code.",
+    ],
+    skillsGained: ["React 18", "TypeScript", "Framer Motion", "Tailwind CSS", "WordPress", "SEO", "UI/UX Craft"],
   },
   {
     id: "pivot",
@@ -56,29 +83,29 @@ const timelineData: TimelineItem[] = [
     skillsGained: ["Python", "Django", "React", "TypeScript", "SQL", "Git", "REST APIs"],
   },
   {
-    id: "dev",
-    era: "developer",
-    period: "2024 - Present",
-    title: "Frontend & Product Developer",
-    role: "Web Application Developer",
-    organization: "Freelance & Production Projects",
-    accent: "#34A853",
-    icon: <Target size={18} />,
+    id: "edu",
+    era: "education",
+    period: "2015 – 2024",
+    title: "Science Educator & Academic Mentor",
+    role: "Senior Chemistry & STEM Educator",
+    organization: "Schools & Educational Institutes (Chennai)",
+    accent: "#EA4335",
+    icon: <GraduationCap size={18} />,
     summary:
-      "Shipping high-quality web applications, responsive user interfaces, and custom digital solutions for clients and product initiatives.",
+      "Taught Chemistry and General Science for nearly a decade, mastering the art of breaking complex theories into clear, structured, and relatable concepts.",
     details: [
-      "Building responsive, high-performance web applications using React, TypeScript, Vite, and Framer Motion.",
-      "Creating custom WordPress themes and elementor/PHP integrations for business clients.",
-      "Integrating AI assistant capabilities, MCP tools, and automated contact pipelines.",
-      "Focusing on user-centered UI/UX design, SEO best practices, and clean maintainable code.",
+      "Mentored and taught 1,000+ students across Secondary and Higher Secondary levels.",
+      "Designed interactive lesson plans and laboratory experiments that simplified abstract scientific principles.",
+      "Developed deep patience, empathetic communication, and public presentation skills.",
+      "Managed academic performance data and student evaluation frameworks.",
     ],
-    skillsGained: ["React 18", "TypeScript", "Framer Motion", "Tailwind CSS", "WordPress", "SEO", "UI/UX Craft"],
+    skillsGained: ["Pedagogical Design", "Clear Communication", "Systemic Problem Solving", "Data Management"],
   },
 ];
 
 export default function AboutTimeline() {
   const [filter, setFilter] = useState<string>("all");
-  const [expandedId, setExpandedId] = useState<string | null>("dev");
+  const [expandedId, setExpandedId] = useState<string | null>("aionion");
 
   const filteredTimeline = filter === "all" ? timelineData : timelineData.filter((t) => t.era === filter);
 
@@ -101,9 +128,9 @@ export default function AboutTimeline() {
         <div className="flex flex-wrap items-center gap-1.5 rounded-full border border-slate-200 bg-white/80 p-1 dark:border-zinc-800 dark:bg-zinc-900/80">
           {[
             { id: "all", label: "All Milestones" },
-            { id: "education", label: "Science Era" },
+            { id: "developer", label: "Aionion Capital & Dev" },
             { id: "transition", label: "Tech Pivot" },
-            { id: "developer", label: "Product Engineering" },
+            { id: "education", label: "Science Era" },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -148,14 +175,14 @@ export default function AboutTimeline() {
                   className="flex cursor-pointer flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"
                 >
                   <div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-2">
                       <span
                         className="inline-block rounded-md px-2.5 py-0.5 text-xs font-bold text-white"
                         style={{ backgroundColor: item.accent }}
                       >
                         {item.period}
                       </span>
-                      <span className="text-xs font-semibold text-slate-500 dark:text-zinc-400">
+                      <span className="text-xs font-bold text-slate-800 dark:text-zinc-200">
                         {item.organization}
                       </span>
                     </div>
@@ -188,7 +215,7 @@ export default function AboutTimeline() {
                     >
                       <div className="rounded-xl border border-slate-100 bg-slate-50/80 p-4 dark:border-zinc-800 dark:bg-zinc-900/60 space-y-3">
                         <p className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-zinc-400">
-                          Key Milestones & Contributions
+                          Key Milestones & Measured Impact
                         </p>
                         <ul className="space-y-2">
                           {item.details.map((detail, dIdx) => (
@@ -201,13 +228,13 @@ export default function AboutTimeline() {
 
                         <div className="pt-2">
                           <p className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-zinc-400 mb-1.5">
-                            Competencies Acquired
+                            Competencies & Metrics
                           </p>
                           <div className="flex flex-wrap gap-1.5">
                             {item.skillsGained.map((sk) => (
                               <span
                                 key={sk}
-                                className="rounded-md border border-slate-200 bg-white px-2.5 py-0.5 text-xs font-medium text-slate-800 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200"
+                                className="rounded-md border border-slate-200 bg-white px-2.5 py-0.5 text-xs font-semibold text-slate-800 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200"
                               >
                                 {sk}
                               </span>

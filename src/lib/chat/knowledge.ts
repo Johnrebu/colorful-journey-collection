@@ -4,14 +4,21 @@ export const portfolioData = {
     name: "Johnson",
     from: "Pudukkottai",
     base: "Chennai (Tambaram)",
-    role: "Full-Stack Developer",
+    role: "Full-Stack Developer | AI Video Creator | Automation Specialist | Graphic Designer | Event Coordinator | Content Creator",
+    company: "Aionion Capital (2026 – Present)",
   },
 
   experience: {
+    current: "Full Stack Developer & Multidisciplinary Specialist at Aionion Capital (2026 – Present)",
     teaching: "9+ years teaching chemistry",
     transition: "2024 career transition to IT",
     course: "9-month Python full-stack program at Greens Technology",
-    internship: "8-month internship at OOR Cabs (React + WordPress + AI tools)",
+    pillars: [
+      "Full-Stack Engineering & System Automation: <300ms backend API response times, ≥ 99.5% system uptime, 100% CRM sync accuracy within 24h, ≥ 80% test coverage.",
+      "AI Video Creation & Digital Content Strategy: 4+ AI educational videos/month, ≥ 40% watch time, +10% MoM subscriber growth, short-form SEO metadata optimization.",
+      "Graphic Design & Creative Branding: 100% on-time digital campaign delivery minimum 5 days prior to launch, zero campaign delays, reusable brand templates.",
+      "Event Coordination & Digital Operations: ≥ 99% live AV tech uptime, 2-hour pre-event dry-run setup, ≥ 95% escalation-free vendor delivery, ≥ 90% SOP compliance."
+    ]
   },
 
   education: [
@@ -22,8 +29,20 @@ export const portfolioData = {
   ],
 
   skills: {
-    technical: ["React", "TypeScript", "Tailwind CSS", "Python", "Django", "SQL", "WordPress", "AI-assisted workflows"],
-    soft: ["Communication", "Problem-solving", "Adaptability", "Team collaboration"],
+    technical: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Python",
+      "Django",
+      "SQL",
+      "System Automation",
+      "AI Video Production",
+      "Graphic Design & Branding",
+      "Live AV & Event Tech Ops",
+      "WordPress"
+    ],
+    soft: ["Communication", "Problem-solving", "Adaptability", "Team collaboration", "Event Orchestration"],
   },
 
   projects: [
@@ -88,14 +107,14 @@ export const portfolioData = {
   ],
 
   availability: {
-    status: "Open to full-time and freelance opportunities",
+    status: "Currently at Aionion Capital; open to select high-impact consulting & projects",
     response_time: "24-48 hours",
     location_preference: "Chennai or remote",
   },
 
   interests: {
-    hobbies: ["Cricket", "Reading"],
-    goals: "Long-term research and innovation in computer science",
+    hobbies: ["Cricket", "Reading", "AI Content Creation"],
+    goals: "Long-term research and innovation in computer science, system automation, and AI media",
   },
 
   services: {
@@ -174,11 +193,11 @@ export const portfolioData = {
 
 export const routePrompts = {
   "/bio": [
+    "What is your role at Aionion Capital?",
+    "Tell me about your 4 operational pillars",
     "How did you transition from teaching to IT?",
     "What's your education background?",
     "Where are you based?",
-    "What are your hobbies and goals?",
-    "Give me career advice for switching domains",
   ],
   "/projects": [
     "Show me your Weather Widget",
@@ -196,9 +215,9 @@ export const routePrompts = {
   ],
   "/resume": [
     "Can I download your resume?",
-    "What are your key skills?",
+    "What are your key metrics at Aionion Capital?",
     "Summarize your experience",
-    "Tell me about your internship",
+    "What are your 4 operational pillars?",
     "How do I prepare for frontend interviews?",
   ],
   "/contact": [
@@ -209,12 +228,12 @@ export const routePrompts = {
     "How should I write a good outreach message?",
   ],
   default: [
+    "What is your role at Aionion Capital?",
     "What services & packages do you offer?",
-    "What are your skills?",
+    "What are your skills & metrics?",
     "Tell me about your projects",
     "How much does a website or mobile app cost?",
     "How did you switch to IT?",
-    "Create a 30-day learning roadmap",
   ],
 };
 

@@ -14,11 +14,13 @@ import {
 import { toast } from "sonner";
 import useSeo from "@/hooks/useSeo";
 import ResumeDownload from "../components/resume/ResumeDownload";
+import CurrentRoleImpact from "../components/CurrentRoleImpact";
 import { certifications, educationItems, skills, workExperiences } from "../components/resume/resumeData";
 
 const profile = {
   name: "Johnson T",
-  role: "Full-Stack Developer",
+  role: "Full Stack Developer • AI Video • Automation • Graphic Design • Event Ops",
+  company: "Aionion Capital",
   location: "Tambaram, Chennai, India",
   email: "johnchemist91@gmail.com",
   phone: "+91 875-477-4022",
@@ -48,19 +50,19 @@ const selectedProjects = [
 ];
 
 const summary =
-  "Full-Stack Developer with hands-on experience building modern web applications using React, TypeScript, Python, and Django. Known for clear communication, consistent execution, and a strong problem-solving mindset built through 9+ years in education. Focused on building reliable products with thoughtful user experience and maintainable code.";
+  "Full-Stack Developer, AI Video Creator, and Automation Specialist at Aionion Capital. Experienced in building scalable backend infrastructure with sub-300ms response times, ≥ 99.5% system uptime, 100% CRM lead sync accuracy, end-to-end AI educational video production, graphic design, and live event technology operations. Combines 9+ years of pedagogical problem-solving with cutting-edge digital execution.";
 
-const normalizePeriod = (value: string) => value.replace("�", "�");
+const normalizePeriod = (value: string) => value.replace("•", "•");
 
 export default function Resume() {
   const resumeRef = useRef<HTMLDivElement>(null);
   const [isDownloading, setIsDownloading] = useState(false);
 
   useSeo({
-    title: "Resume & Experience - Johnson | Full-Stack Developer",
+    title: "Resume & Experience - Johnson | Aionion Capital",
     description:
-      "View Johnson's professional resume: Full-Stack Developer with 9+ years in education, expertise in React, TypeScript, Python, Django, and modern web development.",
-    keywords: "resume, experience, full-stack developer, React, TypeScript, Python, Django, education, portfolio",
+      "View Johnson's professional resume: Full-Stack Developer & Multidisciplinary Specialist at Aionion Capital with expertise in API automation, AI video production, graphic design, and event tech.",
+    keywords: "resume, Aionion Capital, experience, full-stack developer, AI video creator, automation, React, TypeScript, Python",
   });
 
   const handleDownloadResume = async () => {
@@ -155,7 +157,8 @@ export default function Resume() {
             <div className="flex flex-wrap items-start justify-between gap-5">
               <div>
                 <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-zinc-100">{profile.name}</h1>
-                <p className="mt-1 text-lg font-medium text-slate-700 dark:text-zinc-300">{profile.role}</p>
+                <p className="mt-1 text-lg font-bold text-[#4285F4] dark:text-[#8ab4f8]">{profile.company}</p>
+                <p className="mt-1 text-sm font-medium text-slate-700 dark:text-zinc-300">{profile.role}</p>
               </div>
               <div className="space-y-2 text-sm text-slate-600 dark:text-zinc-300">
                 <a href={`mailto:${profile.email}`} className="flex items-center gap-2 hover:text-slate-900 dark:hover:text-white">
@@ -190,10 +193,15 @@ export default function Resume() {
             <p className="mt-3 leading-relaxed text-slate-700 dark:text-zinc-300">{summary}</p>
           </section>
 
+          {/* Current Role & Measured Impact Detailed Section */}
+          <section className="mt-8">
+            <CurrentRoleImpact />
+          </section>
+
           <section className="mt-8">
             <h2 className="inline-flex items-center gap-2 text-base font-semibold uppercase tracking-[0.1em] text-[#34A853] dark:text-[#7bdc9c]">
               <Briefcase size={16} />
-              Work Experience
+              Work Experience History
             </h2>
             <div className="mt-4 space-y-5">
               {workExperiences.map((experience) => (
@@ -230,7 +238,7 @@ export default function Resume() {
             </div>
 
             <div>
-              <h2 className="text-base font-semibold uppercase tracking-[0.1em] text-[#FBBC05] dark:text-[#fdd663]">Skills</h2>
+              <h2 className="text-base font-semibold uppercase tracking-[0.1em] text-[#FBBC05] dark:text-[#fdd663]">Skills & Disciplines</h2>
               <div className="mt-4 flex flex-wrap gap-2">
                 {skills.map((skill) => (
                   <span

@@ -1,7 +1,16 @@
-
 // Resume data centralized in one place for easier maintenance
 
 export const workExperiences = [
+  {
+    title: "Full Stack Developer | AI & Digital Ops Specialist - Aionion Capital",
+    period: "Chennai • 2026 - Present",
+    responsibilities: [
+      "Full-Stack Engineering & Automation: Built backend API architectures with sub-300ms response times, ≥ 99.5% uptime, and 100% CRM lead sync accuracy.",
+      "AI Video Production & Content Strategy: Scripted, edited, and published 4+ AI educational videos per month with ≥ 40% watch time and +10% MoM growth.",
+      "Graphic Design & Creative Branding: Produced digital campaign assets, thumbnails, and reusable brand kits with 100% on-time delivery (5 days prior to launch).",
+      "Event Coordination & Live Tech Ops: Orchestrated live event tech with ≥ 99% AV uptime, 2-hour pre-event dry-runs, and ≥ 95% escalation-free vendor delivery."
+    ]
+  },
   {
     title: "Teacher - Infant Jesus Mat. Hr. Sec. School",
     period: "Pattabiram, Chennai • 06/2015 - 06/2018",
@@ -62,6 +71,9 @@ export const skills = [
   { name: "Django", scheme: "purple" },
   { name: "SQL", scheme: "purple" },
   { name: "WordPress", scheme: "blue" },
+  { name: "AI Video Production", scheme: "purple" },
+  { name: "Graphic Design", scheme: "orange" },
+  { name: "Event AV Ops", scheme: "blue" },
 ];
 
 export const certifications = [

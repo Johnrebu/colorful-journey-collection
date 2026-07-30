@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
-import { Briefcase, Globe, GraduationCap, MapPin, Sparkles, User } from "lucide-react";
+import { Briefcase, Building2, Globe, GraduationCap, MapPin, Sparkles, User } from "lucide-react";
 import useSeo from "@/hooks/useSeo";
+import CurrentRoleImpact from "@/components/CurrentRoleImpact";
 
 export default function Bio() {
   useSeo({
-    title: "Bio - Johnson | Personal & Professional Profile",
+    title: "Bio - Johnson | Full Stack Developer & AI Operations",
     description:
-      "Explore Johnson's biodata, professional profile, education, and language strengths.",
-    keywords: "bio, profile, personal information, professional summary, education",
+      "Explore Johnson's personal profile, current role at Aionion Capital, education, and multidisciplinary skills.",
+    keywords: "bio, profile, personal information, professional summary, Aionion Capital, full stack developer",
   });
 
   const personalInfo = [
@@ -18,10 +19,14 @@ export default function Bio() {
   ];
 
   const professionalInfo = [
-    { title: "Current Role", value: "Full Stack Developer", icon: <Briefcase size={17} /> },
-    { title: "Work Experience", value: "9+ years", icon: <Briefcase size={17} /> },
+    { title: "Current Company", value: "Aionion Capital (2026 – Present)", icon: <Building2 size={17} /> },
+    {
+      title: "Current Role",
+      value: "Full Stack Dev • AI Video • Automation • Design • Event Ops",
+      icon: <Briefcase size={17} />,
+    },
+    { title: "Work Experience", value: "9+ years (STEM & Software)", icon: <Briefcase size={17} /> },
     { title: "Education", value: "M.Sc Chemistry, B.Ed, PGDCA", icon: <GraduationCap size={17} /> },
-    { title: "Industry Focus", value: "Web Development", icon: <Sparkles size={17} /> },
   ];
 
   return (
@@ -36,14 +41,17 @@ export default function Bio() {
         <div className="google-grid-bg absolute inset-0 opacity-60" />
         <div className="relative">
           <span className="google-chip inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700 dark:text-slate-200">
-            Bio Data
+            Bio Data & Profile
           </span>
           <h1 className="mt-4 font-display text-4xl text-slate-900 dark:text-zinc-100 md:text-5xl">Personal and Professional Overview</h1>
           <p className="mt-3 max-w-3xl text-slate-700 dark:text-zinc-300">
-            A concise snapshot of who I am, how I work, and what I bring to product teams.
+            A comprehensive snapshot of my multidisciplinary engineering, content, automation, and operational responsibilities at Aionion Capital.
           </p>
         </div>
       </section>
+
+      {/* Current Role & Measured Impact Section */}
+      <CurrentRoleImpact />
 
       <section className="grid gap-4 md:grid-cols-2">
         <article className="portfolio-panel">
@@ -90,13 +98,13 @@ export default function Bio() {
           <span className="h-2.5 w-2.5 rounded-full bg-[#FBBC05]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#34A853]" />
         </div>
-        <h3 className="font-display text-2xl text-slate-900 dark:text-zinc-100">Ready to Work Together?</h3>
+        <h3 className="font-display text-2xl text-slate-900 dark:text-zinc-100">Ready to Collaborate?</h3>
         <p className="mx-auto mt-3 max-w-2xl text-slate-600 dark:text-zinc-300">
-          I enjoy building clear, useful web products that solve real user problems.
+          I deliver end-to-end full-stack systems, automated workflows, digital content, and high-craft user experiences.
         </p>
         <motion.a
           href="/contact"
-          className="mt-6 inline-flex rounded-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] to-[#34A853] px-7 py-3 font-medium text-white"
+          className="mt-6 inline-flex rounded-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] to-[#34A853] px-7 py-3 font-medium text-white shadow-md"
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.97 }}
         >

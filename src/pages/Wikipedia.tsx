@@ -3,12 +3,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import useSeo from "@/hooks/useSeo";
 import { certifications, educationItems, skills } from "@/components/resume/resumeData";
 import ParallaxProfilePhoto from "@/components/ParallaxProfilePhoto";
+import CurrentRoleImpact from "@/components/CurrentRoleImpact";
 
 export default function Wikipedia() {
   useSeo({
-    title: "Wikipedia Style Profile - Johnson",
-    description: "Wikipedia-style profile page for Johnson: education, teaching career, transition to tech, and projects.",
-    keywords: "wikipedia profile, education, teaching career, technology transition",
+    title: "Wikipedia Profile - Johnson T | Full Stack Developer & AI Specialist",
+    description: "Wikipedia-style profile page for Johnson T: Aionion Capital role, education, science background, and technical expertise.",
+    keywords: "wikipedia profile, Aionion Capital, full stack developer, AI video creator, automation, education, tech transition",
   });
 
   return (
@@ -17,7 +18,7 @@ export default function Wikipedia() {
         <div className="google-grid-bg absolute inset-0 opacity-50" />
         <div className="relative">
           <h1 className="text-4xl text-slate-900 dark:text-zinc-100 md:text-5xl">Johnson T</h1>
-          <p className="mt-2 text-slate-600 dark:text-zinc-300">From a Wikipedia-style personal profile</p>
+          <p className="mt-2 text-slate-600 dark:text-zinc-300">Wikipedia-style Profile & Comprehensive Career Summary</p>
         </div>
       </section>
 
@@ -26,17 +27,20 @@ export default function Wikipedia() {
           <Card className="border-slate-200 bg-white/80 dark:border-zinc-700 dark:bg-zinc-900/70">
             <CardContent className="p-5 text-slate-700 dark:text-zinc-300">
               <p className="text-lg leading-relaxed">
-                <strong className="text-slate-900 dark:text-white">Johnson T</strong> is an Indian educator and software developer who transitioned from a teaching career into modern web development.
+                <strong className="text-slate-900 dark:text-white">Johnson T</strong> is a Full Stack Developer, AI Video Creator, Automation Specialist, and Multidisciplinary Engineering Lead currently working at <strong className="text-[#4285F4]">Aionion Capital</strong>. He previously spent 9+ years as a Chemistry Educator before transitioning into software engineering and digital operations.
               </p>
             </CardContent>
           </Card>
+
+          {/* Current Role & Measured Impact Section */}
+          <CurrentRoleImpact />
 
           <Card className="border-slate-200 bg-white/80 dark:border-zinc-700 dark:bg-zinc-900/70">
             <CardContent className="p-5 space-y-4">
               <h2 className="text-2xl text-slate-900 dark:text-white">Technical Skills and Certifications</h2>
               <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
                 {skills.map((skill) => (
-                  <Badge key={skill.name} variant="secondary" className="justify-center py-1">
+                  <Badge key={skill.name} variant="secondary" className="justify-center py-1 font-semibold">
                     {skill.name}
                   </Badge>
                 ))}
@@ -51,12 +55,12 @@ export default function Wikipedia() {
 
           <Card className="border-slate-200 bg-white/80 dark:border-zinc-700 dark:bg-zinc-900/70">
             <CardContent className="p-5 space-y-4">
-              <h2 className="text-2xl text-slate-900 dark:text-white">Career Summary</h2>
+              <h2 className="text-2xl text-slate-900 dark:text-white">Career Evolution & Measured Impact</h2>
               <p className="text-slate-700 dark:text-zinc-300">
-                Johnson worked in education for nearly a decade, then transitioned to software engineering in 2024 through structured learning and project-based execution.
+                At Aionion Capital, Johnson oversees 4 operational pillars spanning full-stack backend development (sub-300ms API latency, ≥ 99.5% uptime, 100% CRM sync), AI-powered educational video production (4+ videos/mo, ≥ 40% watch time), graphic branding, and live event technology orchestration.
               </p>
               <p className="text-slate-700 dark:text-zinc-300">
-                His projects focus on React-based user interfaces, product thinking, and practical delivery for real users.
+                His scientific training in chemistry enables hypothesis-driven debugging, zero-assumption troubleshooting, and pedagogical clarity across all product workflows.
               </p>
             </CardContent>
           </Card>
@@ -79,22 +83,26 @@ export default function Wikipedia() {
               <table className="w-full text-sm text-slate-700 dark:text-zinc-300">
                 <tbody>
                   <tr>
+                    <td className="font-medium text-slate-500 dark:text-zinc-400">Current Co.</td>
+                    <td className="font-bold text-[#4285F4]">Aionion Capital</td>
+                  </tr>
+                  <tr>
                     <td className="font-medium text-slate-500 dark:text-zinc-400">Occupation</td>
-                    <td>Educator, Software Developer</td>
+                    <td>Full Stack Dev, AI Video, Automation Specialist</td>
                   </tr>
                   <tr>
                     <td className="font-medium text-slate-500 dark:text-zinc-400">Education</td>
-                    <td>M.Sc. Chemistry, B.Ed</td>
+                    <td>M.Sc. Chemistry, B.Ed, PGDCA</td>
                   </tr>
                   <tr>
                     <td className="font-medium text-slate-500 dark:text-zinc-400">Years active</td>
-                    <td>2015-present</td>
+                    <td>2015–present</td>
                   </tr>
                 </tbody>
               </table>
 
               <div className="border-t border-slate-200 pt-3 dark:border-zinc-700">
-                <h4 className="mb-2 font-semibold text-slate-900 dark:text-white">Education</h4>
+                <h4 className="mb-2 font-semibold text-slate-900 dark:text-white">Education History</h4>
                 <div className="space-y-2 text-sm">
                   {educationItems.map((edu) => (
                     <div key={`${edu.degree}-${edu.institution}`} className="border-l-2 border-[#4285F4]/30 pl-3">

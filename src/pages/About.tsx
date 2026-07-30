@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import useSeo from "@/hooks/useSeo";
 import AboutHero from "@/components/about/AboutHero";
+import CurrentRoleImpact from "@/components/CurrentRoleImpact";
 import ScienceOfCode from "@/components/about/ScienceOfCode";
 import AboutTimeline from "@/components/about/AboutTimeline";
 import AboutStrengths from "@/components/about/AboutStrengths";
@@ -9,11 +10,11 @@ import AboutStats from "@/components/about/AboutStats";
 
 export default function About() {
   useSeo({
-    title: "About - Johnson | Science Educator Turned Developer",
+    title: "About - Johnson | Full-Stack Developer & AI Specialist",
     description:
-      "Discover Johnson's journey from 9+ years of teaching Chemistry to building modern, human-centered web applications. Synthesizing scientific rigor with full-stack engineering.",
+      "Discover Johnson's journey at Aionion Capital: Full-Stack Engineering, AI Video Creation, System Automation, Graphic Design, and Live Event Operations.",
     keywords:
-      "about, bio, background, career, science educator, full-stack developer, React, TypeScript, Python, journey, chemistry educator",
+      "about, Aionion Capital, full-stack developer, AI video creator, automation specialist, graphic designer, event coordinator, content creator, React, TypeScript, Python",
   });
 
   return (
@@ -27,19 +28,22 @@ export default function About() {
       {/* 1. Interactive Hero Section with Lens Switcher & Parallax Profile */}
       <AboutHero />
 
-      {/* 2. Science of Code: Chemistry & Code Synthesis Sandbox */}
+      {/* 2. Current Role & Measured Impact at Aionion Capital (4 Pillars) */}
+      <CurrentRoleImpact />
+
+      {/* 3. Science of Code: Chemistry & Code Synthesis Sandbox */}
       <ScienceOfCode />
 
-      {/* 3. Core Superpowers & Mindset */}
+      {/* 4. Core Superpowers & Mindset */}
       <AboutStrengths />
 
-      {/* 4. Interactive Evolution Timeline */}
+      {/* 5. Interactive Evolution Timeline */}
       <AboutTimeline />
 
-      {/* 5. Interactive Skill Arsenal Matrix */}
+      {/* 6. Interactive Skill Arsenal Matrix */}
       <SkillMatrix />
 
-      {/* 6. Impact Statistics & Call-to-Action */}
+      {/* 7. Impact Statistics & Call-to-Action */}
       <AboutStats />
     </motion.div>
   );
