@@ -48,7 +48,7 @@ const timelineData: TimelineItem[] = [
     id: "dev",
     era: "developer",
     period: "2024 – 2026",
-    title: "Frontend & Web Application Developer",
+    title: "Full-Stack & Web Application Developer",
     role: "Web Application Developer",
     organization: "Production & Client Projects",
     accent: "#34A853",

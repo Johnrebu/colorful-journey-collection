@@ -45,7 +45,7 @@ export default function ContactPage() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
             >
-              I&apos;m open to frontend engineering roles, freelance builds, and product collaborations. Share your goal, timeline, and scope and I&apos;ll respond with a practical next step.
+              I&apos;m open to full-stack engineering roles, freelance builds, and product collaborations. Share your goal, timeline, and scope and I&apos;ll respond with a practical next step.
             </motion.p>
 
             <div className="mt-10 space-y-6 text-sm">
