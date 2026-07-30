@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, Loader2 } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
+import AgentDock from "./AgentDock";
 import {
   Sheet,
   SheetContent,
@@ -297,25 +298,21 @@ const ChatContent = () => {
         </div>
       </div>
 
-      {/* Input Area */}
+      {/* Input Area with AgentDock */}
       <div className="p-3 border-t border-slate-200 dark:border-zinc-700 flex-shrink-0 bg-white dark:bg-zinc-950">
-        <div className="flex space-x-2 items-center">
-          <Input
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder="Ask me anything..."
-            className="flex-1 rounded-full border-slate-300 bg-slate-50 focus-visible:ring-[#4285F4]/40 dark:border-zinc-600 dark:bg-zinc-900 text-sm h-10 px-4"
-          />
-          <Button
-            onClick={() => handleSendMessage()}
-            disabled={!inputValue.trim() || isTyping}
-            size="icon"
-            className="rounded-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] to-[#34A853] text-white shrink-0 h-10 w-10"
-          >
-            <Send className="w-4 h-4" />
-          </Button>
-        </div>
+        <AgentDock
+          agentName="Johnson's AI Agent"
+          avatarSrc="/profile-logo.png"
+          idleStatus="Ready to assist"
+          workingStatus="Thinking..."
+          isWorking={isTyping}
+          onMessageSubmit={async (msg) => {
+            await handleSendMessage(msg);
+          }}
+          onVoiceClick={() => {
+            handleSendMessage("What are Johnson's top skills and projects?");
+          }}
+        />
       </div>
     </div>
   );
