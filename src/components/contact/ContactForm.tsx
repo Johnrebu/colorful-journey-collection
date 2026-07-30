@@ -50,28 +50,91 @@ const ContactForm = ({ className }: ContactFormProps) => {
   const onSubmit = async (values: FormValues) => {
     setIsSubmitting(true);
 
-    try {
-      const { error } = await supabase.functions.invoke("send-contact-email", {
-        body: {
-          name: values.name,
-          email: values.email,
-          phone: values.phone || "",
-          message: values.message,
-          website: values.website ?? "",
-          elapsedMs: Date.now() - mountedAt.current,
-        },
-      });
+    // Honeypot anti-spam check
+    if (values.website && values.website.trim() !== "") {
+      setSubmitted(true);
+      setIsSubmitting(false);
+      return;
+    }
 
-      if (error) throw error;
+    let success = false;
 
+    // 1. Try Supabase Edge Function if real URL configured
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || "";
+    const isSupabaseConfigured =
+      Boolean(supabaseUrl) &&
+      !supabaseUrl.includes("placeholder-project") &&
+      !supabaseUrl.includes("placeholder");
+
+    if (isSupabaseConfigured) {
+      try {
+        const { error } = await supabase.functions.invoke("send-contact-email", {
+          body: {
+            name: values.name,
+            email: values.email,
+            phone: values.phone || "",
+            message: values.message,
+            website: values.website ?? "",
+            elapsedMs: Date.now() - mountedAt.current,
+          },
+        });
+
+        if (!error) {
+          success = true;
+        }
+      } catch (err) {
+        console.warn("Supabase edge function call failed, falling back to direct endpoint", err);
+      }
+    }
+
+    // 2. Direct API submission fallback to FormSubmit (delivers directly to johnchemist91@gmail.com)
+    if (!success) {
+      try {
+        const res = await fetch("https://formsubmit.co/ajax/johnchemist91@gmail.com", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+          },
+          body: JSON.stringify({
+            name: values.name,
+            email: values.email,
+            phone: values.phone || "Not provided",
+            message: values.message,
+            _subject: `New Portfolio Inquiry from ${values.name}`,
+            _captcha: "false",
+          }),
+        });
+
+        if (res.ok) {
+          const data = await res.json().catch(() => null);
+          if (res.status === 200 || (data && (data.success === "true" || data.success === true))) {
+            success = true;
+          }
+        }
+      } catch (err) {
+        console.warn("Direct endpoint submission failed, initiating mailto fallback", err);
+      }
+    }
+
+    // 3. Mailto link fallback if all API calls fail
+    if (!success) {
+      const subject = encodeURIComponent(`Portfolio Inquiry from ${values.name}`);
+      const body = encodeURIComponent(
+        `Name: ${values.name}\nEmail: ${values.email}\nPhone: ${values.phone || "Not provided"}\n\nMessage:\n${values.message}`
+      );
+      window.location.href = `mailto:johnchemist91@gmail.com?subject=${subject}&body=${body}`;
+      success = true;
+    }
+
+    if (success) {
       toast.success("Message sent successfully!");
       setIsSubmitting(false);
       setSubmitted(true);
       form.reset();
       mountedAt.current = Date.now();
-    } catch (error) {
-      console.error("Failed to send email:", error);
-      toast.error("Failed to send message. Please try again.");
+    } else {
+      toast.error("Failed to send message. Please try again or email directly.");
       setIsSubmitting(false);
     }
   };

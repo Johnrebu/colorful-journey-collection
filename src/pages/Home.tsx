@@ -309,7 +309,6 @@ export default function Home() {
                           <ParallaxProfilePhoto
                             src={johnImage}
                             alt="Johnson T"
-                            hoverPromptText="Hover me"
                             shape="circle"
                             containerClassName="h-full w-full"
                           />
