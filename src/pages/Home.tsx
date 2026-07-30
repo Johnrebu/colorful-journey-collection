@@ -28,6 +28,7 @@ import useSeo from "@/hooks/useSeo";
 import { getPersonSchema, getWebsiteSchema } from "@/lib/seo";
 import johnImage from "@/images/john.jpg";
 import ServicesSection from "@/components/services/ServicesSection";
+import ParallaxProfilePhoto from "@/components/ParallaxProfilePhoto";
 
 // Quick Credibility Stats
 const heroSignals = [
@@ -305,10 +306,12 @@ export default function Home() {
                     <div className="relative shrink-0">
                       <div className="h-28 w-28 rounded-full bg-gradient-to-tr from-cyan-300 via-blue-500 to-indigo-600 p-[2.5px] shadow-[0_0_35px_rgba(34,211,238,0.3)]">
                         <div className="h-full w-full rounded-full bg-[#071125] p-1.5 overflow-hidden">
-                          <img
+                          <ParallaxProfilePhoto
                             src={johnImage}
                             alt="Johnson T"
-                            className="h-full w-full rounded-full object-cover"
+                            hoverPromptText="Hover me"
+                            shape="circle"
+                            containerClassName="h-full w-full"
                           />
                         </div>
                       </div>

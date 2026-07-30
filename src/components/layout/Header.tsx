@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, Moon, Sun, X } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import ParallaxProfilePhoto from "../ParallaxProfilePhoto";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
 
@@ -18,10 +18,14 @@ const Header = ({ profileImageUrl, darkMode, toggleDarkMode }: HeaderProps) => {
     <header className="fixed left-0 top-0 z-50 w-full px-3 py-3 sm:px-6">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between rounded-full border border-white/50 bg-white/80 px-3 py-2 backdrop-blur-xl shadow-[0_8px_28px_rgba(15,22,35,0.15)] dark:border-white/10 dark:bg-zinc-950/75">
         <a href="/" className="flex items-center gap-3">
-          <Avatar className="h-10 w-10 border border-slate-300 dark:border-zinc-600">
-            <AvatarImage src={profileImageUrl} alt="Johnson profile" className="object-cover" />
-            <AvatarFallback>JT</AvatarFallback>
-          </Avatar>
+          <div className="relative h-10 w-10 overflow-hidden rounded-full border border-slate-300 dark:border-zinc-600 shrink-0">
+            <ParallaxProfilePhoto
+              src={profileImageUrl}
+              alt="Johnson profile"
+              shape="circle"
+              containerClassName="h-full w-full"
+            />
+          </div>
           <span className="hidden text-sm font-semibold tracking-wide text-slate-800 dark:text-zinc-100 sm:inline-block">
             JOHNSON T
           </span>

@@ -89,13 +89,21 @@ export default function About() {
             My background in education sharpened the way I think about users: every interface should reduce confusion,
             guide action, and build trust quickly. That mindset now drives how I build modern web products.
           </p>
-          <a
-            href="/contact"
-            className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] px-5 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#1558b5]"
-          >
-            Let us connect
-            <ArrowRight size={16} />
-          </a>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <a
+              href="/contact"
+              className="inline-flex items-center gap-2 rounded-full bg-[#1a73e8] px-5 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#1558b5]"
+            >
+              Let us connect
+              <ArrowRight size={16} />
+            </a>
+            <a
+              href="/wikipedia"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white/80 px-5 py-2.5 text-sm font-semibold text-slate-800 transition hover:-translate-y-0.5 hover:bg-white dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-100 dark:hover:bg-zinc-800"
+            >
+              View Wiki Profile
+            </a>
+          </div>
         </div>
       </section>
 

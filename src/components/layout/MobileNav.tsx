@@ -21,6 +21,8 @@ const MobileNav = ({ isOpen, onClose }: MobileNavProps) => {
           <div className="mt-3 rounded-3xl border border-white/40 bg-white/85 p-3 shadow-[0_10px_30px_rgba(14,25,40,0.16)] backdrop-blur-xl dark:border-white/10 dark:bg-zinc-950/90">
             <MobileNavLink to="/" onClick={onClose}>Home</MobileNavLink>
             <MobileNavLink to="/about" onClick={onClose}>About</MobileNavLink>
+            <MobileNavLink to="/bio" onClick={onClose}>Bio</MobileNavLink>
+            <MobileNavLink to="/wikipedia" onClick={onClose}>Wiki Profile</MobileNavLink>
             <MobileNavLink to="/services" onClick={onClose}>Services</MobileNavLink>
             <MobileNavLink to="/projects" onClick={onClose}>Projects</MobileNavLink>
             <MobileNavLink to="/resume" onClick={onClose}>Resume</MobileNavLink>

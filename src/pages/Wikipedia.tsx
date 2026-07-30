@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import useSeo from "@/hooks/useSeo";
 import { certifications, educationItems, skills } from "@/components/resume/resumeData";
+import ParallaxProfilePhoto from "@/components/ParallaxProfilePhoto";
 
 export default function Wikipedia() {
   useSeo({
@@ -64,11 +65,12 @@ export default function Wikipedia() {
         <aside className="lg:col-span-1">
           <Card className="sticky top-4 border-slate-200 bg-white/85 dark:border-zinc-700 dark:bg-zinc-900/75">
             <CardContent className="space-y-4 p-4">
-              <div className="aspect-[3/4] w-full overflow-hidden rounded border">
-                <img
+              <div className="aspect-[3/4] w-full overflow-hidden rounded border relative">
+                <ParallaxProfilePhoto
                   src="https://i.postimg.cc/dQ741Z2x/Firefly-20250216210550.png"
                   alt="Professional photo of Johnson T"
-                  className="h-full w-full object-cover"
+                  shape="rounded"
+                  containerClassName="h-full w-full"
                 />
               </div>
 

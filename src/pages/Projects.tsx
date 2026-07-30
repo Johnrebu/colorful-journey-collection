@@ -246,7 +246,7 @@ export default function Projects() {
     const byName = new Map(repos.map((repo) => [repo.name, repo]));
 
     return featuredProjectNames
-      .map((name) => {
+      .map((name): GitHubRepo | null => {
         const repo = byName.get(name);
         if (!repo) return null;
         return {
@@ -254,7 +254,7 @@ export default function Projects() {
           description: getRepoDescription(repo),
         };
       })
-      .filter((repo): repo is GitHubRepo => Boolean(repo));
+      .filter((repo): repo is GitHubRepo => repo !== null);
   }, [repos]);
 
   const featuredDisplayProjects = useMemo<ProjectCard[]>(
