@@ -41,9 +41,13 @@ type ProjectCard = {
   forks_count: number;
   topics?: string[];
   updated_at?: string;
+  image?: string;
 };
 
 const GITHUB_USERNAME = "Johnrebu";
+
+const DEFAULT_PROJECT_IMAGE =
+  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop";
 
 const featuredProjectNames = [
   "WeatherApp_ReactResumeProject",
@@ -61,6 +65,7 @@ const fallbackProjects: ProjectCard[] = [
     stargazers_count: 0,
     forks_count: 0,
     topics: ["weather", "react", "api", "typescript"],
+    image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?q=80&w=800&auto=format&fit=crop",
   },
   {
     name: "Pro_ForCecilAnna_sortSerch",
@@ -71,6 +76,7 @@ const fallbackProjects: ProjectCard[] = [
     stargazers_count: 0,
     forks_count: 0,
     topics: ["directory", "sorting", "ui", "usememo"],
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
   },
   {
     name: "E-Commerce_Website",
@@ -81,6 +87,7 @@ const fallbackProjects: ProjectCard[] = [
     stargazers_count: 0,
     forks_count: 0,
     topics: ["ecommerce", "react", "frontend", "context-api"],
+    image: "https://images.unsplash.com/photo-1556742049-0a6741203099?q=80&w=800&auto=format&fit=crop",
   },
 ];
 
@@ -94,6 +101,7 @@ const liveClientProjects: ProjectCard[] = [
     stargazers_count: 0,
     forks_count: 0,
     topics: ["events", "react", "live-client", "netlify"],
+    image: "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=800&auto=format&fit=crop",
   },
   {
     name: "Rebekha Caterers",
@@ -104,6 +112,7 @@ const liveClientProjects: ProjectCard[] = [
     stargazers_count: 0,
     forks_count: 0,
     topics: ["catering", "business", "live-client", "full-stack"],
+    image: "https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=800&auto=format&fit=crop",
   },
   {
     name: "Tiffin Coffee Range CRM",
@@ -114,6 +123,7 @@ const liveClientProjects: ProjectCard[] = [
     stargazers_count: 0,
     forks_count: 0,
     topics: ["crm", "enterprise", "python", "live-client"],
+    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop",
   },
   {
     name: "Dalphina Academy",
@@ -124,6 +134,7 @@ const liveClientProjects: ProjectCard[] = [
     stargazers_count: 0,
     forks_count: 0,
     topics: ["academy", "education", "react", "live-client"],
+    image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&auto=format&fit=crop",
   },
   {
     name: "Tiffin Coffee Range",
@@ -134,6 +145,7 @@ const liveClientProjects: ProjectCard[] = [
     stargazers_count: 0,
     forks_count: 0,
     topics: ["commercial", "brand", "full-stack", "live-client"],
+    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=800&auto=format&fit=crop",
   },
 ];
 
@@ -167,6 +179,85 @@ const starPositions = Array.from({ length: 48 }, (_, index) => ({
 }));
 
 const formatProjectName = (name: string) => name.replace(/_/g, " ");
+
+const PROJECT_STOCK_IMAGES = [
+  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop", // IDE & Code Editor
+  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop", // Developer Workspace
+  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop", // Data Charts & Dashboard
+  "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=800&auto=format&fit=crop", // Web Design & Layout
+  "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=800&auto=format&fit=crop", // Matrix & Code Streams
+  "https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=800&auto=format&fit=crop", // UI Wireframes & Prototyping
+  "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop", // Servers & Cloud Infrastructure
+  "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop", // CPU & Microchip Tech
+  "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?q=80&w=800&auto=format&fit=crop", // Digital Waves & Tech Grid
+  "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop", // 3D AI Gradient Art
+  "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800&auto=format&fit=crop", // Mobile App Development
+  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop", // Engineering Team Collaboration
+  "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=800&auto=format&fit=crop", // Modern Tech Workstation
+  "https://images.unsplash.com/photo-1542744094-3a3172720249?q=80&w=800&auto=format&fit=crop", // Analytics & Strategy Workspace
+  "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop", // Software Engineers Coding
+  "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop", // Digital API Workflow
+  "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop", // MacBook Web Development
+  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop", // Business Directory & Metrics
+  "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop", // Interactive Web Tech
+  "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop", // Sound & Media Engineering
+];
+
+const getHashIndex = (str: string, max: number): number => {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash << 5) - hash + str.charCodeAt(i);
+    hash |= 0;
+  }
+  return Math.abs(hash) % max;
+};
+
+const getProjectImage = (repo: ProjectCard, index?: number): string => {
+  if (repo.image) return repo.image;
+
+  const fallbackMatch = fallbackProjects.find((f) => f.name === repo.name);
+  if (fallbackMatch?.image) return fallbackMatch.image;
+
+  const liveMatch = liveClientProjects.find(
+    (l) => l.name === repo.name || l.html_url === repo.html_url || repo.name.toLowerCase().includes(l.name.toLowerCase())
+  );
+  if (liveMatch?.image) return liveMatch.image;
+
+  const nameLower = repo.name.toLowerCase();
+  const descLower = (repo.description || "").toLowerCase();
+
+  if (nameLower.includes("weather") || descLower.includes("weather")) {
+    return "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?q=80&w=800&auto=format&fit=crop";
+  }
+  if (nameLower.includes("commerce") || nameLower.includes("shop") || descLower.includes("e-commerce")) {
+    return "https://images.unsplash.com/photo-1556742049-0a6741203099?q=80&w=800&auto=format&fit=crop";
+  }
+  if (nameLower.includes("sort") || nameLower.includes("cecil") || nameLower.includes("directory") || nameLower.includes("employee")) {
+    return "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop";
+  }
+  if (nameLower.includes("event") || nameLower.includes("companion")) {
+    return "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=800&auto=format&fit=crop";
+  }
+  if (nameLower.includes("catering") || nameLower.includes("rebekha") || nameLower.includes("food")) {
+    return "https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=800&auto=format&fit=crop";
+  }
+  if (nameLower.includes("coffee") || nameLower.includes("tiffin")) {
+    return "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=800&auto=format&fit=crop";
+  }
+  if (nameLower.includes("lead") || nameLower.includes("crm")) {
+    return "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop";
+  }
+  if (nameLower.includes("academy") || nameLower.includes("education") || nameLower.includes("iragu")) {
+    return "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&auto=format&fit=crop";
+  }
+
+  // Hash-based unique image distribution for dynamic repos
+  const hashIdx = index !== undefined
+    ? (index + getHashIndex(repo.name, PROJECT_STOCK_IMAGES.length)) % PROJECT_STOCK_IMAGES.length
+    : getHashIndex(repo.name, PROJECT_STOCK_IMAGES.length);
+
+  return PROJECT_STOCK_IMAGES[hashIdx];
+};
 
 const getRepoDescription = (repo: ProjectCard) => {
   if (repo.description && repo.description.trim().length > 0) {
@@ -305,50 +396,77 @@ export default function Projects() {
     </div>
   );
 
-  const renderRepositoryCard = (repo: ProjectCard, index: number) => (
-    <motion.article
-      key={repo.name}
-      className="group relative flex flex-col justify-between rounded-[1.8rem] border border-slate-200/90 bg-white/80 p-6 shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl dark:border-white/10 dark:bg-zinc-950/75 backdrop-blur-xl"
-      initial={{ opacity: 0, y: 18 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.35, delay: index * 0.04 }}
-    >
-      <div className="space-y-3">
-        <div className="flex items-center justify-between gap-2">
-          <span className="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-300">
-            {repo.language || "Web Stack"}
-          </span>
-          <span className="rounded-full border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 px-2.5 py-0.5 text-[11px] font-semibold text-slate-700 dark:text-zinc-300">
-            {repo.homepage ? "Live Site" : "Source Code"}
-          </span>
-        </div>
+  const renderRepositoryCard = (repo: ProjectCard, index: number) => {
+    const imageUrl = getProjectImage(repo, index);
 
-        <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">
-          {formatProjectName(repo.name)}
-        </h3>
+    return (
+      <motion.article
+        key={repo.name}
+        className="group relative flex flex-col justify-between overflow-hidden rounded-[1.8rem] border border-slate-200/90 bg-white/80 shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl dark:border-white/10 dark:bg-zinc-950/75 backdrop-blur-xl"
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.35, delay: index * 0.04 }}
+      >
+        {/* Project Card Top Image */}
+        <div className="relative h-44 w-full overflow-hidden bg-slate-900">
+          <img
+            src={imageUrl}
+            alt={repo.name}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = DEFAULT_PROJECT_IMAGE;
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
 
-        <p className="text-xs leading-relaxed text-slate-600 dark:text-zinc-300">
-          {getRepoDescription(repo)}
-        </p>
-
-        <div className="flex flex-wrap gap-1.5 pt-1">
-          {(repo.topics?.length ? repo.topics : [repo.language?.toLowerCase() || "react"]).slice(0, 3).map((topic) => (
-            <span
-              key={topic}
-              className="rounded-md border border-slate-200 bg-slate-100 dark:border-white/10 dark:bg-white/5 px-2.5 py-1 text-[11px] font-semibold text-slate-700 dark:text-zinc-300"
-            >
-              #{topic}
+          <div className="absolute top-3 left-3 flex items-center gap-2">
+            <span className="rounded-full bg-slate-950/80 backdrop-blur-md border border-white/10 px-3 py-1 text-[11px] font-bold text-cyan-300 shadow-sm">
+              {repo.language || "Web Stack"}
             </span>
-          ))}
-        </div>
-      </div>
+          </div>
 
-      <div className="pt-5 mt-4 border-t border-slate-100 dark:border-white/10 flex items-center justify-between gap-3">
-        {renderProjectActions(repo)}
-      </div>
-    </motion.article>
-  );
+          <div className="absolute top-3 right-3">
+            <span className="rounded-full bg-slate-950/80 backdrop-blur-md border border-white/10 px-2.5 py-1 text-[11px] font-semibold text-zinc-300 shadow-sm">
+              {repo.homepage ? "Live Site" : "Source Code"}
+            </span>
+          </div>
+
+          <div className="absolute bottom-3 left-4 right-4">
+            <h3 className="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors drop-shadow-sm line-clamp-1">
+              {formatProjectName(repo.name)}
+            </h3>
+          </div>
+        </div>
+
+        {/* Card Body */}
+        <div className="p-6 flex flex-col justify-between flex-1 space-y-4">
+          <div className="space-y-3">
+            <p className="text-xs leading-relaxed text-slate-600 dark:text-zinc-300 line-clamp-3">
+              {getRepoDescription(repo)}
+            </p>
+
+            <div className="flex flex-wrap gap-1.5 pt-1">
+              {(repo.topics?.length ? repo.topics : [repo.language?.toLowerCase() || "react"]).slice(0, 3).map((topic) => (
+                <span
+                  key={topic}
+                  className="rounded-md border border-slate-200 bg-slate-100 dark:border-white/10 dark:bg-white/5 px-2.5 py-1 text-[11px] font-semibold text-slate-700 dark:text-zinc-300"
+                >
+                  #{topic}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="pt-4 border-t border-slate-100 dark:border-white/10 flex items-center justify-between gap-3">
+            {renderProjectActions(repo)}
+          </div>
+        </div>
+      </motion.article>
+    );
+  };
 
   return (
     <motion.div
@@ -511,70 +629,95 @@ export default function Projects() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {liveClientProjects.map((project, index) => (
-            <motion.article
-              key={project.name}
-              className="group relative flex flex-col justify-between rounded-[1.8rem] border border-slate-200/90 bg-white/80 p-6 shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl dark:border-white/10 dark:bg-zinc-950/75 backdrop-blur-xl"
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.35, delay: index * 0.08 }}
-            >
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs uppercase tracking-wider font-bold text-cyan-600 dark:text-cyan-300">
-                    {project.language}
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-300">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    Live Site
-                  </span>
-                </div>
+          {liveClientProjects.map((project, index) => {
+            const imageUrl = getProjectImage(project, index);
+            return (
+              <motion.article
+                key={project.name}
+                className="group relative flex flex-col justify-between overflow-hidden rounded-[1.8rem] border border-slate-200/90 bg-white/80 shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl dark:border-white/10 dark:bg-zinc-950/75 backdrop-blur-xl"
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35, delay: index * 0.08 }}
+              >
+                {/* Top Image Banner */}
+                <div className="relative h-48 w-full overflow-hidden bg-slate-900">
+                  <img
+                    src={imageUrl}
+                    alt={project.name}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = DEFAULT_PROJECT_IMAGE;
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
 
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">
-                    {project.name}
-                  </h3>
-                  <p className="mt-2 text-xs leading-relaxed text-slate-600 dark:text-zinc-300">
-                    {project.description}
-                  </p>
-                </div>
-
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {project.topics?.map((topic) => (
-                    <span
-                      key={topic}
-                      className="rounded-md border border-slate-200 bg-slate-100 dark:border-white/10 dark:bg-white/5 px-2.5 py-1 text-[11px] font-semibold text-slate-700 dark:text-zinc-300"
-                    >
-                      #{topic}
+                  <div className="absolute top-3 left-3 flex items-center gap-2">
+                    <span className="rounded-full bg-slate-950/80 backdrop-blur-md border border-white/10 px-3 py-1 text-[11px] font-bold text-cyan-300 shadow-sm">
+                      {project.language}
                     </span>
-                  ))}
+                  </div>
+
+                  <div className="absolute top-3 right-3">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-slate-950/80 backdrop-blur-md px-3 py-1 text-[11px] font-bold text-emerald-400 shadow-sm">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      Live Site
+                    </span>
+                  </div>
+
+                  <div className="absolute bottom-3 left-4 right-4">
+                    <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors drop-shadow-sm">
+                      {project.name}
+                    </h3>
+                  </div>
                 </div>
-              </div>
 
-              <div className="pt-6 mt-6 border-t border-slate-100 dark:border-white/10 flex items-center justify-between gap-3">
-                <a
-                  href={project.homepage!}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-slate-900 dark:bg-gradient-to-r dark:from-cyan-400 dark:to-teal-300 px-4 py-2 text-xs font-bold text-white dark:text-slate-950 transition hover:scale-105 shadow-sm"
-                >
-                  <ExternalLink size={14} />
-                  <span>Launch Website</span>
-                </a>
+                {/* Content Body */}
+                <div className="p-6 flex flex-col justify-between flex-1 space-y-4">
+                  <div className="space-y-3">
+                    <p className="text-xs leading-relaxed text-slate-600 dark:text-zinc-300">
+                      {project.description}
+                    </p>
 
-                <a
-                  href={project.html_url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white transition"
-                >
-                  <Github size={14} />
-                  <span>Code</span>
-                </a>
-              </div>
-            </motion.article>
-          ))}
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {project.topics?.map((topic) => (
+                        <span
+                          key={topic}
+                          className="rounded-md border border-slate-200 bg-slate-100 dark:border-white/10 dark:bg-white/5 px-2.5 py-1 text-[11px] font-semibold text-slate-700 dark:text-zinc-300"
+                        >
+                          #{topic}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="pt-4 border-t border-slate-100 dark:border-white/10 flex items-center justify-between gap-3">
+                    <a
+                      href={project.homepage!}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-slate-900 dark:bg-gradient-to-r dark:from-cyan-400 dark:to-teal-300 px-4 py-2 text-xs font-bold text-white dark:text-slate-950 transition hover:scale-105 shadow-sm"
+                    >
+                      <ExternalLink size={14} />
+                      <span>Launch Website</span>
+                    </a>
+
+                    <a
+                      href={project.html_url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white transition"
+                    >
+                      <Github size={14} />
+                      <span>Code</span>
+                    </a>
+                  </div>
+                </div>
+              </motion.article>
+            );
+          })}
         </div>
       </section>
 
@@ -593,51 +736,76 @@ export default function Projects() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
-          {featuredDisplayProjects.map((repo, index) => (
-            <motion.article
-              key={repo.name}
-              className="group relative flex flex-col justify-between rounded-[1.8rem] border border-slate-200/90 bg-white/80 p-6 shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl dark:border-white/10 dark:bg-zinc-950/75 backdrop-blur-xl"
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.35, delay: index * 0.08 }}
-            >
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs uppercase tracking-wider font-bold text-cyan-600 dark:text-cyan-300">
-                    {repo.language || "TypeScript"}
-                  </span>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-cyan-100 dark:bg-cyan-950/80 px-2.5 py-0.5 text-[11px] font-bold text-cyan-700 dark:text-cyan-300 border border-cyan-300/30">
-                    Featured
-                  </span>
-                </div>
+          {featuredDisplayProjects.map((repo, index) => {
+            const imageUrl = getProjectImage(repo, index);
+            return (
+              <motion.article
+                key={repo.name}
+                className="group relative flex flex-col justify-between overflow-hidden rounded-[1.8rem] border border-slate-200/90 bg-white/80 shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl dark:border-white/10 dark:bg-zinc-950/75 backdrop-blur-xl"
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35, delay: index * 0.08 }}
+              >
+                {/* Top Image Banner */}
+                <div className="relative h-48 w-full overflow-hidden bg-slate-900">
+                  <img
+                    src={imageUrl}
+                    alt={repo.name}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = DEFAULT_PROJECT_IMAGE;
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
 
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">
-                    {formatProjectName(repo.name)}
-                  </h3>
-                  <p className="mt-2 text-xs leading-relaxed text-slate-600 dark:text-zinc-300">
-                    {getRepoDescription(repo)}
-                  </p>
-                </div>
-
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {(repo.topics?.length ? repo.topics : [repo.language?.toLowerCase() || "react"]).slice(0, 4).map((topic) => (
-                    <span
-                      key={topic}
-                      className="rounded-md border border-slate-200 bg-slate-100 dark:border-white/10 dark:bg-white/5 px-2.5 py-1 text-[11px] font-semibold text-slate-700 dark:text-zinc-300"
-                    >
-                      #{topic}
+                  <div className="absolute top-3 left-3 flex items-center gap-2">
+                    <span className="rounded-full bg-slate-950/80 backdrop-blur-md border border-white/10 px-3 py-1 text-[11px] font-bold text-cyan-300 shadow-sm">
+                      {repo.language || "TypeScript"}
                     </span>
-                  ))}
-                </div>
-              </div>
+                  </div>
 
-              <div className="pt-6 mt-6 border-t border-slate-100 dark:border-white/10 flex items-center justify-between gap-3">
-                {renderProjectActions(repo)}
-              </div>
-            </motion.article>
-          ))}
+                  <div className="absolute top-3 right-3">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-cyan-500/20 backdrop-blur-md border border-cyan-400/40 px-3 py-1 text-[11px] font-bold text-cyan-300 shadow-sm">
+                      Featured
+                    </span>
+                  </div>
+
+                  <div className="absolute bottom-3 left-4 right-4">
+                    <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors drop-shadow-sm">
+                      {formatProjectName(repo.name)}
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Content Body */}
+                <div className="p-6 flex flex-col justify-between flex-1 space-y-4">
+                  <div className="space-y-3">
+                    <p className="text-xs leading-relaxed text-slate-600 dark:text-zinc-300">
+                      {getRepoDescription(repo)}
+                    </p>
+
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {(repo.topics?.length ? repo.topics : [repo.language?.toLowerCase() || "react"]).slice(0, 4).map((topic) => (
+                        <span
+                          key={topic}
+                          className="rounded-md border border-slate-200 bg-slate-100 dark:border-white/10 dark:bg-white/5 px-2.5 py-1 text-[11px] font-semibold text-slate-700 dark:text-zinc-300"
+                        >
+                          #{topic}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="pt-4 border-t border-slate-100 dark:border-white/10 flex items-center justify-between gap-3">
+                    {renderProjectActions(repo)}
+                  </div>
+                </div>
+              </motion.article>
+            );
+          })}
         </div>
       </section>
 
