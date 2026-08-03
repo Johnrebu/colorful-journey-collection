@@ -126,15 +126,15 @@
   }
 
   .space-panel {
-    @apply rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(13,24,53,0.92),rgba(6,12,31,0.9))] shadow-[0_28px_80px_rgba(2,6,23,0.42)] backdrop-blur-xl;
+    @apply rounded-[2rem] border border-slate-200/90 bg-white/85 shadow-[0_20px_50px_rgba(15,23,42,0.06)] backdrop-blur-xl dark:border-white/10 dark:bg-[linear-gradient(180deg,rgba(13,24,53,0.92),rgba(6,12,31,0.9))] dark:shadow-[0_28px_80px_rgba(2,6,23,0.42)];
   }
 
   .cosmos-button {
-    @apply rounded-full bg-gradient-to-r from-cyan-300 via-cyan-400 to-teal-300 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:-translate-y-0.5 hover:shadow-[0_0_28px_rgba(34,211,238,0.32)];
+    @apply rounded-full bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400 px-5 py-3 text-sm font-semibold text-slate-950 shadow-md transition hover:-translate-y-0.5 hover:shadow-[0_0_28px_rgba(34,211,238,0.4)] active:scale-95;
   }
 
   .cosmos-button-secondary {
-    @apply rounded-full border border-white/[.12] bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-cyan-300/[.35] hover:bg-cyan-300/10;
+    @apply rounded-full border border-slate-300 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-400 hover:bg-slate-100 hover:text-slate-950 dark:border-white/[.12] dark:bg-white/5 dark:text-white dark:hover:border-cyan-300/[.35] dark:hover:bg-cyan-300/10;
   }
 }
 

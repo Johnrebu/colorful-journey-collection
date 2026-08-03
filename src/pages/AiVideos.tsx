@@ -114,7 +114,10 @@ export default function AiVideos() {
     : aiVideoWorks.filter((v) => v.category === selectedCategory);
 
   return (
-    <div className="space-y-14 pb-20">
+    <div className="dark relative -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-10">
+      {/* Force dark background for cinematic page */}
+      <div className="rounded-[2rem] bg-zinc-950 px-4 sm:px-6 md:px-8 lg:px-10 py-2">
+        <div className="space-y-14 pb-20">
       {/* ══════════════════════════════════════════════════════════════
           IMMERSIVE HERO BANNER
           ══════════════════════════════════════════════════════════════ */}
@@ -677,6 +680,8 @@ export default function AiVideos() {
           </div>
         </div>
       </section>
+        </div>
+      </div>
     </div>
   );
 }

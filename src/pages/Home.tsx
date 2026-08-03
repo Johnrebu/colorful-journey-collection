@@ -200,16 +200,16 @@ export default function Home() {
       {/* ============================================================ */}
       {/* 1. HERO SECTION */}
       {/* ============================================================ */}
-      <section className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#050b1d] px-5 py-8 shadow-[0_35px_120px_rgba(2,6,23,0.45)] sm:px-8 lg:px-12 lg:py-14">
+      <section className="relative overflow-hidden rounded-[2.5rem] border border-slate-200/90 bg-gradient-to-br from-indigo-50/90 via-purple-50/70 to-cyan-50/80 shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-[#050b1d] dark:shadow-[0_35px_120px_rgba(2,6,23,0.45)] px-5 py-8 sm:px-8 lg:px-12 lg:py-14">
         {/* Radial Background Glows */}
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.16),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.14),transparent_36%)]" />
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:72px_72px] opacity-25" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(99,102,241,0.15),transparent_40%),radial-gradient(circle_at_bottom_right,rgba(236,72,153,0.15),transparent_40%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.16),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.14),transparent_36%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(99,102,241,0.05)_1px,transparent_1px),linear-gradient(rgba(99,102,241,0.05)_1px,transparent_1px)] dark:bg-[linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] opacity-40 dark:opacity-25" />
 
         {/* Ambient Stars */}
         {starPositions.map((star, index) => (
           <motion.span
             key={`star-${index}`}
-            className="pointer-events-none absolute rounded-full bg-cyan-100"
+            className="pointer-events-none absolute rounded-full bg-indigo-500/40 dark:bg-cyan-100"
             style={{
               left: star.left,
               top: star.top,
@@ -235,8 +235,8 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
               >
-                <span className="inline-flex items-center gap-2 rounded-full border border-cyan-300/30 bg-cyan-300/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200 backdrop-blur">
-                  <Sparkles size={14} className="text-cyan-300 animate-pulse" />
+                <span className="inline-flex items-center gap-2 rounded-full border border-purple-400/40 bg-purple-500/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-purple-700 dark:border-cyan-300/30 dark:bg-cyan-300/10 dark:text-cyan-200 backdrop-blur shadow-sm">
+                  <Sparkles size={14} className="text-purple-600 dark:text-cyan-300 animate-pulse" />
                   Available for Full-Stack & Web Engineering Roles
                 </span>
               </motion.div>
@@ -247,14 +247,14 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.08 }}
               >
-                <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.12]">
+                <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-5xl lg:text-6xl leading-[1.12]">
                   Johnson T
-                  <span className="block mt-2 bg-gradient-to-r from-cyan-200 via-cyan-400 to-blue-400 bg-clip-text text-transparent font-extrabold">
+                  <span className="block mt-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-cyan-200 dark:via-cyan-400 dark:to-blue-400 bg-clip-text text-transparent font-black">
                     Full-Stack Software Engineer
                   </span>
                 </h1>
 
-                <p className="max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg sm:leading-8">
+                <p className="max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:text-lg sm:leading-8 font-medium">
                   Crafting scalable React frontends, robust Python backends, and full-stack web applications built with performance, clarity, and production-ready precision.
                 </p>
               </motion.div>
@@ -268,7 +268,7 @@ export default function Home() {
               >
                 <a
                   href="#featured-projects"
-                  className="cosmos-button inline-flex items-center gap-2 text-sm font-semibold shadow-lg shadow-cyan-500/20"
+                  className="cosmos-button inline-flex items-center gap-2 text-sm font-bold shadow-lg shadow-cyan-500/25"
                 >
                   View Featured Work
                   <ArrowRight size={16} />
@@ -276,7 +276,7 @@ export default function Home() {
 
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-5 py-3 text-sm font-semibold text-cyan-100 transition hover:-translate-y-0.5 hover:bg-cyan-300/20 hover:border-cyan-300/40"
+                  className="inline-flex items-center gap-2 rounded-full border border-indigo-400/40 bg-indigo-500/10 px-5 py-3 text-sm font-bold text-indigo-700 hover:bg-indigo-500/20 hover:border-indigo-500/50 dark:border-cyan-300/25 dark:bg-cyan-300/10 dark:text-cyan-100 dark:hover:bg-cyan-300/20 dark:hover:border-cyan-300/40 transition hover:-translate-y-0.5 shadow-sm"
                 >
                   <Mail size={16} />
                   Contact Me
@@ -284,7 +284,7 @@ export default function Home() {
 
                 <Link
                   to="/about"
-                  className="cosmos-button-secondary inline-flex items-center gap-2 text-sm font-semibold"
+                  className="cosmos-button-secondary inline-flex items-center gap-2 text-sm font-bold"
                 >
                   <BookOpen size={16} />
                   Read My Story
@@ -299,15 +299,15 @@ export default function Home() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.45, delay: 0.12 }}
             >
-              <div className="space-panel relative overflow-hidden p-6 sm:p-7">
-                <div className="absolute -right-12 -top-12 h-44 w-44 rounded-full bg-cyan-400/15 blur-3xl" />
+              <div className="space-panel relative overflow-hidden p-6 sm:p-7 border-indigo-200/80 bg-white/90 shadow-xl dark:border-white/10 dark:bg-zinc-950/80">
+                <div className="absolute -right-12 -top-12 h-44 w-44 rounded-full bg-indigo-500/20 dark:bg-cyan-400/15 blur-3xl" />
 
                 <div className="relative space-y-6">
                   {/* Portrait Container */}
                   <div className="flex flex-col items-center sm:flex-row sm:items-center gap-5">
                     <div className="relative shrink-0">
-                      <div className="h-28 w-28 rounded-full bg-gradient-to-tr from-cyan-300 via-blue-500 to-indigo-600 p-[2.5px] shadow-[0_0_35px_rgba(34,211,238,0.3)]">
-                        <div className="h-full w-full rounded-full bg-[#071125] p-1.5 overflow-hidden">
+                      <div className="h-28 w-28 rounded-full bg-gradient-to-tr from-pink-500 via-purple-500 to-cyan-400 p-[3px] shadow-[0_0_30px_rgba(168,85,247,0.35)]">
+                        <div className="h-full w-full rounded-full bg-slate-900 p-1.5 overflow-hidden">
                           <ParallaxProfilePhoto
                             src={johnImage}
                             alt="Johnson T"
@@ -316,16 +316,16 @@ export default function Home() {
                           />
                         </div>
                       </div>
-                      <span className="absolute bottom-1 right-1 h-4 w-4 rounded-full border-2 border-[#050b1d] bg-emerald-400" title="Available for work" />
+                      <span className="absolute bottom-1 right-1 h-4 w-4 rounded-full border-2 border-white dark:border-[#050b1d] bg-emerald-500 shadow-sm" title="Available for work" />
                     </div>
 
                     <div className="text-center sm:text-left space-y-1">
-                      <h2 className="text-xl font-bold text-white">Johnson T</h2>
-                      <p className="text-xs uppercase tracking-wider text-cyan-200/90 font-medium">
+                      <h2 className="text-xl font-extrabold text-slate-900 dark:text-white">Johnson T</h2>
+                      <p className="text-xs uppercase tracking-wider text-purple-700 dark:text-cyan-200/90 font-bold">
                         Full-Stack Software Engineer
                       </p>
-                      <div className="flex items-center justify-center sm:justify-start gap-1.5 text-xs text-slate-300 pt-1">
-                        <MapPin size={13} className="text-cyan-300" />
+                      <div className="flex items-center justify-center sm:justify-start gap-1.5 text-xs text-slate-600 dark:text-slate-300 pt-1 font-medium">
+                        <MapPin size={13} className="text-indigo-600 dark:text-cyan-300" />
                         <span>Chennai, Tamil Nadu, India</span>
                       </div>
                     </div>
@@ -333,16 +333,16 @@ export default function Home() {
 
                   {/* Highlight Chips */}
                   <div className="grid gap-2.5 pt-2">
-                    <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3.5 py-2.5 text-xs text-slate-200">
-                      <CheckCircle2 size={15} className="text-cyan-300 shrink-0" />
+                    <div className="flex items-center gap-3 rounded-xl border border-slate-200/80 bg-slate-50/80 dark:border-white/10 dark:bg-white/5 px-3.5 py-2.5 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-sm">
+                      <CheckCircle2 size={15} className="text-emerald-500 dark:text-cyan-300 shrink-0" />
                       <span>9+ Years Educator & Analytical Background</span>
                     </div>
-                    <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3.5 py-2.5 text-xs text-slate-200">
-                      <CheckCircle2 size={15} className="text-cyan-300 shrink-0" />
+                    <div className="flex items-center gap-3 rounded-xl border border-slate-200/80 bg-slate-50/80 dark:border-white/10 dark:bg-white/5 px-3.5 py-2.5 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-sm">
+                      <CheckCircle2 size={15} className="text-indigo-500 dark:text-cyan-300 shrink-0" />
                       <span>Full-Stack Development (React, TypeScript & Python)</span>
                     </div>
-                    <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3.5 py-2.5 text-xs text-slate-200">
-                      <CheckCircle2 size={15} className="text-cyan-300 shrink-0" />
+                    <div className="flex items-center gap-3 rounded-xl border border-slate-200/80 bg-slate-50/80 dark:border-white/10 dark:bg-white/5 px-3.5 py-2.5 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-sm">
+                      <CheckCircle2 size={15} className="text-purple-500 dark:text-cyan-300 shrink-0" />
                       <span>WordPress & End-to-End Web Delivery</span>
                     </div>
                   </div>
@@ -357,7 +357,7 @@ export default function Home() {
                           href={link.href}
                           target={link.href.startsWith("mailto:") ? undefined : "_blank"}
                           rel={link.href.startsWith("mailto:") ? undefined : "noreferrer"}
-                          className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-slate-200 transition hover:border-cyan-300/40 hover:bg-cyan-300/10 hover:text-white"
+                          className="inline-flex items-center gap-1.5 rounded-full border border-slate-300/80 bg-white/90 dark:border-white/10 dark:bg-white/5 px-3.5 py-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 shadow-sm transition hover:border-indigo-400 hover:bg-indigo-50 hover:text-indigo-900 dark:hover:border-cyan-300/40 dark:hover:bg-cyan-300/10 dark:hover:text-white"
                         >
                           <Icon size={14} />
                           {link.label}
@@ -371,20 +371,20 @@ export default function Home() {
           </div>
 
           {/* Quick Credibility Signals Bar */}
-          <div className="grid gap-4 sm:grid-cols-3 pt-4 border-t border-white/10">
+          <div className="grid gap-4 sm:grid-cols-3 pt-4 border-t border-slate-200/80 dark:border-white/10">
             {heroSignals.map((signal, index) => (
               <motion.div
                 key={signal.label}
-                className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur transition hover:border-cyan-300/30 hover:bg-white/[0.07]"
+                className="rounded-2xl border border-slate-200/80 bg-white/80 dark:border-white/10 dark:bg-white/5 p-5 backdrop-blur shadow-sm transition hover:border-indigo-400/40 hover:bg-white dark:hover:border-cyan-300/30 dark:hover:bg-white/[0.07]"
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.35, delay: 0.2 + index * 0.06 }}
               >
-                <p className="text-2xl sm:text-3xl font-extrabold text-white bg-gradient-to-r from-white via-cyan-100 to-cyan-300 bg-clip-text text-transparent">
+                <p className="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-white dark:via-cyan-100 dark:to-cyan-300">
                   {signal.value}
                 </p>
-                <p className="mt-1 text-sm font-semibold text-slate-200">{signal.label}</p>
-                <p className="mt-0.5 text-xs text-slate-400">{signal.subtext}</p>
+                <p className="mt-1 text-sm font-bold text-slate-800 dark:text-slate-200">{signal.label}</p>
+                <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400 font-medium">{signal.subtext}</p>
               </motion.div>
             ))}
           </div>
@@ -396,35 +396,45 @@ export default function Home() {
       {/* ============================================================ */}
       <section className="space-panel p-6 sm:p-8 lg:p-10">
         <div className="max-w-3xl space-y-3">
-          <span className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200">
+          <span className="inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-indigo-700 dark:border-cyan-300/20 dark:bg-cyan-300/10 dark:text-cyan-200">
             <GraduationCap size={14} />
             About Snapshot
           </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white">
             Combining Educator Clarity with Software Engineering Discipline
           </h2>
-          <p className="text-slate-300 text-base sm:text-lg leading-relaxed pt-2">
+          <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed pt-2 font-medium">
             After 9 years as a Science Educator developing a deep foundation in analytical problem solving and communication, I transitioned fully into software development. Today, I build end-to-end full-stack applications, interactive React frontends, and robust backend systems where technical rigor meets user-centered design.
           </p>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-3 pt-8 mt-8 border-t border-white/10">
+        <div className="grid gap-6 sm:grid-cols-3 pt-8 mt-8 border-t border-slate-200/80 dark:border-white/10">
           {aboutHighlights.map((item, index) => {
             const Icon = item.icon;
+            const cardAccents = [
+              "border-amber-200/80 bg-amber-50/50 dark:border-white/10 dark:bg-white/5",
+              "border-emerald-200/80 bg-emerald-50/50 dark:border-white/10 dark:bg-white/5",
+              "border-indigo-200/80 bg-indigo-50/50 dark:border-white/10 dark:bg-white/5",
+            ];
+            const iconAccents = [
+              "border-amber-400/40 bg-amber-500/10 text-amber-700 dark:border-cyan-300/20 dark:bg-cyan-300/10 dark:text-cyan-200",
+              "border-emerald-400/40 bg-emerald-500/10 text-emerald-700 dark:border-cyan-300/20 dark:bg-cyan-300/10 dark:text-cyan-200",
+              "border-indigo-400/40 bg-indigo-500/10 text-indigo-700 dark:border-cyan-300/20 dark:bg-cyan-300/10 dark:text-cyan-200",
+            ];
             return (
               <motion.article
                 key={item.title}
-                className="rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:border-cyan-300/30 hover:bg-white/[0.08]"
+                className={`rounded-2xl border p-5 transition-all duration-300 hover:shadow-md dark:hover:border-cyan-300/30 dark:hover:bg-white/[0.08] ${cardAccents[index % 3]}`}
                 initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.35, delay: index * 0.08 }}
               >
-                <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-300/20 bg-cyan-300/10 text-cyan-200">
+                <div className={`inline-flex h-10 w-10 items-center justify-center rounded-xl border ${iconAccents[index % 3]}`}>
                   <Icon size={18} />
                 </div>
-                <h3 className="mt-4 text-lg font-bold text-white">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-300">{item.description}</p>
+                <h3 className="mt-4 text-lg font-bold text-slate-900 dark:text-white">{item.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300 font-medium">{item.description}</p>
               </motion.article>
             );
           })}
@@ -436,14 +446,14 @@ export default function Home() {
       {/* ============================================================ */}
       <section className="space-panel p-6 sm:p-8 lg:p-10">
         <div className="space-y-3">
-          <span className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200">
+          <span className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-500/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-purple-700 dark:border-cyan-300/20 dark:bg-cyan-300/10 dark:text-cyan-200">
             <Cpu size={14} />
             Tech Stack & Capabilities
           </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white">
             Built for Modern Web Engineering
           </h2>
-          <p className="max-w-2xl text-slate-300 text-sm sm:text-base leading-relaxed">
+          <p className="max-w-2xl text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed font-medium">
             A practical, modern toolset focused on building clean component structures, reliable state flow, and polished user interfaces.
           </p>
         </div>
@@ -451,30 +461,36 @@ export default function Home() {
         <div className="grid gap-6 md:grid-cols-3 pt-8">
           {techCategories.map((cat, index) => {
             const Icon = cat.icon;
+            const categoryPills = [
+              "border-cyan-300/50 bg-cyan-500/10 text-cyan-800 dark:border-cyan-300/20 dark:bg-cyan-300/10 dark:text-cyan-100",
+              "border-purple-300/50 bg-purple-500/10 text-purple-800 dark:border-purple-300/20 dark:bg-purple-300/10 dark:text-purple-100",
+              "border-emerald-300/50 bg-emerald-500/10 text-emerald-800 dark:border-emerald-300/20 dark:bg-emerald-300/10 dark:text-emerald-100",
+            ];
+            const dotColors = ["bg-cyan-500", "bg-purple-500", "bg-emerald-500"];
             return (
               <motion.article
                 key={cat.category}
-                className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur flex flex-col justify-between transition hover:border-cyan-300/30 hover:shadow-[0_0_30px_rgba(34,211,238,0.1)]"
+                className="rounded-2xl border border-slate-200/90 bg-white/90 p-6 backdrop-blur flex flex-col justify-between shadow-sm transition-all duration-300 hover:shadow-lg dark:border-white/10 dark:bg-white/5 dark:hover:border-cyan-300/30 dark:hover:shadow-[0_0_30px_rgba(34,211,238,0.1)]"
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.35, delay: index * 0.08 }}
               >
                 <div>
-                  <div className="flex items-center gap-3 pb-4 border-b border-white/10">
-                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-300/20 bg-cyan-300/10 text-cyan-200">
+                  <div className="flex items-center gap-3 pb-4 border-b border-slate-200/80 dark:border-white/10">
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-slate-100 dark:border-cyan-300/20 dark:bg-cyan-300/10 text-indigo-600 dark:text-cyan-200">
                       <Icon size={18} />
                     </div>
-                    <h3 className="text-lg font-bold text-white">{cat.category}</h3>
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white">{cat.category}</h3>
                   </div>
 
                   <div className="mt-5 flex flex-wrap gap-2">
                     {cat.skills.map((skill) => (
                       <span
                         key={skill}
-                        className="inline-flex items-center gap-1.5 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1.5 text-xs font-semibold text-cyan-100 transition hover:bg-cyan-300/20"
+                        className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-bold transition hover:scale-105 ${categoryPills[index % 3]}`}
                       >
-                        <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
+                        <span className={`h-1.5 w-1.5 rounded-full ${dotColors[index % 3]}`} />
                         {skill}
                       </span>
                     ))}
@@ -492,21 +508,21 @@ export default function Home() {
       <section id="featured-projects" className="space-panel p-6 sm:p-8 lg:p-10 scroll-mt-24">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div className="space-y-3 max-w-2xl">
-            <span className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200">
+            <span className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-amber-700 dark:border-cyan-300/20 dark:bg-cyan-300/10 dark:text-cyan-200">
               <Star size={14} />
               Featured Work
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white">
               Highlighted Projects
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed font-medium">
               Selected applications demonstrating React architecture, responsive design, data filtering, and production UI polish.
             </p>
           </div>
 
           <Link
             to="/projects"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-cyan-300 transition hover:text-cyan-200 shrink-0"
+            className="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 hover:text-indigo-700 dark:text-cyan-300 dark:hover:text-cyan-200 shrink-0"
           >
             View All Projects
             <ArrowRight size={16} />
@@ -517,7 +533,7 @@ export default function Home() {
           {featuredProjects.map((project, index) => (
             <motion.article
               key={project.id}
-              className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:-translate-y-1 hover:border-cyan-300/40 hover:shadow-[0_20px_50px_rgba(2,6,23,0.5)]"
+              className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white/90 p-6 backdrop-blur shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-indigo-400/50 hover:shadow-xl dark:border-white/10 dark:bg-white/5 dark:hover:border-cyan-300/40 dark:hover:shadow-[0_20px_50px_rgba(2,6,23,0.5)]"
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -526,7 +542,7 @@ export default function Home() {
               <div className="space-y-4">
                 {/* Header Badge */}
                 <div className="flex items-center justify-between">
-                  <span className="text-xs uppercase tracking-wider font-semibold text-cyan-300/90">
+                  <span className="text-xs uppercase tracking-wider font-bold text-indigo-600 dark:text-cyan-300/90">
                     {project.category}
                   </span>
                   <div className="flex items-center gap-2">
@@ -534,7 +550,7 @@ export default function Home() {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition hover:bg-cyan-300/20 hover:text-white"
+                      className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-300 bg-slate-100 text-slate-700 transition hover:bg-indigo-600 hover:text-white dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-cyan-300/20 dark:hover:text-white"
                       title="GitHub Source"
                     >
                       <Github size={14} />
@@ -543,7 +559,7 @@ export default function Home() {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-cyan-300/30 bg-cyan-300/10 text-cyan-200 transition hover:bg-cyan-300/20 hover:text-white"
+                      className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-indigo-300 bg-indigo-50 text-indigo-600 transition hover:bg-indigo-600 hover:text-white dark:border-cyan-300/30 dark:bg-cyan-300/10 dark:text-cyan-200 dark:hover:bg-cyan-300/20 dark:hover:text-white"
                       title="Live Demo"
                     >
                       <ExternalLink size={14} />
@@ -553,10 +569,10 @@ export default function Home() {
 
                 {/* Title & Description */}
                 <div>
-                  <h3 className="text-xl font-bold text-white group-hover:text-cyan-200 transition-colors">
+                  <h3 className="text-xl font-bold text-slate-900 group-hover:text-indigo-600 dark:text-white dark:group-hover:text-cyan-200 transition-colors">
                     {project.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-300">
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300 font-medium">
                     {project.description}
                   </p>
                 </div>
@@ -564,8 +580,8 @@ export default function Home() {
                 {/* Key Highlights */}
                 <div className="space-y-1.5 pt-1">
                   {project.highlights.map((h) => (
-                    <div key={h} className="flex items-center gap-2 text-xs text-slate-300">
-                      <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 shrink-0" />
+                    <div key={h} className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 font-medium">
+                      <span className="h-1.5 w-1.5 rounded-full bg-indigo-500 dark:bg-cyan-400 shrink-0" />
                       <span>{h}</span>
                     </div>
                   ))}
@@ -573,12 +589,12 @@ export default function Home() {
               </div>
 
               {/* Tags & Action Footer */}
-              <div className="pt-6 mt-6 border-t border-white/10 space-y-4">
+              <div className="pt-6 mt-6 border-t border-slate-200/80 dark:border-white/10 space-y-4">
                 <div className="flex flex-wrap gap-1.5">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-medium text-slate-300"
+                      className="rounded-md border border-slate-200 bg-slate-100 px-2.5 py-1 text-[11px] font-bold text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-300"
                     >
                       {tag}
                     </span>
@@ -589,7 +605,7 @@ export default function Home() {
                   href={project.liveUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 text-xs font-semibold text-cyan-300 transition hover:text-cyan-100"
+                  className="inline-flex items-center gap-2 text-xs font-bold text-indigo-600 hover:text-indigo-800 dark:text-cyan-300 dark:hover:text-cyan-100"
                 >
                   Launch Live Demo
                   <ArrowUpRight size={14} />
@@ -603,81 +619,97 @@ export default function Home() {
       {/* ============================================================ */}
       {/* AI VIDEO SHOWCASE & OFFICIAL YOUTUBE CHANNELS */}
       {/* ============================================================ */}
-      <section className="space-y-8">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-red-400">
-              <Youtube size={14} className="text-red-500" />
-              Official YouTube Channels
+      <section className="space-panel relative overflow-hidden p-8 sm:p-10">
+        <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-rose-500/10 dark:bg-red-500/8 blur-[80px]" />
+        <div className="absolute -left-10 -bottom-10 h-40 w-40 rounded-full bg-indigo-500/10 dark:bg-indigo-500/8 blur-[60px]" />
+
+        <div className="relative space-y-8">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full border border-rose-500/30 bg-rose-500/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-rose-600 dark:text-red-400">
+                <Youtube size={14} className="text-rose-600 dark:text-red-500" />
+                Official YouTube Channels
+              </div>
+              <h2 className="mt-3 text-3xl font-extrabold text-slate-900 dark:text-white sm:text-4xl">
+                AI Video Creations & Channels
+              </h2>
+              <p className="mt-2 text-slate-600 dark:text-slate-300 max-w-2xl text-sm leading-relaxed font-medium">
+                Explore my generative AI video works, synthetic storytelling, and automated content production across my official YouTube channels.
+              </p>
             </div>
-            <h2 className="mt-3 text-3xl font-extrabold text-white sm:text-4xl">
-              AI Video Creations & Channels
-            </h2>
-            <p className="mt-2 text-slate-300 max-w-2xl text-sm leading-relaxed">
-              Explore my generative AI video works, synthetic storytelling, and automated content production across my official YouTube channels.
-            </p>
+
+            <Link
+              to="/ai-videos"
+              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-red-600/30 transition hover:from-red-700 hover:to-rose-700 active:scale-95 shrink-0"
+            >
+              Explore AI Videos Gallery
+              <ArrowRight size={16} />
+            </Link>
           </div>
 
-          <Link
-            to="/ai-videos"
-            className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-red-600/30 transition hover:bg-red-700 active:scale-95 shrink-0"
-          >
-            Explore AI Videos Gallery
-            <ArrowRight size={16} />
-          </Link>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2">
-          {youtubeChannels.map((channel) => (
-            <div
-              key={channel.id}
-              className="space-panel group relative overflow-hidden p-6 transition duration-300 hover:border-red-500/40"
-            >
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-red-600 text-white shadow-md group-hover:scale-105 transition-transform">
-                    <Youtube size={22} />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-white flex items-center gap-1.5">
-                      {channel.name}
-                      <CheckCircle2 size={15} className="text-blue-400" />
-                    </h3>
-                    <p className="text-xs font-mono font-semibold text-red-400">
-                      {channel.handle}
-                    </p>
+          <div className="grid gap-5 md:grid-cols-3">
+            {youtubeChannels.map((channel) => (
+              <div
+                key={channel.id}
+                className={`group relative overflow-hidden rounded-2xl border p-5 transition duration-300 shadow-sm ${
+                  channel.isCompany
+                    ? "border-blue-200 bg-gradient-to-br from-blue-50/90 to-indigo-50/90 hover:border-blue-400 dark:border-blue-500/20 dark:bg-blue-500/5 dark:hover:border-blue-500/40"
+                    : "border-rose-200 bg-gradient-to-br from-rose-50/90 to-orange-50/90 hover:border-rose-400 dark:border-white/10 dark:bg-white/5 dark:hover:border-red-500/40"
+                }`}
+              >
+                <div className="flex items-start justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className={`flex h-10 w-10 items-center justify-center rounded-xl text-white shadow-md group-hover:scale-105 transition-transform ${
+                      channel.isCompany
+                        ? "bg-gradient-to-br from-blue-600 to-indigo-700"
+                        : "bg-gradient-to-br from-red-600 to-rose-600"
+                    }`}>
+                      <Youtube size={20} />
+                    </div>
+                    <div>
+                      <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                        {channel.name}
+                        <CheckCircle2 size={14} className="text-blue-500 dark:text-blue-400" />
+                      </h3>
+                      <p className={`text-[11px] font-mono font-bold ${
+                        channel.isCompany ? "text-blue-600 dark:text-blue-400" : "text-rose-600 dark:text-red-400"
+                      }`}>
+                        {channel.handle}
+                      </p>
+                    </div>
                   </div>
                 </div>
-                <span className="rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1 text-[11px] font-semibold text-red-300">
-                  {channel.badge}
-                </span>
-              </div>
 
-              <p className="mt-4 text-xs text-slate-300 leading-relaxed">
-                {channel.description}
-              </p>
+                <p className="mt-3 text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-2 font-medium">
+                  {channel.description}
+                </p>
 
-              <div className="mt-5 flex items-center justify-between pt-4 border-t border-white/10">
-                <div className="flex flex-wrap gap-1.5">
-                  {channel.tags.slice(0, 3).map((tag) => (
-                    <span key={tag} className="text-[10px] rounded bg-white/5 px-2 py-0.5 text-slate-400">
-                      #{tag}
-                    </span>
-                  ))}
+                <div className="mt-4 flex items-center justify-between pt-3 border-t border-slate-200/80 dark:border-white/10">
+                  <span className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold ${
+                    channel.isCompany
+                      ? "border border-blue-300 bg-blue-100 text-blue-800 dark:border-blue-500/30 dark:bg-blue-500/10 dark:text-blue-300"
+                      : "border border-rose-300 bg-rose-100 text-rose-800 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-300"
+                  }`}>
+                    {channel.badge}
+                  </span>
+
+                  <a
+                    href={channel.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`inline-flex items-center gap-1.5 text-xs font-bold transition ${
+                      channel.isCompany
+                        ? "text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+                        : "text-rose-600 hover:text-rose-800 dark:text-red-400 dark:hover:text-red-300"
+                    }`}
+                  >
+                    Visit Channel
+                    <ArrowUpRight size={14} />
+                  </a>
                 </div>
-
-                <a
-                  href={channel.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-red-400 transition hover:text-red-300"
-                >
-                  Visit Channel
-                  <ArrowUpRight size={14} />
-                </a>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
@@ -690,45 +722,45 @@ export default function Home() {
       {/* 5. QUICK STATS & CREDIBILITY MARKERS */}
       {/* ============================================================ */}
       <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="space-panel p-6">
-          <p className="text-xs uppercase tracking-wider text-cyan-300 font-semibold">Experience</p>
-          <p className="mt-2 text-4xl font-extrabold text-white">9+ Years</p>
-          <p className="mt-1 text-sm text-slate-300 leading-snug">Analytical communication, structured problem solving & teaching</p>
+        <div className="space-panel p-6 border-indigo-200/80 bg-white/90 shadow-sm dark:border-white/10 dark:bg-zinc-950">
+          <p className="text-xs uppercase tracking-wider text-indigo-600 dark:text-cyan-300 font-bold">Experience</p>
+          <p className="mt-2 text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-white dark:to-cyan-200">9+ Years</p>
+          <p className="mt-1 text-sm text-slate-600 dark:text-slate-300 leading-snug font-medium">Analytical communication, structured problem solving & teaching</p>
         </div>
-        <div className="space-panel p-6">
-          <p className="text-xs uppercase tracking-wider text-cyan-300 font-semibold">Track Record</p>
-          <p className="mt-2 text-4xl font-extrabold text-white">10+ Builds</p>
-          <p className="mt-1 text-sm text-slate-300 leading-snug">React applications, WordPress websites & UI tools</p>
+        <div className="space-panel p-6 border-purple-200/80 bg-white/90 shadow-sm dark:border-white/10 dark:bg-zinc-950">
+          <p className="text-xs uppercase tracking-wider text-purple-600 dark:text-cyan-300 font-bold">Track Record</p>
+          <p className="mt-2 text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 dark:from-white dark:to-cyan-200">10+ Builds</p>
+          <p className="mt-1 text-sm text-slate-600 dark:text-slate-300 leading-snug font-medium">React applications, WordPress websites & UI tools</p>
         </div>
-        <div className="space-panel p-6">
-          <p className="text-xs uppercase tracking-wider text-cyan-300 font-semibold">UX Standard</p>
-          <p className="mt-2 text-4xl font-extrabold text-white">100%</p>
-          <p className="mt-1 text-sm text-slate-300 leading-snug">Responsive layout execution & cross-device compatibility</p>
+        <div className="space-panel p-6 border-emerald-200/80 bg-white/90 shadow-sm dark:border-white/10 dark:bg-zinc-950">
+          <p className="text-xs uppercase tracking-wider text-emerald-600 dark:text-cyan-300 font-bold">UX Standard</p>
+          <p className="mt-2 text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 dark:from-white dark:to-cyan-200">100%</p>
+          <p className="mt-1 text-sm text-slate-600 dark:text-slate-300 leading-snug font-medium">Responsive layout execution & cross-device compatibility</p>
         </div>
-        <div className="space-panel p-6">
-          <p className="text-xs uppercase tracking-wider text-cyan-300 font-semibold">Core Focus</p>
-          <p className="mt-2 text-4xl font-extrabold text-white">Full-Stack</p>
-          <p className="mt-1 text-sm text-slate-300 leading-snug">React, TypeScript, Python & End-to-End Web Systems</p>
+        <div className="space-panel p-6 border-cyan-200/80 bg-white/90 shadow-sm dark:border-white/10 dark:bg-zinc-950">
+          <p className="text-xs uppercase tracking-wider text-cyan-600 dark:text-cyan-300 font-bold">Core Focus</p>
+          <p className="mt-2 text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 dark:from-white dark:to-cyan-200">Full-Stack</p>
+          <p className="mt-1 text-sm text-slate-600 dark:text-slate-300 leading-snug font-medium">React, TypeScript, Python & End-to-End Web Systems</p>
         </div>
       </section>
 
       {/* ============================================================ */}
       {/* 6. CALL-TO-ACTION FOOTER */}
       {/* ============================================================ */}
-      <section className="space-panel relative overflow-hidden p-8 sm:p-12 text-center lg:text-left">
-        <div className="absolute -left-16 bottom-0 h-64 w-64 rounded-full bg-cyan-400/15 blur-3xl" />
-        <div className="absolute right-0 top-0 h-64 w-64 rounded-full bg-blue-500/15 blur-3xl" />
+      <section className="space-panel relative overflow-hidden p-8 sm:p-12 text-center lg:text-left bg-gradient-to-br from-indigo-50/90 via-purple-50/80 to-pink-50/90 border-indigo-200/80 dark:border-white/10 dark:bg-[linear-gradient(180deg,rgba(13,24,53,0.92),rgba(6,12,31,0.9))]">
+        <div className="absolute -left-16 bottom-0 h-64 w-64 rounded-full bg-indigo-500/15 dark:bg-cyan-400/15 blur-3xl" />
+        <div className="absolute right-0 top-0 h-64 w-64 rounded-full bg-pink-500/15 dark:bg-blue-500/15 blur-3xl" />
 
         <div className="relative flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="max-w-2xl space-y-3">
-            <span className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200">
+            <span className="inline-flex items-center gap-2 rounded-full border border-pink-500/30 bg-pink-500/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-pink-700 dark:border-cyan-300/20 dark:bg-cyan-300/10 dark:text-cyan-200">
               <MessageSquareText size={14} />
               Let&apos;s Connect
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
               Ready to Discuss Engineering Opportunities?
             </h2>
-            <p className="text-slate-300 text-base leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed font-medium">
               Whether you are hiring for a full-stack engineering role, looking for web application builds, or open to collaboration, I would love to connect.
             </p>
           </div>
@@ -736,7 +768,7 @@ export default function Home() {
           <div className="flex flex-wrap items-center justify-center lg:justify-end gap-3 shrink-0">
             <Link
               to="/contact"
-              className="cosmos-button inline-flex items-center gap-2 text-sm font-semibold shadow-lg shadow-cyan-500/20"
+              className="cosmos-button inline-flex items-center gap-2 text-sm font-bold shadow-lg shadow-cyan-500/20"
             >
               Get In Touch
               <ArrowRight size={16} />
@@ -744,7 +776,7 @@ export default function Home() {
 
             <a
               href="mailto:johnchemist91@gmail.com"
-              className="cosmos-button-secondary inline-flex items-center gap-2 text-sm font-semibold"
+              className="cosmos-button-secondary inline-flex items-center gap-2 text-sm font-bold"
             >
               <Mail size={16} />
               Email Direct
