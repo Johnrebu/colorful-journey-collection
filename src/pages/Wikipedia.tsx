@@ -4,6 +4,7 @@ import useSeo from "@/hooks/useSeo";
 import { certifications, educationItems, skills } from "@/components/resume/resumeData";
 import ParallaxProfilePhoto from "@/components/ParallaxProfilePhoto";
 import CurrentRoleImpact from "@/components/CurrentRoleImpact";
+import johnImage from "@/images/john.jpg";
 
 export default function Wikipedia() {
   useSeo({
@@ -71,7 +72,7 @@ export default function Wikipedia() {
             <CardContent className="space-y-4 p-4">
               <div className="aspect-[3/4] w-full overflow-hidden rounded border relative">
                 <ParallaxProfilePhoto
-                  src="https://i.postimg.cc/dQ741Z2x/Firefly-20250216210550.png"
+                  src={johnImage}
                   alt="Professional photo of Johnson T"
                   shape="rounded"
                   containerClassName="h-full w-full"
