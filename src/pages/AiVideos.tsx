@@ -273,48 +273,55 @@ export default function AiVideos() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          {youtubeChannels.map((channel, i) => (
+        <div className="space-y-6">
+          {/* Company Channel — Full Width Featured Card */}
+          {youtubeChannels.filter(c => c.isCompany).map((channel, i) => (
             <motion.div
               key={channel.id}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.15, duration: 0.45 }}
-              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-zinc-900/90 via-zinc-900/70 to-zinc-950/90 p-[1px] transition hover:border-red-500/30"
+              transition={{ duration: 0.5 }}
+              className="group relative overflow-hidden rounded-2xl border border-blue-500/20 bg-gradient-to-br from-blue-950/40 via-zinc-950 to-indigo-950/30 p-[1px] transition hover:border-blue-500/40"
             >
               {/* Animated gradient border */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-red-500/20 via-transparent to-indigo-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500/15 via-transparent to-indigo-500/15 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              <div className="relative rounded-2xl bg-zinc-950/80 backdrop-blur-xl p-6 md:p-7 space-y-5">
-                {/* Glow orb */}
-                <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-red-600/8 blur-3xl transition-all duration-500 group-hover:bg-red-600/15 group-hover:scale-125" />
+              <div className="relative rounded-2xl bg-zinc-950/85 backdrop-blur-xl p-6 md:p-8 space-y-5">
+                {/* Glow orbs */}
+                <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-blue-600/8 blur-[60px] transition-all duration-500 group-hover:bg-blue-600/15 group-hover:scale-125" />
+                <div className="absolute -left-10 -bottom-10 h-32 w-32 rounded-full bg-indigo-600/6 blur-[40px]" />
 
-                <div className="relative flex items-start justify-between gap-3">
+                <div className="relative flex flex-col md:flex-row md:items-start md:justify-between gap-5">
                   <div className="flex items-center gap-4">
                     <motion.div
                       whileHover={{ rotate: 360 }}
                       transition={{ duration: 0.6 }}
-                      className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-red-600 to-red-700 text-white shadow-lg shadow-red-600/30"
+                      className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white shadow-lg shadow-blue-600/30"
                     >
-                      <Youtube size={26} />
+                      <Building size={28} />
                     </motion.div>
                     <div>
-                      <h3 className="text-xl font-extrabold text-white flex items-center gap-2">
+                      <h3 className="text-2xl font-extrabold text-white flex items-center gap-2">
                         {channel.name}
-                        <CheckCircle2 size={16} className="text-blue-400" />
+                        <CheckCircle2 size={18} className="text-blue-400" />
                       </h3>
-                      <p className="text-xs font-mono font-bold text-red-400 mt-0.5">
+                      <p className="text-xs font-mono font-bold text-blue-400 mt-0.5">
                         {channel.handle}
                       </p>
                     </div>
                   </div>
-                  <Badge className="bg-red-500/10 text-red-400 border-red-500/20 text-[10px] font-bold shrink-0">
-                    {channel.badge}
-                  </Badge>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <Badge className="bg-blue-500/10 text-blue-400 border-blue-500/20 text-[10px] font-bold">
+                      {channel.badge}
+                    </Badge>
+                    <Badge className="bg-amber-500/10 text-amber-400 border-amber-500/20 text-[10px] font-bold flex items-center gap-1">
+                      <Sparkles size={10} /> AI Videos by Johnson T
+                    </Badge>
+                  </div>
                 </div>
 
-                <p className="text-sm text-zinc-300/90 leading-relaxed relative">
+                <p className="text-sm text-zinc-300/90 leading-relaxed relative max-w-3xl">
                   {channel.description}
                 </p>
 
@@ -322,28 +329,111 @@ export default function AiVideos() {
                   {channel.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-lg bg-white/5 border border-white/5 px-3 py-1.5 text-[11px] font-medium text-zinc-400 transition hover:bg-white/10 hover:text-zinc-200"
+                      className="rounded-lg bg-blue-500/5 border border-blue-500/10 px-3 py-1.5 text-[11px] font-medium text-blue-300/70 transition hover:bg-blue-500/10 hover:text-blue-200"
                     >
                       #{tag}
                     </span>
                   ))}
                 </div>
 
-                <div className="relative pt-2">
+                <div className="relative pt-2 flex flex-wrap gap-3">
                   <a
                     href={channel.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex w-full items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-red-600 to-red-700 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-red-600/20 transition hover:from-red-500 hover:to-red-600 hover:-translate-y-0.5 active:scale-[0.98]"
+                    className="inline-flex items-center gap-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-700 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-blue-600/20 transition hover:from-blue-500 hover:to-indigo-600 hover:-translate-y-0.5 active:scale-[0.98]"
                   >
                     <Youtube size={18} />
-                    Visit Channel & Subscribe
+                    Visit Official Channel
                     <ArrowUpRight size={15} />
+                  </a>
+                  <a
+                    href="https://www.youtube.com/@aionionofficial/shorts"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl border border-blue-500/20 bg-blue-500/5 px-5 py-3 text-sm font-bold text-blue-300 backdrop-blur-md transition hover:bg-blue-500/10 hover:-translate-y-0.5 active:scale-[0.98]"
+                  >
+                    <Zap size={16} />
+                    Watch Shorts
                   </a>
                 </div>
               </div>
             </motion.div>
           ))}
+
+          {/* Personal Channels — 2-column grid */}
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {youtubeChannels.filter(c => !c.isCompany).map((channel, i) => (
+              <motion.div
+                key={channel.id}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.15, duration: 0.45 }}
+                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-zinc-900/90 via-zinc-900/70 to-zinc-950/90 p-[1px] transition hover:border-red-500/30"
+              >
+                {/* Animated gradient border */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-red-500/20 via-transparent to-indigo-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                <div className="relative rounded-2xl bg-zinc-950/80 backdrop-blur-xl p-6 md:p-7 space-y-5">
+                  {/* Glow orb */}
+                  <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-red-600/8 blur-3xl transition-all duration-500 group-hover:bg-red-600/15 group-hover:scale-125" />
+
+                  <div className="relative flex items-start justify-between gap-3">
+                    <div className="flex items-center gap-4">
+                      <motion.div
+                        whileHover={{ rotate: 360 }}
+                        transition={{ duration: 0.6 }}
+                        className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-red-600 to-red-700 text-white shadow-lg shadow-red-600/30"
+                      >
+                        <Youtube size={26} />
+                      </motion.div>
+                      <div>
+                        <h3 className="text-xl font-extrabold text-white flex items-center gap-2">
+                          {channel.name}
+                          <CheckCircle2 size={16} className="text-blue-400" />
+                        </h3>
+                        <p className="text-xs font-mono font-bold text-red-400 mt-0.5">
+                          {channel.handle}
+                        </p>
+                      </div>
+                    </div>
+                    <Badge className="bg-red-500/10 text-red-400 border-red-500/20 text-[10px] font-bold shrink-0">
+                      {channel.badge}
+                    </Badge>
+                  </div>
+
+                  <p className="text-sm text-zinc-300/90 leading-relaxed relative">
+                    {channel.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 relative">
+                    {channel.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-lg bg-white/5 border border-white/5 px-3 py-1.5 text-[11px] font-medium text-zinc-400 transition hover:bg-white/10 hover:text-zinc-200"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="relative pt-2">
+                    <a
+                      href={channel.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex w-full items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-red-600 to-red-700 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-red-600/20 transition hover:from-red-500 hover:to-red-600 hover:-translate-y-0.5 active:scale-[0.98]"
+                    >
+                      <Youtube size={18} />
+                      Visit Channel & Subscribe
+                      <ArrowUpRight size={15} />
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -557,6 +647,15 @@ export default function AiVideos() {
           </div>
 
           <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <a
+              href="https://www.youtube.com/@aionionofficial"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-700 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-blue-600/25 transition hover:from-blue-500 hover:to-indigo-600 hover:-translate-y-0.5 active:scale-95"
+            >
+              <Building size={18} />
+              @aionionofficial
+            </a>
             <a
               href="https://www.youtube.com/@jenishajeni-l9i"
               target="_blank"

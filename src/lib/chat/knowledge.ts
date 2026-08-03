@@ -7,6 +7,7 @@ export const portfolioData = {
     role: "Full-Stack Developer | AI Video Creator | Automation Specialist | Graphic Designer | Event Coordinator | Content Creator",
     company: "Aionion Capital (2026 – Present)",
     youtubeChannels: [
+      { name: "Aionion Capital Official", handle: "@aionionofficial", url: "https://www.youtube.com/@aionionofficial", focus: "Company channel — all AI videos produced by Johnson T including corporate shorts, promos, and educational clips" },
       { name: "Jenisha Jeni", handle: "@jenishajeni-l9i", url: "https://www.youtube.com/@jenishajeni-l9i", focus: "Creative AI video stories, digital animations, visual media" },
       { name: "John Elon Son", handle: "@johnElonSon", url: "https://www.youtube.com/@johnElonSon", focus: "Tech innovations, AI video production, automated media creations" }
     ],

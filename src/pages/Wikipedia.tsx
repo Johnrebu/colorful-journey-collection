@@ -74,7 +74,20 @@ export default function Wikipedia() {
               <p className="text-slate-700 dark:text-zinc-300 leading-relaxed">
                 Johnson creates end-to-end AI videos combining voice cloning, dynamic avatar synthesis, character animation, and automated editing. His video creations are published across his official YouTube channels:
               </p>
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                <a
+                  href="https://www.youtube.com/@aionionofficial"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between rounded-xl border border-blue-500/20 bg-blue-500/5 p-3.5 transition hover:bg-blue-500/10"
+                >
+                  <div>
+                    <div className="font-bold text-slate-900 dark:text-white text-sm">Aionion Capital Official</div>
+                    <div className="text-xs text-blue-600 dark:text-blue-400 font-mono font-semibold">@aionionofficial</div>
+                    <div className="text-[10px] text-slate-500 dark:text-zinc-500 mt-0.5">Company Channel</div>
+                  </div>
+                  <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">Visit →</span>
+                </a>
                 <a
                   href="https://www.youtube.com/@jenishajeni-l9i"
                   target="_blank"
@@ -85,7 +98,7 @@ export default function Wikipedia() {
                     <div className="font-bold text-slate-900 dark:text-white text-sm">Jenisha Jeni</div>
                     <div className="text-xs text-red-600 dark:text-red-400 font-mono font-semibold">@jenishajeni-l9i</div>
                   </div>
-                  <span className="text-xs font-semibold text-red-600 dark:text-red-400">Visit Channel →</span>
+                  <span className="text-xs font-semibold text-red-600 dark:text-red-400">Visit →</span>
                 </a>
                 <a
                   href="https://www.youtube.com/@johnElonSon"
@@ -97,7 +110,7 @@ export default function Wikipedia() {
                     <div className="font-bold text-slate-900 dark:text-white text-sm">John Elon Son</div>
                     <div className="text-xs text-red-600 dark:text-red-400 font-mono font-semibold">@johnElonSon</div>
                   </div>
-                  <span className="text-xs font-semibold text-red-600 dark:text-red-400">Visit Channel →</span>
+                  <span className="text-xs font-semibold text-red-600 dark:text-red-400">Visit →</span>
                 </a>
               </div>
             </CardContent>
