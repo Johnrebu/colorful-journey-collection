@@ -65,6 +65,43 @@ export default function Wikipedia() {
               </p>
             </CardContent>
           </Card>
+
+          <Card className="border-slate-200 bg-white/80 dark:border-zinc-700 dark:bg-zinc-900/70">
+            <CardContent className="p-5 space-y-4">
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                Official YouTube Channels & AI Video Production
+              </h2>
+              <p className="text-slate-700 dark:text-zinc-300 leading-relaxed">
+                Johnson creates end-to-end AI videos combining voice cloning, dynamic avatar synthesis, character animation, and automated editing. His video creations are published across his official YouTube channels:
+              </p>
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <a
+                  href="https://www.youtube.com/@jenishajeni-l9i"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between rounded-xl border border-red-500/20 bg-red-500/5 p-3.5 transition hover:bg-red-500/10"
+                >
+                  <div>
+                    <div className="font-bold text-slate-900 dark:text-white text-sm">Jenisha Jeni</div>
+                    <div className="text-xs text-red-600 dark:text-red-400 font-mono font-semibold">@jenishajeni-l9i</div>
+                  </div>
+                  <span className="text-xs font-semibold text-red-600 dark:text-red-400">Visit Channel →</span>
+                </a>
+                <a
+                  href="https://www.youtube.com/@johnElonSon"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between rounded-xl border border-red-500/20 bg-red-500/5 p-3.5 transition hover:bg-red-500/10"
+                >
+                  <div>
+                    <div className="font-bold text-slate-900 dark:text-white text-sm">John Elon Son</div>
+                    <div className="text-xs text-red-600 dark:text-red-400 font-mono font-semibold">@johnElonSon</div>
+                  </div>
+                  <span className="text-xs font-semibold text-red-600 dark:text-red-400">Visit Channel →</span>
+                </a>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         <aside className="lg:col-span-1">

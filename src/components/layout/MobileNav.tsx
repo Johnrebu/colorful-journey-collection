@@ -23,6 +23,7 @@ const MobileNav = ({ isOpen, onClose }: MobileNavProps) => {
             <MobileNavLink to="/about" onClick={onClose}>About</MobileNavLink>
             <MobileNavLink to="/bio" onClick={onClose}>Bio</MobileNavLink>
             <MobileNavLink to="/wikipedia" onClick={onClose}>Wiki Profile</MobileNavLink>
+            <MobileNavLink to="/ai-videos" onClick={onClose}>AI Videos</MobileNavLink>
             <MobileNavLink to="/services" onClick={onClose}>Services</MobileNavLink>
             <MobileNavLink to="/projects" onClick={onClose}>Projects</MobileNavLink>
             <MobileNavLink to="/resume" onClick={onClose}>Resume</MobileNavLink>

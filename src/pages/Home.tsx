@@ -22,6 +22,7 @@ import {
   Sparkles,
   Star,
   Terminal,
+  Youtube,
   Zap,
 } from "lucide-react";
 import useSeo from "@/hooks/useSeo";
@@ -29,6 +30,7 @@ import { getPersonSchema, getWebsiteSchema } from "@/lib/seo";
 import johnImage from "@/images/john.jpg";
 import ServicesSection from "@/components/services/ServicesSection";
 import ParallaxProfilePhoto from "@/components/ParallaxProfilePhoto";
+import { youtubeChannels } from "@/data/youtubeData";
 
 // Quick Credibility Stats
 const heroSignals = [
@@ -594,6 +596,87 @@ export default function Home() {
                 </a>
               </div>
             </motion.article>
+          ))}
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* AI VIDEO SHOWCASE & OFFICIAL YOUTUBE CHANNELS */}
+      {/* ============================================================ */}
+      <section className="space-y-8">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-red-400">
+              <Youtube size={14} className="text-red-500" />
+              Official YouTube Channels
+            </div>
+            <h2 className="mt-3 text-3xl font-extrabold text-white sm:text-4xl">
+              AI Video Creations & Channels
+            </h2>
+            <p className="mt-2 text-slate-300 max-w-2xl text-sm leading-relaxed">
+              Explore my generative AI video works, synthetic storytelling, and automated content production across my official YouTube channels.
+            </p>
+          </div>
+
+          <Link
+            to="/ai-videos"
+            className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-red-600/30 transition hover:bg-red-700 active:scale-95 shrink-0"
+          >
+            Explore AI Videos Gallery
+            <ArrowRight size={16} />
+          </Link>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2">
+          {youtubeChannels.map((channel) => (
+            <div
+              key={channel.id}
+              className="space-panel group relative overflow-hidden p-6 transition duration-300 hover:border-red-500/40"
+            >
+              <div className="flex items-start justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-red-600 text-white shadow-md group-hover:scale-105 transition-transform">
+                    <Youtube size={22} />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-white flex items-center gap-1.5">
+                      {channel.name}
+                      <CheckCircle2 size={15} className="text-blue-400" />
+                    </h3>
+                    <p className="text-xs font-mono font-semibold text-red-400">
+                      {channel.handle}
+                    </p>
+                  </div>
+                </div>
+                <span className="rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1 text-[11px] font-semibold text-red-300">
+                  {channel.badge}
+                </span>
+              </div>
+
+              <p className="mt-4 text-xs text-slate-300 leading-relaxed">
+                {channel.description}
+              </p>
+
+              <div className="mt-5 flex items-center justify-between pt-4 border-t border-white/10">
+                <div className="flex flex-wrap gap-1.5">
+                  {channel.tags.slice(0, 3).map((tag) => (
+                    <span key={tag} className="text-[10px] rounded bg-white/5 px-2 py-0.5 text-slate-400">
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+
+                <a
+                  href={channel.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-red-400 transition hover:text-red-300"
+                >
+                  Visit Channel
+                  <ArrowUpRight size={14} />
+                </a>
+              </div>
+            </div>
           ))}
         </div>
       </section>

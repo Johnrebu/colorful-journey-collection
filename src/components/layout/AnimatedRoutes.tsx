@@ -11,6 +11,7 @@ import Projects from "../../pages/Projects";
 import Services from "../../pages/Services";
 import Contact from "../../pages/Contact";
 import Wikipedia from "../../pages/Wikipedia";
+import AiVideos from "../../pages/AiVideos";
 import NotFound from "../../pages/NotFound";
 
 const AnimatedRoutes = () => {
@@ -23,10 +24,11 @@ const AnimatedRoutes = () => {
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
         <Route path="/bio" element={<Bio />} />
+        <Route path="/wikipedia" element={<Wikipedia />} />
+        <Route path="/ai-videos" element={<AiVideos />} />
         <Route path="/resume" element={<Resume />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/wikipedia" element={<Wikipedia />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
