@@ -1,12 +1,101 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Youtube, ExternalLink, Play, Sparkles, Video, Film, Tv, CheckCircle2, ArrowUpRight } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
+import {
+  Youtube,
+  ExternalLink,
+  Play,
+  Sparkles,
+  Film,
+  Tv,
+  CheckCircle2,
+  ArrowUpRight,
+  Wand2,
+  Zap,
+  Eye,
+  Bot,
+  Clapperboard,
+  Layers,
+  ArrowRight,
+} from "lucide-react";
+import { Link } from "react-router-dom";
 import useSeo from "@/hooks/useSeo";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { youtubeChannels, aiVideoWorks, AiVideoItem } from "@/data/youtubeData";
 
 const categories = ["All", "AI Animation", "Educational AI", "AI Shorts", "Conceptual Visuals"] as const;
+
+const categoryIcons: Record<string, React.ReactNode> = {
+  "All": <Layers size={14} />,
+  "AI Animation": <Wand2 size={14} />,
+  "Educational AI": <Bot size={14} />,
+  "AI Shorts": <Zap size={14} />,
+  "Conceptual Visuals": <Eye size={14} />,
+};
+
+const toolStack = [
+  "Runway Gen-3", "Kling AI", "Pika", "Sora", "ElevenLabs",
+  "Midjourney", "Stable Diffusion", "HeyGen", "D-ID", "Synthesia",
+  "CapCut AI", "Adobe Premiere", "DaVinci Resolve",
+];
+
+const stats = [
+  { value: "2", label: "YouTube Channels", icon: Tv },
+  { value: "AI", label: "Powered Videos", icon: Bot },
+  { value: "4+", label: "Videos / Month", icon: Clapperboard },
+  { value: "100%", label: "AI Generated", icon: Sparkles },
+];
+
+// Floating particle component for the hero
+function FloatingParticles() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {Array.from({ length: 20 }).map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full"
+          style={{
+            width: Math.random() * 4 + 2,
+            height: Math.random() * 4 + 2,
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            background: i % 3 === 0
+              ? "rgba(239, 68, 68, 0.4)"
+              : i % 3 === 1
+              ? "rgba(168, 85, 247, 0.3)"
+              : "rgba(99, 102, 241, 0.3)",
+          }}
+          animate={{
+            y: [0, -30 - Math.random() * 40, 0],
+            x: [0, Math.random() * 20 - 10, 0],
+            opacity: [0, 0.8, 0],
+            scale: [0.5, 1.2, 0.5],
+          }}
+          transition={{
+            duration: 4 + Math.random() * 4,
+            repeat: Infinity,
+            delay: Math.random() * 3,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+// Animated counter
+function AnimatedNumber({ target }: { target: string }) {
+  return (
+    <motion.span
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className="tabular-nums"
+    >
+      {target}
+    </motion.span>
+  );
+}
 
 export default function AiVideos() {
   useSeo({
@@ -16,196 +105,411 @@ export default function AiVideos() {
   });
 
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  const [activeVideo, setActiveVideo] = useState<AiVideoItem | null>(null);
+  const [hoveredVideo, setHoveredVideo] = useState<string | null>(null);
 
   const filteredVideos = selectedCategory === "All"
     ? aiVideoWorks
     : aiVideoWorks.filter((v) => v.category === selectedCategory);
 
   return (
-    <div className="space-y-10 pb-16">
-      {/* Header Banner */}
-      <section className="relative overflow-hidden rounded-[2rem] bg-gradient-to-r from-red-950/80 via-zinc-900 to-indigo-950/80 p-8 text-white shadow-2xl border border-white/10 md:p-12">
-        <div className="google-grid-bg absolute inset-0 opacity-20" />
-        <div className="relative z-10 space-y-4 max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-4 py-1.5 text-xs font-semibold text-red-400 backdrop-blur-md">
-            <Youtube size={16} className="text-red-500" />
-            Official YouTube Channels & AI Media Portfolio
-          </div>
-          <h1 className="text-4xl font-extrabold tracking-tight md:text-6xl text-white">
-            AI Video Production & Visual Creations
-          </h1>
-          <p className="text-lg text-zinc-300 leading-relaxed">
-            Welcome to my official video gallery. Every video work displayed here is crafted using state-of-the-art Generative AI, automated editing pipelines, synthetic voices, and cinematic storyboarding.
-          </p>
+    <div className="space-y-14 pb-20">
+      {/* ══════════════════════════════════════════════════════════════
+          IMMERSIVE HERO BANNER
+          ══════════════════════════════════════════════════════════════ */}
+      <section className="relative overflow-hidden rounded-[2rem] min-h-[420px] flex items-center">
+        {/* Multi-layer gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-red-950 via-zinc-950 to-indigo-950" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(239,68,68,0.15),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(99,102,241,0.12),transparent_60%)]" />
+
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: '40px 40px',
+          }}
+        />
+
+        {/* Floating particles */}
+        <FloatingParticles />
+
+        {/* Glowing orbs */}
+        <div className="absolute -top-20 -right-20 h-80 w-80 rounded-full bg-red-600/10 blur-[100px]" />
+        <div className="absolute -bottom-20 -left-20 h-60 w-60 rounded-full bg-indigo-600/10 blur-[80px]" />
+
+        {/* Content */}
+        <div className="relative z-10 p-8 md:p-14 max-w-4xl space-y-6">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-red-400 backdrop-blur-md"
+          >
+            <motion.span
+              animate={{ rotate: [0, 15, -15, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Clapperboard size={15} className="text-red-500" />
+            </motion.span>
+            AI Video Production Studio
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-4xl font-black tracking-tight leading-[1.1] md:text-6xl lg:text-7xl"
+          >
+            <span className="text-white">Crafting the Future</span>
+            <br />
+            <span className="bg-gradient-to-r from-red-400 via-pink-400 to-indigo-400 bg-clip-text text-transparent">
+              with AI Video
+            </span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="max-w-2xl text-base text-zinc-300/90 leading-relaxed md:text-lg"
+          >
+            Every frame you see is born from Generative AI — synthetic voices, dynamic avatars,
+            cinematic storyboarding, and automated editing pipelines. Welcome to my AI video universe.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex flex-wrap gap-3 pt-2"
+          >
+            <a
+              href="#channels"
+              className="inline-flex items-center gap-2 rounded-full bg-red-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-red-600/25 transition hover:bg-red-500 hover:-translate-y-0.5 active:scale-95"
+            >
+              <Youtube size={18} />
+              Explore Channels
+            </a>
+            <a
+              href="#gallery"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white/90 backdrop-blur-md transition hover:bg-white/10 hover:border-white/25 hover:-translate-y-0.5"
+            >
+              <Film size={18} />
+              Browse Gallery
+            </a>
+          </motion.div>
+        </div>
+
+        {/* Decorative play button */}
+        <div className="hidden lg:flex absolute right-16 top-1/2 -translate-y-1/2">
+          <motion.div
+            animate={{
+              scale: [1, 1.08, 1],
+              boxShadow: [
+                "0 0 0 0 rgba(239,68,68,0.3)",
+                "0 0 0 20px rgba(239,68,68,0)",
+                "0 0 0 0 rgba(239,68,68,0)",
+              ],
+            }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            className="flex h-28 w-28 items-center justify-center rounded-full bg-gradient-to-br from-red-600 to-red-700 text-white shadow-2xl shadow-red-600/30"
+          >
+            <Play size={44} className="ml-2 fill-white" />
+          </motion.div>
         </div>
       </section>
 
-      {/* Official YouTube Channels Section */}
-      <section className="space-y-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <Tv className="text-red-500" size={24} />
-              Official YouTube Channels
-            </h2>
-            <p className="text-sm text-slate-600 dark:text-zinc-400">
-              Subscribe and watch full AI video productions on YouTube
-            </p>
+      {/* ══════════════════════════════════════════════════════════════
+          LIVE STATS TICKER
+          ══════════════════════════════════════════════════════════════ */}
+      <section className="grid grid-cols-2 gap-4 md:grid-cols-4">
+        {stats.map((stat, i) => {
+          const Icon = stat.icon;
+          return (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.4 }}
+              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-zinc-900/80 to-zinc-950/80 p-5 backdrop-blur-sm transition hover:border-red-500/30"
+            >
+              <div className="absolute -right-4 -top-4 h-20 w-20 rounded-full bg-red-500/5 blur-2xl transition group-hover:bg-red-500/10" />
+              <div className="relative space-y-2">
+                <Icon size={20} className="text-red-400" />
+                <div className="text-3xl font-black text-white">
+                  <AnimatedNumber target={stat.value} />
+                </div>
+                <div className="text-xs font-medium text-zinc-400 uppercase tracking-wider">
+                  {stat.label}
+                </div>
+              </div>
+            </motion.div>
+          );
+        })}
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════
+          OFFICIAL YOUTUBE CHANNELS — GLASSMORPHIC CARDS
+          ══════════════════════════════════════════════════════════════ */}
+      <section id="channels" className="space-y-8">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="space-y-2"
+        >
+          <div className="inline-flex items-center gap-2 rounded-full border border-red-500/20 bg-red-500/5 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-red-400">
+            <Tv size={13} />
+            Official Channels
           </div>
-        </div>
+          <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white md:text-4xl">
+            My YouTube Channels
+          </h2>
+          <p className="text-sm text-slate-600 dark:text-zinc-400 max-w-xl">
+            Subscribe to my official channels where I publish all AI-generated video creations
+          </p>
+        </motion.div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          {youtubeChannels.map((channel) => (
-            <Card
+          {youtubeChannels.map((channel, i) => (
+            <motion.div
               key={channel.id}
-              className="group relative overflow-hidden border-slate-200 bg-white/80 transition duration-300 hover:border-red-500/50 hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-900/80"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15, duration: 0.45 }}
+              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-zinc-900/90 via-zinc-900/70 to-zinc-950/90 p-[1px] transition hover:border-red-500/30"
             >
-              <CardContent className="p-6 space-y-4">
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white shadow-md group-hover:scale-105 transition-transform">
-                      <Youtube size={24} />
-                    </div>
+              {/* Animated gradient border */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-red-500/20 via-transparent to-indigo-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              <div className="relative rounded-2xl bg-zinc-950/80 backdrop-blur-xl p-6 md:p-7 space-y-5">
+                {/* Glow orb */}
+                <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-red-600/8 blur-3xl transition-all duration-500 group-hover:bg-red-600/15 group-hover:scale-125" />
+
+                <div className="relative flex items-start justify-between gap-3">
+                  <div className="flex items-center gap-4">
+                    <motion.div
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.6 }}
+                      className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-red-600 to-red-700 text-white shadow-lg shadow-red-600/30"
+                    >
+                      <Youtube size={26} />
+                    </motion.div>
                     <div>
-                      <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                      <h3 className="text-xl font-extrabold text-white flex items-center gap-2">
                         {channel.name}
-                        <CheckCircle2 size={16} className="text-blue-500" />
+                        <CheckCircle2 size={16} className="text-blue-400" />
                       </h3>
-                      <p className="text-xs font-mono font-semibold text-red-600 dark:text-red-400">
+                      <p className="text-xs font-mono font-bold text-red-400 mt-0.5">
                         {channel.handle}
                       </p>
                     </div>
                   </div>
-                  <Badge variant="outline" className="border-red-500/30 text-red-600 dark:text-red-400 bg-red-500/5">
+                  <Badge className="bg-red-500/10 text-red-400 border-red-500/20 text-[10px] font-bold shrink-0">
                     {channel.badge}
                   </Badge>
                 </div>
 
-                <p className="text-sm text-slate-700 dark:text-zinc-300 leading-relaxed">
+                <p className="text-sm text-zinc-300/90 leading-relaxed relative">
                   {channel.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2 pt-1">
+                <div className="flex flex-wrap gap-2 relative">
                   {channel.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-md bg-slate-100 px-2.5 py-1 text-xs text-slate-600 dark:bg-zinc-800 dark:text-zinc-400"
+                      className="rounded-lg bg-white/5 border border-white/5 px-3 py-1.5 text-[11px] font-medium text-zinc-400 transition hover:bg-white/10 hover:text-zinc-200"
                     >
                       #{tag}
                     </span>
                   ))}
                 </div>
 
-                <div className="pt-2">
+                <div className="relative pt-2">
                   <a
                     href={channel.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-red-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-red-700 shadow-md active:scale-98"
+                    className="inline-flex w-full items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-red-600 to-red-700 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-red-600/20 transition hover:from-red-500 hover:to-red-600 hover:-translate-y-0.5 active:scale-[0.98]"
                   >
                     <Youtube size={18} />
                     Visit Channel & Subscribe
-                    <ArrowUpRight size={16} />
+                    <ArrowUpRight size={15} />
                   </a>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </motion.div>
           ))}
         </div>
       </section>
 
-      {/* Video Portfolio Gallery */}
-      <section className="space-y-6">
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div>
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <Film className="text-indigo-500" size={24} />
-              AI Video Creations & Showcase
+      {/* ══════════════════════════════════════════════════════════════
+          AI TOOLS USED — SCROLLING TICKER
+          ══════════════════════════════════════════════════════════════ */}
+      <section className="relative overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/60 py-5">
+        <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-transparent to-zinc-950 z-10 pointer-events-none" />
+        <div className="flex items-center gap-3 px-6 mb-3">
+          <Wand2 size={15} className="text-purple-400" />
+          <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-purple-400">
+            AI Tools & Platforms Used
+          </span>
+        </div>
+        <motion.div
+          className="flex gap-4 px-6"
+          animate={{ x: [0, -800] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+        >
+          {[...toolStack, ...toolStack].map((tool, i) => (
+            <span
+              key={`${tool}-${i}`}
+              className="shrink-0 rounded-full border border-purple-500/15 bg-purple-500/5 px-4 py-2 text-xs font-semibold text-purple-300/80 whitespace-nowrap"
+            >
+              {tool}
+            </span>
+          ))}
+        </motion.div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════
+          VIDEO GALLERY — CINEMATIC GRID
+          ══════════════════════════════════════════════════════════════ */}
+      <section id="gallery" className="space-y-8">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
+        >
+          <div className="space-y-2">
+            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/5 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-indigo-400">
+              <Film size={13} />
+              Portfolio
+            </div>
+            <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white md:text-4xl">
+              AI Video Creations
             </h2>
-            <p className="text-sm text-slate-600 dark:text-zinc-400">
-              Browse AI video projects, shorts, animations, and automated media
+            <p className="text-sm text-slate-600 dark:text-zinc-400 max-w-lg">
+              Browse my AI-generated video projects — from character animations to educational content
             </p>
           </div>
 
           {/* Category Filter Pills */}
           <div className="flex flex-wrap gap-2">
             {categories.map((cat) => (
-              <button
+              <motion.button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`rounded-full px-4 py-1.5 text-xs font-semibold transition ${
+                whileHover={{ y: -1 }}
+                whileTap={{ scale: 0.95 }}
+                className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold transition-all duration-300 ${
                   selectedCategory === cat
-                    ? "bg-red-600 text-white shadow-md"
-                    : "bg-slate-200 text-slate-700 hover:bg-slate-300 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"
+                    ? "bg-gradient-to-r from-red-600 to-indigo-600 text-white shadow-lg shadow-red-600/20"
+                    : "border border-white/10 bg-white/5 text-zinc-400 hover:bg-white/10 hover:text-white dark:border-zinc-800"
                 }`}
               >
+                {categoryIcons[cat]}
                 {cat}
-              </button>
+              </motion.button>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Video Cards Grid */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <AnimatePresence mode="popLayout">
-            {filteredVideos.map((video) => (
+            {filteredVideos.map((video, i) => (
               <motion.div
                 key={video.id}
                 layout
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3 }}
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9, y: -10 }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+                onMouseEnter={() => setHoveredVideo(video.id)}
+                onMouseLeave={() => setHoveredVideo(null)}
               >
-                <Card className="group overflow-hidden border-slate-200 bg-white/80 transition duration-300 hover:border-red-500/40 hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-900/80">
-                  <div className="relative aspect-video w-full overflow-hidden bg-slate-950">
+                <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/60 transition-all duration-500 hover:border-red-500/30 hover:shadow-2xl hover:shadow-red-600/5">
+                  {/* Video Thumbnail */}
+                  <div className="relative aspect-video w-full overflow-hidden">
                     <img
                       src={video.thumbnail}
                       alt={video.title}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="h-full w-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-75"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
 
-                    <Badge className="absolute top-3 left-3 bg-red-600 text-white font-semibold shadow-sm">
-                      {video.category}
-                    </Badge>
+                    {/* Cinematic gradient overlays */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/30 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/40 to-transparent" />
 
+                    {/* Category badge */}
+                    <motion.div
+                      initial={false}
+                      animate={{ x: hoveredVideo === video.id ? 0 : -4, opacity: hoveredVideo === video.id ? 1 : 0.85 }}
+                      className="absolute top-4 left-4"
+                    >
+                      <span className="inline-flex items-center gap-1.5 rounded-lg bg-zinc-950/70 backdrop-blur-md border border-white/10 px-3 py-1.5 text-[11px] font-bold text-white">
+                        {categoryIcons[video.category]}
+                        {video.category}
+                      </span>
+                    </motion.div>
+
+                    {/* Featured badge */}
                     {video.featured && (
-                      <Badge className="absolute top-3 right-3 bg-amber-500 text-slate-950 font-bold flex items-center gap-1 shadow-sm">
-                        <Sparkles size={12} /> Featured AI Work
-                      </Badge>
+                      <div className="absolute top-4 right-4">
+                        <span className="inline-flex items-center gap-1 rounded-lg bg-amber-500/90 px-2.5 py-1.5 text-[10px] font-black text-zinc-950 uppercase tracking-wider shadow-lg shadow-amber-500/30">
+                          <Sparkles size={11} /> Featured
+                        </span>
+                      </div>
                     )}
 
+                    {/* Center play button */}
                     <a
                       href={video.youtubeUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="absolute inset-0 flex items-center justify-center"
                     >
-                      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-red-600/90 text-white shadow-xl transition-transform duration-300 group-hover:scale-110 group-hover:bg-red-600">
-                        <Play size={26} className="ml-1 fill-white" />
-                      </div>
+                      <motion.div
+                        initial={false}
+                        animate={{
+                          scale: hoveredVideo === video.id ? 1.15 : 1,
+                          opacity: hoveredVideo === video.id ? 1 : 0.8,
+                        }}
+                        transition={{ duration: 0.3 }}
+                        className="flex h-16 w-16 items-center justify-center rounded-full bg-red-600/90 text-white shadow-2xl shadow-red-600/40 backdrop-blur-sm transition-colors group-hover:bg-red-600"
+                      >
+                        <Play size={28} className="ml-1 fill-white" />
+                      </motion.div>
                     </a>
+
+                    {/* Bottom info overlay */}
+                    <div className="absolute bottom-0 inset-x-0 p-4 pb-0">
+                      <div className="flex items-center gap-2 text-[11px] font-mono font-bold text-red-400">
+                        <Youtube size={13} />
+                        {video.channelHandle}
+                      </div>
+                    </div>
                   </div>
 
-                  <CardContent className="p-5 space-y-3">
-                    <div className="flex items-center justify-between text-xs text-slate-500 dark:text-zinc-400 font-mono">
-                      <span>Channel: <strong className="text-red-600 dark:text-red-400 font-semibold">{video.channelHandle}</strong></span>
-                    </div>
-
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-white line-clamp-1 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
+                  {/* Card Body */}
+                  <div className="p-5 space-y-3">
+                    <h3 className="text-lg font-extrabold text-white line-clamp-1 group-hover:text-red-400 transition-colors duration-300">
                       {video.title}
                     </h3>
 
-                    <p className="text-xs text-slate-600 dark:text-zinc-300 line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-zinc-400 line-clamp-2 leading-relaxed">
                       {video.description}
                     </p>
 
-                    <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-zinc-800">
+                    <div className="flex items-center justify-between pt-3 border-t border-white/5">
                       <div className="flex flex-wrap gap-1.5">
                         {video.tags.map((tag) => (
-                          <span key={tag} className="text-[10px] bg-slate-100 dark:bg-zinc-800 text-slate-600 dark:text-zinc-400 px-2 py-0.5 rounded">
+                          <span
+                            key={tag}
+                            className="text-[10px] rounded-md bg-white/5 border border-white/5 px-2 py-1 text-zinc-500 font-medium"
+                          >
                             #{tag}
                           </span>
                         ))}
@@ -215,17 +519,61 @@ export default function AiVideos() {
                         href={video.youtubeUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs font-semibold text-red-600 hover:text-red-700 dark:text-red-400"
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-red-400 transition hover:text-red-300 shrink-0"
                       >
-                        Watch on YouTube
-                        <ExternalLink size={13} />
+                        Watch
+                        <ExternalLink size={12} />
                       </a>
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </AnimatePresence>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════
+          CTA FOOTER — SUBSCRIBE & EXPLORE
+          ══════════════════════════════════════════════════════════════ */}
+      <section className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-red-950/60 via-zinc-950 to-indigo-950/60 p-8 md:p-12">
+        <div className="absolute -left-20 -top-20 h-80 w-80 rounded-full bg-red-600/8 blur-[100px]" />
+        <div className="absolute -right-20 -bottom-20 h-60 w-60 rounded-full bg-indigo-600/8 blur-[80px]" />
+
+        <div className="relative flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div className="max-w-xl space-y-4 text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 rounded-full border border-red-500/20 bg-red-500/10 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-red-400">
+              <Sparkles size={13} />
+              More AI Content Coming
+            </div>
+            <h2 className="text-3xl font-extrabold text-white md:text-4xl">
+              Subscribe for New AI Creations
+            </h2>
+            <p className="text-sm text-zinc-400 leading-relaxed">
+              New AI-generated videos drop regularly. Subscribe to stay updated with the latest generative video experiments, tutorials, and visual stories.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <a
+              href="https://www.youtube.com/@jenishajeni-l9i"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-red-600/25 transition hover:bg-red-500 hover:-translate-y-0.5 active:scale-95"
+            >
+              <Youtube size={18} />
+              @jenishajeni-l9i
+            </a>
+            <a
+              href="https://www.youtube.com/@johnElonSon"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-6 py-3 text-sm font-bold text-white backdrop-blur-md transition hover:bg-white/10 hover:-translate-y-0.5 active:scale-95"
+            >
+              <Youtube size={18} />
+              @johnElonSon
+            </a>
+          </div>
         </div>
       </section>
     </div>
