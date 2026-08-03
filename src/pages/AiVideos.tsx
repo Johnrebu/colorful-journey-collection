@@ -16,16 +16,18 @@ import {
   Clapperboard,
   Layers,
   ArrowRight,
+  Building,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import useSeo from "@/hooks/useSeo";
 import { Badge } from "@/components/ui/badge";
 import { youtubeChannels, aiVideoWorks, AiVideoItem } from "@/data/youtubeData";
 
-const categories = ["All", "AI Animation", "Educational AI", "AI Shorts", "Conceptual Visuals"] as const;
+const categories = ["All", "Corporate AI", "AI Animation", "Educational AI", "AI Shorts", "Conceptual Visuals"] as const;
 
 const categoryIcons: Record<string, React.ReactNode> = {
   "All": <Layers size={14} />,
+  "Corporate AI": <Building size={14} />,
   "AI Animation": <Wand2 size={14} />,
   "Educational AI": <Bot size={14} />,
   "AI Shorts": <Zap size={14} />,
@@ -39,7 +41,7 @@ const toolStack = [
 ];
 
 const stats = [
-  { value: "2", label: "YouTube Channels", icon: Tv },
+  { value: "3", label: "YouTube Channels", icon: Tv },
   { value: "AI", label: "Powered Videos", icon: Bot },
   { value: "4+", label: "Videos / Month", icon: Clapperboard },
   { value: "100%", label: "AI Generated", icon: Sparkles },

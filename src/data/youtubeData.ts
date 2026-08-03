@@ -7,6 +7,7 @@ export interface YoutubeChannel {
   badge: string;
   subscribers?: string;
   tags: string[];
+  isCompany?: boolean;
 }
 
 export interface AiVideoItem {
@@ -16,7 +17,7 @@ export interface AiVideoItem {
   youtubeId?: string; // e.g. for embeds if available
   youtubeUrl: string;
   channelHandle: string;
-  category: "AI Animation" | "Educational AI" | "AI Shorts" | "Conceptual Visuals";
+  category: "AI Animation" | "Educational AI" | "AI Shorts" | "Conceptual Visuals" | "Corporate AI";
   thumbnail: string;
   duration?: string;
   publishedDate?: string;
@@ -25,6 +26,16 @@ export interface AiVideoItem {
 }
 
 export const youtubeChannels: YoutubeChannel[] = [
+  {
+    id: "aionionofficial",
+    name: "Aionion Capital Official",
+    handle: "@aionionofficial",
+    url: "https://www.youtube.com/@aionionofficial",
+    description: "Official company channel of Aionion Capital. All AI-generated video content on this channel — including shorts, promotional videos, and educational clips — was produced by Johnson T as the in-house AI Video Creator & Automation Specialist.",
+    badge: "Company Channel",
+    tags: ["Aionion Capital", "Corporate AI", "Company Shorts", "Official Content"],
+    isCompany: true,
+  },
   {
     id: "jenishajeni",
     name: "Jenisha Jeni",
@@ -46,6 +57,28 @@ export const youtubeChannels: YoutubeChannel[] = [
 ];
 
 export const aiVideoWorks: AiVideoItem[] = [
+  {
+    id: "v-ac1",
+    title: "Aionion Capital — AI-Powered Company Shorts & Promos",
+    description: "End-to-end AI video productions for the official Aionion Capital channel: promotional shorts, educational reels, brand storytelling, and corporate announcements — all produced by Johnson T.",
+    youtubeUrl: "https://www.youtube.com/@aionionofficial/shorts",
+    channelHandle: "@aionionofficial",
+    category: "Corporate AI",
+    thumbnail: "https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=800&auto=format&fit=crop",
+    tags: ["Aionion Capital", "Corporate", "AI Shorts"],
+    featured: true,
+  },
+  {
+    id: "v-ac2",
+    title: "Corporate Brand Storytelling with Generative AI",
+    description: "AI-driven brand videos combining dynamic avatar narration, motion graphics, and automated editing for Aionion Capital's social media and investor communications.",
+    youtubeUrl: "https://www.youtube.com/@aionionofficial/shorts",
+    channelHandle: "@aionionofficial",
+    category: "Corporate AI",
+    thumbnail: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=800&auto=format&fit=crop",
+    tags: ["Brand Story", "AI Narration", "Motion Graphics"],
+    featured: true,
+  },
   {
     id: "v1",
     title: "AI Storytelling & Character Animation Series",
