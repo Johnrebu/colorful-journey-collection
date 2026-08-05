@@ -2,7 +2,385 @@
 // To take ownership, delete this banner line; the plugin then leaves the file alone.
 // supabase function: mcp
 // Bundled from src/lib/mcp/index.ts by @lovable.dev/mcp-js.
+// src/lib/mcp/index.ts
+import { defineMcp } from "npm:@lovable.dev/mcp-js@0.24.0";
+
+// src/lib/mcp/tools/get-profile.ts
+import { defineTool } from "npm:@lovable.dev/mcp-js@0.24.0";
+
+// src/lib/chat/knowledge.ts
+var portfolioData = {
+  profile: {
+    name: "Johnson",
+    from: "Pudukkottai",
+    base: "Chennai (Tambaram)",
+    role: "Full-Stack Developer | AI Video Creator | Automation Specialist | Graphic Designer | Event Coordinator | Content Creator",
+    company: "Aionion Capital (2026 \u2013 Present)",
+    youtubeChannels: [
+      { name: "Aionion Capital Official", handle: "@aionionofficial", url: "https://www.youtube.com/@aionionofficial", focus: "Company channel \u2014 all AI videos produced by Johnson T including corporate shorts, promos, and educational clips" },
+      { name: "Jenisha Jeni", handle: "@jenishajeni-l9i", url: "https://www.youtube.com/@jenishajeni-l9i", focus: "Creative AI video stories, digital animations, visual media" },
+      { name: "John Elon Son", handle: "@johnElonSon", url: "https://www.youtube.com/@johnElonSon", focus: "Tech innovations, AI video production, automated media creations" }
+    ]
+  },
+  experience: {
+    current: "Full Stack Developer & Multidisciplinary Specialist at Aionion Capital (2026 \u2013 Present)",
+    teaching: "9+ years teaching chemistry",
+    transition: "2024 career transition to IT",
+    course: "9-month Python full-stack program at Greens Technology",
+    pillars: [
+      "Full-Stack Engineering & System Automation: <300ms backend API response times, \u2265 99.5% system uptime, 100% CRM sync accuracy within 24h, \u2265 80% test coverage.",
+      "AI Video Creation & Digital Content Strategy: 4+ AI educational videos/month, \u2265 40% watch time, +10% MoM subscriber growth, short-form SEO metadata optimization.",
+      "Graphic Design & Creative Branding: 100% on-time digital campaign delivery minimum 5 days prior to launch, zero campaign delays, reusable brand templates.",
+      "Event Coordination & Digital Operations: \u2265 99% live AV tech uptime, 2-hour pre-event dry-run setup, \u2265 95% escalation-free vendor delivery, \u2265 90% SOP compliance."
+    ]
+  },
+  education: [
+    "B.Sc (H.H. The Rajah's College, Pudukkottai)",
+    "M.Sc (Bishop Heber College, Trichy)",
+    "B.Ed (Mother Teresa College of Education, Illuppur)",
+    "DCA, Tally, DTP, PGDCA"
+  ],
+  skills: {
+    technical: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Python",
+      "Django",
+      "SQL",
+      "System Automation",
+      "AI Video Production",
+      "Graphic Design & Branding",
+      "Live AV & Event Tech Ops",
+      "WordPress"
+    ],
+    soft: ["Communication", "Problem-solving", "Adaptability", "Team collaboration", "Event Orchestration"]
+  },
+  projects: [
+    {
+      name: "Money Pechu Events",
+      stack: ["React", "TypeScript", "Tailwind CSS"],
+      description: "Live event management and ticketing web platform",
+      url: "https://moneypechuevents.netlify.app/",
+      github: "https://github.com/Johnrebu/event-companion",
+      keywords: ["moneypechu", "events", "ticketing", "live"]
+    },
+    {
+      name: "Rebekha Caterers",
+      stack: ["Full-Stack", "React", "Custom UI"],
+      description: "Full catering business website with menu showcases and booking workflows",
+      url: "https://rebekhacaterers.online/",
+      github: "https://github.com/Johnrebu/rebekha-catering-website",
+      keywords: ["rebekha", "caterers", "catering", "live"]
+    },
+    {
+      name: "Tiffin Coffee Range CRM",
+      stack: ["Full-Stack", "Python", "React"],
+      description: "Enterprise CRM & management portal for Tiffin Coffee Range",
+      url: "https://crm.tiffincoffeerange.com/",
+      github: "https://github.com/Johnrebu/lead-hub",
+      keywords: ["crm", "tiffin coffee", "enterprise", "dashboard"]
+    },
+    {
+      name: "Dalphina Academy",
+      stack: ["React", "TypeScript", "Tailwind CSS"],
+      description: "Educational academy portal presenting curriculums and student enrollment pathways",
+      url: "https://dalphinaacademy.netlify.app/",
+      github: "https://github.com/Johnrebu/iragu-foundation-support",
+      keywords: ["dalphina", "academy", "education", "courses"]
+    },
+    {
+      name: "Tiffin Coffee Range Main Site",
+      stack: ["Full-Stack", "Commercial Web"],
+      description: "Official commercial website for Tiffin Coffee Range brand showcasing outlets and menus",
+      url: "https://tiffincoffeerange.com/",
+      github: "https://github.com/Johnrebu/TiffinCoffeeRange",
+      keywords: ["tiffin coffee", "commercial", "brand"]
+    },
+    {
+      name: "React Colorful Weather Widget",
+      stack: ["React", "TypeScript", "Tailwind CSS", "OpenWeatherMap API"],
+      description: "Dynamic weather widget with colorful UI",
+      keywords: ["weather", "widget", "openweather"]
+    },
+    {
+      name: "Employee Directory Application",
+      stack: ["React", "TypeScript", "Tailwind CSS", "useMemo"],
+      description: "Optimized employee management system",
+      keywords: ["employee", "directory", "management"]
+    },
+    {
+      name: "E-commerce Website",
+      stack: ["React", "React Router", "Context API", "MongoDB"],
+      description: "Full-featured online store",
+      keywords: ["ecommerce", "e-commerce", "shop", "store", "mern"]
+    }
+  ],
+  availability: {
+    status: "Currently at Aionion Capital; open to select high-impact consulting & projects",
+    response_time: "24-48 hours",
+    location_preference: "Chennai or remote"
+  },
+  interests: {
+    hobbies: ["Cricket", "Reading", "AI Content Creation"],
+    goals: "Long-term research and innovation in computer science, system automation, and AI media"
+  },
+  services: {
+    phone: "+91 875-477-4022",
+    whatsappUrl: "https://wa.me/918754774022",
+    webPackages: [
+      {
+        name: "Basic Landing Site",
+        price: "\u20B912,000 \u2013 \u20B925,000",
+        timeline: "1 - 2 Weeks",
+        deliverables: ["5 Pages", "Fully Responsive UI", "Contact Form Integration", "Basic SEO Setup"]
+      },
+      {
+        name: "Business + CMS / Blog",
+        price: "\u20B925,000 \u2013 \u20B960,000",
+        timeline: "2 - 4 Weeks",
+        deliverables: ["10 Pages", "Dynamic Blog Engine", "Admin CMS Panel", "On-Page SEO"]
+      },
+      {
+        name: "E-Commerce Website",
+        price: "\u20B960,000 \u2013 \u20B92,00,000+",
+        timeline: "4 - 6 Weeks",
+        deliverables: ["Product Catalog", "Cart & Checkout", "Payment Gateway", "Admin Dashboard"]
+      },
+      {
+        name: "Custom Web App / Portal",
+        price: "\u20B980,000 \u2013 \u20B95,00,000+",
+        timeline: "6 - 12 Weeks",
+        deliverables: ["Authentication", "Role Dashboards", "Custom Workflows", "REST/GraphQL APIs"]
+      }
+    ],
+    mobilePackages: [
+      {
+        name: "Basic Application",
+        price: "\u20B950,000 \u2013 \u20B91,20,000",
+        timeline: "3 - 4 Weeks",
+        deliverables: ["4\u20135 Static/Dynamic Screens", "Clean UI", "Basic Form Inputs"]
+      },
+      {
+        name: "Standard Application",
+        price: "\u20B91,50,000 \u2013 \u20B94,00,000",
+        timeline: "6 - 8 Weeks",
+        deliverables: ["User Auth", "Payment Gateway", "Admin Panel", "Custom APIs"]
+      },
+      {
+        name: "Complex Enterprise App",
+        price: "\u20B94,00,000 \u2013 \u20B910,00,000+",
+        timeline: "10 - 16 Weeks",
+        deliverables: ["Real-time Features", "Booking System", "Full E-Commerce", "Custom Backend"]
+      }
+    ],
+    hourlyCustom: [
+      {
+        name: "Hourly Technical Consulting",
+        price: "\u20B9800 \u2013 \u20B92,000 / hr",
+        idealFor: "Bug fixes, code reviews, small feature enhancements, architecture consultation"
+      },
+      {
+        name: "Dedicated Daily Sprint",
+        price: "\u20B93,500 \u2013 \u20B98,000 / day (8 Hours)",
+        idealFor: "Rapid prototyping, high-intensity feature builds, code refactoring"
+      }
+    ],
+    inclusions: [
+      "Responsive Design",
+      "2 Rounds of Revisions",
+      "1 Month Free Post-Launch Bug Support",
+      "Full Source Code Handover"
+    ],
+    exclusions: [
+      "Hosting & Domain registration fees",
+      "Paid 3rd-party API credits"
+    ]
+  }
+};
+
+// src/lib/mcp/tools/get-profile.ts
+var get_profile_default = defineTool({
+  name: "get_profile",
+  title: "Get profile",
+  description: "Get Johnson's public profile: name, role, location, career background, education, skills, availability and interests.",
+  inputSchema: {},
+  annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
+  handler: () => {
+    const { profile, experience, education, skills: skills2, availability, interests } = portfolioData;
+    const summary = {
+      profile,
+      experience,
+      education,
+      skills: skills2,
+      availability,
+      interests
+    };
+    return {
+      content: [{ type: "text", text: JSON.stringify(summary, null, 2) }],
+      structuredContent: summary
+    };
+  }
+});
+
+// src/lib/mcp/tools/list-projects.ts
+import { defineTool as defineTool2 } from "npm:@lovable.dev/mcp-js@0.24.0";
+import { z } from "npm:zod@^3.23.8";
+var list_projects_default = defineTool2({
+  name: "list_projects",
+  title: "List projects",
+  description: "List Johnson's public portfolio projects with tech stack, description, live URL and GitHub link. Optionally filter by a search term.",
+  inputSchema: {
+    query: z.string().optional().describe("Optional search term matched against project name, stack, description or keywords.")
+  },
+  annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
+  handler: ({ query }) => {
+    const term = query?.trim().toLowerCase();
+    const projects = term ? portfolioData.projects.filter(
+      (project) => [project.name, project.description, ...project.stack, ...project.keywords].join(" ").toLowerCase().includes(term)
+    ) : portfolioData.projects;
+    return {
+      content: [{ type: "text", text: JSON.stringify(projects, null, 2) }],
+      structuredContent: { count: projects.length, projects }
+    };
+  }
+});
+
+// src/lib/mcp/tools/get-resume.ts
+import { defineTool as defineTool3 } from "npm:@lovable.dev/mcp-js@0.24.0";
+
+// src/components/resume/resumeData.ts
+var workExperiences = [
+  {
+    title: "Full Stack Developer | AI & Digital Ops Specialist - Aionion Capital",
+    period: "Chennai \u2022 2026 - Present",
+    responsibilities: [
+      "Full-Stack Engineering & Automation: Built backend API architectures with sub-300ms response times, \u2265 99.5% uptime, and 100% CRM lead sync accuracy.",
+      "AI Video Production & Content Strategy: Scripted, edited, and published 4+ AI educational videos per month with \u2265 40% watch time and +10% MoM growth.",
+      "Graphic Design & Creative Branding: Produced digital campaign assets, thumbnails, and reusable brand kits with 100% on-time delivery (5 days prior to launch).",
+      "Event Coordination & Live Tech Ops: Orchestrated live event tech with \u2265 99% AV uptime, 2-hour pre-event dry-runs, and \u2265 95% escalation-free vendor delivery."
+    ]
+  },
+  {
+    title: "Teacher - Infant Jesus Mat. Hr. Sec. School",
+    period: "Pattabiram, Chennai \u2022 06/2015 - 06/2018",
+    responsibilities: [
+      "Taught Chemistry and Science to classes IX, X, XI, and XII.",
+      "Implemented engaging methodologies to improve student understanding."
+    ]
+  },
+  {
+    title: "Teacher - Good Shepherd Mat. Hr. Sec. School",
+    period: "Pattabiram, Chennai \u2022 06/2015 - 06/2018",
+    responsibilities: [
+      "Instructed students in Chemistry and Biochemistry across classes VIII to XII.",
+      "Enhanced curriculum with practical lab sessions."
+    ]
+  },
+  {
+    title: "Teacher - Mount Zion Mat. Hr. Sec. School",
+    period: "Pattabiram & Pudukkottai \u2022 06/2018 - 01/2024",
+    responsibilities: [
+      "Taught Chemistry to classes VI to VIII.",
+      "Organized successful science fairs and earned Teacher of the Year honors in 2019."
+    ]
+  }
+];
+var educationItems = [
+  {
+    degree: "B.Ed",
+    institution: "Mother Teresa College of Education, Illuppur",
+    period: "06/2014 - 06/2015"
+  },
+  {
+    degree: "M.Sc. (Chemistry)",
+    institution: "Bishop Heber College, Trichy",
+    period: "06/2012 - 06/2014"
+  },
+  {
+    degree: "B.Sc. (Chemistry)",
+    institution: "H.H. The Rajah's College, Pudukkottai",
+    period: "06/2009 - 06/2012"
+  },
+  {
+    degree: "S.S.L.C. & H.S.C.",
+    institution: "Govt. Hr. Sec. School, Sadayampatti",
+    period: "06/2006 - 06/2009"
+  }
+];
+var skills = [
+  { name: "HTML", scheme: "orange" },
+  { name: "CSS", scheme: "blue" },
+  { name: "JavaScript", scheme: "orange" },
+  { name: "React JS", scheme: "blue" },
+  { name: "TypeScript", scheme: "blue" },
+  { name: "Tailwind CSS", scheme: "blue" },
+  { name: "Python", scheme: "blue" },
+  { name: "Django", scheme: "purple" },
+  { name: "SQL", scheme: "purple" },
+  { name: "WordPress", scheme: "blue" },
+  { name: "AI Video Production", scheme: "purple" },
+  { name: "Graphic Design", scheme: "orange" },
+  { name: "Event AV Ops", scheme: "blue" }
+];
+var certifications = [
+  "Full Stack Developer",
+  "Python Using AI Workshop",
+  "AI Tools and ChatGPT Workshop",
+  "Build an E-Commerce platform using React Masterclass"
+];
+
+// src/lib/mcp/tools/get-resume.ts
+var get_resume_default = defineTool3({
+  name: "get_resume",
+  title: "Get resume",
+  description: "Get Johnson's public resume: work experience, education history, skills and certifications.",
+  inputSchema: {},
+  annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
+  handler: () => {
+    const resume = {
+      workExperiences,
+      education: educationItems,
+      skills: skills.map((skill) => skill.name),
+      certifications
+    };
+    return {
+      content: [{ type: "text", text: JSON.stringify(resume, null, 2) }],
+      structuredContent: resume
+    };
+  }
+});
+
+// src/lib/mcp/tools/get-contact-info.ts
+import { defineTool as defineTool4 } from "npm:@lovable.dev/mcp-js@0.24.0";
+var get_contact_info_default = defineTool4({
+  name: "get_contact_info",
+  title: "Get contact info",
+  description: "Get how to reach Johnson: availability status, location preference, expected response time and the contact page URL.",
+  inputSchema: {},
+  annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
+  handler: () => {
+    const contact = {
+      ...portfolioData.availability,
+      contact_page: "https://colorful-journey-collection.lovable.app/contact",
+      preferred_channel: "Contact form on the portfolio website"
+    };
+    return {
+      content: [{ type: "text", text: JSON.stringify(contact, null, 2) }],
+      structuredContent: contact
+    };
+  }
+});
+
+// src/lib/mcp/index.ts
+var mcp_default = defineMcp({
+  name: "johnson-portfolio-mcp",
+  title: "Johnson Portfolio MCP",
+  version: "0.1.0",
+  instructions: "Read-only tools for Johnson's public developer portfolio. Use `get_profile` for background, skills and availability, `list_projects` to browse or search projects, `get_resume` for work history and certifications, and `get_contact_info` for how to reach him.",
+  tools: [get_profile_default, list_projects_default, get_resume_default, get_contact_info_default]
+});
+
 // lovable-mcp-supabase-entry.ts
-import mcp from "npm:D:\\colorful-journey-collection\\src\\lib\\mcp\\index.ts";
 import { createSupabaseHandler } from "npm:@lovable.dev/mcp-js@0.24.0/stacks/supabase";
-Deno.serve(createSupabaseHandler(mcp, { functionName: "mcp" }));
+Deno.serve(createSupabaseHandler(mcp_default, { functionName: "mcp" }));
