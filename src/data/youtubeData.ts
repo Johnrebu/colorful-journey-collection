@@ -8,6 +8,7 @@ export interface YoutubeChannel {
   subscribers?: string;
   tags: string[];
   isCompany?: boolean;
+  platform?: "youtube" | "instagram";
 }
 
 export interface AiVideoItem {
@@ -53,6 +54,17 @@ export const youtubeChannels: YoutubeChannel[] = [
     description: "Official channel focusing on tech innovations, AI video production, automated media creations, and future tech concepts.",
     badge: "AI Tech & Innovation",
     tags: ["Tech Innovations", "AI Video Production", "Automation", "Future Tech"],
+    platform: "youtube",
+  },
+  {
+    id: "aionionoffl_instagram",
+    name: "Aionion Official Instagram",
+    handle: "@aionionoffl",
+    url: "https://www.instagram.com/aionionoffl?igsh=bjE2OXVuOHd5NjI1",
+    description: "Official Instagram page featuring creative AI videos, digital storytelling, and generative video shorts—all created by me.",
+    badge: "AI Creative & Storytelling",
+    tags: ["Instagram", "AI Shorts", "Generative Video"],
+    platform: "instagram",
   },
 ];
 

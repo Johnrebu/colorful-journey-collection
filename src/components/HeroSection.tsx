@@ -2,6 +2,7 @@ import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 import {
   Github,
   Linkedin,
+  Instagram,
   Mail,
   Rocket,
   Sparkles,
@@ -261,6 +262,21 @@ const HeroSection = ({ profileImageUrl, skills }: HeroSectionProps) => {
             whileTap={{ scale: 0.9 }}
           >
             <Mail size={20} />
+          </motion.a>
+          <motion.a
+            href="https://www.instagram.com/aionionoffl?igsh=bjE2OXVuOHd5NjI1"
+            className="p-3 rounded-full bg-white dark:bg-dark-300 shadow-md text-gray-700 dark:text-gray-300 hover:text-primary transition-all duration-300 hover:shadow-lg"
+            variants={item}
+            whileHover={{
+              y: -5,
+              scale: 1.1,
+              boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.3)",
+            }}
+            whileTap={{ scale: 0.9 }}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Instagram size={20} />
           </motion.a>
         </motion.div>
       </div>

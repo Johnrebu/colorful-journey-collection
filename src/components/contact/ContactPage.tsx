@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Linkedin, Twitter, Instagram } from "lucide-react";
 import useSeo from "@/hooks/useSeo";
 import ContactForm from "./ContactForm";
 
@@ -117,6 +117,14 @@ export default function ContactPage() {
                 className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#EA4335] hover:bg-[#EA4335]/20"
               >
                 <Twitter size={18} />
+              </a>
+              <a
+                href="https://www.instagram.com/aionionoffl?igsh=bjE2OXVuOHd5NjI1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#DD2A7B] hover:bg-[#DD2A7B]/20"
+              >
+                <Instagram size={18} />
               </a>
             </motion.div>
           </section>

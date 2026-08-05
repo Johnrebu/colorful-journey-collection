@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Github, Linkedin, Twitter, MessageSquare } from "lucide-react";
+import { Mail, Phone, MapPin, Github, Linkedin, Twitter, MessageSquare, Instagram } from "lucide-react";
 import React from "react";
 import GlassCard from "../GlassCard";
 import ContactItem from "./ContactItem";
@@ -65,6 +65,12 @@ const ContactInfoCard = () => {
               icon={<Twitter className="w-5 h-5" />}
               label="Twitter"
               color="bg-[#1DA1F2]"
+            />
+            <SocialLink 
+              href="https://www.instagram.com/aionionoffl?igsh=bjE2OXVuOHd5NjI1"
+              icon={<Instagram className="w-5 h-5" />}
+              label="Instagram"
+              color="bg-gradient-to-tr from-[#F58529] via-[#DD2A7B] to-[#8134AF]"
             />
           </div>
         </div>

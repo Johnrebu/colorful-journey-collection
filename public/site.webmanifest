@@ -1,6 +1,6 @@
 {
-  "name": "Johnson - Full-Stack Software Engineer",
-  "short_name": "Johnson Portfolio",
+  "name": "Johnson T - Web Engineer",
+  "short_name": "Johnson T",
   "description": "Full-Stack Software Engineer building high-performance React interfaces, robust backend APIs, and scalable web applications.",
   "start_url": "/",
   "scope": "/",
@@ -36,8 +36,7 @@
     {
       "src": "/profile-logo.png",
       "sizes": "540x720",
-      "type": "image/png",
-      "form_factor": "narrow"
+      "type": "image/png"
     }
   ]
 }

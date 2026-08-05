@@ -14,6 +14,7 @@ import {
   GraduationCap,
   Layers3,
   Linkedin,
+  Instagram,
   Mail,
   MapPin,
   MessageSquareText,
@@ -164,6 +165,11 @@ const socialLinks = [
     href: "mailto:johnchemist91@gmail.com",
     label: "Email",
     icon: Mail,
+  },
+  {
+    href: "https://www.instagram.com/aionionoffl?igsh=bjE2OXVuOHd5NjI1",
+    label: "Instagram",
+    icon: Instagram,
   },
 ];
 
@@ -617,7 +623,7 @@ export default function Home() {
       </section>
 
       {/* ============================================================ */}
-      {/* AI VIDEO SHOWCASE & OFFICIAL YOUTUBE CHANNELS */}
+      {/* AI VIDEO SHOWCASE & OFFICIAL CHANNELS */}
       {/* ============================================================ */}
       <section className="space-panel relative overflow-hidden p-8 sm:p-10">
         <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-rose-500/10 dark:bg-red-500/8 blur-[80px]" />
@@ -628,7 +634,7 @@ export default function Home() {
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-rose-500/30 bg-rose-500/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-rose-600 dark:text-red-400">
                 <Youtube size={14} className="text-rose-600 dark:text-red-500" />
-                Official YouTube Channels
+                Official Media Channels
               </div>
               <h2 className="mt-3 text-3xl font-extrabold text-slate-900 dark:text-white sm:text-4xl">
                 AI Video Creations & Channels
@@ -662,9 +668,11 @@ export default function Home() {
                     <div className={`flex h-10 w-10 items-center justify-center rounded-xl text-white shadow-md group-hover:scale-105 transition-transform ${
                       channel.isCompany
                         ? "bg-gradient-to-br from-blue-600 to-indigo-700"
+                        : channel.platform === "instagram"
+                        ? "bg-gradient-to-br from-pink-600 to-purple-600"
                         : "bg-gradient-to-br from-red-600 to-rose-600"
                     }`}>
-                      <Youtube size={20} />
+                      {channel.platform === "instagram" ? <Instagram size={20} /> : <Youtube size={20} />}
                     </div>
                     <div>
                       <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
