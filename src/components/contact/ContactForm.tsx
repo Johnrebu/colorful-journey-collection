@@ -38,6 +38,8 @@ const ContactForm = ({ className }: ContactFormProps) => {
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",
     defaultValues: {
       name: "",
       email: "",
@@ -160,6 +162,20 @@ const ContactForm = ({ className }: ContactFormProps) => {
 
   const messageClassName = isDark ? "text-red-400" : "text-red-500";
 
+  const { errors, touchedFields, dirtyFields } = form.formState;
+  const fieldState = (n: keyof FormValues) => {
+    if (errors[n]) return "error";
+    if ((touchedFields as any)[n] && (dirtyFields as any)[n]) return "valid";
+    return "idle";
+  };
+  const stateClasses = (n: keyof FormValues) => {
+    const s = fieldState(n);
+    if (s === "error") return "border-red-500 focus:border-red-500 focus:ring-red-500/20";
+    if (s === "valid") return "border-[#34A853] focus:border-[#34A853] focus:ring-[#34A853]/20";
+    return "";
+  };
+  const isDisabled = isSubmitting || !form.formState.isValid;
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className={`space-y-5 ${className}`}>
@@ -181,7 +197,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <input placeholder="Full name" className={inputClasses} {...field} />
+                <input placeholder="Full name" className={`${inputClasses} ${stateClasses("name")}`} {...field} />
               </FormControl>
               <FormMessage className={messageClassName} />
             </FormItem>
@@ -194,7 +210,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <input type="email" placeholder="Email address" className={inputClasses} {...field} />
+                <input type="email" placeholder="Email address" className={`${inputClasses} ${stateClasses("email")}`} {...field} />
               </FormControl>
               <FormMessage className={messageClassName} />
             </FormItem>
@@ -207,7 +223,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <input type="tel" placeholder="Phone number (optional)" className={inputClasses} {...field} />
+                <input type="tel" placeholder="Phone number (optional)" className={`${inputClasses} ${stateClasses("phone")}`} {...field} />
               </FormControl>
               <FormMessage className={messageClassName} />
             </FormItem>
@@ -223,27 +239,31 @@ const ContactForm = ({ className }: ContactFormProps) => {
                 <textarea
                   placeholder="Tell me about your project, timeline, and goals"
                   rows={4}
-                  className={`${inputClasses} resize-none`}
+                  className={`${inputClasses} ${stateClasses("message")} resize-none`}
                   {...field}
                 />
               </FormControl>
               <FormMessage className={messageClassName} />
+              <p className={`mt-1 text-xs ${isDark ? "text-gray-400" : "text-slate-500"}`}>
+                {(field.value?.length ?? 0)} characters
+              </p>
             </FormItem>
           )}
         />
 
         <motion.button
           type="submit"
-          className={`flex items-center justify-center rounded-full px-8 py-3 font-medium transition-all ${
+          className={`flex items-center justify-center rounded-full px-8 py-3 font-medium transition-all disabled:cursor-not-allowed disabled:opacity-50 ${
             isDark
               ? "border-2 border-white bg-transparent text-white hover:bg-white hover:text-[#1e2a4a]"
               : isGoogle
                 ? "w-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] to-[#34A853] text-white shadow-[0_12px_25px_rgba(66,133,244,0.28)] hover:shadow-[0_16px_28px_rgba(52,168,83,0.25)]"
                 : "w-full bg-gradient-to-r from-primary to-portfolioPurple text-white shadow-md"
           }`}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          disabled={isSubmitting}
+          whileHover={isDisabled ? undefined : { scale: 1.02 }}
+          whileTap={isDisabled ? undefined : { scale: 0.98 }}
+          disabled={isDisabled}
+          aria-busy={isSubmitting}
         >
           {isSubmitting ? (
             <>
