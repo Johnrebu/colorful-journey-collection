@@ -38,6 +38,8 @@ const ContactForm = ({ className }: ContactFormProps) => {
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",
     defaultValues: {
       name: "",
       email: "",
