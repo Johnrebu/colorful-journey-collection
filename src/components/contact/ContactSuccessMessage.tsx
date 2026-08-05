@@ -1,15 +1,23 @@
 
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 interface ContactSuccessMessageProps {
   onSendAnother: () => void;
 }
 
 const ContactSuccessMessage = ({ onSendAnother }: ContactSuccessMessageProps) => {
+  const headingRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    headingRef.current?.focus();
+  }, []);
+
   return (
     <motion.div 
       className="text-center py-10"
+      role="status"
+      aria-live="polite"
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
@@ -19,9 +27,15 @@ const ContactSuccessMessage = ({ onSendAnother }: ContactSuccessMessageProps) =>
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
         </svg>
       </div>
-      <h4 className="mb-2 font-display text-xl font-semibold text-slate-900 dark:text-white">Message Sent</h4>
+      <h4
+        ref={headingRef}
+        tabIndex={-1}
+        className="mb-2 font-display text-xl font-semibold text-slate-900 outline-none dark:text-white"
+      >
+        Message Sent
+      </h4>
       <p className="text-sm text-slate-600 dark:text-zinc-300">Thank you for reaching out. I'll get back to you shortly.</p>
-      <div className="mx-auto mt-4 flex w-fit gap-2">
+      <div aria-hidden="true" className="mx-auto mt-4 flex w-fit gap-2">
         <span className="h-2.5 w-2.5 rounded-full bg-[#4285F4]" />
         <span className="h-2.5 w-2.5 rounded-full bg-[#EA4335]" />
         <span className="h-2.5 w-2.5 rounded-full bg-[#FBBC05]" />
