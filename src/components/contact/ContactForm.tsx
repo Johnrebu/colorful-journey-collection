@@ -11,6 +11,7 @@ import {
   FormControl,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 
@@ -38,6 +39,9 @@ const ContactForm = ({ className }: ContactFormProps) => {
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",
+    shouldFocusError: true,
     defaultValues: {
       name: "",
       email: "",
@@ -160,9 +164,41 @@ const ContactForm = ({ className }: ContactFormProps) => {
 
   const messageClassName = isDark ? "text-red-400" : "text-red-500";
 
+  const { errors, touchedFields, dirtyFields } = form.formState;
+  const fieldState = (n: keyof FormValues) => {
+    if (errors[n]) return "error";
+    if ((touchedFields as any)[n] && (dirtyFields as any)[n]) return "valid";
+    return "idle";
+  };
+  const stateClasses = (n: keyof FormValues) => {
+    const s = fieldState(n);
+    if (s === "error") return "border-red-500 focus:border-red-500 focus:ring-red-500/20";
+    if (s === "valid") return "border-[#34A853] focus:border-[#34A853] focus:ring-[#34A853]/20";
+    return "";
+  };
+  // Keep the button enabled when invalid so submitting can move focus to the
+  // first invalid field and announce the errors to screen readers.
+  const isDisabled = isSubmitting;
+  const errorCount = Object.keys(errors).filter((k) => k !== "website").length;
+  const showErrorSummary = form.formState.submitCount > 0 && errorCount > 0;
+  const labelClasses = "sr-only";
+  const msgProps = { role: "alert" as const, "aria-live": "assertive" as const };
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className={`space-y-5 ${className}`}>
+        <div aria-live="polite" className="sr-only">
+          {isSubmitting ? "Sending your message" : ""}
+        </div>
+
+        {showErrorSummary && (
+          <p role="alert" className={`text-sm ${messageClassName}`}>
+            {errorCount === 1
+              ? "1 field needs your attention before sending."
+              : `${errorCount} fields need your attention before sending.`}
+          </p>
+        )}
+
         {/* Honeypot field: visually hidden and skipped by assistive tech / tabbing */}
         <div aria-hidden="true" className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden">
           <label htmlFor="website">Website</label>
@@ -180,10 +216,17 @@ const ContactForm = ({ className }: ContactFormProps) => {
           name="name"
           render={({ field }) => (
             <FormItem>
+              <FormLabel className={labelClasses}>Full name</FormLabel>
               <FormControl>
-                <input placeholder="Full name" className={inputClasses} {...field} />
+                <input
+                  placeholder="Full name"
+                  autoComplete="name"
+                  aria-required="true"
+                  className={`${inputClasses} ${stateClasses("name")}`}
+                  {...field}
+                />
               </FormControl>
-              <FormMessage className={messageClassName} />
+              <FormMessage className={messageClassName} {...msgProps} />
             </FormItem>
           )}
         />
@@ -193,10 +236,18 @@ const ContactForm = ({ className }: ContactFormProps) => {
           name="email"
           render={({ field }) => (
             <FormItem>
+              <FormLabel className={labelClasses}>Email address</FormLabel>
               <FormControl>
-                <input type="email" placeholder="Email address" className={inputClasses} {...field} />
+                <input
+                  type="email"
+                  placeholder="Email address"
+                  autoComplete="email"
+                  aria-required="true"
+                  className={`${inputClasses} ${stateClasses("email")}`}
+                  {...field}
+                />
               </FormControl>
-              <FormMessage className={messageClassName} />
+              <FormMessage className={messageClassName} {...msgProps} />
             </FormItem>
           )}
         />
@@ -206,10 +257,17 @@ const ContactForm = ({ className }: ContactFormProps) => {
           name="phone"
           render={({ field }) => (
             <FormItem>
+              <FormLabel className={labelClasses}>Phone number (optional)</FormLabel>
               <FormControl>
-                <input type="tel" placeholder="Phone number (optional)" className={inputClasses} {...field} />
+                <input
+                  type="tel"
+                  placeholder="Phone number (optional)"
+                  autoComplete="tel"
+                  className={`${inputClasses} ${stateClasses("phone")}`}
+                  {...field}
+                />
               </FormControl>
-              <FormMessage className={messageClassName} />
+              <FormMessage className={messageClassName} {...msgProps} />
             </FormItem>
           )}
         />
@@ -219,31 +277,37 @@ const ContactForm = ({ className }: ContactFormProps) => {
           name="message"
           render={({ field }) => (
             <FormItem>
+              <FormLabel className={labelClasses}>Message</FormLabel>
               <FormControl>
                 <textarea
                   placeholder="Tell me about your project, timeline, and goals"
                   rows={4}
-                  className={`${inputClasses} resize-none`}
+                  aria-required="true"
+                  className={`${inputClasses} ${stateClasses("message")} resize-none`}
                   {...field}
                 />
               </FormControl>
-              <FormMessage className={messageClassName} />
+              <FormMessage className={messageClassName} {...msgProps} />
+              <p aria-live="polite" className={`mt-1 text-xs ${isDark ? "text-gray-400" : "text-slate-500"}`}>
+                {(field.value?.length ?? 0)} characters
+              </p>
             </FormItem>
           )}
         />
 
         <motion.button
           type="submit"
-          className={`flex items-center justify-center rounded-full px-8 py-3 font-medium transition-all ${
+          className={`flex items-center justify-center rounded-full px-8 py-3 font-medium transition-all disabled:cursor-not-allowed disabled:opacity-50 ${
             isDark
               ? "border-2 border-white bg-transparent text-white hover:bg-white hover:text-[#1e2a4a]"
               : isGoogle
                 ? "w-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] to-[#34A853] text-white shadow-[0_12px_25px_rgba(66,133,244,0.28)] hover:shadow-[0_16px_28px_rgba(52,168,83,0.25)]"
                 : "w-full bg-gradient-to-r from-primary to-portfolioPurple text-white shadow-md"
           }`}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          disabled={isSubmitting}
+          whileHover={isDisabled ? undefined : { scale: 1.02 }}
+          whileTap={isDisabled ? undefined : { scale: 0.98 }}
+          disabled={isDisabled}
+          aria-busy={isSubmitting}
         >
           {isSubmitting ? (
             <>
