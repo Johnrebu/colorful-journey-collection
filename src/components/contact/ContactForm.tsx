@@ -11,6 +11,7 @@ import {
   FormControl,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 
@@ -40,6 +41,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
     resolver: zodResolver(formSchema),
     mode: "onChange",
     reValidateMode: "onChange",
+    shouldFocusError: true,
     defaultValues: {
       name: "",
       email: "",
