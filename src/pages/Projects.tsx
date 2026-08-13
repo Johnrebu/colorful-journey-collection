@@ -571,32 +571,32 @@ export default function Projects() {
           >
             <div className="space-panel p-6 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-cyan-300">Live Client Sites</span>
-                <Globe2 size={18} className="text-cyan-400" />
+                <span className="text-xs font-bold uppercase tracking-wider text-cyan-700 dark:text-cyan-300">Live Client Sites</span>
+                <Globe2 size={18} className="text-cyan-600 dark:text-cyan-400" />
               </div>
-              <p className="text-3xl font-extrabold text-white">5 Commercial</p>
-              <p className="text-xs text-slate-300">Deployed web platforms & CRM systems</p>
+              <p className="text-3xl font-extrabold text-slate-900 dark:text-white">5 Commercial</p>
+              <p className="text-xs text-slate-500 dark:text-slate-300">Deployed web platforms & CRM systems</p>
             </div>
 
             <div className="space-panel p-6 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-cyan-300">Total Codebases</span>
-                <Code2 size={18} className="text-cyan-400" />
+                <span className="text-xs font-bold uppercase tracking-wider text-cyan-700 dark:text-cyan-300">Total Codebases</span>
+                <Code2 size={18} className="text-cyan-600 dark:text-cyan-400" />
               </div>
-              <p className="text-3xl font-extrabold text-white">{portfolioMetrics.repoCount}+ Repos</p>
-              <p className="text-xs text-slate-300">GitHub open-source repositories</p>
+              <p className="text-3xl font-extrabold text-slate-900 dark:text-white">{portfolioMetrics.repoCount}+ Repos</p>
+              <p className="text-xs text-slate-500 dark:text-slate-300">GitHub open-source repositories</p>
             </div>
 
             <div className="space-panel p-6 space-y-2 sm:col-span-2 lg:col-span-1 xl:col-span-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-cyan-300">Primary Stack</span>
-                <Layers3 size={18} className="text-cyan-400" />
+                <span className="text-xs font-bold uppercase tracking-wider text-cyan-700 dark:text-cyan-300">Primary Stack</span>
+                <Layers3 size={18} className="text-cyan-600 dark:text-cyan-400" />
               </div>
               <div className="flex flex-wrap gap-2 pt-1">
                 {["React", "TypeScript", "Python", "Tailwind CSS", "REST APIs", "Node.js"].map((tech) => (
                   <span
                     key={tech}
-                    className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs font-medium text-cyan-100"
+                    className="rounded-full border border-cyan-600/20 bg-cyan-600/10 px-3 py-1 text-xs font-medium text-cyan-800 dark:border-cyan-300/20 dark:bg-cyan-300/10 dark:text-cyan-100"
                   >
                     {tech}
                   </span>

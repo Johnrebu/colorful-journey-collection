@@ -49,7 +49,7 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({ experiences }) => {
             className="relative pl-6 border-l-2 border-primary/30 before:content-[''] before:absolute before:w-4 before:h-4 before:rounded-full before:bg-primary before:left-[-9px] before:top-0"
           >
             <GlassCard>
-              <h4 className="text-xl md:text-2xl font-playfair font-semibold text-gray-800">
+              <h4 className="text-xl md:text-2xl font-playfair font-semibold text-gray-800 dark:text-white">
                 {experience.title}
               </h4>
               <p className="text-gray-500 font-montserrat mb-4">{experience.period}</p>

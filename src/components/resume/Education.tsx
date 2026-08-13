@@ -52,8 +52,8 @@ const Education: React.FC<EducationProps> = ({ educationItems }) => {
             <GlassCard className="relative overflow-hidden">
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary to-portfolioPurple"></div>
               <div className="pl-4">
-                <h4 className="text-xl md:text-2xl font-playfair font-semibold text-gray-800">{item.degree}</h4>
-                <p className={`font-montserrat md:text-lg ${index % 2 === 0 ? "text-portfolioBlue" : "text-portfolioPurple"}`}>
+                <h4 className="text-xl md:text-2xl font-playfair font-semibold text-gray-800 dark:text-white">{item.degree}</h4>
+                <p className={`font-montserrat md:text-lg ${index % 2 === 0 ? "text-cyan-800 dark:text-portfolioBlue" : "text-pink-800 dark:text-portfolioPurple"}`}>
                   {item.institution} • {item.period}
                 </p>
               </div>

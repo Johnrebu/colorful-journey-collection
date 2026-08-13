@@ -46,7 +46,7 @@ const Projects: React.FC<ProjectsProps> = ({ paragraphColors }) => {
           transition={{ type: "spring", stiffness: 300 }}
         >
           <GlassCard>
-            <h4 className="text-xl md:text-2xl font-playfair font-semibold text-gray-800 mb-2">
+            <h4 className="text-xl md:text-2xl font-playfair font-semibold text-gray-800 dark:text-white mb-2">
               React_Colorful Weather Widget
             </h4>
             <p className={`font-montserrat md:text-lg ${paragraphColors.project1}`}>
@@ -64,7 +64,7 @@ const Projects: React.FC<ProjectsProps> = ({ paragraphColors }) => {
           transition={{ type: "spring", stiffness: 300 }}
         >
           <GlassCard>
-            <h4 className="text-xl md:text-2xl font-playfair font-semibold text-gray-800 mb-2">
+            <h4 className="text-xl md:text-2xl font-playfair font-semibold text-gray-800 dark:text-white mb-2">
               Employee Directory Application
             </h4>
             <p className={`font-montserrat md:text-lg ${paragraphColors.project2}`}>
@@ -82,7 +82,7 @@ const Projects: React.FC<ProjectsProps> = ({ paragraphColors }) => {
           transition={{ type: "spring", stiffness: 300 }}
         >
           <GlassCard>
-            <h4 className="text-xl md:text-2xl font-playfair font-semibold text-gray-800 mb-2">
+            <h4 className="text-xl md:text-2xl font-playfair font-semibold text-gray-800 dark:text-white mb-2">
               E-commerce_Website
             </h4>
             <p className={`font-montserrat md:text-lg ${paragraphColors.project3}`}>

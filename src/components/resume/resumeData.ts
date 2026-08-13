@@ -84,11 +84,11 @@ export const certifications = [
 ];
 
 export const paragraphColors = {
-  summary: "text-portfolioBlue",
-  experience1: "text-portfolioPurple",
-  experience2: "text-portfolioPink",
-  project1: "text-portfolioOrange",
-  project2: "text-portfolioBlue",
-  project3: "text-portfolioPurple",
-  downloadText: "text-indigo-600",
+  summary: "text-cyan-800 dark:text-portfolioBlue",
+  experience1: "text-pink-800 dark:text-portfolioPurple",
+  experience2: "text-amber-800 dark:text-portfolioPink",
+  project1: "text-violet-800 dark:text-portfolioOrange",
+  project2: "text-cyan-800 dark:text-portfolioBlue",
+  project3: "text-pink-800 dark:text-portfolioPurple",
+  downloadText: "text-indigo-700 dark:text-indigo-400",
 };
