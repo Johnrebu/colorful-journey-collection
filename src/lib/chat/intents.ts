@@ -22,7 +22,7 @@ const intents: Intent[] = [
   },
   {
     id: "name_identity",
-    keywords: ["your name", "who are you", "introduce yourself", "about you"],
+    keywords: ["your name", "who are you", "introduce yourself", "about you", "tell me about yourself", "about johnson", "who is johnson", "introduction", "self introduction", "describe yourself", "tell about you", "know about you", "brief about you", "about him", "who is he", "tell me about johnson"],
   },
   {
     id: "location",
@@ -253,7 +253,63 @@ export const answerForIntent = (
     case "greeting":
       return "Hello! I am Johnson's assistant. Ask me about his projects, skills, background, availability, or even career/interview guidance.";
     case "name_identity":
-      return "I'm Johnson's portfolio assistant. Johnson is a Chennai-based full-stack developer with a strong background in teaching and clear technical communication.";
+      return `\u{1F44B} Meet Johnson T \u2014 Full-Stack Developer & AI Specialist based in Chennai!
+
+\u{1F3E0} Originally from Pudukkottai, Tamil Nadu, Johnson is currently based in Chennai (Tambaram).
+
+\u{1F393} Education:
+\u2022 B.Sc. (Chemistry) \u2014 H.H. The Rajah\u2019s College, Pudukkottai (2009\u20132012)
+\u2022 M.Sc. (Chemistry) \u2014 Bishop Heber College, Trichy (2012\u20132014)
+\u2022 B.Ed. \u2014 Mother Teresa College of Education, Illuppur (2014\u20132015)
+\u2022 Additional: DCA, Tally, DTP, PGDCA
+
+\u{1F468}\u200D\u{1F3EB} Teaching Career (9+ Years):
+Johnson taught Chemistry & Science across classes VI to XII at Infant Jesus Mat. Hr. Sec. School, Good Shepherd Mat. Hr. Sec. School, and Mount Zion Mat. Hr. Sec. School in Chennai & Pudukkottai. He earned \u201CTeacher of the Year\u201D honors in 2019 and organized successful science fairs.
+
+\u{1F4A1} Career Transition:
+During the COVID-19 lockdown, while conducting online classes, Johnson became curious about how software and websites worked. This sparked a journey \u2014 he completed DCA, Tally, DTP, and PGDCA certifications, then in 2024, resigned from teaching and enrolled in a 9-month Python Full-Stack Developer course at Greens Technology. He then worked as an intern at OOR Cabs for 8 months, gaining hands-on experience with React, WordPress, and AI tools.
+
+\u{1F3E2} Current Role \u2014 Aionion Capital (2026 \u2013 Present):
+Johnson serves as a Full Stack Developer & AI/Digital Ops Specialist operating across 4 key pillars:
+
+\u26A1 Pillar 1: Full-Stack Engineering & System Automation
+\u2022 Sub-300ms API response times | \u2265 99.5% system uptime
+\u2022 100% CRM sync accuracy | \u2265 80% test coverage
+
+\u{1F3A5} Pillar 2: AI Video Creation & Digital Content Strategy
+\u2022 4+ AI educational videos/month | \u2265 40% watch time
+\u2022 +10% MoM subscriber growth across YouTube channels
+
+\u{1F3A8} Pillar 3: Graphic Design & Creative Branding
+\u2022 100% on-time campaign delivery (5 days ahead)
+\u2022 Reusable brand templates & promotional assets
+
+\u{1F4E1} Pillar 4: Event Coordination & Digital Operations
+\u2022 \u2265 99% AV & live-streaming uptime
+\u2022 2-hour pre-event dry-runs | \u2265 95% escalation-free delivery
+
+\u{1F6E0}\uFE0F Technical Skills: React, TypeScript, Tailwind CSS, Python, Django, SQL, JavaScript, HTML, CSS, WordPress, AI Video Production, Graphic Design, Event AV Ops, System Automation
+
+\u{1F680} Live Projects:
+\u2022 Money Pechu Events \u2014 Live event management & ticketing platform
+\u2022 Rebekha Caterers \u2014 Full catering business website
+\u2022 Tiffin Coffee Range CRM \u2014 Enterprise CRM & management portal
+\u2022 Dalphina Academy \u2014 Educational academy portal
+\u2022 Tiffin Coffee Range Main Site \u2014 Official commercial website
+\u2022 React Colorful Weather Widget, Employee Directory App, E-commerce Website (MERN)
+
+\u{1F4DC} Certifications: Full Stack Developer, Python Using AI Workshop, AI Tools & ChatGPT Workshop, React E-Commerce Masterclass
+
+\u{1F3AC} YouTube Channels: @aionionofficial, @jenishajeni-l9i, @johnElonSon
+
+\u{1F3CF} Hobbies: Cricket, Reading, AI Content Creation
+\u{1F3AF} Goal: Long-term research & innovation in computer science, system automation, and AI media
+
+\u{1F4E7} Contact: johnchemist91@gmail.com
+\u{1F4F1} WhatsApp: https://wa.me/918754774022
+\u{1F517} GitHub: github.com/Johnrebu | LinkedIn: linkedin.com/in/johnsonelon
+
+Feel free to ask me anything specific about Johnson\u2019s projects, skills, services, or experience!`;
     case "location":
       return `Johnson is from ${data.profile.from} and currently based in ${data.profile.base}.`;
     case "experience_transition":

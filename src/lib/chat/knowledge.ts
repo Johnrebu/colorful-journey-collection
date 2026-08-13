@@ -233,6 +233,7 @@ export const routePrompts = {
     "How should I write a good outreach message?",
   ],
   default: [
+    "Introduce yourself",
     "What is your role at Aionion Capital?",
     "What services & packages do you offer?",
     "What are your skills & metrics?",
