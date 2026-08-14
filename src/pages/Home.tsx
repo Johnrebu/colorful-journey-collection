@@ -354,7 +354,7 @@ export default function Home() {
                   </div>
 
                   {/* Social Buttons */}
-                  <div className="flex items-center gap-2 pt-2 justify-center sm:justify-start">
+                  <div className="flex flex-wrap items-center gap-2 pt-2 justify-center sm:justify-start">
                     {socialLinks.map((link) => {
                       const Icon = link.icon;
                       return (
@@ -363,7 +363,7 @@ export default function Home() {
                           href={link.href}
                           target={link.href.startsWith("mailto:") ? undefined : "_blank"}
                           rel={link.href.startsWith("mailto:") ? undefined : "noreferrer"}
-                          className="inline-flex items-center gap-1.5 rounded-full border border-slate-300/80 bg-white/90 dark:border-white/10 dark:bg-white/5 px-3.5 py-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 shadow-sm transition hover:border-indigo-400 hover:bg-indigo-50 hover:text-indigo-900 dark:hover:border-cyan-300/40 dark:hover:bg-cyan-300/10 dark:hover:text-white"
+                          className="inline-flex items-center gap-1.5 rounded-full border border-slate-300/80 bg-white/90 dark:border-white/10 dark:bg-white/5 px-3 py-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 shadow-sm transition hover:border-indigo-400 hover:bg-indigo-50 hover:text-indigo-900 dark:hover:border-cyan-300/40 dark:hover:bg-cyan-300/10 dark:hover:text-white shrink-0"
                         >
                           <Icon size={14} />
                           {link.label}
