@@ -166,7 +166,7 @@ export default function AboutHero() {
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.4 }}
-              className="absolute -bottom-5 -left-6 flex items-center gap-3 rounded-2xl border border-white/60 bg-white/90 p-3 shadow-xl backdrop-blur-md dark:border-zinc-700 dark:bg-zinc-900/90"
+              className="absolute -bottom-5 left-0 sm:-left-6 flex items-center gap-3 rounded-2xl border border-white/60 bg-white/90 p-3 shadow-xl backdrop-blur-md dark:border-zinc-700 dark:bg-zinc-900/90"
             >
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#4285F4] text-white">
                 <Brain size={20} />
@@ -182,7 +182,7 @@ export default function AboutHero() {
               initial={{ x: 20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.4 }}
-              className="absolute -top-4 -right-4 flex items-center gap-2 rounded-full border border-white/60 bg-white/90 px-4 py-2 shadow-lg backdrop-blur-md dark:border-zinc-700 dark:bg-zinc-900/90"
+              className="absolute -top-4 right-0 sm:-right-4 flex items-center gap-2 rounded-full border border-white/60 bg-white/90 px-4 py-2 shadow-lg backdrop-blur-md dark:border-zinc-700 dark:bg-zinc-900/90"
             >
               <span className="relative flex h-3 w-3">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#34A853] opacity-75"></span>

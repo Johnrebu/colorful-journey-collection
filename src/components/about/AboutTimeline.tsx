@@ -135,7 +135,7 @@ export default function AboutTimeline() {
             <button
               key={tab.id}
               onClick={() => setFilter(tab.id)}
-              className={`rounded-full px-3 py-1 text-xs font-semibold transition-all ${
+              className={`rounded-full px-3 py-2 text-xs font-semibold transition-all min-h-[44px] flex items-center ${
                 filter === tab.id
                   ? "bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900"
                   : "text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white"

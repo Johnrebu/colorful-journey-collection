@@ -43,7 +43,7 @@ export default function Bio() {
           <span className="google-chip inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700 dark:text-slate-200">
             Bio Data & Profile
           </span>
-          <h1 className="mt-4 font-display text-4xl text-slate-900 dark:text-zinc-100 md:text-5xl">Personal and Professional Overview</h1>
+          <h1 className="mt-4 font-display text-2xl sm:text-4xl text-slate-900 dark:text-zinc-100 md:text-5xl">Personal and Professional Overview</h1>
           <p className="mt-3 max-w-3xl text-slate-700 dark:text-zinc-300">
             A comprehensive snapshot of my multidisciplinary engineering, content, automation, and operational responsibilities at Aionion Capital.
           </p>

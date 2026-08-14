@@ -80,7 +80,7 @@ export default function SkillMatrix() {
       </div>
 
       {/* Category Tabs */}
-      <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 pb-4 dark:border-zinc-800">
+      <div className="flex items-center gap-2 border-b border-slate-200 pb-4 dark:border-zinc-800 overflow-x-auto scrollbar-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {[
           { id: "all", label: "All Skills", icon: <Sparkles size={14} /> },
           { id: "frontend", label: "Frontend", icon: <Code2 size={14} /> },
@@ -91,7 +91,7 @@ export default function SkillMatrix() {
           <button
             key={tab.id}
             onClick={() => setActiveCategory(tab.id)}
-            className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold transition-all ${
+            className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold transition-all whitespace-nowrap shrink-0 ${
               activeCategory === tab.id
                 ? "bg-[#34A853] text-white shadow-md"
                 : "border border-slate-200 bg-white/80 text-slate-700 hover:bg-white dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-300 dark:hover:bg-zinc-800"

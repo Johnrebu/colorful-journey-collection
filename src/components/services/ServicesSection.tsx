@@ -308,7 +308,7 @@ export default function ServicesSection({ id = "services", className = "" }: Ser
                     </div>
 
                     <div className="pt-2 border-t border-slate-100 dark:border-white/10">
-                      <div className="text-2xl font-extrabold bg-gradient-to-r from-slate-900 via-cyan-700 to-teal-600 dark:from-white dark:via-cyan-300 dark:to-teal-300 bg-clip-text text-transparent">
+                      <div className="text-xl sm:text-2xl font-extrabold break-words bg-gradient-to-r from-slate-900 via-cyan-700 to-teal-600 dark:from-white dark:via-cyan-300 dark:to-teal-300 bg-clip-text text-transparent">
                         {pkg.price}
                       </div>
                       <div className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 dark:text-zinc-400 bg-slate-100 dark:bg-white/5 px-2.5 py-1 rounded-full border border-slate-200/60 dark:border-white/10">
@@ -383,7 +383,7 @@ export default function ServicesSection({ id = "services", className = "" }: Ser
                     </div>
 
                     <div className="pt-2 border-t border-slate-100 dark:border-white/10">
-                      <div className="text-2xl font-extrabold bg-gradient-to-r from-slate-900 via-cyan-700 to-teal-600 dark:from-white dark:via-cyan-300 dark:to-teal-300 bg-clip-text text-transparent">
+                      <div className="text-xl sm:text-2xl font-extrabold break-words bg-gradient-to-r from-slate-900 via-cyan-700 to-teal-600 dark:from-white dark:via-cyan-300 dark:to-teal-300 bg-clip-text text-transparent">
                         {pkg.price}
                       </div>
                       <div className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 dark:text-zinc-400 bg-slate-100 dark:bg-white/5 px-2.5 py-1 rounded-full border border-slate-200/60 dark:border-white/10">
@@ -461,7 +461,7 @@ export default function ServicesSection({ id = "services", className = "" }: Ser
                     </div>
 
                     <div className="pt-3 border-t border-slate-100 dark:border-white/10">
-                      <div className="text-3xl font-extrabold bg-gradient-to-r from-slate-900 via-cyan-700 to-teal-600 dark:from-white dark:via-cyan-300 dark:to-teal-300 bg-clip-text text-transparent">
+                      <div className="text-2xl sm:text-3xl font-extrabold break-words bg-gradient-to-r from-slate-900 via-cyan-700 to-teal-600 dark:from-white dark:via-cyan-300 dark:to-teal-300 bg-clip-text text-transparent">
                         {pkg.price}
                       </div>
                       <div className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 dark:text-zinc-400 bg-slate-100 dark:bg-white/5 px-2.5 py-1 rounded-full border border-slate-200/60 dark:border-white/10">

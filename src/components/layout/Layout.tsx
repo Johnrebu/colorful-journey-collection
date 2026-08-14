@@ -15,7 +15,7 @@ const Layout = () => {
 
   return (
     <motion.div
-      className={`min-h-screen transition-colors duration-300 ${
+      className={`min-h-[100dvh] overflow-x-hidden transition-colors duration-300 ${
         darkMode ? "dark bg-[#0f1523] text-white" : "bg-[#eef3fb] text-slate-900"
       }`}
       initial={{ opacity: 0 }}

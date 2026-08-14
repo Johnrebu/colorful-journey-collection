@@ -26,7 +26,7 @@ export default function ContactPage() {
         <div className="pointer-events-none absolute -bottom-10 right-6 h-36 w-36 rounded-full bg-[#EA4335]/25 blur-3xl" />
 
         <div className="relative grid grid-cols-1 gap-4 lg:grid-cols-[1fr_1.1fr]">
-          <section className="rounded-[1.6rem] bg-[#111827] p-8 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] lg:p-10">
+          <section className="rounded-[1.6rem] bg-[#111827] p-5 sm:p-8 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] lg:p-10">
             <motion.h1
               className="font-display text-4xl leading-tight md:text-5xl"
               initial={{ opacity: 0, y: -20 }}
@@ -98,7 +98,7 @@ export default function ContactPage() {
                 href="https://www.linkedin.com/in/johnsonelon/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#4285F4] hover:bg-[#4285F4]/20"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#4285F4] hover:bg-[#4285F4]/20"
               >
                 <Linkedin size={18} />
               </a>
@@ -106,7 +106,7 @@ export default function ContactPage() {
                 href="https://github.com/Johnrebu"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#34A853] hover:bg-[#34A853]/20"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#34A853] hover:bg-[#34A853]/20"
               >
                 <Github size={18} />
               </a>
@@ -114,7 +114,7 @@ export default function ContactPage() {
                 href="https://x.com/JohnsonJoh31080"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#EA4335] hover:bg-[#EA4335]/20"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#EA4335] hover:bg-[#EA4335]/20"
               >
                 <Twitter size={18} />
               </a>
@@ -122,7 +122,7 @@ export default function ContactPage() {
                 href="https://www.instagram.com/aionionoffl?igsh=bjE2OXVuOHd5NjI1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#DD2A7B] hover:bg-[#DD2A7B]/20"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-[#DD2A7B] hover:bg-[#DD2A7B]/20"
               >
                 <Instagram size={18} />
               </a>

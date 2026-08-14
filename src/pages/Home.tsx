@@ -206,7 +206,7 @@ export default function Home() {
       {/* ============================================================ */}
       {/* 1. HERO SECTION */}
       {/* ============================================================ */}
-      <section className="relative overflow-hidden rounded-[2.5rem] border border-slate-200/90 bg-gradient-to-br from-indigo-50/90 via-purple-50/70 to-cyan-50/80 shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-[#050b1d] dark:shadow-[0_35px_120px_rgba(2,6,23,0.45)] px-5 py-8 sm:px-8 lg:px-12 lg:py-14">
+      <section className="relative overflow-hidden rounded-[2.5rem] border border-slate-200/90 bg-gradient-to-br from-indigo-50/90 via-purple-50/70 to-cyan-50/80 shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-[#050b1d] dark:shadow-[0_35px_120px_rgba(2,6,23,0.45)] px-4 py-6 sm:px-8 sm:py-8 lg:px-12 lg:py-14">
         {/* Radial Background Glows */}
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(99,102,241,0.15),transparent_40%),radial-gradient(circle_at_bottom_right,rgba(236,72,153,0.15),transparent_40%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.16),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.14),transparent_36%)]" />
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(99,102,241,0.05)_1px,transparent_1px),linear-gradient(rgba(99,102,241,0.05)_1px,transparent_1px)] dark:bg-[linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] opacity-40 dark:opacity-25" />
@@ -653,7 +653,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {youtubeChannels.map((channel) => (
               <div
                 key={channel.id}

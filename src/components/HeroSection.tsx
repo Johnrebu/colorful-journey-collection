@@ -88,7 +88,7 @@ const HeroSection = ({ profileImageUrl, skills }: HeroSectionProps) => {
           </motion.p>
 
           <motion.h1
-            className="text-5xl sm:text-6xl font-bold tracking-tight bg-gradient-to-r from-primary via-portfolioPurple to-portfolioPink text-transparent bg-clip-text"
+            className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight bg-gradient-to-r from-primary via-portfolioPurple to-portfolioPink text-transparent bg-clip-text"
             variants={titleContainer}
             initial="hidden"
             animate="show"
@@ -97,7 +97,7 @@ const HeroSection = ({ profileImageUrl, skills }: HeroSectionProps) => {
               <motion.span
                 key={index}
                 variants={titleWord}
-                className="inline-block mr-4"
+                className="inline-block mr-2 sm:mr-4"
               >
                 {word}
               </motion.span>
@@ -302,7 +302,7 @@ const HeroSection = ({ profileImageUrl, skills }: HeroSectionProps) => {
         <motion.div className="relative" style={{ rotateX, rotateY }}>
           {/* Background elements */}
           <motion.div
-            className="absolute -top-12 -right-12 w-24 h-24 rounded-full bg-portfolioPink/20 dark:bg-portfolioPink/10 blur-xl"
+            className="absolute -top-12 -right-12 w-24 h-24 rounded-full bg-portfolioPink/20 dark:bg-portfolioPink/10 blur-xl hidden sm:block"
             animate={{
               scale: [1, 1.2, 1],
               opacity: [0.5, 0.8, 0.5],
@@ -314,7 +314,7 @@ const HeroSection = ({ profileImageUrl, skills }: HeroSectionProps) => {
             }}
           />
           <motion.div
-            className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-portfolioPurple/20 dark:bg-portfolioPurple/10 blur-xl"
+            className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-portfolioPurple/20 dark:bg-portfolioPurple/10 blur-xl hidden sm:block"
             animate={{
               scale: [1, 1.1, 1],
               opacity: [0.4, 0.7, 0.4],

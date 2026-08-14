@@ -184,7 +184,7 @@ export default function CurrentRoleImpact() {
               <Building2 size={14} className="text-[#4285F4]" />
               Current Role & Measured Impact
             </div>
-            <h2 className="mt-3 font-display text-3xl font-extrabold text-slate-900 dark:text-zinc-100 md:text-4xl">
+            <h2 className="mt-3 font-display text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-zinc-100 md:text-4xl">
               Aionion Capital
             </h2>
             <p className="mt-1 text-sm font-semibold text-slate-500 dark:text-zinc-400 flex items-center gap-2">
@@ -194,7 +194,7 @@ export default function CurrentRoleImpact() {
           </div>
 
           {/* Interactive Pillar Filter Tabs */}
-          <div className="flex flex-wrap items-center gap-1.5 rounded-full border border-slate-200 bg-white/80 p-1 dark:border-zinc-800 dark:bg-zinc-900/80">
+          <div className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/80 p-1 dark:border-zinc-800 dark:bg-zinc-900/80 overflow-x-auto max-w-full scrollbar-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <button
               onClick={() => setActivePillarId("all")}
               className={`rounded-full px-3 py-1 text-xs font-semibold transition-all ${

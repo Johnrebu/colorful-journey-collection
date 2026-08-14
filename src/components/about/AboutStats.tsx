@@ -50,7 +50,7 @@ export default function AboutStats() {
           <span className="h-3 w-3 rounded-full bg-[#34A853]" />
         </div>
 
-        <h3 className="font-display text-3xl font-extrabold text-slate-900 dark:text-zinc-100 md:text-4xl">
+        <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-zinc-100 md:text-4xl">
           Ready to Build Something Extraordinary?
         </h3>
 

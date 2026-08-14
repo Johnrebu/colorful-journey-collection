@@ -56,6 +56,7 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
@@ -64,7 +65,8 @@
     background-image:
       radial-gradient(circle at 0% 0%, hsla(190, 95%, 43%, 0.1), transparent 30%),
       radial-gradient(circle at 100% 10%, hsla(45, 96%, 56%, 0.1), transparent 28%);
-    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
   }
 
   h1,
@@ -114,8 +116,10 @@
     @apply absolute inset-x-3 -bottom-0.5 h-0.5 origin-left scale-x-0 rounded-full bg-slate-900 transition-transform duration-300 dark:bg-white;
   }
 
-  .nav-link-modern:hover::after {
-    @apply scale-x-100;
+  @media (hover: hover) and (pointer: fine) {
+    .nav-link-modern:hover::after {
+      @apply scale-x-100;
+    }
   }
 
   .nav-link-modern-active {

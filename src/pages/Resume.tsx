@@ -156,9 +156,9 @@ export default function Resume() {
           <header className="border-b border-slate-200 pb-6 dark:border-zinc-700">
             <div className="flex flex-wrap items-start justify-between gap-5">
               <div>
-                <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-zinc-100">{profile.name}</h1>
+                <h1 className="text-2xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-zinc-100">{profile.name}</h1>
                 <p className="mt-1 text-lg font-bold text-[#4285F4] dark:text-[#8ab4f8]">{profile.company}</p>
-                <p className="mt-1 text-sm font-medium text-slate-700 dark:text-zinc-300">{profile.role}</p>
+                <p className="mt-1 text-xs sm:text-sm font-medium text-slate-700 dark:text-zinc-300 break-words">{profile.role}</p>
               </div>
               <div className="space-y-2 text-sm text-slate-600 dark:text-zinc-300">
                 <a href={`mailto:${profile.email}`} className="flex items-center gap-2 hover:text-slate-900 dark:hover:text-white">
