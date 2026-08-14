@@ -665,14 +665,20 @@ export default function Home() {
               >
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <div className={`flex h-10 w-10 items-center justify-center rounded-xl text-white shadow-md group-hover:scale-105 transition-transform ${
+                    <div className={`flex h-10 w-10 items-center justify-center rounded-xl text-white shadow-md group-hover:scale-105 transition-transform overflow-hidden ${
                       channel.isCompany
-                        ? "bg-gradient-to-br from-blue-600 to-indigo-700"
+                        ? "bg-white p-1 border border-blue-200 dark:border-blue-500/30"
                         : channel.platform === "instagram"
                         ? "bg-gradient-to-br from-pink-600 to-purple-600"
                         : "bg-gradient-to-br from-red-600 to-rose-600"
                     }`}>
-                      {channel.platform === "instagram" ? <Instagram size={20} /> : <Youtube size={20} />}
+                      {channel.isCompany ? (
+                        <img src="/aionion-capital-logo.png" alt="Aionion Capital" className="h-full w-full object-contain" />
+                      ) : channel.platform === "instagram" ? (
+                        <Instagram size={20} />
+                      ) : (
+                        <Youtube size={20} />
+                      )}
                     </div>
                     <div>
                       <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-1.5">

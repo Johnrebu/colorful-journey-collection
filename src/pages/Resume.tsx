@@ -157,7 +157,12 @@ export default function Resume() {
             <div className="flex flex-wrap items-start justify-between gap-5">
               <div>
                 <h1 className="text-2xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-zinc-100">{profile.name}</h1>
-                <p className="mt-1 text-lg font-bold text-[#4285F4] dark:text-[#8ab4f8]">{profile.company}</p>
+                <div className="mt-1 flex items-center gap-2">
+                  <span className="h-7 px-2 py-0.5 rounded-md bg-white border border-slate-200 dark:border-white/10 flex items-center shrink-0 shadow-sm">
+                    <img src="/aionion-capital-logo.png" alt="Aionion Capital" className="h-full w-auto object-contain" />
+                  </span>
+                  <p className="text-lg font-bold text-[#4285F4] dark:text-[#8ab4f8]">{profile.company}</p>
+                </div>
                 <p className="mt-1 text-xs sm:text-sm font-medium text-slate-700 dark:text-zinc-300 break-words">{profile.role}</p>
               </div>
               <div className="space-y-2 text-sm text-slate-600 dark:text-zinc-300">
@@ -207,7 +212,14 @@ export default function Resume() {
               {workExperiences.map((experience) => (
                 <article key={experience.title} className="rounded-2xl border border-slate-200 bg-white/70 p-4 dark:border-zinc-700 dark:bg-zinc-900/50">
                   <div className="flex flex-wrap items-start justify-between gap-2">
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-zinc-100">{experience.title}</h3>
+                    <div className="flex items-center gap-2">
+                      {experience.title.includes("Aionion Capital") && (
+                        <span className="h-6 px-1.5 py-0.5 rounded bg-white border border-slate-200 dark:border-white/10 flex items-center shrink-0">
+                          <img src="/aionion-capital-logo.png" alt="Aionion Capital" className="h-full w-auto object-contain" />
+                        </span>
+                      )}
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-zinc-100">{experience.title}</h3>
+                    </div>
                     <p className="text-sm text-slate-500 dark:text-zinc-400">{normalizePeriod(experience.period)}</p>
                   </div>
                   <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-slate-700 dark:text-zinc-300">

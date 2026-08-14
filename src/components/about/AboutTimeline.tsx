@@ -182,7 +182,12 @@ export default function AboutTimeline() {
                       >
                         {item.period}
                       </span>
-                      <span className="text-xs font-bold text-slate-800 dark:text-zinc-200">
+                      <span className="text-xs font-bold text-slate-800 dark:text-zinc-200 flex items-center gap-1.5">
+                        {item.id === "aionion" && (
+                          <span className="h-5 px-1.5 py-0.5 rounded bg-white border border-slate-200 dark:border-white/10 flex items-center">
+                            <img src="/aionion-capital-logo.png" alt="Aionion Capital" className="h-full w-auto object-contain" />
+                          </span>
+                        )}
                         {item.organization}
                       </span>
                     </div>

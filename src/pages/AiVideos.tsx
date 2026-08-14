@@ -298,11 +298,15 @@ export default function AiVideos() {
                 <div className="relative flex flex-col md:flex-row md:items-start md:justify-between gap-5">
                   <div className="flex items-center gap-4">
                     <motion.div
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.6 }}
-                      className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white shadow-lg shadow-blue-600/30"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.3 }}
+                      className="flex h-16 w-28 px-2 py-1 items-center justify-center rounded-2xl bg-white border border-blue-400/30 text-white shadow-lg shadow-blue-600/20 shrink-0"
                     >
-                      <Building size={28} />
+                      <img
+                        src="/aionion-capital-logo.png"
+                        alt="Aionion Capital Logo"
+                        className="h-full w-auto object-contain"
+                      />
                     </motion.div>
                     <div>
                       <h3 className="text-2xl font-extrabold text-white flex items-center gap-2">

@@ -135,7 +135,14 @@ export default function Wikipedia() {
                 <tbody>
                   <tr>
                     <td className="font-medium text-slate-500 dark:text-zinc-400">Current Co.</td>
-                    <td className="font-bold text-[#4285F4]">Aionion Capital</td>
+                    <td className="font-bold text-[#4285F4]">
+                      <div className="flex items-center gap-1.5">
+                        <span className="h-5 px-1.5 py-0.5 rounded bg-white border border-slate-200 dark:border-white/10 flex items-center shrink-0">
+                          <img src="/aionion-capital-logo.png" alt="Aionion Capital" className="h-full w-auto object-contain" />
+                        </span>
+                        <span>Aionion Capital</span>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
                     <td className="font-medium text-slate-500 dark:text-zinc-400">Occupation</td>

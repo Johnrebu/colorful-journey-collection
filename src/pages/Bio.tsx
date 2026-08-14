@@ -84,7 +84,14 @@ export default function Bio() {
                   {item.icon}
                   <span className="text-xs uppercase tracking-[0.12em]">{item.title}</span>
                 </div>
-                <p className="text-base font-medium text-slate-800 dark:text-zinc-100">{item.value}</p>
+                <div className="flex items-center gap-2">
+                  {item.title === "Current Company" && (
+                    <span className="h-6 px-2 py-0.5 rounded bg-white border border-slate-200 dark:border-white/10 flex items-center shrink-0">
+                      <img src="/aionion-capital-logo.png" alt="Aionion Capital" className="h-full w-auto object-contain" />
+                    </span>
+                  )}
+                  <p className="text-base font-medium text-slate-800 dark:text-zinc-100">{item.value}</p>
+                </div>
               </li>
             ))}
           </ul>

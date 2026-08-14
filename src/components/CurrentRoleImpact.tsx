@@ -179,15 +179,28 @@ export default function CurrentRoleImpact() {
       {/* Main Header */}
       <div className="relative z-10 space-y-6">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div>
+          <div className="space-y-3">
             <div className="inline-flex items-center gap-2 rounded-full border border-slate-300/80 bg-white/90 px-3.5 py-1 text-xs font-bold uppercase tracking-[0.16em] text-slate-700 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/90 dark:text-zinc-200">
               <Building2 size={14} className="text-[#4285F4]" />
               Current Role & Measured Impact
             </div>
-            <h2 className="mt-3 font-display text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-zinc-100 md:text-4xl">
-              Aionion Capital
-            </h2>
-            <p className="mt-1 text-sm font-semibold text-slate-500 dark:text-zinc-400 flex items-center gap-2">
+            
+            <div className="flex flex-wrap items-center gap-3 pt-1">
+              <div className="h-10 sm:h-12 px-3 py-1.5 rounded-xl bg-white border border-slate-200/90 dark:border-white/15 shadow-sm flex items-center shrink-0">
+                <img
+                  src="/aionion-capital-logo.png"
+                  alt="Aionion Capital Logo"
+                  className="h-full w-auto max-h-8 object-contain"
+                />
+              </div>
+              <div>
+                <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-zinc-100 md:text-4xl">
+                  Aionion Capital
+                </h2>
+              </div>
+            </div>
+
+            <p className="text-sm font-semibold text-slate-500 dark:text-zinc-400 flex items-center gap-2">
               <Calendar size={14} className="text-[#EA4335]" />
               2026 – Present • Operational & Engineering Excellence
             </p>
