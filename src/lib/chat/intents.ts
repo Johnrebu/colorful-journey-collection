@@ -18,114 +18,194 @@ interface ChatReply {
 const intents: Intent[] = [
   {
     id: "greeting",
-    keywords: ["hello", "hi", "hey", "good morning", "good evening", "namaste"],
+    keywords: [
+      "hello", "hi", "hey", "hai", "helo", "hellow", "greetings", "good morning",
+      "good afternoon", "good evening", "namaste", "vanakkam", "sup", "yo",
+    ],
   },
   {
     id: "name_identity",
-    keywords: ["your name", "who are you", "introduce yourself", "about you", "tell me about yourself", "about johnson", "who is johnson", "introduction", "self introduction", "describe yourself", "tell about you", "know about you", "brief about you", "about him", "who is he", "tell me about johnson"],
+    keywords: [
+      "johnson", "john", "who", "intro", "introdue", "introduc", "introdce", "introduce",
+      "introduction", "intrduction", "introduce yourself", "about you", "tell me about yourself",
+      "about johnson", "who is johnson", "self introduction", "describe yourself",
+      "tell about you", "know about you", "brief about you", "about him", "who is he",
+      "tell me about johnson", "bio", "profile", "identity", "creator", "author",
+      "developer", "owner", "summary", "overview", "who are you",
+    ],
+  },
+  {
+    id: "aionion_role",
+    keywords: [
+      "aionion", "aionian", "current role", "company", "current company", "pillars",
+      "4 pillars", "operational pillars", "metrics", "sub 300ms", "lead sync", "event ops",
+      "role", "current job", "present job",
+    ],
+    routeBoost: ["/bio", "/resume"],
+  },
+  {
+    id: "ai_videos_youtube",
+    keywords: [
+      "youtube", "youtub", "video", "videos", "ai video", "ai videos", "channel", "channels",
+      "animation", "shorts", "content creator", "video production", "runway", "kling",
+      "elevenlabs", "heygen", "aionionofficial", "jenisha", "johnelonson",
+    ],
   },
   {
     id: "location",
-    keywords: ["where", "based", "from", "location", "city", "place", "live"],
+    keywords: [
+      "where", "based", "from", "location", "locaton", "city", "place", "live", "living",
+      "chennai", "tambaram", "pudukkottai", "native", "tamil nadu", "address", "stay", "staying",
+    ],
   },
   {
     id: "experience_transition",
-    keywords: ["experience", "background", "teaching", "transition", "changed", "switch", "career", "journey"],
+    keywords: [
+      "experience", "experiance", "experiense", "exp", "background", "teaching", "teacher",
+      "transition", "transitioned", "switch", "switched", "career", "journey", "story",
+      "chemistry teacher", "stem", "greens", "greens technology", "prior work", "history",
+    ],
     routeBoost: ["/bio", "/resume"],
   },
   {
     id: "education",
-    keywords: ["education", "degree", "college", "b.sc", "m.sc", "b.ed", "pgdca", "dca", "tally", "dtp", "study"],
+    keywords: [
+      "education", "educaton", "edukation", "degree", "college", "university", "study",
+      "studied", "qualification", "qualifications", "academic", "academics", "b.sc", "bsc",
+      "m.sc", "msc", "b.ed", "bed", "pgdca", "dca", "tally", "dtp", "school", "schools",
+      "rajah", "heber", "chemistry degree",
+    ],
     routeBoost: ["/bio", "/resume"],
   },
   {
     id: "skills_stack",
-    keywords: ["skills", "stack", "tech", "technologies", "tools", "programming", "languages"],
+    keywords: [
+      "skills", "skill", "skils", "stack", "tech", "technologies", "technology", "tools",
+      "programming", "languages", "language", "coding", "frontend", "backend", "react",
+      "typescript", "python", "javascript", "tailwind", "django", "html", "css", "sql",
+      "frameworks", "libraries", "techstack",
+    ],
     routeBoost: ["/resume"],
   },
   {
     id: "projects_overview",
-    keywords: ["projects", "work", "portfolio", "built", "developed", "created", "case study"],
+    keywords: [
+      "projects", "project", "projct", "projets", "projetcs", "work", "works", "portfolio",
+      "built", "developed", "created", "case study", "apps", "app", "applications", "repos",
+      "repositories", "github", "builds", "showcase", "codebase", "websites",
+    ],
     routeBoost: ["/projects"],
   },
   {
     id: "project_weather",
-    keywords: ["weather", "openweather", "widget", "colorful"],
+    keywords: ["weather", "wether", "weathr", "forecast", "openweather", "widget", "colorful weather"],
     routeBoost: ["/projects"],
   },
   {
     id: "project_employee",
-    keywords: ["employee", "directory", "management", "usememo"],
+    keywords: ["employee", "employe", "directory", "sort", "sorting", "cecil", "management", "staff", "usememo"],
     routeBoost: ["/projects"],
   },
   {
     id: "project_ecommerce",
-    keywords: ["ecommerce", "e-commerce", "shop", "store", "mern", "mongodb"],
+    keywords: ["ecommerce", "e-commerce", "ecom", "shop", "shopping", "store", "mern", "mongodb", "cart", "checkout"],
     routeBoost: ["/projects"],
   },
   {
     id: "internship",
-    keywords: ["intern", "oor cabs", "wordpress", "react", "ai tools", "internship"],
+    keywords: ["intern", "internship", "oor cabs", "oorcabs", "wordpress", "intern work"],
     routeBoost: ["/bio", "/resume"],
   },
   {
     id: "availability_hiring",
-    keywords: ["available", "hire", "rates", "freelance", "full-time", "job", "work", "opportunity"],
+    keywords: [
+      "available", "availability", "hire", "hiring", "freelance", "freelancer", "freelancing",
+      "contract", "full-time", "part-time", "job", "work", "opportunity", "work together",
+      "collaborate", "collaboration", "hire me", "hiring status",
+    ],
     routeBoost: ["/contact", "/services"],
   },
   {
     id: "services_overview",
-    keywords: ["services", "service", "packages", "pricing", "pricing list", "cost", "investment", "rates", "offerings", "how much", "tier"],
+    keywords: [
+      "services", "service", "servises", "packages", "package", "packeges", "pricing", "price",
+      "prices", "pricng", "cost", "costs", "investment", "rates", "rate", "offerings",
+      "how much", "tier", "tiers", "charges", "fee", "fees", "quotation", "budget", "plans",
+    ],
     routeBoost: ["/services"],
   },
   {
     id: "web_packages",
-    keywords: ["website cost", "web package", "landing site", "landing page", "business website", "cms", "blog", "e-commerce", "ecommerce", "web app", "portal", "website price"],
+    keywords: [
+      "website cost", "web package", "landing site", "landing page", "business website",
+      "cms", "blog", "e-commerce site", "web app", "portal", "website price", "web development cost",
+    ],
     routeBoost: ["/services"],
   },
   {
     id: "mobile_packages",
-    keywords: ["mobile app", "app development", "android app", "ios app", "mobile package", "app cost", "application cost", "mobile pricing"],
+    keywords: [
+      "mobile app", "app development", "android app", "ios app", "mobile package",
+      "app cost", "application cost", "mobile pricing", "android", "ios", "apk",
+    ],
     routeBoost: ["/services"],
   },
   {
     id: "hourly_custom_rates",
-    keywords: ["hourly rate", "hourly consulting", "daily sprint", "day rate", "per hour", "consulting rate", "sprint cost"],
+    keywords: [
+      "hourly rate", "hourly consulting", "daily sprint", "day rate", "per hour",
+      "consulting rate", "sprint cost", "hourly", "sprint", "consultation",
+    ],
     routeBoost: ["/services"],
   },
   {
     id: "fixed_inclusions",
-    keywords: ["included", "inclusions", "revisions", "bug support", "source code", "guarantee", "what is included", "free support"],
+    keywords: [
+      "included", "inclusions", "revisions", "bug support", "source code",
+      "guarantee", "what is included", "free support", "warranty",
+    ],
     routeBoost: ["/services"],
   },
   {
     id: "scope_exclusions",
-    keywords: ["exclusions", "hosting fee", "domain registration", "extra charges", "hidden costs", "api credits", "3rd party cost"],
+    keywords: [
+      "exclusions", "hosting fee", "domain registration", "extra charges",
+      "hidden costs", "api credits", "3rd party cost", "excluded",
+    ],
     routeBoost: ["/services"],
   },
   {
     id: "custom_quote_whatsapp",
-    keywords: ["custom quote", "get quote", "whatsapp", "discuss project", "book call", "quote"],
+    keywords: [
+      "custom quote", "get quote", "whatsapp", "discuss project", "book call",
+      "quote", "wa.me", "phone number", "call me",
+    ],
     routeBoost: ["/services", "/contact"],
   },
   {
     id: "resume_download",
-    keywords: ["resume", "cv", "download", "pdf"],
+    keywords: ["resume", "resum", "resme", "cv", "download", "pdf", "curriculum vitae", "resume pdf"],
     routeBoost: ["/resume"],
   },
   {
     id: "contact_methods",
-    keywords: ["contact", "reach", "email", "message", "get in touch", "communicate"],
+    keywords: [
+      "contact", "contct", "reach", "email", "mail", "gmail", "message", "get in touch",
+      "communicate", "phone", "mobile", "number", "call", "inbox", "talk",
+    ],
     routeBoost: ["/contact"],
   },
   {
     id: "hobbies_goals",
-    keywords: ["hobbies", "interests", "goals", "future", "cricket", "reading", "research"],
+    keywords: [
+      "hobbies", "hobby", "interests", "interest", "goals", "goal", "future",
+      "cricket", "reading", "research", "passion", "vision", "leisure", "free time",
+    ],
     routeBoost: ["/bio"],
   },
   {
     id: "learning_plan",
-    keywords: ["learn", "roadmap", "beginner", "start coding", "study plan", "how to learn"],
+    keywords: ["learn", "roadmap", "beginner", "start coding", "study plan", "how to learn", "guide"],
   },
   {
     id: "interview_prep",
@@ -133,7 +213,7 @@ const intents: Intent[] = [
   },
   {
     id: "career_advice",
-    keywords: ["career", "growth", "switch", "promotion", "next step", "job search"],
+    keywords: ["career", "growth", "promotion", "next step", "job search", "advice"],
   },
   {
     id: "productivity",
@@ -171,20 +251,101 @@ const normalize = (input: string): string =>
     .replace(/\s+/g, " ")
     .trim();
 
+// Fast Levenshtein distance for typo tolerance
+const levenshtein = (a: string, b: string): number => {
+  if (a === b) return 0;
+  if (!a.length) return b.length;
+  if (!b.length) return a.length;
+
+  const row = Array.from({ length: b.length + 1 }, (_, i) => i);
+
+  for (let i = 1; i <= a.length; i++) {
+    let prev = i;
+    for (let j = 1; j <= b.length; j++) {
+      const val =
+        a[i - 1] === b[j - 1]
+          ? row[j - 1]
+          : Math.min(row[j - 1] + 1, prev + 1, row[j] + 1);
+      row[j - 1] = prev;
+      prev = val;
+    }
+    row[b.length] = prev;
+  }
+
+  return row[b.length];
+};
+
+// Check if two single words are a match either exact, prefix/stem, or within typo tolerance
+const isWordFuzzyMatch = (userWord: string, keywordWord: string): boolean => {
+  if (userWord === keywordWord) return true;
+
+  // Short words (<= 3 chars like "cv", "bio", "exp", "job", "hi") require exact match
+  if (keywordWord.length <= 3 || userWord.length <= 3) {
+    return userWord === keywordWord;
+  }
+
+  // Prefix / stem matching (e.g. "introd" -> "introduce", "proj" -> "project", "experi" -> "experience")
+  if (userWord.length >= 4 && keywordWord.length >= 4) {
+    if (userWord.startsWith(keywordWord) || keywordWord.startsWith(userWord)) {
+      return true;
+    }
+  }
+
+  // Typo tolerance based on length
+  const dist = levenshtein(userWord, keywordWord);
+  if (keywordWord.length <= 5) {
+    return dist <= 1;
+  }
+  return dist <= 2;
+};
+
 const containsAny = (text: string, keywords: string[]): boolean =>
   keywords.some((keyword) => text.includes(keyword));
 
 const scoreIntent = (intent: Intent, normalizedMessage: string, pathname: string): number => {
   let score = 0;
+  const userTokens = normalizedMessage.split(" ").filter((t) => t.length > 0);
 
   for (const keyword of intent.keywords) {
-    if (normalizedMessage.includes(keyword)) {
-      score += keyword.includes(" ") ? 2 : 1;
+    const isMultiWord = keyword.includes(" ");
+
+    if (isMultiWord) {
+      // Direct exact phrase match
+      if (normalizedMessage.includes(keyword)) {
+        score += 3;
+      } else {
+        // Multi-word fuzzy match: check if every keyword word matches a user word
+        const kwTokens = keyword.split(" ");
+        const allMatched = kwTokens.every((kw) =>
+          userTokens.some((ut) => isWordFuzzyMatch(ut, kw))
+        );
+        if (allMatched) {
+          score += 2.5;
+        }
+      }
+    } else {
+      // Single-word keyword matching
+      if (normalizedMessage === keyword) {
+        // Exact single-word query
+        score += 3;
+      } else if (userTokens.includes(keyword)) {
+        // Exact token inside sentence
+        score += 2;
+      } else if (normalizedMessage.includes(keyword)) {
+        // Substring inside sentence
+        score += 1.5;
+      } else {
+        // Fuzzy match against any token in user's message
+        const matched = userTokens.some((token) => isWordFuzzyMatch(token, keyword));
+        if (matched) {
+          score += 1.5;
+        }
+      }
     }
   }
 
   if (intent.routeBoost?.includes(pathname)) {
-    score += 0.5;
+    score += 0.3;
   }
 
   return score;
@@ -310,6 +471,36 @@ Johnson serves as a Full Stack Developer & AI/Digital Ops Specialist operating a
 \u{1F517} GitHub: github.com/Johnrebu | LinkedIn: linkedin.com/in/johnsonelon
 
 Feel free to ask me anything specific about Johnson\u2019s projects, skills, services, or experience!`;
+    case "aionion_role":
+      return `🏢 Johnson's Role at Aionion Capital (2026 – Present):
+Johnson is a Full Stack Developer & AI/Digital Operations Specialist driving 4 key operational pillars:
+
+⚡ Pillar 1: Full-Stack Engineering & Automation
+• Sub-300ms API response times & ≥ 99.5% system uptime
+• 100% CRM lead sync accuracy within 24h
+
+🎥 Pillar 2: AI Video Creation & Content Strategy
+• 4+ AI educational videos/month with ≥ 40% watch time
+• +10% MoM subscriber growth across YouTube channels
+
+🎨 Pillar 3: Graphic Design & Creative Branding
+• 100% digital campaign assets delivered 5 days prior to launch (0 delays)
+• Reusable brand kit & promotional visual designs
+
+📡 Pillar 4: Event Coordination & Live AV Operations
+• ≥ 99% AV tech uptime during live conference sessions
+• 2-hour pre-event dry-run setup with ≥ 95% escalation-free delivery`;
+
+    case "ai_videos_youtube":
+      return `🎬 Johnson's AI Video Creation & YouTube Channels:
+Johnson produces end-to-end AI-generated videos, animations, and educational media for 3 active channels:
+
+1️⃣ @aionionofficial — Aionion Capital's official channel (corporate AI video shorts, promos, market insights, and educational clips)
+2️⃣ @jenishajeni-l9i — Creative AI storytelling, digital character animation, and visual experiments
+3️⃣ @johnElonSon — Tech innovation, AI workflow demos, and cutting-edge media productions
+
+🛠️ AI Production Stack: Runway Gen-3, Kling AI, Pika, Midjourney, ElevenLabs, HeyGen, Synthesia, CapCut AI, Premiere Pro & DaVinci Resolve.`;
+
     case "location":
       return `Johnson is from ${data.profile.from} and currently based in ${data.profile.base}.`;
     case "experience_transition":
