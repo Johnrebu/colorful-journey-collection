@@ -17,7 +17,7 @@ interface MetaConfig {
   canonical?: string;
 }
 
-const DEFAULT_OG_IMAGE = '/profile-logo.png';
+const DEFAULT_OG_IMAGE = 'https://colorful-journey-collection.lovable.app/profile-logo.png';
 const SITE_URL = typeof window !== 'undefined' ? window.location.origin : '';
 const CURRENT_URL = typeof window !== 'undefined' ? window.location.href : SITE_URL;
 const TWITTER_HANDLE = '@johnsondeveloper'; // Update with your handle
