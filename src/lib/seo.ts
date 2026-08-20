@@ -18,9 +18,10 @@ interface MetaConfig {
 }
 
 const DEFAULT_OG_IMAGE = 'https://colorful-journey-collection.lovable.app/profile-logo.png';
-const SITE_URL = typeof window !== 'undefined' ? window.location.origin : '';
+const PUBLISHED_SITE_URL = 'https://colorful-journey-collection.lovable.app';
+const SITE_URL = typeof window !== 'undefined' ? window.location.origin : PUBLISHED_SITE_URL;
 const CURRENT_URL = typeof window !== 'undefined' ? window.location.href : SITE_URL;
-const TWITTER_HANDLE = '@johnsondeveloper'; // Update with your handle
+const TWITTER_HANDLE = '@JohnsonJoh31080';
 
 export const updateMetaTags = (config: MetaConfig) => {
   // Update title
@@ -30,13 +31,13 @@ export const updateMetaTags = (config: MetaConfig) => {
   const updateOrCreateMeta = (name: string, value: string, isProperty = false) => {
     const attr = isProperty ? 'property' : 'name';
     let element = document.querySelector(`meta[${attr}="${name}"]`) as HTMLMetaElement;
-    
+
     if (!element) {
       element = document.createElement('meta');
       element.setAttribute(attr, name);
       document.head.appendChild(element);
     }
-    
+
     element.content = value;
   };
 
@@ -77,15 +78,43 @@ export const updateMetaTags = (config: MetaConfig) => {
  */
 export const updateStructuredData = (data: Record<string, unknown>) => {
   let script = document.querySelector('script[type="application/ld+json"][data-seo="true"]') as HTMLScriptElement;
-  
+
   if (!script) {
     script = document.createElement('script');
     script.type = 'application/ld+json';
     script.setAttribute('data-seo', 'true');
     document.head.appendChild(script);
   }
-  
+
   script.textContent = JSON.stringify(data);
+};
+
+/**
+ * Schema.org Organization Schema for the portfolio brand
+ */
+export const getOrganizationSchema = () => {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Johnson T Portfolio',
+    alternateName: 'Johnson Portfolio',
+    url: SITE_URL,
+    logo: `${SITE_URL}/profile-logo.png`,
+    image: `${SITE_URL}/profile-logo.png`,
+    description: 'Portfolio and services of Johnson T, a Full-Stack Software Engineer based in Chennai, India.',
+    sameAs: [
+      'https://www.linkedin.com/in/johnsonelon/',
+      'https://github.com/Johnrebu',
+      'https://x.com/JohnsonJoh31080',
+    ],
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+91-875-477-4022',
+      contactType: 'sales',
+      areaServed: 'IN',
+      availableLanguage: ['English', 'Tamil'],
+    },
+  };
 };
 
 /**
@@ -95,16 +124,41 @@ export const getPersonSchema = () => {
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    name: 'Johnson',
-    jobTitle: 'Full-Stack Developer & Software Engineer',
+    name: 'Johnson T',
+    givenName: 'Johnson',
+    jobTitle: 'Full-Stack Software Engineer',
     url: SITE_URL,
     image: `${SITE_URL}/profile-logo.png`,
     sameAs: [
-      'https://twitter.com/johnsondeveloper', // Update these
-      'https://linkedin.com/in/johnsondeveloper',
-      'https://github.com/johnsondeveloper',
+      'https://x.com/JohnsonJoh31080',
+      'https://www.linkedin.com/in/johnsonelon/',
+      'https://github.com/Johnrebu',
+      'https://www.instagram.com/aionionoffl',
     ],
-    description: 'Full-stack developer with a science-education background. Building thoughtful, high-performance web applications and systems.',
+    description: 'Full-Stack Software Engineer with a science-education background, building high-performance web applications, scalable APIs, and AI-powered digital solutions.',
+    knowsAbout: [
+      'React',
+      'TypeScript',
+      'Tailwind CSS',
+      'Python',
+      'Django',
+      'SQL',
+      'WordPress',
+      'AI Video Production',
+      'Graphic Design',
+      'System Automation',
+      'Live Event AV Operations',
+    ],
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Aionion Capital',
+    },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Tambaram, Chennai',
+      addressRegion: 'Tamil Nadu',
+      addressCountry: 'IN',
+    },
   };
 };
 
@@ -116,8 +170,13 @@ export const getWebsiteSchema = () => {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     url: SITE_URL,
-    name: 'Johnson Portfolio',
-    description: 'Johnson portfolio: full-stack developer building high-performance web applications.',
+    name: 'Johnson T Portfolio',
+    description: 'Johnson T portfolio: full-stack developer building high-performance web applications.',
+    publisher: {
+      '@type': 'Organization',
+      name: 'Johnson T Portfolio',
+      url: SITE_URL,
+    },
     potentialAction: {
       '@type': 'SearchAction',
       target: {
@@ -169,6 +228,93 @@ export const getProjectSchema = (project: {
 };
 
 /**
+ * Schema.org CollectionPage / ItemList for the projects portfolio
+ */
+export const getProjectsSchema = (projects: Array<{
+  name: string;
+  description: string;
+  image?: string;
+  url?: string;
+  datePublished?: string;
+  skills?: string[];
+}>) => {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Projects & Portfolio - Johnson T',
+    description: 'Featured web applications, commercial client platforms, enterprise CRMs, and open-source GitHub builds by Johnson T.',
+    url: `${SITE_URL}/projects`,
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: projects.map((project, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: getProjectSchema(project),
+      })),
+    },
+  };
+};
+
+/**
+ * Schema.org ProfilePage for the resume
+ */
+export const getResumeSchema = () => {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    mainEntity: {
+      '@type': 'Person',
+      name: 'Johnson T',
+      jobTitle: 'Full-Stack Software Engineer',
+      url: SITE_URL,
+      image: `${SITE_URL}/profile-logo.png`,
+      sameAs: [
+        'https://www.linkedin.com/in/johnsonelon/',
+        'https://github.com/Johnrebu',
+        'https://x.com/JohnsonJoh31080',
+      ],
+      worksFor: {
+        '@type': 'Organization',
+        name: 'Aionion Capital',
+      },
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Tambaram, Chennai',
+        addressRegion: 'Tamil Nadu',
+        addressCountry: 'IN',
+      },
+    },
+  };
+};
+
+/**
+ * Schema.org ContactPage for the contact page
+ */
+export const getContactPageSchema = () => {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contact Johnson T',
+    description: 'Contact Johnson T for project inquiries, collaboration opportunities, and freelance or full-time engagements.',
+    url: `${SITE_URL}/contact`,
+    mainEntity: {
+      '@type': 'Person',
+      name: 'Johnson T',
+      jobTitle: 'Full-Stack Software Engineer',
+      url: SITE_URL,
+      email: 'mailto:johnchemist91@gmail.com',
+      telephone: '+91-875-477-4022',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Tambaram, Chennai',
+        addressRegion: 'Tamil Nadu',
+        addressCountry: 'IN',
+      },
+    },
+  };
+};
+
+/**
  * Schema.org Service Schema for freelance development packages
  */
 export const getServicesSchema = () => {
@@ -180,6 +326,7 @@ export const getServicesSchema = () => {
       '@type': 'Person',
       name: 'Johnson T',
       url: SITE_URL,
+      image: `${SITE_URL}/profile-logo.png`,
     },
     areaServed: 'Worldwide',
     hasOfferCatalog: {
@@ -209,4 +356,3 @@ export const getServicesSchema = () => {
     },
   };
 };
-
