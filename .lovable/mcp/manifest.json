@@ -3,7 +3,9 @@
   "sdk_version": "0.24.0",
   "path": "/functions/v1/mcp",
   "auth": {
-    "type": "none"
+    "type": "oauth",
+    "issuer": "https://epfqzoniyldpktyyyaxv.supabase.co/auth/v1",
+    "resource": "https://epfqzoniyldpktyyyaxv.supabase.co/functions/v1/mcp"
   },
   "mcp": {
     "server": {
