@@ -4,7 +4,7 @@ import useSeo from "@/hooks/useSeo";
 import { certifications, educationItems, skills } from "@/components/resume/resumeData";
 import ParallaxProfilePhoto from "@/components/ParallaxProfilePhoto";
 import CurrentRoleImpact from "@/components/CurrentRoleImpact";
-import johnImage from "@/images/john.jpg";
+import johnImage from "@/images/johnson-professional.jpg";
 
 export default function Wikipedia() {
   useSeo({

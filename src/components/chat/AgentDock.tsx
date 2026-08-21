@@ -22,7 +22,7 @@ const dockTransition = {
 
 export function AgentDock({
   agentName = "Johnson's AI Assistant",
-  avatarSrc = "/profile-logo.png",
+  avatarSrc = "/profile-photo.jpg",
   className = "",
   idleStatus = "Ready to assist",
   workingStatus = "Thinking...",

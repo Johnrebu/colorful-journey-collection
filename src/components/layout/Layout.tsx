@@ -7,7 +7,7 @@ import ScrollToTop from "./ScrollToTop";
 import ChatWidget from "../chat/ChatWidget";
 import { Toaster } from "sonner";
 
-const profileImageUrl = "/profile-logo.png";
+const profileImageUrl = "/profile-photo.jpg";
 
 const Layout = () => {
   const { theme, toggleTheme } = useTheme();

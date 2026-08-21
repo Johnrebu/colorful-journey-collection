@@ -28,7 +28,7 @@ import {
 } from "lucide-react";
 import useSeo from "@/hooks/useSeo";
 import { getPersonSchema, getWebsiteSchema } from "@/lib/seo";
-import johnImage from "@/images/john.jpg";
+import johnImage from "@/images/johnson-professional.jpg";
 import ServicesSection from "@/components/services/ServicesSection";
 import ParallaxProfilePhoto from "@/components/ParallaxProfilePhoto";
 import { youtubeChannels } from "@/data/youtubeData";

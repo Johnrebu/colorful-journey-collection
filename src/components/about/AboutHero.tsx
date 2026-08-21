@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, BookOpen, Brain, Sparkles, Terminal, Code2, GraduationCap, Compass, CheckCircle2 } from "lucide-react";
 import ParallaxProfilePhoto from "@/components/ParallaxProfilePhoto";
-import johnImage from "@/images/john.jpg";
+import johnImage from "@/images/johnson-professional.jpg";
 
 type Lens = "developer" | "educator" | "synthesis";
 

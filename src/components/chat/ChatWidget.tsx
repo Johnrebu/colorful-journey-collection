@@ -302,7 +302,7 @@ const ChatContent = () => {
       <div className="p-3 border-t border-slate-200 dark:border-zinc-700 flex-shrink-0 bg-white dark:bg-zinc-950">
         <AgentDock
           agentName="Johnson's AI Agent"
-          avatarSrc="/profile-logo.png"
+          avatarSrc="/profile-photo.jpg"
           idleStatus="Ready to assist"
           workingStatus="Thinking..."
           isWorking={isTyping}
