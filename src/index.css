@@ -164,3 +164,31 @@
   background: #4c5d7d;
 }
 
+@media print {
+  @page {
+    size: A4;
+    margin: 8mm;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  header, nav, footer, .toaster, [data-html2canvas-ignore="true"], #chat-widget-container {
+    display: none !important;
+  }
+
+  .print-avoid-break {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .print-page-break {
+    break-before: page !important;
+    page-break-before: always !important;
+  }
+}
+
