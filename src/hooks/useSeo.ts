@@ -1,5 +1,15 @@
-import { useEffect } from 'react';
-import { updateMetaTags, updateStructuredData } from '@/lib/seo';
+import { useEffect, useMemo } from 'react';
+import {
+  updateMetaTags,
+  updateStructuredData,
+  removeStructuredData,
+  getBreadcrumbSchema,
+} from '@/lib/seo';
+
+export interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
 
 interface UseSeoOptions {
   title: string;
@@ -8,6 +18,8 @@ interface UseSeoOptions {
   ogImage?: string;
   ogUrl?: string;
   structuredData?: Record<string, unknown>;
+  /** Trail shown in breadcrumb rich results, e.g. [{ name: 'Home', url: '/' }, ...] */
+  breadcrumbs?: BreadcrumbItem[];
 }
 
 /**
@@ -16,8 +28,7 @@ interface UseSeoOptions {
  * useSeo({
  *   title: 'Projects - Johnson Portfolio',
  *   description: 'Explore my featured projects',
- *   keywords: 'portfolio, projects, react, typescript',
- *   structuredData: getProjectSchema(...)
+ *   breadcrumbs: [{ name: 'Home', url: '/' }, { name: 'Projects', url: '/projects' }],
  * })
  */
 export const useSeo = ({
@@ -27,7 +38,18 @@ export const useSeo = ({
   ogImage,
   ogUrl,
   structuredData,
+  breadcrumbs,
 }: UseSeoOptions) => {
+  const breadcrumbKey = breadcrumbs
+    ? breadcrumbs.map((item) => `${item.name}|${item.url}`).join('>')
+    : '';
+
+  const breadcrumbTrail = useMemo(
+    () => (breadcrumbKey ? breadcrumbs : undefined),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [breadcrumbKey]
+  );
+
   useEffect(() => {
     updateMetaTags({
       title,
@@ -41,6 +63,17 @@ export const useSeo = ({
       updateStructuredData(structuredData);
     }
   }, [title, description, keywords, ogImage, ogUrl, structuredData]);
+
+  useEffect(() => {
+    if (!breadcrumbTrail || breadcrumbTrail.length === 0) {
+      removeStructuredData('breadcrumb');
+      return;
+    }
+
+    updateStructuredData(getBreadcrumbSchema(breadcrumbTrail), 'breadcrumb');
+
+    return () => removeStructuredData('breadcrumb');
+  }, [breadcrumbTrail]);
 };
 
 export default useSeo;
