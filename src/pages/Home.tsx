@@ -193,6 +193,7 @@ export default function Home() {
       "@context": "https://schema.org",
       "@graph": [getPersonSchema(), getWebsiteSchema()],
     },
+    breadcrumbs: [{ name: "Home", url: "/" }],
   });
 
   return (

@@ -9,6 +9,10 @@ export default function Bio() {
     description:
       "Explore Johnson's personal profile, current role at Aionion Capital, education, and multidisciplinary skills.",
     keywords: "bio, profile, personal information, professional summary, Aionion Capital, full stack developer",
+    breadcrumbs: [
+      { name: "Home", url: "/" },
+      { name: "Bio", url: "/bio" },
+    ],
   });
 
   const personalInfo = [
