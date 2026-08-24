@@ -74,20 +74,29 @@ export const updateMetaTags = (config: MetaConfig) => {
 };
 
 /**
- * Update structured data (JSON-LD) for rich snippets
+ * Update structured data (JSON-LD) for rich snippets.
+ * `key` allows multiple independent JSON-LD blocks (e.g. page schema + breadcrumbs).
  */
-export const updateStructuredData = (data: Record<string, unknown>) => {
-  let script = document.querySelector('script[type="application/ld+json"][data-seo="true"]') as HTMLScriptElement;
+export const updateStructuredData = (data: Record<string, unknown>, key = 'true') => {
+  let script = document.querySelector(`script[type="application/ld+json"][data-seo="${key}"]`) as HTMLScriptElement;
 
   if (!script) {
     script = document.createElement('script');
     script.type = 'application/ld+json';
-    script.setAttribute('data-seo', 'true');
+    script.setAttribute('data-seo', key);
     document.head.appendChild(script);
   }
 
   script.textContent = JSON.stringify(data);
 };
+
+/**
+ * Remove a previously injected JSON-LD block
+ */
+export const removeStructuredData = (key: string) => {
+  document.querySelector(`script[type="application/ld+json"][data-seo="${key}"]`)?.remove();
+};
+
 
 /**
  * Schema.org Organization Schema for the portfolio brand
@@ -192,6 +201,9 @@ export const getWebsiteSchema = () => {
  * Schema.org BreadcrumbList for navigation
  */
 export const getBreadcrumbSchema = (breadcrumbs: Array<{ name: string; url: string }>) => {
+  const toAbsolute = (url: string) =>
+    url.startsWith('http') ? url : `${SITE_URL}${url.startsWith('/') ? '' : '/'}${url}`;
+
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -199,10 +211,11 @@ export const getBreadcrumbSchema = (breadcrumbs: Array<{ name: string; url: stri
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: item.url,
+      item: toAbsolute(item.url),
     })),
   };
 };
+
 
 /**
  * Schema.org Project/Portfolio Item

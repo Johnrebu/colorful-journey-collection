@@ -11,6 +11,10 @@ export default function Wikipedia() {
     title: "Wikipedia Profile - Johnson T | Full Stack Developer & AI Specialist",
     description: "Wikipedia-style profile page for Johnson T: Aionion Capital role, education, science background, and technical expertise.",
     keywords: "wikipedia profile, Aionion Capital, full stack developer, AI video creator, automation, education, tech transition",
+    breadcrumbs: [
+      { name: "Home", url: "/" },
+      { name: "Wikipedia Profile", url: "/wikipedia" },
+    ],
   });
 
   return (

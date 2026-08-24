@@ -126,6 +126,10 @@ export default function Resume() {
       "View Johnson T's professional resume: Full-Stack Developer & Multidisciplinary Specialist at Aionion Capital with expertise in API automation, AI video production, graphic design, and event tech.",
     keywords:
       "resume, Aionion Capital, experience, full-stack developer, AI video creator, automation, React, TypeScript, Python",
+    breadcrumbs: [
+      { name: "Home", url: "/" },
+      { name: "Resume", url: "/resume" },
+    ],
   });
 
   const handleDownloadResume = async () => {
