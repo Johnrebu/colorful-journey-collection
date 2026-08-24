@@ -201,6 +201,9 @@ export const getWebsiteSchema = () => {
  * Schema.org BreadcrumbList for navigation
  */
 export const getBreadcrumbSchema = (breadcrumbs: Array<{ name: string; url: string }>) => {
+  const toAbsolute = (url: string) =>
+    url.startsWith('http') ? url : `${SITE_URL}${url.startsWith('/') ? '' : '/'}${url}`;
+
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -208,10 +211,11 @@ export const getBreadcrumbSchema = (breadcrumbs: Array<{ name: string; url: stri
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: item.url,
+      item: toAbsolute(item.url),
     })),
   };
 };
+
 
 /**
  * Schema.org Project/Portfolio Item
