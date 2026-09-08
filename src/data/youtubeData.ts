@@ -17,6 +17,8 @@ export interface AiVideoItem {
   description: string;
   youtubeId?: string; // e.g. for embeds if available
   youtubeUrl: string;
+  videoUrl?: string; // local or direct mp4 url for in-app video player / preview
+  externalVideoUrl?: string;
   channelHandle: string;
   category: "AI Animation" | "Educational AI" | "AI Shorts" | "Conceptual Visuals" | "Corporate AI";
   thumbnail: string;
@@ -69,6 +71,19 @@ export const youtubeChannels: YoutubeChannel[] = [
 ];
 
 export const aiVideoWorks: AiVideoItem[] = [
+  {
+    id: "v-spotlight-avatar",
+    title: "Cinematic AI Avatar: Lab Science to Quantum Hologram Matrix",
+    description: "State-of-the-art cinematic AI generation showcasing the visual transformation from laboratory chemistry into glowing quantum data matrices, interactive holographic system monitoring (99.5% Uptime), and neural brain analytics.",
+    youtubeUrl: "https://www.youtube.com/@johnElonSon",
+    videoUrl: "/videos/johnson-ai-presentation.mp4",
+    externalVideoUrl: "https://videotourl.com/videos/1788884134518-45a5258c-8de1-49c1-98b4-64cd70a5257a.mp4",
+    channelHandle: "@johnElonSon",
+    category: "Conceptual Visuals",
+    thumbnail: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop",
+    tags: ["Cinematic AI", "Holographic UI", "Avatar Synthesis", "Quantum Tech", "Neural Brain AI"],
+    featured: true,
+  },
   {
     id: "v-ac1",
     title: "Aionion Capital — AI-Powered Company Shorts & Promos",

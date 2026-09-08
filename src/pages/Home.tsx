@@ -1,9 +1,14 @@
+import { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
   ArrowUpRight,
   BookOpen,
+  Film,
+  Play,
+  Volume2,
+  VolumeX,
   BriefcaseBusiness,
   CheckCircle2,
   Code2,
@@ -181,6 +186,175 @@ const starPositions = Array.from({ length: 36 }, (_, index) => ({
   delay: (index % 6) * 0.4,
   duration: 3 + (index % 4) * 0.75,
 }));
+
+// Life Transformation Video Showcase Component
+function LifeTransformationVideo() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [isMuted, setIsMuted] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(true);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && videoRef.current) {
+          videoRef.current.play().catch(() => {});
+          setIsPlaying(true);
+          setShowOverlay(false);
+        } else if (!entry.isIntersecting && videoRef.current) {
+          videoRef.current.pause();
+          setIsPlaying(false);
+        }
+      },
+      { threshold: 0.4 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(!isMuted);
+    }
+  };
+
+  const handlePlayClick = () => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {});
+      setIsPlaying(true);
+      setShowOverlay(false);
+    }
+  };
+
+  return (
+    <motion.section
+      ref={sectionRef}
+      className="relative overflow-hidden rounded-[2.5rem] border border-slate-200/90 bg-gradient-to-br from-slate-950 via-indigo-950 to-purple-950 shadow-[0_30px_80px_rgba(0,0,0,0.3)] dark:border-white/10"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+    >
+      {/* Ambient background glows */}
+      <div className="absolute -left-20 -top-20 h-80 w-80 rounded-full bg-purple-600/15 blur-[100px]" />
+      <div className="absolute -right-20 -bottom-20 h-60 w-60 rounded-full bg-cyan-500/10 blur-[80px]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-indigo-500/8 blur-[120px]" />
+
+      {/* Header strip */}
+      <div className="relative z-10 px-6 pt-6 pb-4 sm:px-8 sm:pt-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="space-y-2">
+            <motion.div
+              initial={{ opacity: 0, x: -10 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 rounded-full border border-purple-400/30 bg-purple-500/15 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-purple-300 backdrop-blur-md"
+            >
+              <motion.span
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <Film size={14} className="text-purple-400" />
+              </motion.span>
+              My Life Transformation
+            </motion.div>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight">
+              From Educator to{" "}
+              <span className="bg-gradient-to-r from-cyan-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
+                Full-Stack Engineer
+              </span>
+            </h2>
+            <p className="text-sm text-slate-300/80 max-w-xl leading-relaxed font-medium">
+              Watch my journey — a cinematic AI visualization of my transformation from science teaching to software engineering, powered entirely by generative AI.
+            </p>
+          </div>
+
+          {/* Mute toggle */}
+          <button
+            onClick={toggleMute}
+            className="self-start sm:self-auto inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2.5 text-xs font-bold text-white/80 backdrop-blur-md transition hover:bg-white/10 hover:border-white/25 hover:text-white active:scale-95"
+          >
+            {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+            {isMuted ? "Unmute" : "Mute"}
+          </button>
+        </div>
+      </div>
+
+      {/* Video container */}
+      <div className="relative mx-4 mb-6 sm:mx-6 sm:mb-8 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+        {/* Gradient frame effect */}
+        <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-br from-purple-500/30 via-transparent to-cyan-500/30 pointer-events-none z-10" />
+
+        {/* Aspect ratio container */}
+        <div className="relative aspect-video w-full bg-zinc-950">
+          <video
+            ref={videoRef}
+            src="/videos/johnson-ai-presentation.mp4"
+            className="absolute inset-0 h-full w-full object-cover"
+            muted
+            loop
+            playsInline
+            preload="metadata"
+          />
+
+          {/* Play overlay — shown until video starts */}
+          {showOverlay && (
+            <motion.div
+              className="absolute inset-0 flex flex-col items-center justify-center bg-zinc-950/60 backdrop-blur-sm z-20 cursor-pointer"
+              onClick={handlePlayClick}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <motion.div
+                animate={{
+                  scale: [1, 1.08, 1],
+                  boxShadow: [
+                    "0 0 0 0 rgba(168,85,247,0.4)",
+                    "0 0 0 24px rgba(168,85,247,0)",
+                    "0 0 0 0 rgba(168,85,247,0)",
+                  ],
+                }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                className="flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 text-white shadow-2xl shadow-purple-600/40"
+              >
+                <Play size={36} className="ml-1.5 fill-white" />
+              </motion.div>
+              <p className="mt-4 text-sm font-bold text-white/80 uppercase tracking-widest">
+                Watch My Journey
+              </p>
+            </motion.div>
+          )}
+
+          {/* Cinematic vignette overlay */}
+          <div className="absolute inset-0 pointer-events-none z-10 bg-[radial-gradient(ellipse_at_center,transparent_50%,rgba(0,0,0,0.3)_100%)]" />
+
+          {/* Bottom gradient fade */}
+          <div className="absolute bottom-0 inset-x-0 h-20 bg-gradient-to-t from-slate-950/80 to-transparent pointer-events-none z-10" />
+        </div>
+      </div>
+
+      {/* Bottom info bar */}
+      <div className="relative z-10 px-6 pb-6 sm:px-8 sm:pb-8">
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-400/20 bg-cyan-500/10 px-3 py-1.5 text-[11px] font-bold text-cyan-300">
+            <Sparkles size={12} />
+            100% AI Generated
+          </span>
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-purple-400/20 bg-purple-500/10 px-3 py-1.5 text-[11px] font-bold text-purple-300">
+            <Film size={12} />
+            Life Transformation Story
+          </span>
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] font-bold text-slate-400">
+            Autoplay Enabled
+          </span>
+        </div>
+      </div>
+    </motion.section>
+  );
+}
 
 export default function Home() {
   useSeo({
@@ -396,6 +570,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ============================================================ */}
+      {/* LIFE TRANSFORMATION VIDEO SHOWCASE */}
+      {/* ============================================================ */}
+      <LifeTransformationVideo />
 
       {/* ============================================================ */}
       {/* 2. BRIEF INTRO / ABOUT SNAPSHOT */}
