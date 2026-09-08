@@ -104,6 +104,10 @@ export default function AiVideos() {
     title: "AI Video Works & Official YouTube Channels - Johnson T",
     description: "Explore AI video creations, automated video productions, digital animations, and official YouTube channels (@jenishajeni-l9i & @johnElonSon) by Johnson T.",
     keywords: "AI video creation, YouTube channel, jenishajeni, johnElonSon, generative AI videos, automated content production, AI animation, Johnson T",
+    breadcrumbs: [
+      { name: "Home", url: "/" },
+      { name: "AI Videos", url: "/ai-videos" },
+    ],
   });
 
   const [selectedCategory, setSelectedCategory] = useState<string>("All");

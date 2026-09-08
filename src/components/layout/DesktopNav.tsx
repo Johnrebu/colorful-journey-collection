@@ -17,6 +17,7 @@ const DesktopNav = ({ darkMode, toggleDarkMode }: DesktopNavProps) => {
       <NavLink to="/wikipedia">Wiki</NavLink>
       <NavLink to="/ai-videos">AI Videos</NavLink>
       <NavLink to="/services">Services</NavLink>
+      <NavLink to="/chennai-services">Chennai</NavLink>
       <NavLink to="/projects">Projects</NavLink>
       <NavLink to="/resume">Resume</NavLink>
       <NavLink to="/contact">Contact</NavLink>

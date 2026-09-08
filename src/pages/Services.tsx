@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import useSeo from "@/hooks/useSeo";
-import { getServicesSchema, getBreadcrumbSchema } from "@/lib/seo";
+import { getServicesSchema } from "@/lib/seo";
 import ServicesSection from "@/components/services/ServicesSection";
 
 export default function Services() {
@@ -13,15 +13,14 @@ export default function Services() {
       "services and pricing, web development rates, mobile app development cost, freelance React developer, India full stack software engineer pricing, Johnson T services",
     structuredData: {
       "@context": "https://schema.org",
-      "@graph": [
-        getServicesSchema(),
-        getBreadcrumbSchema([
-          { name: "Home", url: "/" },
-          { name: "Services", url: "/services" },
-        ]),
-      ],
+      "@graph": [getServicesSchema()],
     },
+    breadcrumbs: [
+      { name: "Home", url: "/" },
+      { name: "Services", url: "/services" },
+    ],
   });
+
 
   return (
     <motion.div

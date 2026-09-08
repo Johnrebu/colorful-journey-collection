@@ -17,6 +17,7 @@ const links = [
   { to: "/wikipedia", label: "Wiki Profile" },
   { to: "/ai-videos", label: "AI Videos" },
   { to: "/services", label: "Services" },
+  { to: "/chennai-services", label: "Chennai Services" },
   { to: "/projects", label: "Projects" },
   { to: "/resume", label: "Resume" },
   { to: "/contact", label: "Contact" },

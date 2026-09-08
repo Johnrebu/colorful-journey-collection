@@ -291,6 +291,10 @@ export default function Projects() {
       "Explore Johnson T's featured web applications, commercial client platforms, enterprise CRMs, and open-source GitHub builds built with React, TypeScript, and Python.",
     keywords:
       "Johnson T projects, React developer portfolio, full stack applications, commercial websites, GitHub repositories, web engineering",
+    breadcrumbs: [
+      { name: "Home", url: "/" },
+      { name: "Projects", url: "/projects" },
+    ],
   });
 
   useEffect(() => {

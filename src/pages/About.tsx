@@ -15,6 +15,10 @@ export default function About() {
       "Discover Johnson's journey at Aionion Capital: Full-Stack Engineering, AI Video Creation, System Automation, Graphic Design, and Live Event Operations.",
     keywords:
       "about, Aionion Capital, full-stack developer, AI video creator, automation specialist, graphic designer, event coordinator, content creator, React, TypeScript, Python",
+    breadcrumbs: [
+      { name: "Home", url: "/" },
+      { name: "About", url: "/about" },
+    ],
   });
 
   return (

@@ -9,6 +9,7 @@ import Bio from "../../pages/Bio";
 import Resume from "../../pages/Resume";
 import Projects from "../../pages/Projects";
 import Services from "../../pages/Services";
+import ChennaiServices from "../../pages/ChennaiServices";
 import Contact from "../../pages/Contact";
 import Wikipedia from "../../pages/Wikipedia";
 import AiVideos from "../../pages/AiVideos";
@@ -23,6 +24,7 @@ const AnimatedRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
+        <Route path="/chennai-services" element={<ChennaiServices />} />
         <Route path="/bio" element={<Bio />} />
         <Route path="/wikipedia" element={<Wikipedia />} />
         <Route path="/ai-videos" element={<AiVideos />} />

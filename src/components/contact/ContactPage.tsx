@@ -10,6 +10,10 @@ export default function ContactPage() {
     description:
       "Contact Johnson for project inquiries, collaboration opportunities, or just to say hello. Available for freelance work and full-time opportunities.",
     keywords: "contact, email, phone, get in touch, collaboration, freelance, hire",
+    breadcrumbs: [
+      { name: "Home", url: "/" },
+      { name: "Contact", url: "/contact" },
+    ],
   });
 
   return (
