@@ -7,6 +7,7 @@ import AboutTimeline from "@/components/about/AboutTimeline";
 import AboutStrengths from "@/components/about/AboutStrengths";
 import SkillMatrix from "@/components/about/SkillMatrix";
 import AboutStats from "@/components/about/AboutStats";
+import PortraitVideoShowcase from "@/components/PortraitVideoShowcase";
 
 export default function About() {
   useSeo({
@@ -31,6 +32,14 @@ export default function About() {
     >
       {/* 1. Interactive Hero Section with Lens Switcher & Parallax Profile */}
       <AboutHero />
+
+      {/* Life Transformation Video Showcase (Portrait 9:16) */}
+      <PortraitVideoShowcase
+        badgeLabel="My Story"
+        heading="The Journey Behind"
+        headingAccent="Who I Am Today"
+        description="Watch the cinematic AI visualization of my evolution — from 9 years of science education to building production-grade full-stack applications."
+      />
 
       {/* 2. Current Role & Measured Impact at Aionion Capital (4 Pillars) */}
       <CurrentRoleImpact />

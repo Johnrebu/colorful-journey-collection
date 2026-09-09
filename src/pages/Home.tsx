@@ -194,23 +194,104 @@ function LifeTransformationVideo() {
   const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showOverlay, setShowOverlay] = useState(true);
+  const hasAttemptedPlay = useRef(false);
 
+  // Attempt to play the video — returns true if successful
+  const attemptPlay = async () => {
+    const video = videoRef.current;
+    if (!video) return false;
+    try {
+      // Ensure muted (required for mobile autoplay)
+      video.muted = true;
+      await video.play();
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  // Listen to native video events for accurate state tracking
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const onPlaying = () => {
+      setIsPlaying(true);
+      setShowOverlay(false);
+    };
+    const onPause = () => {
+      setIsPlaying(false);
+    };
+
+    video.addEventListener("playing", onPlaying);
+    video.addEventListener("pause", onPause);
+
+    return () => {
+      video.removeEventListener("playing", onPlaying);
+      video.removeEventListener("pause", onPause);
+    };
+  }, []);
+
+  // IntersectionObserver for auto-play/pause on scroll
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && videoRef.current) {
-          videoRef.current.play().catch(() => {});
-          setIsPlaying(true);
-          setShowOverlay(false);
+          attemptPlay();
         } else if (!entry.isIntersecting && videoRef.current) {
           videoRef.current.pause();
-          setIsPlaying(false);
         }
       },
-      { threshold: 0.4 }
+      // Lower threshold for mobile — trigger earlier when even 15% visible
+      { threshold: 0.15 }
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
+  }, []);
+
+  // On mount: try autoplay immediately once metadata/data is ready
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const tryAutoplay = async () => {
+      if (hasAttemptedPlay.current) return;
+      hasAttemptedPlay.current = true;
+      await attemptPlay();
+    };
+
+    // If the video already has enough data, try immediately
+    if (video.readyState >= 2) {
+      tryAutoplay();
+    } else {
+      // Wait for enough data to be loaded
+      video.addEventListener("loadeddata", tryAutoplay, { once: true });
+      // Also try on canplay as a fallback
+      video.addEventListener("canplay", tryAutoplay, { once: true });
+    }
+
+    return () => {
+      video.removeEventListener("loadeddata", tryAutoplay);
+      video.removeEventListener("canplay", tryAutoplay);
+    };
+  }, []);
+
+  // Handle first user touch/click anywhere on the document to unlock mobile playback
+  useEffect(() => {
+    const unlockPlayback = () => {
+      attemptPlay();
+      // Remove listeners once we've tried
+      document.removeEventListener("touchstart", unlockPlayback);
+      document.removeEventListener("click", unlockPlayback);
+    };
+
+    document.addEventListener("touchstart", unlockPlayback, { once: true, passive: true });
+    document.addEventListener("click", unlockPlayback, { once: true });
+
+    return () => {
+      document.removeEventListener("touchstart", unlockPlayback);
+      document.removeEventListener("click", unlockPlayback);
+    };
   }, []);
 
   const toggleMute = () => {
@@ -222,9 +303,11 @@ function LifeTransformationVideo() {
 
   const handlePlayClick = () => {
     if (videoRef.current) {
-      videoRef.current.play().catch(() => {});
-      setIsPlaying(true);
-      setShowOverlay(false);
+      videoRef.current.muted = true;
+      videoRef.current.play().then(() => {
+        setIsPlaying(true);
+        setShowOverlay(false);
+      }).catch(() => {});
     }
   };
 
@@ -293,13 +376,16 @@ function LifeTransformationVideo() {
             ref={videoRef}
             src="/videos/johnson-ai-presentation.mp4"
             className="absolute inset-0 h-full w-full object-cover"
+            autoPlay
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="auto"
+            // webkit-specific attribute for iOS inline playback
+            {...{ "webkit-playsinline": "true" } as any}
           />
 
-          {/* Play overlay — shown until video starts */}
+          {/* Play overlay — shown only when autoplay fails, hidden once video plays */}
           {showOverlay && (
             <motion.div
               className="absolute inset-0 flex flex-col items-center justify-center bg-zinc-950/60 backdrop-blur-sm z-20 cursor-pointer"
@@ -323,7 +409,7 @@ function LifeTransformationVideo() {
                 <Play size={36} className="ml-1.5 fill-white" />
               </motion.div>
               <p className="mt-4 text-sm font-bold text-white/80 uppercase tracking-widest">
-                Watch My Journey
+                Tap to Play
               </p>
             </motion.div>
           )}

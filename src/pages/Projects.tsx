@@ -14,6 +14,7 @@ import {
   Zap,
 } from "lucide-react";
 import useSeo from "@/hooks/useSeo";
+import PortraitVideoShowcase from "@/components/PortraitVideoShowcase";
 
 type GitHubRepo = {
   id: number;
@@ -610,6 +611,14 @@ export default function Projects() {
           </motion.div>
         </div>
       </section>
+
+      {/* LIFE TRANSFORMATION VIDEO SHOWCASE (Portrait 9:16) */}
+      <PortraitVideoShowcase
+        badgeLabel="Behind the Portfolio"
+        heading="Watch My"
+        headingAccent="Transformation Journey"
+        description="From 9 years of science education to shipping production web applications — experience the cinematic AI-powered story behind this portfolio."
+      />
 
       {/* LIVE COMMERCIAL & CLIENT DEPLOYMENTS */}
       <section id="live-commercial-projects" className="space-y-6">
