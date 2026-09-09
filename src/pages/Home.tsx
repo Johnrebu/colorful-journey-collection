@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
@@ -178,14 +178,23 @@ const socialLinks = [
   },
 ];
 
-// Subtle Animated Background Stars
-const starPositions = Array.from({ length: 36 }, (_, index) => ({
+// Subtle Animated Background Stars — reduced on mobile for performance
+const STAR_COUNT = 36;
+const starPositions = Array.from({ length: STAR_COUNT }, (_, index) => ({
   left: `${(index * 19) % 100}%`,
   top: `${(index * 31) % 100}%`,
   size: index % 5 === 0 ? 3 : index % 3 === 0 ? 2 : 1.5,
   delay: (index % 6) * 0.4,
   duration: 3 + (index % 4) * 0.75,
 }));
+
+// Detect mobile once at module level
+const getIsMobile = () =>
+  typeof window !== "undefined" &&
+  (window.innerWidth < 768 ||
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    ));
 
 // Life Transformation Video Showcase Component
 function LifeTransformationVideo() {
@@ -194,7 +203,11 @@ function LifeTransformationVideo() {
   const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showOverlay, setShowOverlay] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
   const hasAttemptedPlay = useRef(false);
+  const hasStartedLoad = useRef(false);
+  const isMobile = useRef(getIsMobile());
 
   // Attempt to play the video — returns true if successful
   const attemptPlay = async () => {
@@ -210,6 +223,21 @@ function LifeTransformationVideo() {
     }
   };
 
+  // Start loading the video (called lazily)
+  const startVideoLoad = () => {
+    const video = videoRef.current;
+    if (!video || hasStartedLoad.current) return;
+    hasStartedLoad.current = true;
+
+    // On mobile, switch from 'none' to 'metadata' first, then load
+    if (isMobile.current) {
+      video.preload = "metadata";
+    } else {
+      video.preload = "auto";
+    }
+    video.load();
+  };
+
   // Listen to native video events for accurate state tracking
   useEffect(() => {
     const video = videoRef.current;
@@ -218,39 +246,59 @@ function LifeTransformationVideo() {
     const onPlaying = () => {
       setIsPlaying(true);
       setShowOverlay(false);
+      setIsLoading(false);
     };
     const onPause = () => {
       setIsPlaying(false);
     };
+    const onCanPlay = () => {
+      setVideoReady(true);
+      setIsLoading(false);
+    };
+    const onWaiting = () => {
+      setIsLoading(true);
+    };
 
     video.addEventListener("playing", onPlaying);
     video.addEventListener("pause", onPause);
+    video.addEventListener("canplay", onCanPlay);
+    video.addEventListener("waiting", onWaiting);
 
     return () => {
       video.removeEventListener("playing", onPlaying);
       video.removeEventListener("pause", onPause);
+      video.removeEventListener("canplay", onCanPlay);
+      video.removeEventListener("waiting", onWaiting);
     };
   }, []);
 
-  // IntersectionObserver for auto-play/pause on scroll
+  // IntersectionObserver: lazy-load video when section scrolls into view,
+  // and auto-play/pause on scroll
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && videoRef.current) {
-          attemptPlay();
+        if (entry.isIntersecting) {
+          // Start loading video when section becomes visible
+          startVideoLoad();
+
+          if (videoRef.current && !isMobile.current) {
+            attemptPlay();
+          }
         } else if (!entry.isIntersecting && videoRef.current) {
           videoRef.current.pause();
         }
       },
       // Lower threshold for mobile — trigger earlier when even 15% visible
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
-  // On mount: try autoplay immediately once metadata/data is ready
+  // On mount (desktop only): try autoplay once metadata/data is ready
   useEffect(() => {
+    if (isMobile.current) return; // Skip on mobile — user must tap
+
     const video = videoRef.current;
     if (!video) return;
 
@@ -266,7 +314,6 @@ function LifeTransformationVideo() {
     } else {
       // Wait for enough data to be loaded
       video.addEventListener("loadeddata", tryAutoplay, { once: true });
-      // Also try on canplay as a fallback
       video.addEventListener("canplay", tryAutoplay, { once: true });
     }
 
@@ -278,9 +325,10 @@ function LifeTransformationVideo() {
 
   // Handle first user touch/click anywhere on the document to unlock mobile playback
   useEffect(() => {
+    if (!isMobile.current) return; // Desktop doesn't need this
+
     const unlockPlayback = () => {
-      attemptPlay();
-      // Remove listeners once we've tried
+      startVideoLoad();
       document.removeEventListener("touchstart", unlockPlayback);
       document.removeEventListener("click", unlockPlayback);
     };
@@ -302,12 +350,46 @@ function LifeTransformationVideo() {
   };
 
   const handlePlayClick = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = true;
-      videoRef.current.play().then(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    setIsLoading(true);
+
+    // Ensure the video source is being loaded
+    startVideoLoad();
+
+    // If video has enough data, play immediately
+    if (video.readyState >= 3) {
+      video.muted = true;
+      video.play().then(() => {
         setIsPlaying(true);
         setShowOverlay(false);
-      }).catch(() => {});
+        setIsLoading(false);
+      }).catch(() => {
+        setIsLoading(false);
+      });
+    } else {
+      // Wait for enough data to play
+      video.preload = "auto";
+      video.load();
+
+      const onReady = () => {
+        video.muted = true;
+        video.play().then(() => {
+          setIsPlaying(true);
+          setShowOverlay(false);
+          setIsLoading(false);
+        }).catch(() => {
+          setIsLoading(false);
+        });
+        video.removeEventListener("canplay", onReady);
+      };
+      video.addEventListener("canplay", onReady, { once: true });
+
+      // Timeout fallback — stop loading spinner after 15s
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 15000);
     }
   };
 
@@ -320,10 +402,10 @@ function LifeTransformationVideo() {
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
     >
-      {/* Ambient background glows */}
-      <div className="absolute -left-20 -top-20 h-80 w-80 rounded-full bg-purple-600/15 blur-[100px]" />
-      <div className="absolute -right-20 -bottom-20 h-60 w-60 rounded-full bg-cyan-500/10 blur-[80px]" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-indigo-500/8 blur-[120px]" />
+      {/* Ambient background glows — hidden on mobile for GPU performance */}
+      <div className="hidden md:block absolute -left-20 -top-20 h-80 w-80 rounded-full bg-purple-600/15 blur-[100px]" />
+      <div className="hidden md:block absolute -right-20 -bottom-20 h-60 w-60 rounded-full bg-cyan-500/10 blur-[80px]" />
+      <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-indigo-500/8 blur-[120px]" />
 
       {/* Header strip */}
       <div className="relative z-10 px-6 pt-6 pb-4 sm:px-8 sm:pt-8">
@@ -376,11 +458,11 @@ function LifeTransformationVideo() {
             ref={videoRef}
             src="/videos/johnson-ai-presentation.mp4"
             className="absolute inset-0 h-full w-full object-cover"
-            autoPlay
+            autoPlay={!isMobile.current}
             muted
             loop
             playsInline
-            preload="auto"
+            preload={isMobile.current ? "none" : "metadata"}
             // webkit-specific attribute for iOS inline playback
             {...{ "webkit-playsinline": "true" } as any}
           />
@@ -394,23 +476,41 @@ function LifeTransformationVideo() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <motion.div
-                animate={{
-                  scale: [1, 1.08, 1],
-                  boxShadow: [
-                    "0 0 0 0 rgba(168,85,247,0.4)",
-                    "0 0 0 24px rgba(168,85,247,0)",
-                    "0 0 0 0 rgba(168,85,247,0)",
-                  ],
-                }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                className="flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 text-white shadow-2xl shadow-purple-600/40"
-              >
-                <Play size={36} className="ml-1.5 fill-white" />
-              </motion.div>
-              <p className="mt-4 text-sm font-bold text-white/80 uppercase tracking-widest">
-                Tap to Play
-              </p>
+              {isLoading ? (
+                <>
+                  <div className="flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-full bg-gradient-to-br from-purple-600/80 to-indigo-600/80 text-white shadow-2xl shadow-purple-600/40">
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
+                      className="h-8 w-8 rounded-full border-3 border-white/30 border-t-white"
+                      style={{ borderWidth: "3px" }}
+                    />
+                  </div>
+                  <p className="mt-4 text-sm font-bold text-white/80 uppercase tracking-widest">
+                    Loading Video...
+                  </p>
+                </>
+              ) : (
+                <>
+                  <motion.div
+                    animate={{
+                      scale: [1, 1.08, 1],
+                      boxShadow: [
+                        "0 0 0 0 rgba(168,85,247,0.4)",
+                        "0 0 0 24px rgba(168,85,247,0)",
+                        "0 0 0 0 rgba(168,85,247,0)",
+                      ],
+                    }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                    className="flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 text-white shadow-2xl shadow-purple-600/40"
+                  >
+                    <Play size={36} className="ml-1.5 fill-white" />
+                  </motion.div>
+                  <p className="mt-4 text-sm font-bold text-white/80 uppercase tracking-widest">
+                    Tap to Play
+                  </p>
+                </>
+              )}
             </motion.div>
           )}
 
@@ -472,8 +572,8 @@ export default function Home() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(99,102,241,0.15),transparent_40%),radial-gradient(circle_at_bottom_right,rgba(236,72,153,0.15),transparent_40%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.16),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.14),transparent_36%)]" />
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(99,102,241,0.05)_1px,transparent_1px),linear-gradient(rgba(99,102,241,0.05)_1px,transparent_1px)] dark:bg-[linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] opacity-40 dark:opacity-25" />
 
-        {/* Ambient Stars */}
-        {starPositions.map((star, index) => (
+        {/* Ambient Stars — reduced on mobile for performance */}
+        {(getIsMobile() ? starPositions.slice(0, 12) : starPositions).map((star, index) => (
           <motion.span
             key={`star-${index}`}
             className="pointer-events-none absolute rounded-full bg-indigo-500/40 dark:bg-cyan-100"

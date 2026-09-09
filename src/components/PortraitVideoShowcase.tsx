@@ -2,6 +2,14 @@ import { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Film, Play, Volume2, VolumeX, Sparkles } from "lucide-react";
 
+// Detect mobile once at module level
+const getIsMobile = () =>
+  typeof window !== "undefined" &&
+  (window.innerWidth < 768 ||
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    ));
+
 interface PortraitVideoShowcaseProps {
   /** Section heading text */
   heading?: string;
@@ -27,7 +35,10 @@ export default function PortraitVideoShowcase({
   const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showOverlay, setShowOverlay] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const hasAttemptedPlay = useRef(false);
+  const hasStartedLoad = useRef(false);
+  const isMobile = useRef(getIsMobile());
 
   const attemptPlay = async () => {
     const video = videoRef.current;
@@ -41,6 +52,20 @@ export default function PortraitVideoShowcase({
     }
   };
 
+  // Start loading the video (called lazily)
+  const startVideoLoad = () => {
+    const video = videoRef.current;
+    if (!video || hasStartedLoad.current) return;
+    hasStartedLoad.current = true;
+
+    if (isMobile.current) {
+      video.preload = "metadata";
+    } else {
+      video.preload = "auto";
+    }
+    video.load();
+  };
+
   // Native event listeners for accurate state
   useEffect(() => {
     const video = videoRef.current;
@@ -49,35 +74,47 @@ export default function PortraitVideoShowcase({
     const onPlaying = () => {
       setIsPlaying(true);
       setShowOverlay(false);
+      setIsLoading(false);
     };
     const onPause = () => setIsPlaying(false);
+    const onWaiting = () => setIsLoading(true);
+    const onCanPlay = () => setIsLoading(false);
 
     video.addEventListener("playing", onPlaying);
     video.addEventListener("pause", onPause);
+    video.addEventListener("waiting", onWaiting);
+    video.addEventListener("canplay", onCanPlay);
     return () => {
       video.removeEventListener("playing", onPlaying);
       video.removeEventListener("pause", onPause);
+      video.removeEventListener("waiting", onWaiting);
+      video.removeEventListener("canplay", onCanPlay);
     };
   }, []);
 
-  // IntersectionObserver for scroll-based play/pause
+  // IntersectionObserver: lazy-load video when section scrolls into view
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && videoRef.current) {
-          attemptPlay();
+        if (entry.isIntersecting) {
+          startVideoLoad();
+          if (videoRef.current && !isMobile.current) {
+            attemptPlay();
+          }
         } else if (!entry.isIntersecting && videoRef.current) {
           videoRef.current.pause();
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
-  // On mount: try autoplay once data is ready
+  // On mount (desktop only): try autoplay once data is ready
   useEffect(() => {
+    if (isMobile.current) return;
+
     const video = videoRef.current;
     if (!video) return;
 
@@ -101,8 +138,10 @@ export default function PortraitVideoShowcase({
 
   // Unlock mobile playback on first touch/click
   useEffect(() => {
+    if (!isMobile.current) return;
+
     const unlock = () => {
-      attemptPlay();
+      startVideoLoad();
       document.removeEventListener("touchstart", unlock);
       document.removeEventListener("click", unlock);
     };
@@ -122,15 +161,42 @@ export default function PortraitVideoShowcase({
   };
 
   const handlePlayClick = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = true;
-      videoRef.current
-        .play()
-        .then(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    setIsLoading(true);
+    startVideoLoad();
+
+    if (video.readyState >= 3) {
+      video.muted = true;
+      video.play().then(() => {
+        setIsPlaying(true);
+        setShowOverlay(false);
+        setIsLoading(false);
+      }).catch(() => {
+        setIsLoading(false);
+      });
+    } else {
+      video.preload = "auto";
+      video.load();
+
+      const onReady = () => {
+        video.muted = true;
+        video.play().then(() => {
           setIsPlaying(true);
           setShowOverlay(false);
-        })
-        .catch(() => {});
+          setIsLoading(false);
+        }).catch(() => {
+          setIsLoading(false);
+        });
+        video.removeEventListener("canplay", onReady);
+      };
+      video.addEventListener("canplay", onReady, { once: true });
+
+      // Timeout fallback
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 15000);
     }
   };
 
@@ -143,10 +209,10 @@ export default function PortraitVideoShowcase({
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
     >
-      {/* Ambient glows */}
-      <div className="absolute -left-20 -top-20 h-80 w-80 rounded-full bg-purple-600/15 blur-[100px]" />
-      <div className="absolute -right-20 -bottom-20 h-60 w-60 rounded-full bg-cyan-500/10 blur-[80px]" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-indigo-500/8 blur-[120px]" />
+      {/* Ambient glows — hidden on mobile for GPU performance */}
+      <div className="hidden md:block absolute -left-20 -top-20 h-80 w-80 rounded-full bg-purple-600/15 blur-[100px]" />
+      <div className="hidden md:block absolute -right-20 -bottom-20 h-60 w-60 rounded-full bg-cyan-500/10 blur-[80px]" />
+      <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-indigo-500/8 blur-[120px]" />
 
       {/* Two-column layout: text left, portrait video right */}
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-0">
@@ -218,11 +284,11 @@ export default function PortraitVideoShowcase({
                 ref={videoRef}
                 src={videoSrc}
                 className="absolute inset-0 h-full w-full object-cover"
-                autoPlay
+                autoPlay={!isMobile.current}
                 muted
                 loop
                 playsInline
-                preload="auto"
+                preload={isMobile.current ? "none" : "metadata"}
                 {...({ "webkit-playsinline": "true" } as any)}
               />
 
@@ -235,23 +301,41 @@ export default function PortraitVideoShowcase({
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                 >
-                  <motion.div
-                    animate={{
-                      scale: [1, 1.08, 1],
-                      boxShadow: [
-                        "0 0 0 0 rgba(168,85,247,0.4)",
-                        "0 0 0 20px rgba(168,85,247,0)",
-                        "0 0 0 0 rgba(168,85,247,0)",
-                      ],
-                    }}
-                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                    className="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 text-white shadow-2xl shadow-purple-600/40"
-                  >
-                    <Play size={28} className="ml-1 fill-white" />
-                  </motion.div>
-                  <p className="mt-3 text-xs font-bold text-white/80 uppercase tracking-widest">
-                    Tap to Play
-                  </p>
+                  {isLoading ? (
+                    <>
+                      <div className="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-gradient-to-br from-purple-600/80 to-indigo-600/80 text-white shadow-2xl shadow-purple-600/40">
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
+                          className="h-7 w-7 rounded-full border-white/30 border-t-white"
+                          style={{ borderWidth: "3px", borderStyle: "solid", borderColor: "rgba(255,255,255,0.3)", borderTopColor: "white" }}
+                        />
+                      </div>
+                      <p className="mt-3 text-xs font-bold text-white/80 uppercase tracking-widest">
+                        Loading...
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <motion.div
+                        animate={{
+                          scale: [1, 1.08, 1],
+                          boxShadow: [
+                            "0 0 0 0 rgba(168,85,247,0.4)",
+                            "0 0 0 20px rgba(168,85,247,0)",
+                            "0 0 0 0 rgba(168,85,247,0)",
+                          ],
+                        }}
+                        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                        className="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 text-white shadow-2xl shadow-purple-600/40"
+                      >
+                        <Play size={28} className="ml-1 fill-white" />
+                      </motion.div>
+                      <p className="mt-3 text-xs font-bold text-white/80 uppercase tracking-widest">
+                        Tap to Play
+                      </p>
+                    </>
+                  )}
                 </motion.div>
               )}
 
