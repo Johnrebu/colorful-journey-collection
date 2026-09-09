@@ -111,7 +111,7 @@ const HeroSection = ({ profileImageUrl, skills }: HeroSectionProps) => {
             transition={{ delay: 0.5 }}
           >
             <span className="text-2xl font-medium text-gray-800 dark:text-white">
-              Full Stack Developer
+               9+ Years Analytical & Science Educator Background | Full‑Stack Engineer
             </span>
             <motion.span
               animate={{
@@ -143,7 +143,7 @@ const HeroSection = ({ profileImageUrl, skills }: HeroSectionProps) => {
         </motion.div>
 
         <motion.div
-          className="flex flex-wrap gap-2 mt-6"
+          className="flex flex-wrap gap-4 mt-6"
           variants={container}
           initial="hidden"
           animate="show"
@@ -165,14 +165,14 @@ const HeroSection = ({ profileImageUrl, skills }: HeroSectionProps) => {
         </motion.div>
 
         <motion.div
-          className="flex flex-wrap gap-4 mt-8"
+          className="flex flex-wrap gap-3 mt-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
         >
           <Link to="/projects">
             <motion.button
-              className="px-6 py-3 bg-primary text-white rounded-full shadow-md font-medium flex items-center gap-2 group relative overflow-hidden"
+              className="px-6 py-3 bg-primary text-white rounded-full shadow-md font-medium flex items-center gap-2 group relative overflow-hidden min-h-[44px]"
               whileHover={{
                 scale: 1.03,
                 boxShadow: "0 10px 25px -5px rgba(233, 69, 96, 0.5)",
@@ -191,7 +191,7 @@ const HeroSection = ({ profileImageUrl, skills }: HeroSectionProps) => {
           </Link>
           <Link to="/about">
             <motion.button
-              className="px-6 py-3 bg-transparent text-primary border border-primary rounded-full shadow-sm font-medium hover:bg-primary hover:text-white transition-colors"
+              className="px-6 py-3 bg-transparent text-primary border border-primary rounded-full shadow-sm font-medium hover:bg-primary hover:text-white transition-colors min-h-[44px]"
               whileHover={{
                 scale: 1.03,
               }}
@@ -202,7 +202,7 @@ const HeroSection = ({ profileImageUrl, skills }: HeroSectionProps) => {
           </Link>
           <Link to="/contact">
             <motion.button
-              className="px-6 py-3 bg-transparent text-gray-800 dark:text-white border border-gray-300 dark:border-gray-700 rounded-full shadow-sm font-medium"
+              className="px-6 py-3 bg-transparent text-gray-800 dark:text-white border border-gray-300 dark:border-gray-700 rounded-full shadow-sm font-medium min-h-[44px]"
               whileHover={{
                 scale: 1.03,
                 backgroundColor: "rgba(255, 255, 255, 0.1)",

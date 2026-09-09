@@ -26,7 +26,7 @@ const Layout = () => {
 
       <Header profileImageUrl={profileImageUrl} darkMode={darkMode} toggleDarkMode={toggleTheme} />
 
-      <main className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-10 pt-28 sm:px-6 lg:px-8">
+      <main className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-24 md:pb-10 pt-28 sm:px-6 lg:px-8">
         <AnimatedRoutes />
       </main>
 
